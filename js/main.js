@@ -5,30 +5,33 @@
 // Register GSAP plugins
 gsap.registerPlugin(ScrollTrigger);
 
-// Initialize Lenis Smooth Scrolling
-const lenis = new Lenis({
-  duration: 1.2,
-  easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // Apple-like smooth scroll
-  direction: 'vertical',
-  gestureDirection: 'vertical',
-  smooth: true,
-  mouseMultiplier: 1,
-  smoothTouch: false,
-  touchMultiplier: 2,
-  infinite: false,
-})
+// ========================================
+// Initialize Lenis Smooth Scrolling (DESKTOP ONLY)
+// ========================================
+let lenis;
 
-function raf(time) {
-  lenis.raf(time)
-  requestAnimationFrame(raf)
+// Check if it's a desktop device (width > 768px)
+if (window.innerWidth > 768) {
+  lenis = new Lenis({
+    duration: 1.2,
+    easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // Apple-like smooth scroll
+    direction: 'vertical',
+    gestureDirection: 'vertical',
+    smooth: true,
+    smoothTouch: false, // Explicitly disable on touch
+  });
+
+  function raf(time) {
+    lenis.raf(time);
+    requestAnimationFrame(raf);
+  }
+  requestAnimationFrame(raf);
+
+  // Sync GSAP ScrollTrigger with Lenis
+  lenis.on('scroll', ScrollTrigger.update);
+  gsap.ticker.add((time) => { lenis.raf(time * 1000) });
+  gsap.ticker.lagSmoothing(0, 0);
 }
-requestAnimationFrame(raf)
-
-// Sync GSAP ScrollTrigger with Lenis
-lenis.on('scroll', ScrollTrigger.update)
-gsap.ticker.add((time) => { lenis.raf(time * 1000) })
-gsap.ticker.lagSmoothing(0, 0)
-
 
 // ========================================
 // DOM Elements
@@ -52,8 +55,10 @@ const demoModalTitle = document.getElementById('demoModalTitle');
 // ========================================
 window.addEventListener('load', () => {
   setTimeout(() => {
-    preloader.style.opacity = '0';
-    preloader.style.visibility = 'hidden';
+    if(preloader) {
+      preloader.style.opacity = '0';
+      preloader.style.visibility = 'hidden';
+    }
     initAnimations(); // Start animations only after load
     initCounters();
   }, 1000); // 1 second luxury loading delay
@@ -82,7 +87,7 @@ navbarMenu.querySelectorAll('a').forEach(link => {
   });
 });
 
-// Lenis Smooth Anchor Scrolling
+// Smooth Anchor Scrolling (Works for both Desktop and Mobile)
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
   anchor.addEventListener('click', function(e) {
     const href = this.getAttribute('href');
@@ -92,7 +97,18 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     const target = document.querySelector(href);
     if (target) {
       const offset = navbar.offsetHeight + 20;
-      lenis.scrollTo(target, { offset: -offset });
+      
+      if (lenis) {
+        // Desktop Lenis Scroll
+        lenis.scrollTo(target, { offset: -offset });
+      } else {
+        // Mobile Native Smooth Scroll
+        const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - offset;
+        window.scrollTo({
+          top: targetPosition,
+          behavior: 'smooth'
+        });
+      }
     }
   });
 });
@@ -114,7 +130,7 @@ function openDemoModal(demoPath, title) {
   demoModal.classList.add('active');
   demoModal.setAttribute('aria-hidden', 'false');
   document.body.classList.add('modal-open');
-  lenis.stop(); // Pause smooth scrolling while modal is open
+  if (lenis) lenis.stop(); // Pause smooth scrolling while modal is open
   
   demoScan.classList.add('active');
   demoPhone.classList.remove('active');
@@ -130,7 +146,7 @@ function closeDemoModal() {
   demoModal.classList.remove('active');
   demoModal.setAttribute('aria-hidden', 'true');
   document.body.classList.remove('modal-open');
-  lenis.start(); // Resume scrolling
+  if (lenis) lenis.start(); // Resume scrolling
   
   demoIframe.src = 'about:blank';
   demoScan.classList.remove('active');
@@ -148,7 +164,7 @@ document.addEventListener('keydown', (e) => {
 });
 
 // ========================================
-// Scroll Animations (Slower, Premium Easing)
+// Scroll Animations
 // ========================================
 function initAnimations() {
   const elements = document.querySelectorAll(
@@ -164,10 +180,10 @@ function initAnimations() {
         start: 'top 85%'
       },
       opacity: 0,
-      y: 50,
-      duration: 1.2, // Slower
-      ease: 'power4.out', // Premium curve
-      delay: (i % 4) * 0.15
+      y: 40,
+      duration: 1, // Slightly sped up for better mobile response
+      ease: 'power3.out', 
+      delay: (i % 4) * 0.1
     });
   });
 }
@@ -230,4 +246,7 @@ if (currentYearEl) {
   currentYearEl.textContent = new Date().getFullYear();
 }
 
-window.addEventListener('resize', () => { ScrollTrigger.refresh(); });
+// Refresh ScrollTrigger on resize
+window.addEventListener('resize', () => { 
+  ScrollTrigger.refresh(); 
+});
