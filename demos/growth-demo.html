@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Divine Beauty | Luxury Salon Menu & Booking</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Inter:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --gold-primary: #d4af37;
+            --gold-light: #f1d592;
+            --obsidian: #0a0a0a;
+            --glass-bg: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(255, 255, 255, 0.08);
+            --text-main: #e0e0e0;
+            --text-muted: #a0a0a0;
+            --accent-gradient: linear-gradient(135deg, #d4af37 0%, #f1d592 100%);
+            
+            /* Enhanced Easing for Smooth Animations */
+            --ease-premium: cubic-bezier(0.65, 0, 0.35, 1);
+            --transition-speed: 0.5s;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+        ::-webkit-scrollbar { width: 5px; }
+        ::-webkit-scrollbar-thumb { background: var(--gold-primary); border-radius: 10px; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--obsidian);
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(212, 175, 55, 0.05) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(212, 175, 55, 0.05) 0%, transparent 40%);
+            color: var(--text-main);
+            min-height: 100vh;
+            line-height: 1.6;
+            overflow-x: hidden;
+            padding-bottom: 100px; /* Space for sticky CTA */
+        }
+
+        header { 
+            text-align: center; 
+            padding: 5rem 1.5rem 3rem; 
+            animation: heroFade 1.2s var(--ease-premium);
+        }
+
+        .salon-name { 
+            font-family: 'Playfair Display', serif; 
+            font-size: 2.5rem; 
+            font-weight: 700;
+            letter-spacing: -1px;
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 0.2rem;
+        }
+
+        .tagline { 
+            font-family: 'Cinzel', serif; 
+            font-size: 0.8rem; 
+            color: var(--gold-light); 
+            letter-spacing: 5px; 
+            text-transform: uppercase; 
+            opacity: 0.8;
+        }
+
+        .header-divider { 
+            width: 40px; 
+            height: 2px; 
+            background: var(--gold-primary); 
+            margin: 2rem auto; 
+            position: relative;
+        }
+
+        main { max-width: 650px; margin: 0 auto; padding: 0 20px 2rem; }
+
+        /* --- Category Styling --- */
+        .category { 
+            margin-bottom: 1rem; 
+            border-radius: 16px; 
+            overflow: hidden; 
+            background: var(--glass-bg); 
+            border: 1px solid var(--glass-border);
+            transition: all var(--transition-speed) var(--ease-premium);
+        }
+
+        .category:hover {
+            border-color: rgba(212, 175, 55, 0.2);
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .category.active {
+            border-color: var(--gold-primary);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6);
+            transform: scale(1.02);
+            z-index: 10;
+        }
+
+        .category-header {
+            position: relative;
+            height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            overflow: hidden;
+        }
+
+        .category-header::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-size: cover;
+            background-position: center;
+            z-index: 1;
+            transition: transform 1.2s var(--ease-premium);
+            filter: grayscale(30%) brightness(0.6);
+        }
+
+        /* Unique Image Placeholders */
+        .cat-hair .category-header::before { background-image: url('images/haircut.png'); }
+        .cat-treatments .category-header::before { background-image: url('images/hairtreat.png'); }
+        .cat-mehndi .category-header::before { background-image: url('images/design.png'); }
+        .cat-facial .category-header::before { background-image: url('images/skin.png'); }
+        .cat-detan .category-header::before { background-image: url('images/detan.png'); }
+        .cat-waxing .category-header::before { background-image: url('images/waxing.png'); }
+        .cat-manicure .category-header::before { background-image: url('images/pedicure.png'); }
+        .cat-threading .category-header::before { background-image: url('images/treading.png'); }
+
+        .category:hover .category-header::before { transform: scale(1.1); }
+
+        .category-header::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(to top, rgba(10,10,10,0.8), transparent);
+            z-index: 2;
+        }
+
+        .category-title {
+            position: relative;
+            z-index: 3;
+            color: #fff;
+            font-family: 'Cinzel', serif;
+            font-size: 1.1rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            transition: letter-spacing 0.5s var(--ease-premium);
+        }
+        .category:hover .category-title { letter-spacing: 5px; }
+
+        /* --- Service Items & Checkbox Styling --- */
+        .category-content {
+            max-height: 0;
+            overflow: hidden;
+            background-color: rgba(15, 15, 15, 0.98);
+            transition: max-height var(--transition-speed) var(--ease-premium), opacity 0.4s ease;
+            opacity: 0;
+        }
+
+        .category.active .category-content { opacity: 1; }
+
+        .service-list { list-style: none; padding: 0.5rem 0; }
+        
+        .service-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.1rem 1.5rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+            transition: background 0.3s ease;
+            cursor: pointer;
+        }
+
+        .service-item:hover { background: rgba(212, 175, 55, 0.04); }
+        .service-item:last-child { border-bottom: none; }
+
+        .custom-checkbox {
+            width: 22px;
+            height: 22px;
+            border: 2px solid var(--gold-primary);
+            border-radius: 4px;
+            margin-right: 15px;
+            position: relative;
+            flex-shrink: 0;
+            transition: 0.3s;
+        }
+
+        .service-item.selected .custom-checkbox { background: var(--gold-primary); }
+        .service-item.selected .custom-checkbox::after {
+            content: '✓';
+            position: absolute;
+            color: var(--obsidian);
+            font-size: 14px;
+            font-weight: bold;
+            left: 4px;
+            top: -1px;
+        }
+
+        .service-info { flex-grow: 1; display: flex; justify-content: space-between; align-items: center; }
+        .service-name { font-weight: 400; font-size: 0.95rem; display: flex; align-items: center; gap: 10px; }
+        .service-price { color: var(--gold-light); font-weight: 600; font-size: 1rem; }
+
+        .badge-popular {
+            font-size: 0.6rem;
+            background: var(--accent-gradient);
+            color: var(--obsidian);
+            padding: 2px 8px;
+            border-radius: 20px;
+            text-transform: uppercase;
+            font-weight: 700;
+        }
+
+        /* --- Floating Booking Bar --- */
+        .booking-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(15px);
+            border-top: 1px solid var(--gold-primary);
+            padding: 1.2rem 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 100;
+            transform: translateY(100%);
+            transition: 0.5s var(--ease-premium);
+        }
+
+        .booking-bar.visible { transform: translateY(0); }
+
+        .btn-primary {
+            background: var(--gold-primary);
+            color: var(--obsidian);
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-weight: 700;
+            font-family: 'Inter', sans-serif;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        /* --- Appointment Drawer (Modal) --- */
+        .drawer-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.8);
+            z-index: 1000;
+            display: none;
+            opacity: 0;
+            transition: 0.3s;
+        }
+
+        .drawer {
+            position: fixed;
+            bottom: -100%;
+            left: 0;
+            width: 100%;
+            background: #141414;
+            border-radius: 25px 25px 0 0;
+            padding: 2rem 1.5rem;
+            z-index: 1001;
+            transition: 0.5s var(--ease-premium);
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .drawer.open { bottom: 0; }
+        .drawer-title { font-family: 'Cinzel', serif; color: var(--gold-primary); margin-bottom: 1.5rem; border-bottom: 1px solid var(--glass-border); padding-bottom: 10px; }
+
+        .form-group { margin-bottom: 1.5rem; }
+        .form-label { display: block; color: var(--text-muted); font-size: 0.8rem; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 1px; }
+        
+        input[type="text"], select {
+            width: 100%;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            padding: 12px;
+            color: #fff;
+            border-radius: 8px;
+            outline: none;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .btn-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+        .selectable-btn {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            color: #fff;
+            padding: 10px;
+            border-radius: 8px;
+            cursor: pointer;
+            text-align: center;
+            transition: 0.2s;
+        }
+        .selectable-btn.selected { border-color: var(--gold-primary); background: rgba(212,175,55,0.1); color: var(--gold-primary); }
+
+        .time-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+
+        .whatsapp-btn {
+            width: 100%;
+            background: #25d366;
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            border: none;
+            font-weight: 700;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 2rem;
+            cursor: pointer;
+        }
+
+        footer { 
+            text-align: center; 
+            padding: 2rem 2rem 6rem; 
+            font-size: 0.75rem; 
+            color: var(--text-muted);
+            letter-spacing: 1px;
+            opacity: 0.6;
+        }
+
+        @keyframes heroFade {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 480px) {
+            .salon-name { font-size: 2rem; }
+            .category-header { height: 90px; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1 class="salon-name">Divine Beauty</h1>
+        <p class="tagline">The Art of Luxury Grooming</p>
+        <div class="header-divider"></div>
+    </header>
+
+    <main id="menu-container">
+        <section class="category cat-hair">
+            <div class="category-header" onclick="toggleCategory(this)">
+                <h2 class="category-title">Hair & Styling</h2>
+            </div>
+            <div class="category-content">
+                <ul class="service-list">
+                    <li class="service-item" onclick="toggleService(this, '‘U’ Shape Hair Cut', 100)">
+                        <div class="custom-checkbox"></div>
+                        <div class="service-info">
+                            <span class="service-name">‘U’ Shape Hair Cut</span>
+                            <span class="service-price">₹100</span>
+                        </div>
+                    </li>
+                    <li class="service-item" onclick="toggleService(this, 'Straight Hair Cut', 100)">
+                        <div class="custom-checkbox"></div>
+                        <div class="service-info">
+                            <span class="service-name">Straight Hair Cut</span>
+                            <span class="service-price">₹100</span>
+                        </div>
+                    </li>
+                    <li class="service-item" onclick="toggleService(this, 'Step Hair Cut', 300)">
+                        <div class="custom-checkbox"></div>
+                        <div class="service-info">
+                            <span class="service-name">Step Hair Cut <span class="badge-popular">Trending</span></span>
+                            <span class="service-price">₹300</span>
+                        </div>
+                    </li>
+                    <li class="service-item" onclick="toggleService(this, 'Hair Wash (L’Oréal)', 100)">
+                        <div class="custom-checkbox"></div>
+                        <div class="service-info">
+                            <span class="service-name">Hair Wash (L’Oréal)</span>
+                            <span class="service-price">₹100</span>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="category cat-treatments">
+            <div class="category-header" onclick="toggleCategory(this)">
+                <h2 class="category-title">Treatments & Color</h2>
+            </div>
+            <div class="category-content">
+                <ul class="service-list">
+                    <li class="service-item" onclick="toggleService(this, 'Perm. Straightening (L’Oréal)', 4000)">
+                        <div class="custom-checkbox"></div>
+                        <div class="service-info">
+                            <span class="service-name">Perm. Straightening (L’Oréal)</span>
+                            <span class="service-price">₹4,000</span>
+                        </div>
+                    </li>
+                    <li class="service-item" onclick="toggleService(this, 'Hair Smoothing', 3500)">
+                        <div class="custom-checkbox"></div>
+                        <div class="service-info">
+                            <span class="service-name">Hair Smoothing</span>
+                            <span class="service-price">₹3,500</span>
+                        </div>
+                    </li>
+                    <li class="service-item" onclick="toggleService(this, 'Hair Spa (L’Oréal)', 800)">
+                        <div class="custom-checkbox"></div>
+                        <div class="service-info">
+                            <span class="service-name">Hair Spa (L’Oréal)</span>
+                            <span class="service-price">₹800</span>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="category cat-mehndi">
+            <div class="category-header" onclick="toggleCategory(this)">
+                <h2 class="category-title">Mehndi Art</h2>
+            </div>
+            <div class="category-content">
+                <ul class="service-list">
+                    <li class="service-item" onclick="toggleService(this, 'Mehndi (Shahnaz)', 300)">
+                        <div class="custom-checkbox"></div>
+                        <div class="service-info">
+                            <span class="service-name">Mehndi (Shahnaz)</span>
+                            <span class="service-price">₹300</span>
+                        </div>
+                    </li>
+                    <li class="service-item" onclick="toggleService(this, 'Mehndi (Nupur)', 250)">
+                        <div class="custom-checkbox"></div>
+                        <div class="service-info">
+                            <span class="service-name">Mehndi (Nupur)</span>
+                            <span class="service-price">₹250</span>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="category cat-facial">
+            <div class="category-header" onclick="toggleCategory(this)">
+                <h2 class="category-title">Facial & Skin</h2>
+            </div>
+            <div class="category-content">
+                <ul class="service-list">
+                    <li class="service-item" onclick="toggleService(this, 'Facial (Shahnaz Power)', 800)">
+                        <div class="custom-checkbox"></div>
+                        <div class="service-info">
+                            <span class="service-name">Facial (Shahnaz Power) <span class="badge-popular">Top Pick</span></span>
+                            <span class="service-price">₹800</span>
+                        </div>
+                    </li>
+                    <li class="service-item" onclick="toggleService(this, 'Fruit Facial (VLCC)', 600)">
+                        <div class="custom-checkbox"></div>
+                        <div class="service-info">
+                            <span class="service-name">Fruit Facial (VLCC)</span>
+                            <span class="service-price">₹600</span>
+                        </div>
+                    </li>
+                    <li class="service-item" onclick="toggleService(this, 'Facial (Cheryl’s)', 600)">
+                        <div class="custom-checkbox"></div>
+                        <div class="service-info">
+                            <span class="service-name">Facial (Cheryl’s)</span>
+                            <span class="service-price">₹600</span>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="category cat-detan">
+            <div class="category-header" onclick="toggleCategory(this)">
+                <h2 class="category-title">De-Tan Care</h2>
+            </div>
+            <div class="category-content">
+                <ul class="service-list">
+                    <li class="service-item" onclick="toggleService(this, 'De-Tan (Only Face)', 150)">
+                        <div class="custom-checkbox"></div>
+                        <div class="service-info">
+                            <span class="service-name">De-Tan (Only Face)</span>
+                            <span class="service-price">₹150</span>
+                        </div>
+                    </li>
+                    <li class="service-item" onclick="toggleService(this, 'De-Tan (Body)', 650)">
+                        <div class="custom-checkbox"></div>
+                        <div class="service-info">
+                            <span class="service-name">De-Tan (Body)</span>
+                            <span class="service-price">₹650</span>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="category cat-waxing">
+            <div class="category-header" onclick="toggleCategory(this)">
+                <h2 class="category-title">Waxing</h2>
+            </div>
+            <div class="category-content">
+                <ul class="service-list">
+                    <li class="service-item" onclick="toggleService(this, 'Full Hand Waxing', 250)">
+                        <div class="custom-checkbox"></div>
+                        <div class="service-info">
+                            <span class="service-name">Full Hand</span>
+                            <span class="service-price">₹250</span>
+                        </div>
+                    </li>
+                    <li class="service-item" onclick="toggleService(this, 'Full Leg Waxing', 450)">
+                        <div class="custom-checkbox"></div>
+                        <div class="service-info">
+                            <span class="service-name">Full Leg Waxing</span>
+                            <span class="service-price">₹450</span>
+                        </div>
+                    </li>
+                    <li class="service-item" onclick="toggleService(this, 'Face Waxing', 50)">
+                        <div class="custom-checkbox"></div>
+                        <div class="service-info">
+                            <span class="service-name">Face Waxing</span>
+                            <span class="service-price">₹50</span>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="category cat-manicure">
+            <div class="category-header" onclick="toggleCategory(this)">
+                <h2 class="category-title">Hands & Feet</h2>
+            </div>
+            <div class="category-content">
+                <ul class="service-list">
+                    <li class="service-item" onclick="toggleService(this, 'Manicure (VLCC)', 350)">
+                        <div class="custom-checkbox"></div>
+                        <div class="service-info">
+                            <span class="service-name">Manicure (VLCC)</span>
+                            <span class="service-price">₹350</span>
+                        </div>
+                    </li>
+                    <li class="service-item" onclick="toggleService(this, 'Pedicure (VLCC)', 450)">
+                        <div class="custom-checkbox"></div>
+                        <div class="service-info">
+                            <span class="service-name">Pedicure (VLCC)</span>
+                            <span class="service-price">₹450</span>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="category cat-threading">
+            <div class="category-header" onclick="toggleCategory(this)">
+                <h2 class="category-title">Threading & Massage</h2>
+            </div>
+            <div class="category-content">
+                <ul class="service-list">
+                    <li class="service-item" onclick="toggleService(this, 'Eyebrows', 50)">
+                        <div class="custom-checkbox"></div>
+                        <div class="service-info">
+                            <span class="service-name">Eyebrows</span>
+                            <span class="service-price">₹50</span>
+                        </div>
+                    </li>
+                    <li class="service-item" onclick="toggleService(this, 'Upper Lips', 20)">
+                        <div class="custom-checkbox"></div>
+                        <div class="service-info">
+                            <span class="service-name">Upper Lips</span>
+                            <span class="service-price">₹20</span>
+                        </div>
+                    </li>
+                    <li class="service-item" onclick="toggleService(this, 'Body Massage (60 Min)', 1000)">
+                        <div class="custom-checkbox"></div>
+                        <div class="service-info">
+                            <span class="service-name">Body Massage (60 Min) <span class="badge-popular">Relax</span></span>
+                            <span class="service-price">₹1,000</span>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </section>
+    </main>
+
+    <div class="booking-bar" id="bookingBar">
+        <div>
+            <span id="selectedCount" style="color:var(--gold-primary); font-weight:700;">0</span> Services Selected
+            <div id="totalPrice" style="font-size: 0.8rem; color: var(--text-muted);">Total: ₹0</div>
+        </div>
+        <button class="btn-primary" onclick="openDrawer()">Continue</button>
+    </div>
+
+    <div class="drawer-overlay" id="overlay" onclick="closeDrawer()"></div>
+    <div class="drawer" id="bookingDrawer">
+        <h2 class="drawer-title">Booking Details</h2>
+        
+        <div class="form-group">
+            <label class="form-label">When would you like to come?</label>
+            <div class="btn-grid">
+                <div class="selectable-btn date-btn selected" onclick="selectDate(this, 'Today')">Today</div>
+                <div class="selectable-btn date-btn" onclick="selectDate(this, 'Tomorrow')">Tomorrow</div>
+            </div>
+            <input type="text" id="customDate" placeholder="Or enter specific date (e.g. 15th Feb)" style="margin-top:10px;">
+        </div>
+
+        <div class="form-group">
+            <label class="form-label">Preferred Time Slot</label>
+            <div class="time-grid">
+                <div class="selectable-btn time-btn" onclick="selectTime(this, '10:00 AM')">10 AM</div>
+                <div class="selectable-btn time-btn" onclick="selectTime(this, '12:30 PM')">12:30 PM</div>
+                <div class="selectable-btn time-btn" onclick="selectTime(this, '03:00 PM')">03 PM</div>
+                <div class="selectable-btn time-btn" onclick="selectTime(this, '05:30 PM')">05:30 PM</div>
+                <div class="selectable-btn time-btn" onclick="selectTime(this, '07:00 PM')">07 PM</div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="form-label">Your Details</label>
+            <input type="text" id="userName" placeholder="Your Name" style="margin-bottom:10px;">
+            <select id="userGender">
+                <option value="Not Specified">Select Gender</option>
+                <option value="Female">Female</option>
+                <option value="Male">Male</option>
+            </select>
+        </div>
+
+        <div class="form-group" style="display:flex; align-items:center; gap:10px;">
+            <input type="checkbox" id="homeService" style="accent-color: var(--gold-primary); width: 18px; height: 18px;">
+            <label for="homeService" style="font-size:0.85rem; cursor: pointer;">Request Home Service (+ Extra Charges)</label>
+        </div>
+
+        <button class="whatsapp-btn" onclick="sendToWhatsApp()">
+            Confirm Appointment on WhatsApp
+        </button>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 Divine Beauty Unisex Salon. All Rights Reserved.</p>
+        <p>Prices are subject to variation based on consultation.</p>
+    </footer>
+
+    <script>
+        // --- CONFIGURATION ---
+        const WHATSAPP_NUMBER = "918219928236"; // REPLACE WITH ACTUAL SALON NUMBER
+        const SALON_NAME = "Divine Beauty Unisex Salon";
+
+        // --- STATE MANAGER ---
+        let selectedServices = [];
+        let selectedDay = "Today";
+        let selectedTime = "";
+
+        // --- ACCORDION LOGIC ---
+        function toggleCategory(headerElement) {
+            const category = headerElement.parentElement;
+            const content = category.querySelector('.category-content');
+            const isOpen = category.classList.contains('active');
+
+            // Close all other categories for a premium feel
+            document.querySelectorAll('.category').forEach(cat => {
+                if(cat !== category) {
+                    cat.classList.remove('active');
+                    cat.querySelector('.category-content').style.maxHeight = null;
+                }
+            });
+
+            if (isOpen) {
+                category.classList.remove('active');
+                content.style.maxHeight = null;
+            } else {
+                category.classList.add('active');
+                content.style.maxHeight = content.scrollHeight + "px";
+            }
+        }
+
+        // --- SERVICE SELECTION LOGIC ---
+        function toggleService(element, name, price) {
+            element.classList.toggle('selected');
+            const index = selectedServices.findIndex(s => s.name === name);
+            
+            if (index > -1) {
+                selectedServices.splice(index, 1);
+            } else {
+                selectedServices.push({ name, price });
+            }
+
+            updateBookingBar();
+        }
+
+        function updateBookingBar() {
+            const bar = document.getElementById('bookingBar');
+            const count = document.getElementById('selectedCount');
+            const total = document.getElementById('totalPrice');
+            
+            count.innerText = selectedServices.length;
+            const sum = selectedServices.reduce((a, b) => a + b.price, 0);
+            
+            // Format price with comma for display
+            total.innerText = `Total: ₹${sum.toLocaleString('en-IN')}`;
+
+            if (selectedServices.length > 0) {
+                bar.classList.add('visible');
+            } else {
+                bar.classList.remove('visible');
+            }
+        }
+
+        // --- DRAWER LOGIC ---
+        function openDrawer() {
+            document.getElementById('overlay').style.display = 'block';
+            setTimeout(() => {
+                document.getElementById('overlay').style.opacity = '1';
+                document.getElementById('bookingDrawer').classList.add('open');
+            }, 10);
+        }
+
+        function closeDrawer() {
+            document.getElementById('bookingDrawer').classList.remove('open');
+            document.getElementById('overlay').style.opacity = '0';
+            setTimeout(() => { document.getElementById('overlay').style.display = 'none'; }, 500);
+        }
+
+        function selectDate(btn, day) {
+            document.querySelectorAll('.date-btn').forEach(b => b.classList.remove('selected'));
+            btn.classList.add('selected');
+            selectedDay = day;
+            document.getElementById('customDate').value = ""; // Clear manual input if preset clicked
+        }
+
+        function selectTime(btn, time) {
+            document.querySelectorAll('.time-btn').forEach(b => b.classList.remove('selected'));
+            btn.classList.add('selected');
+            selectedTime = time;
+        }
+
+        // --- WHATSAPP CHECKOUT LOGIC ---
+        function sendToWhatsApp() {
+            const name = document.getElementById('userName').value || "Guest";
+            const gender = document.getElementById('userGender').value;
+            const customDate = document.getElementById('customDate').value;
+            const finalDate = customDate || selectedDay;
+            const homeService = document.getElementById('homeService').checked ? "✅ Yes" : "❌ No";
+
+            if (!selectedTime) {
+                alert("Please select a preferred time slot first!");
+                return;
+            }
+
+            // Build WhatsApp Message
+            let message = `*🌟 APPOINTMENT REQUEST - ${SALON_NAME}* \n\n`;
+            message += `👤 *Client:* ${name}\n`;
+            message += `🚻 *Gender:* ${gender}\n`;
+            message += `📅 *Date:* ${finalDate}\n`;
+            message += `⏰ *Time:* ${selectedTime}\n`;
+            message += `🏠 *Home Service:* ${homeService}\n\n`;
+            message += `*Selected Services:* \n`;
+            
+            selectedServices.forEach((s, i) => {
+                message += `${i+1}. ${s.name} (₹${s.price.toLocaleString('en-IN')})\n`;
+            });
+
+            const totalSum = selectedServices.reduce((a, b) => a + b.price, 0);
+            message += `\n💰 *Estimated Total:* ₹${totalSum.toLocaleString('en-IN')}\n\n`;
+            message += `_Please confirm if this slot is available._`;
+
+            // Redirect
+            const encodedMsg = encodeURIComponent(message);
+            window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodedMsg}`, '_blank');
+        }
+    </script>
+</body>
+</html>
