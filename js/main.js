@@ -14,18 +14,12 @@ let lenis;
 if (window.innerWidth > 768) {
   lenis = new Lenis({
     duration: 1.2,
-    easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // Apple-like smooth scroll
+    easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
     direction: 'vertical',
     gestureDirection: 'vertical',
     smooth: true,
-    smoothTouch: false, // Explicitly disable on touch
+    smoothTouch: false,
   });
-
-  function raf(time) {
-    lenis.raf(time);
-    requestAnimationFrame(raf);
-  }
-  requestAnimationFrame(raf);
 
   // Sync GSAP ScrollTrigger with Lenis
   lenis.on('scroll', ScrollTrigger.update);
@@ -40,7 +34,6 @@ const preloader = document.getElementById('preloader');
 const navbar = document.getElementById('navbar');
 const navbarToggle = document.getElementById('navbarToggle');
 const navbarMenu = document.getElementById('navbarMenu');
-const contactForm = document.getElementById('contactForm');
 const currentYearEl = document.getElementById('currentYear');
 
 // Demo Modal Elements
@@ -55,13 +48,13 @@ const demoModalTitle = document.getElementById('demoModalTitle');
 // ========================================
 window.addEventListener('load', () => {
   setTimeout(() => {
-    if(preloader) {
+    if (preloader) {
       preloader.style.opacity = '0';
       preloader.style.visibility = 'hidden';
     }
-    initAnimations(); // Start animations only after load
-    initCounters();
-  }, 1000); // 1 second luxury loading delay
+    initAnimations();
+    initPricingAnimation();
+  }, 1000);
 });
 
 // ========================================
@@ -89,20 +82,18 @@ navbarMenu.querySelectorAll('a').forEach(link => {
 
 // Smooth Anchor Scrolling (Works for both Desktop and Mobile)
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-  anchor.addEventListener('click', function(e) {
+  anchor.addEventListener('click', function (e) {
     const href = this.getAttribute('href');
     if (href === '#') return;
-    
+
     e.preventDefault();
     const target = document.querySelector(href);
     if (target) {
       const offset = navbar.offsetHeight + 20;
-      
+
       if (lenis) {
-        // Desktop Lenis Scroll
         lenis.scrollTo(target, { offset: -offset });
       } else {
-        // Mobile Native Smooth Scroll
         const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - offset;
         window.scrollTo({
           top: targetPosition,
@@ -117,24 +108,22 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 // Demo Logic - MOBILE FIXED
 // ========================================
 function openDemoModal(demoPath, title) {
-  console.log('Opening demo:', demoPath);
-  
-  // FIXED FOR MOBILE: Open full screen in new tab if screen is small
+  // Open full screen in new tab on mobile
   if (window.innerWidth <= 768) {
     window.open(demoPath, '_blank');
     return;
   }
-  
-  // Desktop Logic: Show Phone Modal
+
+  // Desktop: Show Phone Modal
   demoModalTitle.textContent = title || 'System Demo';
   demoModal.classList.add('active');
   demoModal.setAttribute('aria-hidden', 'false');
   document.body.classList.add('modal-open');
-  if (lenis) lenis.stop(); // Pause smooth scrolling while modal is open
-  
+  if (lenis) lenis.stop();
+
   demoScan.classList.add('active');
   demoPhone.classList.remove('active');
-  
+
   setTimeout(() => {
     demoScan.classList.remove('active');
     demoPhone.classList.add('active');
@@ -146,8 +135,8 @@ function closeDemoModal() {
   demoModal.classList.remove('active');
   demoModal.setAttribute('aria-hidden', 'true');
   document.body.classList.remove('modal-open');
-  if (lenis) lenis.start(); // Resume scrolling
-  
+  if (lenis) lenis.start();
+
   demoIframe.src = 'about:blank';
   demoScan.classList.remove('active');
   demoPhone.classList.remove('active');
@@ -168,11 +157,10 @@ document.addEventListener('keydown', (e) => {
 // ========================================
 function initAnimations() {
   const elements = document.querySelectorAll(
-    '.section-header, .problem-card, .system-card, .industry-card, ' +
-    '.benefit-item, .stats-card, .cta-box, .pricing-card, ' +
-    '.testimonial-card, .founder__image-wrapper, .founder__content, .contact-form'
+    '.section-header, .problem-card, .system-card, .how-it-works-step, ' +
+    '.cta-box, .pricing-card'
   );
-  
+
   elements.forEach((el, i) => {
     gsap.from(el, {
       scrollTrigger: {
@@ -181,72 +169,74 @@ function initAnimations() {
       },
       opacity: 0,
       y: 40,
-      duration: 1, // Slightly sped up for better mobile response
-      ease: 'power3.out', 
+      duration: 1,
+      ease: 'power3.out',
       delay: (i % 4) * 0.1
     });
   });
 }
 
-function initCounters() {
-  const counters = document.querySelectorAll('.stat-number');
-  
-  counters.forEach(counter => {
-    const target = parseInt(counter.dataset.target, 10);
-    if (isNaN(target)) return;
-    
+// ========================================
+// Pricing Price-Reveal Animation
+// ========================================
+function initPricingAnimation() {
+  const pricingCards = document.querySelectorAll('.pricing-card');
+
+  pricingCards.forEach(card => {
+    const oldPrice = card.querySelector('.pricing-card__old-price');
+    const newPrice = card.querySelector('.pricing-card__price');
+
+    if (!oldPrice || !newPrice) return;
+
     ScrollTrigger.create({
-      trigger: counter,
-      start: 'top 85%',
+      trigger: card,
+      start: 'top 80%',
       once: true,
       onEnter: () => {
-        gsap.to(counter, {
-          innerHTML: target,
-          duration: 2.5,
-          ease: 'power3.out',
-          snap: { innerHTML: 1 }
+        // Animate old price strikethrough fade
+        gsap.to(oldPrice, {
+          opacity: 0.4,
+          duration: 0.8,
+          ease: 'power2.out',
+          onComplete: () => {
+            oldPrice.classList.add('revealed');
+          }
         });
+
+        // Animate new price scale-up
+        gsap.fromTo(newPrice,
+          { scale: 0.85, opacity: 0 },
+          {
+            scale: 1,
+            opacity: 1,
+            duration: 0.8,
+            delay: 0.3,
+            ease: 'back.out(1.4)',
+            onComplete: () => {
+              // Brief pulse at the end
+              gsap.to(newPrice, {
+                scale: 1.05,
+                duration: 0.3,
+                yoyo: true,
+                repeat: 1,
+                ease: 'power2.inOut'
+              });
+            }
+          }
+        );
       }
     });
   });
 }
 
 // ========================================
-// Contact Form Handle
+// Footer Year
 // ========================================
-if (contactForm) {
-  contactForm.addEventListener('submit', (e) => {
-    e.preventDefault();
-    const formData = new FormData(contactForm);
-    const data = Object.fromEntries(formData);
-    
-    const message = `Hi Pankaj! I'm interested in QRBoost.
-
-Name: ${data.name}
-Business: ${data.business}
-Phone: ${data.phone}
-Plan: ${data.plan || 'Not specified'}
-Message: ${data.message || 'None'}`;
-    
-    const whatsappURL = `https://wa.me/918219928236?text=${encodeURIComponent(message)}`;
-    window.open(whatsappURL, '_blank');
-    
-    const btn = contactForm.querySelector('.btn--submit');
-    const originalText = btn.querySelector('.btn-text').textContent;
-    btn.querySelector('.btn-text').textContent = 'Opening WhatsApp...';
-    
-    setTimeout(() => {
-      btn.querySelector('.btn-text').textContent = originalText;
-      contactForm.reset();
-    }, 2000);
-  });
-}
-
 if (currentYearEl) {
   currentYearEl.textContent = new Date().getFullYear();
 }
 
 // Refresh ScrollTrigger on resize
-window.addEventListener('resize', () => { 
-  ScrollTrigger.refresh(); 
+window.addEventListener('resize', () => {
+  ScrollTrigger.refresh();
 });
