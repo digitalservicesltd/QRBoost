@@ -11,14 +11,22 @@
 
     <style>
         :root {
-            --gold-primary: #d4af37;
-            --gold-light: #f1d592;
-            --obsidian: #0a0a0a;
-            --glass-bg: rgba(255, 255, 255, 0.03);
-            --glass-border: rgba(255, 255, 255, 0.08);
-            --text-main: #e0e0e0;
-            --text-muted: #a0a0a0;
-            --accent-gradient: linear-gradient(135deg, #d4af37 0%, #f1d592 100%);
+            /* Midnight Sapphire Color Palette */
+            --sapphire-primary: #3d7cb8;
+            --sapphire-light: #7ec8e3;
+            --sapphire-deep: #1a3a5c;
+            --electric-blue: #4fc3f7;
+            --midnight-bg: #0a0e17;
+            --midnight-surface: #0d1420;
+
+            /* Glass & UI Colors */
+            --glass-bg: rgba(61, 124, 184, 0.03);
+            --glass-border: rgba(61, 124, 184, 0.12);
+            --text-main: #e8eef4;
+            --text-muted: #8fa4b8;
+
+            /* Accent Gradients */
+            --accent-gradient: linear-gradient(135deg, #3d7cb8 0%, #4fc3f7 50%, #7ec8e3 100%);
 
             /* Enhanced Easing for Smooth Animations */
             --ease-premium: cubic-bezier(0.65, 0, 0.35, 1);
@@ -37,22 +45,26 @@
         }
 
         ::-webkit-scrollbar-thumb {
-            background: var(--gold-primary);
+            background: var(--sapphire-primary);
             border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--midnight-bg);
         }
 
         body {
             font-family: 'Inter', sans-serif;
-            background-color: var(--obsidian);
+            background-color: var(--midnight-bg);
             background-image:
-                radial-gradient(circle at 10% 20%, rgba(212, 175, 55, 0.05) 0%, transparent 40%),
-                radial-gradient(circle at 90% 80%, rgba(212, 175, 55, 0.05) 0%, transparent 40%);
+                radial-gradient(ellipse at 10% 20%, rgba(61, 124, 184, 0.08) 0%, transparent 50%),
+                radial-gradient(ellipse at 90% 80%, rgba(79, 195, 247, 0.06) 0%, transparent 50%),
+                radial-gradient(ellipse at 50% 50%, rgba(26, 58, 92, 0.3) 0%, transparent 70%);
             color: var(--text-main);
             min-height: 100vh;
             line-height: 1.6;
             overflow-x: hidden;
             padding-bottom: 100px;
-            /* Space for sticky CTA */
         }
 
         header {
@@ -76,18 +88,19 @@
         .tagline {
             font-family: 'Cinzel', serif;
             font-size: 0.8rem;
-            color: var(--gold-light);
+            color: var(--sapphire-light);
             letter-spacing: 5px;
             text-transform: uppercase;
-            opacity: 0.8;
+            opacity: 0.85;
         }
 
         .header-divider {
             width: 40px;
             height: 2px;
-            background: var(--gold-primary);
+            background: var(--accent-gradient);
             margin: 2rem auto;
             position: relative;
+            box-shadow: 0 0 15px rgba(79, 195, 247, 0.5);
         }
 
         main {
@@ -104,18 +117,50 @@
             background: var(--glass-bg);
             border: 1px solid var(--glass-border);
             transition: all var(--transition-speed) var(--ease-premium);
+            position: relative;
+        }
+
+        .category::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border-radius: 16px;
+            padding: 1px;
+            background: linear-gradient(135deg, transparent 0%, rgba(79, 195, 247, 0.2) 50%, transparent 100%);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            pointer-events: none;
+            z-index: 1;
         }
 
         .category:hover {
-            border-color: rgba(212, 175, 55, 0.2);
-            background: rgba(255, 255, 255, 0.05);
+            border-color: rgba(61, 124, 184, 0.3);
+            background: rgba(61, 124, 184, 0.06);
+        }
+
+        .category:hover::before {
+            opacity: 1;
         }
 
         .category.active {
-            border-color: var(--gold-primary);
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6);
+            border-color: var(--sapphire-primary);
+            box-shadow:
+                0 15px 40px rgba(0, 0, 0, 0.5),
+                0 0 30px rgba(61, 124, 184, 0.25),
+                inset 0 0 20px rgba(79, 195, 247, 0.05);
             transform: scale(1.02);
             z-index: 10;
+        }
+
+        .category.active::before {
+            opacity: 1;
         }
 
         .category-header {
@@ -139,7 +184,7 @@
             background-position: center;
             z-index: 1;
             transition: transform 1.2s var(--ease-premium);
-            filter: grayscale(30%) brightness(0.6);
+            filter: grayscale(40%) brightness(0.5) saturate(1.2);
         }
 
         /* Unique Image Placeholders */
@@ -186,7 +231,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(to top, rgba(10, 10, 10, 0.8), transparent);
+            background: linear-gradient(to top, rgba(10, 14, 23, 0.9) 0%, rgba(10, 14, 23, 0.4) 50%, transparent 100%);
             z-index: 2;
         }
 
@@ -199,17 +244,19 @@
             letter-spacing: 3px;
             text-transform: uppercase;
             transition: letter-spacing 0.5s var(--ease-premium);
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
         }
 
         .category:hover .category-title {
             letter-spacing: 5px;
+            text-shadow: 0 2px 15px rgba(79, 195, 247, 0.3);
         }
 
         /* --- Service Items & Checkbox Styling --- */
         .category-content {
             max-height: 0;
             overflow: hidden;
-            background-color: rgba(15, 15, 15, 0.98);
+            background-color: rgba(13, 20, 32, 0.98);
             transition: max-height var(--transition-speed) var(--ease-premium), opacity 0.4s ease;
             opacity: 0;
         }
@@ -228,13 +275,14 @@
             justify-content: space-between;
             align-items: center;
             padding: 1.1rem 1.5rem;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+            border-bottom: 1px solid rgba(61, 124, 184, 0.06);
             transition: background 0.3s ease;
             cursor: pointer;
+            position: relative;
         }
 
         .service-item:hover {
-            background: rgba(212, 175, 55, 0.04);
+            background: rgba(61, 124, 184, 0.08);
         }
 
         .service-item:last-child {
@@ -244,7 +292,7 @@
         .custom-checkbox {
             width: 22px;
             height: 22px;
-            border: 2px solid var(--gold-primary);
+            border: 2px solid var(--sapphire-primary);
             border-radius: 4px;
             margin-right: 15px;
             position: relative;
@@ -253,17 +301,23 @@
         }
 
         .service-item.selected .custom-checkbox {
-            background: var(--gold-primary);
+            background: var(--accent-gradient);
+            border-color: var(--electric-blue);
+            box-shadow: 0 0 15px rgba(79, 195, 247, 0.4);
         }
 
         .service-item.selected .custom-checkbox::after {
             content: '✓';
             position: absolute;
-            color: var(--obsidian);
+            color: var(--midnight-bg);
             font-size: 14px;
             font-weight: bold;
             left: 4px;
             top: -1px;
+        }
+
+        .service-item.selected {
+            background: rgba(61, 124, 184, 0.1);
         }
 
         .service-info {
@@ -282,7 +336,7 @@
         }
 
         .service-price {
-            color: var(--gold-light);
+            color: var(--sapphire-light);
             font-weight: 600;
             font-size: 1rem;
         }
@@ -290,7 +344,7 @@
         .badge-popular {
             font-size: 0.6rem;
             background: var(--accent-gradient);
-            color: var(--obsidian);
+            color: var(--midnight-bg);
             padding: 2px 8px;
             border-radius: 20px;
             text-transform: uppercase;
@@ -303,9 +357,9 @@
             bottom: 0;
             left: 0;
             width: 100%;
-            background: rgba(10, 10, 10, 0.95);
+            background: rgba(10, 14, 23, 0.95);
             backdrop-filter: blur(15px);
-            border-top: 1px solid var(--gold-primary);
+            border-top: 1px solid var(--sapphire-primary);
             padding: 1.2rem 1.5rem;
             display: flex;
             justify-content: space-between;
@@ -313,6 +367,7 @@
             z-index: 100;
             transform: translateY(100%);
             transition: 0.5s var(--ease-premium);
+            box-shadow: 0 -5px 30px rgba(61, 124, 184, 0.15);
         }
 
         .booking-bar.visible {
@@ -320,8 +375,8 @@
         }
 
         .btn-primary {
-            background: var(--gold-primary);
-            color: var(--obsidian);
+            background: var(--accent-gradient);
+            color: var(--midnight-bg);
             border: none;
             padding: 12px 24px;
             border-radius: 8px;
@@ -329,6 +384,12 @@
             font-family: 'Inter', sans-serif;
             cursor: pointer;
             transition: 0.3s;
+            box-shadow: 0 4px 15px rgba(79, 195, 247, 0.3);
+        }
+
+        .btn-primary:hover {
+            box-shadow: 0 6px 25px rgba(79, 195, 247, 0.5);
+            transform: translateY(-2px);
         }
 
         /* --- Appointment Drawer (Modal) --- */
@@ -338,7 +399,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.8);
+            background: rgba(5, 8, 15, 0.9);
             z-index: 1000;
             display: none;
             opacity: 0;
@@ -350,13 +411,14 @@
             bottom: -100%;
             left: 0;
             width: 100%;
-            background: #141414;
+            background: linear-gradient(180deg, #0d1420 0%, #0a0e17 100%);
             border-radius: 25px 25px 0 0;
             padding: 2rem 1.5rem;
             z-index: 1001;
             transition: 0.5s var(--ease-premium);
             max-height: 90vh;
             overflow-y: auto;
+            box-shadow: 0 -10px 50px rgba(61, 124, 184, 0.2);
         }
 
         .drawer.open {
@@ -365,9 +427,9 @@
 
         .drawer-title {
             font-family: 'Cinzel', serif;
-            color: var(--gold-primary);
+            color: var(--sapphire-light);
             margin-bottom: 1.5rem;
-            border-bottom: 1px solid var(--glass-border);
+            border-bottom: 1px solid rgba(61, 124, 184, 0.2);
             padding-bottom: 10px;
         }
 
@@ -387,13 +449,20 @@
         input[type="text"],
         select {
             width: 100%;
-            background: var(--glass-bg);
-            border: 1px solid var(--glass-border);
+            background: rgba(61, 124, 184, 0.05);
+            border: 1px solid rgba(61, 124, 184, 0.15);
             padding: 12px;
             color: #fff;
             border-radius: 8px;
             outline: none;
             font-family: 'Inter', sans-serif;
+            transition: 0.3s;
+        }
+
+        input[type="text"]:focus,
+        select:focus {
+            border-color: var(--sapphire-primary);
+            box-shadow: 0 0 15px rgba(79, 195, 247, 0.15);
         }
 
         .btn-grid {
@@ -403,20 +472,26 @@
         }
 
         .selectable-btn {
-            background: var(--glass-bg);
-            border: 1px solid var(--glass-border);
+            background: rgba(61, 124, 184, 0.05);
+            border: 1px solid rgba(61, 124, 184, 0.15);
             color: #fff;
             padding: 10px;
             border-radius: 8px;
             cursor: pointer;
             text-align: center;
-            transition: 0.2s;
+            transition: 0.3s;
+        }
+
+        .selectable-btn:hover {
+            border-color: rgba(79, 195, 247, 0.3);
+            background: rgba(61, 124, 184, 0.1);
         }
 
         .selectable-btn.selected {
-            border-color: var(--gold-primary);
-            background: rgba(212, 175, 55, 0.1);
-            color: var(--gold-primary);
+            border-color: var(--electric-blue);
+            background: rgba(79, 195, 247, 0.15);
+            color: var(--sapphire-light);
+            box-shadow: 0 0 20px rgba(79, 195, 247, 0.2);
         }
 
         .time-grid {
@@ -427,7 +502,7 @@
 
         .whatsapp-btn {
             width: 100%;
-            background: #25d366;
+            background: linear-gradient(135deg, #25d366 0%, #128c7e 100%);
             color: white;
             padding: 15px;
             border-radius: 10px;
@@ -440,6 +515,13 @@
             gap: 10px;
             margin-top: 2rem;
             cursor: pointer;
+            box-shadow: 0 5px 20px rgba(37, 211, 102, 0.3);
+            transition: 0.3s;
+        }
+
+        .whatsapp-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(37, 211, 102, 0.4);
         }
 
         footer {
@@ -490,10 +572,10 @@
             </div>
             <div class="category-content">
                 <ul class="service-list">
-                    <li class="service-item" onclick="toggleService(this, '‘U’ Shape Hair Cut', 100)">
+                    <li class="service-item" onclick="toggleService(this, 'U Shape Hair Cut', 100)">
                         <div class="custom-checkbox"></div>
                         <div class="service-info">
-                            <span class="service-name">‘U’ Shape Hair Cut</span>
+                            <span class="service-name">U Shape Hair Cut</span>
                             <span class="service-price">₹100</span>
                         </div>
                     </li>
@@ -511,10 +593,10 @@
                             <span class="service-price">₹300</span>
                         </div>
                     </li>
-                    <li class="service-item" onclick="toggleService(this, 'Hair Wash (L’Oréal)', 100)">
+                    <li class="service-item" onclick="toggleService(this, 'Hair Wash (LOréal)', 100)">
                         <div class="custom-checkbox"></div>
                         <div class="service-info">
-                            <span class="service-name">Hair Wash (L’Oréal)</span>
+                            <span class="service-name">Hair Wash (LOréal)</span>
                             <span class="service-price">₹100</span>
                         </div>
                     </li>
@@ -528,10 +610,10 @@
             </div>
             <div class="category-content">
                 <ul class="service-list">
-                    <li class="service-item" onclick="toggleService(this, 'Perm. Straightening (L’Oréal)', 4000)">
+                    <li class="service-item" onclick="toggleService(this, 'Perm. Straightening (LOréal)', 4000)">
                         <div class="custom-checkbox"></div>
                         <div class="service-info">
-                            <span class="service-name">Perm. Straightening (L’Oréal)</span>
+                            <span class="service-name">Perm. Straightening (LOréal)</span>
                             <span class="service-price">₹4,000</span>
                         </div>
                     </li>
@@ -542,10 +624,10 @@
                             <span class="service-price">₹3,500</span>
                         </div>
                     </li>
-                    <li class="service-item" onclick="toggleService(this, 'Hair Spa (L’Oréal)', 800)">
+                    <li class="service-item" onclick="toggleService(this, 'Hair Spa (LOréal)', 800)">
                         <div class="custom-checkbox"></div>
                         <div class="service-info">
-                            <span class="service-name">Hair Spa (L’Oréal)</span>
+                            <span class="service-name">Hair Spa (LOréal)</span>
                             <span class="service-price">₹800</span>
                         </div>
                     </li>
@@ -586,8 +668,7 @@
                     <li class="service-item" onclick="toggleService(this, 'Facial (Shahnaz Power)', 800)">
                         <div class="custom-checkbox"></div>
                         <div class="service-info">
-                            <span class="service-name">Facial (Shahnaz Power) <span class="badge-popular">Top
-                                    Pick</span></span>
+                            <span class="service-name">Facial (Shahnaz Power) <span class="badge-popular">Top Pick</span></span>
                             <span class="service-price">₹800</span>
                         </div>
                     </li>
@@ -598,10 +679,10 @@
                             <span class="service-price">₹600</span>
                         </div>
                     </li>
-                    <li class="service-item" onclick="toggleService(this, 'Facial (Cheryl’s)', 600)">
+                    <li class="service-item" onclick="toggleService(this, 'Facial (Cheryls)', 600)">
                         <div class="custom-checkbox"></div>
                         <div class="service-info">
-                            <span class="service-name">Facial (Cheryl’s)</span>
+                            <span class="service-name">Facial (Cheryls)</span>
                             <span class="service-price">₹600</span>
                         </div>
                     </li>
@@ -711,8 +792,7 @@
                     <li class="service-item" onclick="toggleService(this, 'Body Massage (60 Min)', 1000)">
                         <div class="custom-checkbox"></div>
                         <div class="service-info">
-                            <span class="service-name">Body Massage (60 Min) <span
-                                    class="badge-popular">Relax</span></span>
+                            <span class="service-name">Body Massage (60 Min) <span class="badge-popular">Relax</span></span>
                             <span class="service-price">₹1,000</span>
                         </div>
                     </li>
@@ -723,7 +803,7 @@
 
     <div class="booking-bar" id="bookingBar">
         <div>
-            <span id="selectedCount" style="color:var(--gold-primary); font-weight:700;">0</span> Services Selected
+            <span id="selectedCount" style="color: var(--sapphire-light); font-weight: 700;">0</span> Services Selected
             <div id="totalPrice" style="font-size: 0.8rem; color: var(--text-muted);">Total: ₹0</div>
         </div>
         <button class="btn-primary" onclick="openDrawer()">Continue</button>
@@ -739,8 +819,7 @@
                 <div class="selectable-btn date-btn selected" onclick="selectDate(this, 'Today')">Today</div>
                 <div class="selectable-btn date-btn" onclick="selectDate(this, 'Tomorrow')">Tomorrow</div>
             </div>
-            <input type="text" id="customDate" placeholder="Or enter specific date (e.g. 15th Feb)"
-                style="margin-top:10px;">
+            <input type="text" id="customDate" placeholder="Or enter specific date (e.g. 15th Feb)" style="margin-top:10px;">
         </div>
 
         <div class="form-group">
@@ -765,10 +844,8 @@
         </div>
 
         <div class="form-group" style="display:flex; align-items:center; gap:10px;">
-            <input type="checkbox" id="homeService"
-                style="accent-color: var(--gold-primary); width: 18px; height: 18px;">
-            <label for="homeService" style="font-size:0.85rem; cursor: pointer;">Request Home Service (+ Extra
-                Charges)</label>
+            <input type="checkbox" id="homeService" style="accent-color: var(--sapphire-primary); width: 18px; height: 18px;">
+            <label for="homeService" style="font-size:0.85rem; cursor: pointer;">Request Home Service (+ Extra Charges)</label>
         </div>
 
         <button class="whatsapp-btn" onclick="sendToWhatsApp()">
@@ -783,7 +860,7 @@
 
     <script>
         // --- CONFIGURATION ---
-        const WHATSAPP_NUMBER = "918219928236"; // REPLACE WITH ACTUAL SALON NUMBER
+        const WHATSAPP_NUMBER = "918219928236";
         const SALON_NAME = "Divine Beauty Unisex Salon";
 
         // --- STATE MANAGER ---
@@ -797,7 +874,6 @@
             const content = category.querySelector('.category-content');
             const isOpen = category.classList.contains('active');
 
-            // Close all other categories for a premium feel
             document.querySelectorAll('.category').forEach(cat => {
                 if (cat !== category) {
                     cat.classList.remove('active');
@@ -835,8 +911,6 @@
 
             count.innerText = selectedServices.length;
             const sum = selectedServices.reduce((a, b) => a + b.price, 0);
-
-            // Format price with comma for display
             total.innerText = `Total: ₹${sum.toLocaleString('en-IN')}`;
 
             if (selectedServices.length > 0) {
@@ -865,7 +939,7 @@
             document.querySelectorAll('.date-btn').forEach(b => b.classList.remove('selected'));
             btn.classList.add('selected');
             selectedDay = day;
-            document.getElementById('customDate').value = ""; // Clear manual input if preset clicked
+            document.getElementById('customDate').value = "";
         }
 
         function selectTime(btn, time) {
@@ -880,31 +954,29 @@
             const gender = document.getElementById('userGender').value;
             const customDate = document.getElementById('customDate').value;
             const finalDate = customDate || selectedDay;
-            const homeService = document.getElementById('homeService').checked ? "✅ Yes" : "❌ No";
+            const homeService = document.getElementById('homeService').checked ? "Yes" : "No";
 
             if (!selectedTime) {
                 alert("Please select a preferred time slot first!");
                 return;
             }
 
-            // Build WhatsApp Message
-            let message = `*🌟 APPOINTMENT REQUEST - ${SALON_NAME}* \n\n`;
-            message += `👤 *Client:* ${name}\n`;
-            message += `🚻 *Gender:* ${gender}\n`;
-            message += `📅 *Date:* ${finalDate}\n`;
-            message += `⏰ *Time:* ${selectedTime}\n`;
-            message += `🏠 *Home Service:* ${homeService}\n\n`;
-            message += `*Selected Services:* \n`;
+            let message = `APPOINTMENT REQUEST - ${SALON_NAME}\n\n`;
+            message += `Client: ${name}\n`;
+            message += `Gender: ${gender}\n`;
+            message += `Date: ${finalDate}\n`;
+            message += `Time: ${selectedTime}\n`;
+            message += `Home Service: ${homeService}\n\n`;
+            message += `Selected Services:\n`;
 
             selectedServices.forEach((s, i) => {
                 message += `${i + 1}. ${s.name} (₹${s.price.toLocaleString('en-IN')})\n`;
             });
 
             const totalSum = selectedServices.reduce((a, b) => a + b.price, 0);
-            message += `\n💰 *Estimated Total:* ₹${totalSum.toLocaleString('en-IN')}\n\n`;
-            message += `_Please confirm if this slot is available._`;
+            message += `\nEstimated Total: ₹${totalSum.toLocaleString('en-IN')}\n\n`;
+            message += `Please confirm if this slot is available.`;
 
-            // Redirect
             const encodedMsg = encodeURIComponent(message);
             window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodedMsg}`, '_blank');
         }

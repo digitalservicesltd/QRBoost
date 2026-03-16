@@ -1,0 +1,1294 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Divine Beauty | Luxury Salon Menu & Booking</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
+
+    <style>
+        :root {
+            /* Warm Bronze & Copper Palette */
+            --bronze-primary: #cd7f32;
+            --bronze-light: #e6a86c;
+            --bronze-dark: #8b5a2b;
+            --copper-accent: #b87333;
+            --copper-glow: rgba(205, 127, 50, 0.4);
+
+            /* Background Colors */
+            --bg-dark: #0d0b09;
+            --bg-card: #1a1613;
+            --bg-elevated: #241f1a;
+            --bg-warm: rgba(205, 127, 50, 0.03);
+
+            /* Text Colors */
+            --text-primary: #f5f0e8;
+            --text-secondary: #c4b8a8;
+            --text-muted: #8a7f72;
+
+            /* UI Colors */
+            --border-subtle: rgba(205, 127, 50, 0.15);
+            --border-active: rgba(205, 127, 50, 0.4);
+            --timeline-line: rgba(205, 127, 50, 0.2);
+
+            /* Gradients */
+            --gradient-primary: linear-gradient(135deg, #8b5a2b 0%, #cd7f32 50%, #e6a86c 100%);
+            --gradient-glow: radial-gradient(circle, rgba(205, 127, 50, 0.2) 0%, transparent 70%);
+
+            /* Shadows */
+            --shadow-node: 0 0 20px rgba(205, 127, 50, 0.3), 0 0 40px rgba(205, 127, 50, 0.1);
+            --shadow-card: 0 8px 30px rgba(0, 0, 0, 0.4);
+            --shadow-selected: 0 0 25px rgba(205, 127, 50, 0.3);
+
+            /* Transitions */
+            --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+            --ease-slide: cubic-bezier(0.16, 1, 0.3, 1);
+            --ease-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--bronze-primary);
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--bg-dark);
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-dark);
+            background-image:
+                radial-gradient(ellipse at 0% 0%, rgba(139, 90, 43, 0.08) 0%, transparent 50%),
+                radial-gradient(ellipse at 100% 100%, rgba(205, 127, 50, 0.05) 0%, transparent 50%);
+            color: var(--text-primary);
+            min-height: 100vh;
+            line-height: 1.6;
+            padding-bottom: 140px;
+        }
+
+        /* --- Header --- */
+        .header {
+            padding: 3rem 1.5rem 2rem;
+            text-align: center;
+            position: relative;
+        }
+
+        .header::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--timeline-line), transparent);
+        }
+
+        .brand-name {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.2rem;
+            font-weight: 600;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: 3px;
+            margin-bottom: 0.3rem;
+        }
+
+        .brand-tagline {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 4px;
+        }
+
+        /* --- Timeline Container --- */
+        .timeline-container {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
+
+        /* --- Vertical Timeline Line --- */
+        .timeline-line {
+            position: absolute;
+            left: 28px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(180deg, 
+                var(--bronze-primary) 0%, 
+                var(--timeline-line) 15%, 
+                var(--timeline-line) 85%, 
+                transparent 100%);
+        }
+
+        @media (min-width: 600px) {
+            .timeline-line {
+                left: 50%;
+                transform: translateX(-50%);
+            }
+        }
+
+        /* --- Timeline Node --- */
+        .timeline-node {
+            position: relative;
+            margin-bottom: 0;
+            padding-left: 70px;
+        }
+
+        @media (min-width: 600px) {
+            .timeline-node {
+                padding-left: 0;
+                width: 50%;
+            }
+
+            .timeline-node:nth-child(odd) {
+                margin-left: auto;
+                padding-left: 50px;
+            }
+
+            .timeline-node:nth-child(even) {
+                padding-right: 50px;
+                text-align: right;
+            }
+        }
+
+        /* --- Node Circle --- */
+        .node-circle {
+            position: absolute;
+            left: 12px;
+            top: 0;
+            width: 34px;
+            height: 34px;
+            background: var(--bg-dark);
+            border: 2px solid var(--bronze-primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 10;
+            transition: all 0.4s var(--ease-smooth);
+        }
+
+        .node-circle::before {
+            content: '';
+            width: 12px;
+            height: 12px;
+            background: var(--bronze-primary);
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+
+        .node-circle:hover {
+            box-shadow: var(--shadow-node);
+            transform: scale(1.1);
+        }
+
+        .node-circle:hover::before {
+            transform: scale(1.2);
+        }
+
+        .timeline-node.active .node-circle {
+            background: var(--gradient-primary);
+            border-color: var(--bronze-light);
+            box-shadow: var(--shadow-node);
+        }
+
+        .timeline-node.active .node-circle::before {
+            background: white;
+        }
+
+        @media (min-width: 600px) {
+            .node-circle {
+                left: auto;
+                right: -17px;
+            }
+
+            .timeline-node:nth-child(odd) .node-circle {
+                left: -17px;
+                right: auto;
+            }
+        }
+
+        /* --- Node Number --- */
+        .node-number {
+            position: absolute;
+            left: 12px;
+            top: 42px;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            letter-spacing: 1px;
+        }
+
+        @media (min-width: 600px) {
+            .node-number {
+                left: auto;
+                right: -35px;
+            }
+
+            .timeline-node:nth-child(odd) .node-number {
+                left: -35px;
+                right: auto;
+            }
+        }
+
+        /* --- Node Content --- */
+        .node-content {
+            background: var(--bg-card);
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid var(--border-subtle);
+            transition: all 0.4s var(--ease-smooth);
+            margin-bottom: 2rem;
+        }
+
+        .timeline-node:hover .node-content {
+            border-color: var(--border-active);
+        }
+
+        .timeline-node.active .node-content {
+            border-color: var(--bronze-primary);
+            box-shadow: var(--shadow-card);
+        }
+
+        /* --- Node Header --- */
+        .node-header {
+            padding: 1.2rem 1.5rem;
+            cursor: pointer;
+            position: relative;
+            transition: background 0.3s ease;
+        }
+
+        .node-header:hover {
+            background: var(--bg-warm);
+        }
+
+        .node-label {
+            font-size: 0.6rem;
+            color: var(--bronze-light);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 0.3rem;
+        }
+
+        .node-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+        }
+
+        .timeline-node.active .node-title {
+            color: var(--bronze-light);
+        }
+
+        @media (min-width: 600px) {
+            .timeline-node:nth-child(even) .node-label,
+            .timeline-node:nth-child(even) .node-title {
+                text-align: right;
+                flex-direction: row-reverse;
+            }
+        }
+
+        .node-meta {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-top: 0.5rem;
+        }
+
+        @media (min-width: 600px) {
+            .timeline-node:nth-child(even) .node-meta {
+                justify-content: flex-end;
+            }
+        }
+
+        .service-count {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        .service-count span {
+            color: var(--bronze-primary);
+            font-weight: 600;
+        }
+
+        .expand-icon {
+            width: 28px;
+            height: 28px;
+            background: rgba(205, 127, 50, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            color: var(--bronze-light);
+            transition: all 0.4s var(--ease-smooth);
+        }
+
+        .timeline-node.active .expand-icon {
+            background: var(--gradient-primary);
+            color: var(--bg-dark);
+            transform: rotate(45deg);
+        }
+
+        /* --- Selection Badge --- */
+        .selection-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            background: var(--gradient-primary);
+            color: var(--bg-dark);
+            font-size: 0.6rem;
+            font-weight: 700;
+            padding: 4px 10px;
+            border-radius: 20px;
+            opacity: 0;
+            transform: scale(0.8);
+            transition: all 0.3s var(--ease-bounce);
+        }
+
+        .timeline-node.has-selection .selection-badge {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        /* --- Services Container --- */
+        .services-container {
+            max-height: 0;
+            overflow: hidden;
+            background: var(--bg-elevated);
+            transition: max-height 0.5s var(--ease-slide);
+        }
+
+        .timeline-node.active .services-container {
+            max-height: 600px;
+        }
+
+        .services-inner {
+            padding: 0;
+            opacity: 0;
+            transition: opacity 0.4s ease 0.1s;
+        }
+
+        .timeline-node.active .services-inner {
+            opacity: 1;
+            padding: 1rem;
+        }
+
+        .services-divider {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--bronze-primary), transparent);
+            opacity: 0.3;
+            margin-bottom: 1rem;
+        }
+
+        /* --- Service Items --- */
+        .service-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 1.2rem;
+            margin-bottom: 0.5rem;
+            background: var(--bg-card);
+            border-radius: 12px;
+            cursor: pointer;
+            border: 1px solid transparent;
+            position: relative;
+            overflow: hidden;
+            opacity: 0;
+            transform: translateX(-20px);
+            transition: all 0.4s var(--ease-smooth);
+        }
+
+        .timeline-node:nth-child(even) .service-item {
+            transform: translateX(20px);
+        }
+
+        .timeline-node.active .service-item {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        /* Staggered animation */
+        .timeline-node.active .service-item:nth-child(1) { transition-delay: 0.1s; }
+        .timeline-node.active .service-item:nth-child(2) { transition-delay: 0.2s; }
+        .timeline-node.active .service-item:nth-child(3) { transition-delay: 0.3s; }
+        .timeline-node.active .service-item:nth-child(4) { transition-delay: 0.4s; }
+        .timeline-node.active .service-item:nth-child(5) { transition-delay: 0.5s; }
+
+        .service-item::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 3px;
+            height: 100%;
+            background: var(--gradient-primary);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .service-item:hover {
+            border-color: var(--border-active);
+            background: var(--bg-warm);
+        }
+
+        .service-item:hover::before {
+            opacity: 1;
+        }
+
+        .service-item.selected {
+            border-color: var(--bronze-primary);
+            background: rgba(205, 127, 50, 0.08);
+            box-shadow: var(--shadow-selected);
+        }
+
+        .service-item.selected::before {
+            opacity: 1;
+        }
+
+        .service-left {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .service-checkbox {
+            width: 22px;
+            height: 22px;
+            border: 2px solid var(--bronze-primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            flex-shrink: 0;
+        }
+
+        .service-item.selected .service-checkbox {
+            background: var(--gradient-primary);
+            border-color: var(--bronze-light);
+        }
+
+        .service-item.selected .service-checkbox::after {
+            content: '✓';
+            color: var(--bg-dark);
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .service-info {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .service-name {
+            font-size: 0.9rem;
+            color: var(--text-primary);
+            transition: color 0.3s ease;
+        }
+
+        .service-item.selected .service-name {
+            color: var(--bronze-light);
+        }
+
+        .service-badge {
+            display: inline-block;
+            font-size: 0.55rem;
+            background: var(--gradient-primary);
+            color: var(--bg-dark);
+            padding: 2px 8px;
+            border-radius: 20px;
+            text-transform: uppercase;
+            font-weight: 700;
+            margin-top: 3px;
+        }
+
+        .service-right {
+            text-align: right;
+        }
+
+        .service-price {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--bronze-light);
+        }
+
+        .service-duration {
+            font-size: 0.65rem;
+            color: var(--text-muted);
+            margin-top: 2px;
+        }
+
+        /* --- Floating Booking Bar --- */
+        .booking-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: linear-gradient(180deg, transparent 0%, var(--bg-dark) 30%);
+            padding: 2.5rem 1rem 1.5rem;
+            z-index: 100;
+            transform: translateY(100%);
+            transition: transform 0.5s var(--ease-slide);
+        }
+
+        .booking-bar.visible {
+            transform: translateY(0);
+        }
+
+        .booking-bar-inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            max-width: 600px;
+            margin: 0 auto;
+            background: var(--bg-elevated);
+            border: 1px solid var(--border-active);
+            border-radius: 18px;
+            padding: 1rem 1.5rem;
+            box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .booking-info {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .booking-services {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+        }
+
+        .booking-services strong {
+            color: var(--bronze-light);
+            font-weight: 600;
+        }
+
+        .booking-total {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--bronze-light);
+        }
+
+        .btn-continue {
+            background: var(--gradient-primary);
+            border: none;
+            padding: 14px 28px;
+            border-radius: 14px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--bg-dark);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 20px rgba(205, 127, 50, 0.3);
+        }
+
+        .btn-continue:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(205, 127, 50, 0.4);
+        }
+
+        /* --- Booking Modal --- */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(13, 11, 9, 0);
+            z-index: 200;
+            display: none;
+            transition: background 0.4s ease;
+        }
+
+        .modal-overlay.active {
+            background: rgba(13, 11, 9, 0.92);
+        }
+
+        .booking-modal {
+            position: fixed;
+            bottom: -100%;
+            left: 0;
+            width: 100%;
+            max-height: 92vh;
+            background: var(--bg-elevated);
+            border-radius: 28px 28px 0 0;
+            z-index: 201;
+            transition: bottom 0.5s var(--ease-slide);
+            overflow-y: auto;
+        }
+
+        .booking-modal.open {
+            bottom: 0;
+        }
+
+        .modal-handle {
+            width: 50px;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 2px;
+            margin: 1rem auto 1.5rem;
+        }
+
+        .modal-header {
+            text-align: center;
+            padding: 0 1.5rem 1.5rem;
+            border-bottom: 1px solid var(--border-subtle);
+        }
+
+        .modal-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.6rem;
+            font-weight: 600;
+            color: var(--bronze-light);
+            margin-bottom: 0.3rem;
+        }
+
+        .modal-subtitle {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        .modal-body {
+            padding: 1.5rem;
+        }
+
+        .selected-summary {
+            background: var(--bg-card);
+            border-radius: 16px;
+            padding: 1rem;
+            margin-bottom: 1.5rem;
+            border: 1px solid var(--border-subtle);
+        }
+
+        .summary-header {
+            font-size: 0.65rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 0.8rem;
+        }
+
+        .summary-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.6rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+            font-size: 0.9rem;
+        }
+
+        .summary-item:last-child {
+            border-bottom: none;
+        }
+
+        .summary-item.total {
+            font-weight: 600;
+            color: var(--bronze-light);
+            margin-top: 0.5rem;
+            padding-top: 0.8rem;
+            border-top: 1px solid var(--border-active);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 0.65rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 10px;
+        }
+
+        input[type="text"],
+        select {
+            width: 100%;
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            padding: 14px 16px;
+            border-radius: 12px;
+            color: var(--text-primary);
+            font-size: 0.95rem;
+            outline: none;
+            font-family: 'Inter', sans-serif;
+            transition: border-color 0.3s ease;
+        }
+
+        input[type="text"]:focus,
+        select:focus {
+            border-color: var(--bronze-primary);
+        }
+
+        input[type="text"]::placeholder {
+            color: var(--text-muted);
+        }
+
+        .options-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+        }
+
+        .option-btn {
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            padding: 12px;
+            border-radius: 12px;
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            cursor: pointer;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .option-btn:hover {
+            border-color: var(--border-active);
+            color: var(--text-primary);
+        }
+
+        .option-btn.active {
+            background: rgba(205, 127, 50, 0.15);
+            border-color: var(--bronze-primary);
+            color: var(--bronze-light);
+        }
+
+        .time-options {
+            grid-template-columns: repeat(3, 1fr);
+        }
+
+        .toggle-row {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 14px;
+            background: var(--bg-card);
+            border-radius: 12px;
+            cursor: pointer;
+            border: 1px solid var(--border-subtle);
+            transition: all 0.3s ease;
+        }
+
+        .toggle-row:hover {
+            border-color: var(--border-active);
+        }
+
+        .toggle-switch {
+            width: 52px;
+            height: 28px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 14px;
+            position: relative;
+            transition: background 0.3s ease;
+            flex-shrink: 0;
+        }
+
+        .toggle-switch.on {
+            background: var(--bronze-primary);
+        }
+
+        .toggle-switch::after {
+            content: '';
+            position: absolute;
+            top: 3px;
+            left: 3px;
+            width: 22px;
+            height: 22px;
+            background: white;
+            border-radius: 50%;
+            transition: transform 0.3s var(--ease-smooth);
+        }
+
+        .toggle-switch.on::after {
+            transform: translateX(24px);
+        }
+
+        .toggle-text {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        .whatsapp-btn {
+            width: 100%;
+            background: linear-gradient(135deg, #25d366 0%, #128c7e 100%);
+            border: none;
+            padding: 16px;
+            border-radius: 14px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: white;
+            cursor: pointer;
+            margin-top: 0.5rem;
+            box-shadow: 0 4px 20px rgba(37, 211, 102, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .whatsapp-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(37, 211, 102, 0.4);
+        }
+
+        /* --- Animations --- */
+        @keyframes nodeFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .timeline-node {
+            animation: nodeFadeIn 0.6s var(--ease-smooth) forwards;
+            opacity: 0;
+        }
+
+        .timeline-node:nth-child(1) { animation-delay: 0.1s; }
+        .timeline-node:nth-child(2) { animation-delay: 0.2s; }
+        .timeline-node:nth-child(3) { animation-delay: 0.3s; }
+        .timeline-node:nth-child(4) { animation-delay: 0.4s; }
+        .timeline-node:nth-child(5) { animation-delay: 0.5s; }
+        .timeline-node:nth-child(6) { animation-delay: 0.6s; }
+        .timeline-node:nth-child(7) { animation-delay: 0.7s; }
+        .timeline-node:nth-child(8) { animation-delay: 0.8s; }
+    </style>
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header class="header">
+        <h1 class="brand-name">Divine Beauty</h1>
+        <p class="brand-tagline">Luxury Salon & Spa Experience</p>
+    </header>
+
+    <!-- Timeline Container -->
+    <div class="timeline-container">
+        <div class="timeline-line"></div>
+
+        <!-- Timeline Nodes will be generated dynamically -->
+        <div id="timelineNodes"></div>
+    </div>
+
+    <!-- Booking Bar -->
+    <div class="booking-bar" id="bookingBar">
+        <div class="booking-bar-inner">
+            <div class="booking-info">
+                <span class="booking-services"><strong id="selectedCount">0</strong> services selected</span>
+                <span class="booking-total" id="totalPrice">₹0</span>
+            </div>
+            <button class="btn-continue" onclick="openModal()">Continue</button>
+        </div>
+    </div>
+
+    <!-- Booking Modal -->
+    <div class="modal-overlay" id="modalOverlay" onclick="closeModal()"></div>
+    <div class="booking-modal" id="bookingModal">
+        <div class="modal-handle"></div>
+        <div class="modal-header">
+            <h3 class="modal-title">Complete Your Booking</h3>
+            <p class="modal-subtitle">Select your preferred date and time</p>
+        </div>
+        <div class="modal-body">
+            <div class="selected-summary" id="selectedSummary">
+                <div class="summary-header">Selected Services</div>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">Preferred Date</label>
+                <div class="options-grid">
+                    <button class="option-btn active" onclick="selectDate(this, 'Today')">Today</button>
+                    <button class="option-btn" onclick="selectDate(this, 'Tomorrow')">Tomorrow</button>
+                </div>
+                <input type="text" id="customDate" placeholder="Or enter a specific date" style="margin-top:10px;">
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">Preferred Time</label>
+                <div class="options-grid time-options">
+                    <button class="option-btn" onclick="selectTime(this, '10:00 AM')">10 AM</button>
+                    <button class="option-btn" onclick="selectTime(this, '12:30 PM')">12:30 PM</button>
+                    <button class="option-btn" onclick="selectTime(this, '03:00 PM')">03 PM</button>
+                    <button class="option-btn" onclick="selectTime(this, '05:30 PM')">05:30 PM</button>
+                    <button class="option-btn" onclick="selectTime(this, '07:00 PM')">07 PM</button>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">Your Details</label>
+                <input type="text" id="userName" placeholder="Your Name" style="margin-bottom:10px;">
+                <select id="userGender">
+                    <option value="Not Specified">Select Gender</option>
+                    <option value="Female">Female</option>
+                    <option value="Male">Male</option>
+                </select>
+            </div>
+
+            <div class="toggle-row" onclick="toggleHomeService()">
+                <div class="toggle-switch" id="homeToggle"></div>
+                <span class="toggle-text">Request Home Service (+ Extra Charges)</span>
+            </div>
+
+            <button class="whatsapp-btn" onclick="sendToWhatsApp()">Confirm via WhatsApp</button>
+        </div>
+    </div>
+
+    <script>
+        // --- CONFIGURATION ---
+        const WHATSAPP_NUMBER = "918219928236";
+        const SALON_NAME = "Divine Beauty Unisex Salon";
+
+        // --- SERVICES DATA ---
+        const categoriesData = [
+            {
+                id: 'hair',
+                label: 'Signature Services',
+                title: 'Hair & Styling',
+                services: [
+                    { id: 'hair-1', name: 'U Shape Hair Cut', price: 100, duration: '30 min' },
+                    { id: 'hair-2', name: 'Straight Hair Cut', price: 100, duration: '30 min' },
+                    { id: 'hair-3', name: 'Step Hair Cut', price: 300, duration: '45 min', badge: 'Trending' },
+                    { id: 'hair-4', name: 'Hair Wash (LOréal)', price: 100, duration: '20 min' }
+                ]
+            },
+            {
+                id: 'treatments',
+                label: 'Premium Care',
+                title: 'Treatments & Color',
+                services: [
+                    { id: 'treat-1', name: 'Perm. Straightening', price: 4000, duration: '4 hrs', badge: 'Premium' },
+                    { id: 'treat-2', name: 'Hair Smoothing', price: 3500, duration: '3 hrs' },
+                    { id: 'treat-3', name: 'Hair Spa (LOréal)', price: 800, duration: '1 hr' }
+                ]
+            },
+            {
+                id: 'mehndi',
+                label: 'Traditional Art',
+                title: 'Mehndi Art',
+                services: [
+                    { id: 'mehndi-1', name: 'Mehndi (Shahnaz)', price: 300, duration: '1 hr' },
+                    { id: 'mehndi-2', name: 'Mehndi (Nupur)', price: 250, duration: '1 hr' }
+                ]
+            },
+            {
+                id: 'facial',
+                label: 'Skin Rejuvenation',
+                title: 'Facial & Skin',
+                services: [
+                    { id: 'facial-1', name: 'Facial (Shahnaz Power)', price: 800, duration: '1 hr', badge: 'Top Pick' },
+                    { id: 'facial-2', name: 'Fruit Facial (VLCC)', price: 600, duration: '45 min' },
+                    { id: 'facial-3', name: 'Facial (Cheryls)', price: 600, duration: '45 min' }
+                ]
+            },
+            {
+                id: 'detan',
+                label: 'Skin Brightening',
+                title: 'De-Tan Care',
+                services: [
+                    { id: 'detan-1', name: 'De-Tan (Only Face)', price: 150, duration: '30 min' },
+                    { id: 'detan-2', name: 'De-Tan (Body)', price: 650, duration: '1 hr' }
+                ]
+            },
+            {
+                id: 'waxing',
+                label: 'Smooth Finish',
+                title: 'Waxing',
+                services: [
+                    { id: 'waxing-1', name: 'Full Hand Waxing', price: 250, duration: '30 min' },
+                    { id: 'waxing-2', name: 'Full Leg Waxing', price: 450, duration: '45 min' },
+                    { id: 'waxing-3', name: 'Face Waxing', price: 50, duration: '15 min' }
+                ]
+            },
+            {
+                id: 'manicure',
+                label: 'Nail Care',
+                title: 'Hands & Feet',
+                services: [
+                    { id: 'mani-1', name: 'Manicure (VLCC)', price: 350, duration: '45 min' },
+                    { id: 'mani-2', name: 'Pedicure (VLCC)', price: 450, duration: '1 hr', badge: 'Relaxing' }
+                ]
+            },
+            {
+                id: 'threading',
+                label: 'Precision & Relax',
+                title: 'Threading & Massage',
+                services: [
+                    { id: 'thread-1', name: 'Eyebrows', price: 50, duration: '10 min' },
+                    { id: 'thread-2', name: 'Upper Lips', price: 20, duration: '5 min' },
+                    { id: 'thread-3', name: 'Body Massage (60 Min)', price: 1000, duration: '1 hr', badge: 'Relax' }
+                ]
+            }
+        ];
+
+        // --- STATE ---
+        let selectedServices = [];
+        let activeNode = null;
+        let selectedDate = 'Today';
+        let selectedTime = '';
+        let homeService = false;
+
+        // --- INITIALIZE ---
+        function init() {
+            renderTimeline();
+        }
+
+        // --- RENDER TIMELINE ---
+        function renderTimeline() {
+            const container = document.getElementById('timelineNodes');
+
+            container.innerHTML = categoriesData.map((cat, index) => {
+                return `
+                    <div class="timeline-node" data-category="${cat.id}">
+                        <div class="node-circle" onclick="toggleNode('${cat.id}')"></div>
+                        <span class="node-number">0${index + 1}</span>
+                        
+                        <div class="node-content">
+                            <div class="node-header" onclick="toggleNode('${cat.id}')">
+                                <div>
+                                    <div class="node-label">${cat.label}</div>
+                                    <div class="node-title">
+                                        <span>${cat.title}</span>
+                                        <span class="expand-icon">+</span>
+                                    </div>
+                                    <div class="node-meta">
+                                        <span class="service-count"><span>${cat.services.length}</span> services</span>
+                                        <span class="selection-badge" id="badge-${cat.id}">
+                                            <span id="count-${cat.id}">0</span> selected
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="services-container">
+                                <div class="services-inner">
+                                    <div class="services-divider"></div>
+                                    ${cat.services.map(service => `
+                                        <div class="service-item" 
+                                             id="item-${service.id}"
+                                             onclick="toggleService('${service.id}', '${cat.id}')">
+                                            <div class="service-left">
+                                                <div class="service-checkbox"></div>
+                                                <div class="service-info">
+                                                    <span class="service-name">${service.name}</span>
+                                                    ${service.badge ? `<span class="service-badge">${service.badge}</span>` : ''}
+                                                </div>
+                                            </div>
+                                            <div class="service-right">
+                                                <div class="service-price">₹${service.price.toLocaleString('en-IN')}</div>
+                                                <div class="service-duration">~ ${service.duration}</div>
+                                            </div>
+                                        </div>
+                                    `).join('')}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        // --- TOGGLE NODE ---
+        function toggleNode(categoryId) {
+            const node = document.querySelector(`.timeline-node[data-category="${categoryId}"]`);
+            const wasActive = node.classList.contains('active');
+
+            // Close all nodes
+            document.querySelectorAll('.timeline-node').forEach(n => {
+                n.classList.remove('active');
+            });
+
+            // Toggle current node
+            if (!wasActive) {
+                node.classList.add('active');
+                activeNode = categoryId;
+            } else {
+                activeNode = null;
+            }
+        }
+
+        // --- TOGGLE SERVICE ---
+        function toggleService(serviceId, categoryId) {
+            const category = categoriesData.find(c => c.id === categoryId);
+            const service = category.services.find(s => s.id === serviceId);
+            const item = document.getElementById(`item-${serviceId}`);
+
+            const index = selectedServices.findIndex(s => s.id === serviceId);
+
+            if (index > -1) {
+                selectedServices.splice(index, 1);
+                item.classList.remove('selected');
+            } else {
+                selectedServices.push({ ...service, category: categoryId });
+                item.classList.add('selected');
+            }
+
+            updateUI();
+        }
+
+        // --- UPDATE UI ---
+        function updateUI() {
+            // Update booking bar
+            const bar = document.getElementById('bookingBar');
+            const count = document.getElementById('selectedCount');
+            const total = document.getElementById('totalPrice');
+
+            count.textContent = selectedServices.length;
+            const sum = selectedServices.reduce((a, b) => a + b.price, 0);
+            total.textContent = `₹${sum.toLocaleString('en-IN')}`;
+
+            if (selectedServices.length > 0) {
+                bar.classList.add('visible');
+            } else {
+                bar.classList.remove('visible');
+            }
+
+            // Update node badges
+            categoriesData.forEach(cat => {
+                const catSelections = selectedServices.filter(s => s.category === cat.id);
+                const node = document.querySelector(`.timeline-node[data-category="${cat.id}"]`);
+                const badge = document.getElementById(`badge-${cat.id}`);
+                const countSpan = document.getElementById(`count-${cat.id}`);
+
+                if (catSelections.length > 0) {
+                    node.classList.add('has-selection');
+                    countSpan.textContent = catSelections.length;
+                } else {
+                    node.classList.remove('has-selection');
+                }
+            });
+        }
+
+        // --- MODAL FUNCTIONS ---
+        function openModal() {
+            if (selectedServices.length === 0) return;
+
+            const overlay = document.getElementById('modalOverlay');
+            const modal = document.getElementById('bookingModal');
+            const summary = document.getElementById('selectedSummary');
+
+            let html = '<div class="summary-header">Selected Services</div>';
+            selectedServices.forEach(s => {
+                html += `
+                    <div class="summary-item">
+                        <span>${s.name}</span>
+                        <span>₹${s.price.toLocaleString('en-IN')}</span>
+                    </div>
+                `;
+            });
+
+            const sum = selectedServices.reduce((a, b) => a + b.price, 0);
+            html += `
+                <div class="summary-item total">
+                    <span>Total</span>
+                    <span>₹${sum.toLocaleString('en-IN')}</span>
+                </div>
+            `;
+
+            summary.innerHTML = html;
+
+            overlay.style.display = 'block';
+            setTimeout(() => {
+                overlay.classList.add('active');
+                modal.classList.add('open');
+            }, 10);
+        }
+
+        function closeModal() {
+            const overlay = document.getElementById('modalOverlay');
+            const modal = document.getElementById('bookingModal');
+
+            modal.classList.remove('open');
+            overlay.classList.remove('active');
+
+            setTimeout(() => {
+                overlay.style.display = 'none';
+            }, 400);
+        }
+
+        function selectDate(btn, date) {
+            document.querySelectorAll('.options-grid:not(.time-options) .option-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            selectedDate = date;
+            document.getElementById('customDate').value = '';
+        }
+
+        function selectTime(btn, time) {
+            document.querySelectorAll('.time-options .option-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            selectedTime = time;
+        }
+
+        function toggleHomeService() {
+            const toggle = document.getElementById('homeToggle');
+            toggle.classList.toggle('on');
+            homeService = toggle.classList.contains('on');
+        }
+
+        // --- WHATSAPP ---
+        function sendToWhatsApp() {
+            const name = document.getElementById('userName').value || 'Guest';
+            const gender = document.getElementById('userGender').value;
+            const customDate = document.getElementById('customDate').value;
+            const date = customDate || selectedDate;
+
+            if (!selectedTime) {
+                alert('Please select a preferred time slot!');
+                return;
+            }
+
+            let message = `🌟 APPOINTMENT REQUEST - ${SALON_NAME}\n\n`;
+            message += `👤 Client: ${name}\n`;
+            message += `🚻 Gender: ${gender}\n`;
+            message += `📅 Date: ${date}\n`;
+            message += `⏰ Time: ${selectedTime}\n`;
+            message += `🏠 Home Service: ${homeService ? 'Yes' : 'No'}\n\n`;
+            message += `📋 Selected Services:\n`;
+
+            selectedServices.forEach((s, i) => {
+                message += `${i + 1}. ${s.name} - ₹${s.price.toLocaleString('en-IN')}\n`;
+            });
+
+            const sum = selectedServices.reduce((a, b) => a + b.price, 0);
+            message += `\n💰 Total: ₹${sum.toLocaleString('en-IN')}\n\n`;
+            message += `_Please confirm availability._`;
+
+            window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`, '_blank');
+        }
+
+        // --- INIT ---
+        init();
+    </script>
+</body>
+
+</html>

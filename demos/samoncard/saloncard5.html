@@ -1,0 +1,1365 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Divine Beauty | Luxury Salon Menu & Booking</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <style>
+        :root {
+            /* Glassmorphism Color Palette */
+            --glass-bg: rgba(255, 255, 255, 0.08);
+            --glass-bg-hover: rgba(255, 255, 255, 0.12);
+            --glass-bg-active: rgba(255, 255, 255, 0.15);
+            --glass-border: rgba(255, 255, 255, 0.15);
+            --glass-border-hover: rgba(255, 255, 255, 0.25);
+            --glass-border-active: rgba(255, 255, 255, 0.35);
+
+            /* Accent Colors */
+            --accent-primary: rgba(200, 170, 255, 0.9);
+            --accent-secondary: rgba(255, 182, 193, 0.9);
+            --accent-glow: rgba(200, 170, 255, 0.4);
+            --accent-gradient: linear-gradient(135deg, rgba(200, 170, 255, 0.8) 0%, rgba(255, 182, 193, 0.8) 100%);
+
+            /* Text Colors */
+            --text-primary: rgba(255, 255, 255, 0.95);
+            --text-secondary: rgba(255, 255, 255, 0.7);
+            --text-muted: rgba(255, 255, 255, 0.5);
+
+            /* Shadows & Glows */
+            --shadow-glass: 0 8px 32px rgba(0, 0, 0, 0.3);
+            --shadow-glow: 0 0 40px rgba(200, 170, 255, 0.15);
+            --shadow-selected: 0 0 50px rgba(200, 170, 255, 0.25), 0 0 100px rgba(200, 170, 255, 0.1);
+
+            /* Transitions */
+            --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+            --ease-expand: cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            min-height: 100vh;
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+            padding-bottom: 140px;
+        }
+
+        /* --- Animated Background --- */
+        .bg-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .bg-gradient {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 25%, #0f0f23 50%, #1a1a2e 75%, #16213e 100%);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .bg-orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.5;
+            animation: float 20s ease-in-out infinite;
+        }
+
+        .bg-orb-1 {
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(200, 170, 255, 0.4) 0%, transparent 70%);
+            top: -100px;
+            left: -100px;
+            animation-delay: 0s;
+        }
+
+        .bg-orb-2 {
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(255, 182, 193, 0.3) 0%, transparent 70%);
+            bottom: -150px;
+            right: -150px;
+            animation-delay: -5s;
+        }
+
+        .bg-orb-3 {
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(147, 197, 253, 0.3) 0%, transparent 70%);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            animation-delay: -10s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            25% { transform: translate(30px, -30px) scale(1.1); }
+            50% { transform: translate(-20px, 20px) scale(0.95); }
+            75% { transform: translate(20px, 30px) scale(1.05); }
+        }
+
+        /* --- Header --- */
+        .header {
+            position: relative;
+            padding: 3rem 1.5rem 2rem;
+            text-align: center;
+            z-index: 10;
+        }
+
+        .brand-container {
+            display: inline-block;
+            position: relative;
+        }
+
+        .brand-glow {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 200px;
+            height: 80px;
+            background: var(--accent-gradient);
+            filter: blur(40px);
+            opacity: 0.3;
+            border-radius: 50%;
+        }
+
+        .brand-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.4rem;
+            font-weight: 600;
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            position: relative;
+            letter-spacing: 2px;
+        }
+
+        .brand-tagline {
+            font-size: 0.7rem;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 5px;
+            margin-top: 0.5rem;
+            position: relative;
+        }
+
+        .brand-divider {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 1.5rem;
+        }
+
+        .divider-line {
+            width: 50px;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--glass-border), transparent);
+        }
+
+        .divider-dot {
+            width: 6px;
+            height: 6px;
+            background: var(--accent-gradient);
+            border-radius: 50%;
+            box-shadow: 0 0 10px var(--accent-glow);
+        }
+
+        /* --- Main Content --- */
+        .main-content {
+            max-width: 700px;
+            margin: 0 auto;
+            padding: 0 1rem;
+            position: relative;
+            z-index: 10;
+        }
+
+        /* --- Glass Category Card --- */
+        .glass-category {
+            margin-bottom: 1rem;
+            border-radius: 24px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .glass-panel {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            overflow: hidden;
+            transition: all 0.5s var(--ease-expand);
+            position: relative;
+        }
+
+        .glass-panel::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+        }
+
+        .glass-category:hover .glass-panel {
+            background: var(--glass-bg-hover);
+            border-color: var(--glass-border-hover);
+            box-shadow: var(--shadow-glass), var(--shadow-glow);
+        }
+
+        .glass-category.active .glass-panel {
+            background: var(--glass-bg-active);
+            border-color: var(--glass-border-active);
+            box-shadow: var(--shadow-glass), var(--shadow-selected);
+        }
+
+        /* --- Category Header --- */
+        .category-header {
+            position: relative;
+            height: 120px;
+            cursor: pointer;
+            overflow: hidden;
+        }
+
+        .category-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            transition: transform 0.8s var(--ease-smooth), filter 0.5s ease;
+            filter: brightness(0.4) saturate(1.2);
+            z-index: 0;
+        }
+
+        .glass-category:hover .category-bg {
+            transform: scale(1.05);
+            filter: brightness(0.5) saturate(1.3);
+        }
+
+        .glass-category.active .category-bg {
+            filter: brightness(0.35) saturate(1.1);
+        }
+
+        /* Background Images */
+        .cat-hair .category-bg { background-image: url('images/haircut.webp'); }
+        .cat-treatments .category-bg { background-image: url('images/hairtreat.webp'); }
+        .cat-mehndi .category-bg { background-image: url('images/design.webp'); }
+        .cat-facial .category-bg { background-image: url('images/skin.webp'); }
+        .cat-detan .category-bg { background-image: url('images/detan.webp'); }
+        .cat-waxing .category-bg { background-image: url('images/waxing.webp'); }
+        .cat-manicure .category-bg { background-image: url('images/pedicure.webp'); }
+        .cat-threading .category-bg { background-image: url('images/threading.webp'); }
+
+        .category-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(180deg, 
+                rgba(26, 26, 46, 0.3) 0%, 
+                rgba(26, 26, 46, 0.5) 50%, 
+                rgba(26, 26, 46, 0.85) 100%);
+            z-index: 1;
+        }
+
+        .category-content {
+            position: relative;
+            z-index: 2;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 1.5rem;
+        }
+
+        .category-top {
+            position: absolute;
+            top: 1rem;
+            right: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .service-count-badge {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            color: var(--text-secondary);
+        }
+
+        .service-count-badge span {
+            color: var(--accent-primary);
+            font-weight: 600;
+        }
+
+        .selection-indicator {
+            background: var(--accent-gradient);
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.65rem;
+            font-weight: 600;
+            color: #1a1a2e;
+            opacity: 0;
+            transform: scale(0.8);
+            transition: all 0.3s var(--ease-expand);
+        }
+
+        .glass-category.has-selection .selection-indicator {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .category-label {
+            font-size: 0.6rem;
+            color: var(--accent-primary);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 0.3rem;
+        }
+
+        .category-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .expand-icon {
+            width: 32px;
+            height: 32px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            transition: all 0.4s var(--ease-expand);
+        }
+
+        .glass-category.active .expand-icon {
+            background: var(--accent-gradient);
+            color: #1a1a2e;
+            transform: rotate(45deg);
+            border-color: transparent;
+        }
+
+        /* --- Services Container --- */
+        .services-container {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.6s var(--ease-expand);
+        }
+
+        .glass-category.active .services-container {
+            max-height: 500px;
+        }
+
+        .services-inner {
+            padding: 0 1rem 1rem;
+            opacity: 0;
+            transform: translateY(-10px);
+            filter: blur(5px);
+            transition: all 0.4s var(--ease-smooth);
+        }
+
+        .glass-category.active .services-inner {
+            opacity: 1;
+            transform: translateY(0);
+            filter: blur(0);
+            padding: 1rem;
+        }
+
+        .glass-divider {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--glass-border), transparent);
+            margin-bottom: 1rem;
+        }
+
+        /* --- Service Item --- */
+        .service-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 1.2rem;
+            margin-bottom: 0.5rem;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 16px;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid transparent;
+            transition: all 0.3s var(--ease-smooth);
+        }
+
+        .service-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.05), transparent);
+            transition: left 0.5s var(--ease-smooth);
+        }
+
+        .service-item:hover::before {
+            left: 100%;
+        }
+
+        .service-item:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(255, 255, 255, 0.1);
+            box-shadow: 0 0 20px rgba(200, 170, 255, 0.1);
+        }
+
+        .service-item.selected {
+            background: rgba(200, 170, 255, 0.1);
+            border-color: rgba(200, 170, 255, 0.3);
+            box-shadow: 0 0 30px rgba(200, 170, 255, 0.15), inset 0 0 20px rgba(200, 170, 255, 0.05);
+        }
+
+        .service-left {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .service-checkbox {
+            width: 24px;
+            height: 24px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s var(--ease-expand);
+            flex-shrink: 0;
+        }
+
+        .service-item:hover .service-checkbox {
+            border-color: rgba(200, 170, 255, 0.5);
+            box-shadow: 0 0 15px rgba(200, 170, 255, 0.2);
+        }
+
+        .service-item.selected .service-checkbox {
+            background: var(--accent-gradient);
+            border-color: transparent;
+            box-shadow: 0 0 20px rgba(200, 170, 255, 0.4);
+        }
+
+        .service-item.selected .service-checkbox::after {
+            content: '✓';
+            color: #1a1a2e;
+            font-size: 13px;
+            font-weight: bold;
+        }
+
+        .service-info {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .service-name {
+            font-size: 0.95rem;
+            color: var(--text-primary);
+            transition: color 0.3s ease;
+        }
+
+        .service-item.selected .service-name {
+            color: var(--accent-primary);
+        }
+
+        .service-badge {
+            display: inline-block;
+            font-size: 0.55rem;
+            background: var(--accent-gradient);
+            color: #1a1a2e;
+            padding: 3px 10px;
+            border-radius: 20px;
+            text-transform: uppercase;
+            font-weight: 700;
+            margin-top: 3px;
+        }
+
+        .service-right {
+            text-align: right;
+            position: relative;
+            z-index: 1;
+        }
+
+        .service-price {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.15rem;
+            font-weight: 600;
+            color: var(--accent-primary);
+        }
+
+        .service-duration {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            margin-top: 2px;
+        }
+
+        /* --- Floating Booking Bar --- */
+        .booking-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            z-index: 100;
+            transform: translateY(100%);
+            transition: transform 0.5s var(--ease-expand);
+            padding: 0 1rem 1rem;
+        }
+
+        .booking-bar.visible {
+            transform: translateY(0);
+        }
+
+        .booking-bar-inner {
+            max-width: 500px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(30px);
+            -webkit-backdrop-filter: blur(30px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 24px;
+            padding: 1.2rem 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: var(--shadow-glass), var(--shadow-glow);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .booking-bar-inner::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+        }
+
+        .booking-info {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .booking-services {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+        }
+
+        .booking-services strong {
+            color: var(--accent-primary);
+            font-weight: 600;
+        }
+
+        .booking-total {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .btn-continue {
+            background: var(--accent-gradient);
+            border: none;
+            padding: 14px 28px;
+            border-radius: 14px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #1a1a2e;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 20px rgba(200, 170, 255, 0.3);
+        }
+
+        .btn-continue:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(200, 170, 255, 0.4);
+        }
+
+        /* --- Booking Modal --- */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(15, 15, 35, 0);
+            backdrop-filter: blur(0px);
+            z-index: 200;
+            display: none;
+            transition: all 0.4s ease;
+        }
+
+        .modal-overlay.active {
+            background: rgba(15, 15, 35, 0.7);
+            backdrop-filter: blur(10px);
+        }
+
+        .booking-modal {
+            position: fixed;
+            bottom: -100%;
+            left: 0;
+            width: 100%;
+            max-height: 92vh;
+            background: rgba(30, 30, 50, 0.8);
+            backdrop-filter: blur(40px);
+            -webkit-backdrop-filter: blur(40px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 32px 32px 0 0;
+            z-index: 201;
+            transition: bottom 0.5s var(--ease-expand);
+            overflow-y: auto;
+        }
+
+        .booking-modal.open {
+            bottom: 0;
+        }
+
+        .modal-handle {
+            width: 50px;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 2px;
+            margin: 1.2rem auto 1.5rem;
+        }
+
+        .modal-header {
+            text-align: center;
+            padding: 0 1.5rem 1.5rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .modal-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.6rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 0.3rem;
+        }
+
+        .modal-subtitle {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        .modal-body {
+            padding: 1.5rem;
+        }
+
+        .selected-summary {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 18px;
+            padding: 1.2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .summary-header {
+            font-size: 0.65rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 0.8rem;
+        }
+
+        .summary-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.6rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            font-size: 0.9rem;
+        }
+
+        .summary-item:last-child {
+            border-bottom: none;
+        }
+
+        .summary-item.total {
+            font-weight: 600;
+            color: var(--accent-primary);
+            margin-top: 0.5rem;
+            padding-top: 0.8rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 0.65rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 10px;
+        }
+
+        input[type="text"],
+        select {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            padding: 14px 16px;
+            border-radius: 14px;
+            color: var(--text-primary);
+            font-size: 0.95rem;
+            outline: none;
+            font-family: 'Inter', sans-serif;
+            transition: all 0.3s ease;
+        }
+
+        input[type="text"]:focus,
+        select:focus {
+            border-color: rgba(200, 170, 255, 0.5);
+            box-shadow: 0 0 20px rgba(200, 170, 255, 0.1);
+        }
+
+        input[type="text"]::placeholder {
+            color: var(--text-muted);
+        }
+
+        .options-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+        }
+
+        .option-btn {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 12px;
+            border-radius: 14px;
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            cursor: pointer;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .option-btn:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .option-btn.active {
+            background: rgba(200, 170, 255, 0.15);
+            border-color: rgba(200, 170, 255, 0.4);
+            color: var(--accent-primary);
+        }
+
+        .time-options {
+            grid-template-columns: repeat(3, 1fr);
+        }
+
+        .toggle-row {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 14px;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 14px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .toggle-row:hover {
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .toggle-switch {
+            width: 52px;
+            height: 28px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 14px;
+            position: relative;
+            transition: background 0.3s ease;
+            flex-shrink: 0;
+        }
+
+        .toggle-switch.on {
+            background: rgba(200, 170, 255, 0.5);
+        }
+
+        .toggle-switch::after {
+            content: '';
+            position: absolute;
+            top: 3px;
+            left: 3px;
+            width: 22px;
+            height: 22px;
+            background: white;
+            border-radius: 50%;
+            transition: transform 0.3s var(--ease-smooth);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .toggle-switch.on::after {
+            transform: translateX(24px);
+        }
+
+        .toggle-text {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        .whatsapp-btn {
+            width: 100%;
+            background: linear-gradient(135deg, #25d366 0%, #128c7e 100%);
+            border: none;
+            padding: 16px;
+            border-radius: 16px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: white;
+            cursor: pointer;
+            margin-top: 0.5rem;
+            box-shadow: 0 4px 20px rgba(37, 211, 102, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .whatsapp-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(37, 211, 102, 0.4);
+        }
+
+        /* --- Animations --- */
+        @keyframes glassFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+                filter: blur(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+                filter: blur(0);
+            }
+        }
+
+        .glass-category {
+            animation: glassFadeIn 0.7s var(--ease-smooth) forwards;
+            opacity: 0;
+        }
+
+        .glass-category:nth-child(1) { animation-delay: 0.1s; }
+        .glass-category:nth-child(2) { animation-delay: 0.2s; }
+        .glass-category:nth-child(3) { animation-delay: 0.3s; }
+        .glass-category:nth-child(4) { animation-delay: 0.4s; }
+        .glass-category:nth-child(5) { animation-delay: 0.5s; }
+        .glass-category:nth-child(6) { animation-delay: 0.6s; }
+        .glass-category:nth-child(7) { animation-delay: 0.7s; }
+        .glass-category:nth-child(8) { animation-delay: 0.8s; }
+
+        /* --- Responsive --- */
+        @media (max-width: 480px) {
+            .brand-name {
+                font-size: 1.8rem;
+            }
+
+            .category-header {
+                height: 100px;
+            }
+
+            .category-title {
+                font-size: 1.3rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Animated Background -->
+    <div class="bg-container">
+        <div class="bg-gradient"></div>
+        <div class="bg-orb bg-orb-1"></div>
+        <div class="bg-orb bg-orb-2"></div>
+        <div class="bg-orb bg-orb-3"></div>
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="brand-container">
+            <div class="brand-glow"></div>
+            <h1 class="brand-name">Divine Beauty</h1>
+        </div>
+        <p class="brand-tagline">Luxury Salon & Spa Experience</p>
+        <div class="brand-divider">
+            <div class="divider-line"></div>
+            <div class="divider-dot"></div>
+            <div class="divider-line"></div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content" id="mainContent">
+        <!-- Categories will be rendered dynamically -->
+    </main>
+
+    <!-- Floating Booking Bar -->
+    <div class="booking-bar" id="bookingBar">
+        <div class="booking-bar-inner">
+            <div class="booking-info">
+                <span class="booking-services"><strong id="selectedCount">0</strong> services selected</span>
+                <span class="booking-total" id="totalPrice">₹0</span>
+            </div>
+            <button class="btn-continue" onclick="openModal()">Continue</button>
+        </div>
+    </div>
+
+    <!-- Booking Modal -->
+    <div class="modal-overlay" id="modalOverlay" onclick="closeModal()"></div>
+    <div class="booking-modal" id="bookingModal">
+        <div class="modal-handle"></div>
+        <div class="modal-header">
+            <h3 class="modal-title">Complete Your Booking</h3>
+            <p class="modal-subtitle">Select your preferred date and time</p>
+        </div>
+        <div class="modal-body">
+            <div class="selected-summary" id="selectedSummary">
+                <div class="summary-header">Selected Services</div>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">Preferred Date</label>
+                <div class="options-grid">
+                    <button class="option-btn active" onclick="selectDate(this, 'Today')">Today</button>
+                    <button class="option-btn" onclick="selectDate(this, 'Tomorrow')">Tomorrow</button>
+                </div>
+                <input type="text" id="customDate" placeholder="Or enter a specific date" style="margin-top:10px;">
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">Preferred Time</label>
+                <div class="options-grid time-options">
+                    <button class="option-btn" onclick="selectTime(this, '10:00 AM')">10 AM</button>
+                    <button class="option-btn" onclick="selectTime(this, '12:30 PM')">12:30 PM</button>
+                    <button class="option-btn" onclick="selectTime(this, '03:00 PM')">03 PM</button>
+                    <button class="option-btn" onclick="selectTime(this, '05:30 PM')">05:30 PM</button>
+                    <button class="option-btn" onclick="selectTime(this, '07:00 PM')">07 PM</button>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">Your Details</label>
+                <input type="text" id="userName" placeholder="Your Name" style="margin-bottom:10px;">
+                <select id="userGender">
+                    <option value="Not Specified">Select Gender</option>
+                    <option value="Female">Female</option>
+                    <option value="Male">Male</option>
+                </select>
+            </div>
+
+            <div class="toggle-row" onclick="toggleHomeService()">
+                <div class="toggle-switch" id="homeToggle"></div>
+                <span class="toggle-text">Request Home Service (+ Extra Charges)</span>
+            </div>
+
+            <button class="whatsapp-btn" onclick="sendToWhatsApp()">Confirm via WhatsApp</button>
+        </div>
+    </div>
+
+    <script>
+        // --- CONFIGURATION ---
+        const WHATSAPP_NUMBER = "918219928236";
+        const SALON_NAME = "Divine Beauty Unisex Salon";
+
+        // --- SERVICES DATA ---
+        const categoriesData = [
+            {
+                id: 'hair',
+                label: 'Signature Services',
+                title: 'Hair & Styling',
+                class: 'cat-hair',
+                services: [
+                    { id: 'hair-1', name: 'U Shape Hair Cut', price: 100, duration: '30 min' },
+                    { id: 'hair-2', name: 'Straight Hair Cut', price: 100, duration: '30 min' },
+                    { id: 'hair-3', name: 'Step Hair Cut', price: 300, duration: '45 min', badge: 'Trending' },
+                    { id: 'hair-4', name: 'Hair Wash (LOréal)', price: 100, duration: '20 min' }
+                ]
+            },
+            {
+                id: 'treatments',
+                label: 'Premium Care',
+                title: 'Treatments & Color',
+                class: 'cat-treatments',
+                services: [
+                    { id: 'treat-1', name: 'Perm. Straightening', price: 4000, duration: '4 hrs', badge: 'Premium' },
+                    { id: 'treat-2', name: 'Hair Smoothing', price: 3500, duration: '3 hrs' },
+                    { id: 'treat-3', name: 'Hair Spa (LOréal)', price: 800, duration: '1 hr' }
+                ]
+            },
+            {
+                id: 'mehndi',
+                label: 'Traditional Art',
+                title: 'Mehndi Art',
+                class: 'cat-mehndi',
+                services: [
+                    { id: 'mehndi-1', name: 'Mehndi (Shahnaz)', price: 300, duration: '1 hr' },
+                    { id: 'mehndi-2', name: 'Mehndi (Nupur)', price: 250, duration: '1 hr' }
+                ]
+            },
+            {
+                id: 'facial',
+                label: 'Skin Rejuvenation',
+                title: 'Facial & Skin',
+                class: 'cat-facial',
+                services: [
+                    { id: 'facial-1', name: 'Facial (Shahnaz Power)', price: 800, duration: '1 hr', badge: 'Top Pick' },
+                    { id: 'facial-2', name: 'Fruit Facial (VLCC)', price: 600, duration: '45 min' },
+                    { id: 'facial-3', name: 'Facial (Cheryls)', price: 600, duration: '45 min' }
+                ]
+            },
+            {
+                id: 'detan',
+                label: 'Skin Brightening',
+                title: 'De-Tan Care',
+                class: 'cat-detan',
+                services: [
+                    { id: 'detan-1', name: 'De-Tan (Only Face)', price: 150, duration: '30 min' },
+                    { id: 'detan-2', name: 'De-Tan (Body)', price: 650, duration: '1 hr' }
+                ]
+            },
+            {
+                id: 'waxing',
+                label: 'Smooth Finish',
+                title: 'Waxing',
+                class: 'cat-waxing',
+                services: [
+                    { id: 'waxing-1', name: 'Full Hand Waxing', price: 250, duration: '30 min' },
+                    { id: 'waxing-2', name: 'Full Leg Waxing', price: 450, duration: '45 min' },
+                    { id: 'waxing-3', name: 'Face Waxing', price: 50, duration: '15 min' }
+                ]
+            },
+            {
+                id: 'manicure',
+                label: 'Nail Care',
+                title: 'Hands & Feet',
+                class: 'cat-manicure',
+                services: [
+                    { id: 'mani-1', name: 'Manicure (VLCC)', price: 350, duration: '45 min' },
+                    { id: 'mani-2', name: 'Pedicure (VLCC)', price: 450, duration: '1 hr', badge: 'Relaxing' }
+                ]
+            },
+            {
+                id: 'threading',
+                label: 'Precision & Relax',
+                title: 'Threading & Massage',
+                class: 'cat-threading',
+                services: [
+                    { id: 'thread-1', name: 'Eyebrows', price: 50, duration: '10 min' },
+                    { id: 'thread-2', name: 'Upper Lips', price: 20, duration: '5 min' },
+                    { id: 'thread-3', name: 'Body Massage (60 Min)', price: 1000, duration: '1 hr', badge: 'Relax' }
+                ]
+            }
+        ];
+
+        // --- STATE ---
+        let selectedServices = [];
+        let activeCategory = null;
+        let selectedDate = 'Today';
+        let selectedTime = '';
+        let homeService = false;
+
+        // --- INITIALIZE ---
+        function init() {
+            renderCategories();
+        }
+
+        // --- RENDER CATEGORIES ---
+        function renderCategories() {
+            const container = document.getElementById('mainContent');
+
+            container.innerHTML = categoriesData.map(cat => `
+                <div class="glass-category ${cat.class}" data-category="${cat.id}">
+                    <div class="glass-panel">
+                        <div class="category-header" onclick="toggleCategory('${cat.id}')">
+                            <div class="category-bg"></div>
+                            <div class="category-overlay"></div>
+                            <div class="category-content">
+                                <div class="category-top">
+                                    <span class="service-count-badge"><span>${cat.services.length}</span> services</span>
+                                    <span class="selection-indicator" id="indicator-${cat.id}">
+                                        <span id="count-${cat.id}">0</span> selected
+                                    </span>
+                                </div>
+                                <span class="category-label">${cat.label}</span>
+                                <div class="category-title">
+                                    <span>${cat.title}</span>
+                                    <span class="expand-icon">+</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="services-container">
+                            <div class="services-inner">
+                                <div class="glass-divider"></div>
+                                ${cat.services.map(service => `
+                                    <div class="service-item" id="item-${service.id}" onclick="toggleService('${service.id}', '${cat.id}')">
+                                        <div class="service-left">
+                                            <div class="service-checkbox"></div>
+                                            <div class="service-info">
+                                                <span class="service-name">${service.name}</span>
+                                                ${service.badge ? `<span class="service-badge">${service.badge}</span>` : ''}
+                                            </div>
+                                        </div>
+                                        <div class="service-right">
+                                            <div class="service-price">₹${service.price.toLocaleString('en-IN')}</div>
+                                            <div class="service-duration">~ ${service.duration}</div>
+                                        </div>
+                                    </div>
+                                `).join('')}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // --- TOGGLE CATEGORY ---
+        function toggleCategory(categoryId) {
+            const category = document.querySelector(`.glass-category[data-category="${categoryId}"]`);
+            const wasActive = category.classList.contains('active');
+
+            // Close all categories
+            document.querySelectorAll('.glass-category').forEach(cat => {
+                cat.classList.remove('active');
+            });
+
+            // Toggle current category
+            if (!wasActive) {
+                category.classList.add('active');
+                activeCategory = categoryId;
+            } else {
+                activeCategory = null;
+            }
+        }
+
+        // --- TOGGLE SERVICE ---
+        function toggleService(serviceId, categoryId) {
+            const category = categoriesData.find(c => c.id === categoryId);
+            const service = category.services.find(s => s.id === serviceId);
+            const item = document.getElementById(`item-${serviceId}`);
+
+            const index = selectedServices.findIndex(s => s.id === serviceId);
+
+            if (index > -1) {
+                selectedServices.splice(index, 1);
+                item.classList.remove('selected');
+            } else {
+                selectedServices.push({ ...service, category: categoryId });
+                item.classList.add('selected');
+            }
+
+            updateUI();
+        }
+
+        // --- UPDATE UI ---
+        function updateUI() {
+            // Update booking bar
+            const bar = document.getElementById('bookingBar');
+            const count = document.getElementById('selectedCount');
+            const total = document.getElementById('totalPrice');
+
+            count.textContent = selectedServices.length;
+            const sum = selectedServices.reduce((a, b) => a + b.price, 0);
+            total.textContent = `₹${sum.toLocaleString('en-IN')}`;
+
+            if (selectedServices.length > 0) {
+                bar.classList.add('visible');
+            } else {
+                bar.classList.remove('visible');
+            }
+
+            // Update category indicators
+            categoriesData.forEach(cat => {
+                const catSelections = selectedServices.filter(s => s.category === cat.id);
+                const categoryEl = document.querySelector(`.glass-category[data-category="${cat.id}"]`);
+                const countSpan = document.getElementById(`count-${cat.id}`);
+
+                if (catSelections.length > 0) {
+                    categoryEl.classList.add('has-selection');
+                    countSpan.textContent = catSelections.length;
+                } else {
+                    categoryEl.classList.remove('has-selection');
+                }
+            });
+        }
+
+        // --- MODAL FUNCTIONS ---
+        function openModal() {
+            if (selectedServices.length === 0) return;
+
+            const overlay = document.getElementById('modalOverlay');
+            const modal = document.getElementById('bookingModal');
+            const summary = document.getElementById('selectedSummary');
+
+            let html = '<div class="summary-header">Selected Services</div>';
+            selectedServices.forEach(s => {
+                html += `
+                    <div class="summary-item">
+                        <span>${s.name}</span>
+                        <span>₹${s.price.toLocaleString('en-IN')}</span>
+                    </div>
+                `;
+            });
+
+            const sum = selectedServices.reduce((a, b) => a + b.price, 0);
+            html += `
+                <div class="summary-item total">
+                    <span>Total</span>
+                    <span>₹${sum.toLocaleString('en-IN')}</span>
+                </div>
+            `;
+
+            summary.innerHTML = html;
+
+            overlay.style.display = 'block';
+            setTimeout(() => {
+                overlay.classList.add('active');
+                modal.classList.add('open');
+            }, 10);
+        }
+
+        function closeModal() {
+            const overlay = document.getElementById('modalOverlay');
+            const modal = document.getElementById('bookingModal');
+
+            modal.classList.remove('open');
+            overlay.classList.remove('active');
+
+            setTimeout(() => {
+                overlay.style.display = 'none';
+            }, 400);
+        }
+
+        function selectDate(btn, date) {
+            document.querySelectorAll('.options-grid:not(.time-options) .option-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            selectedDate = date;
+            document.getElementById('customDate').value = '';
+        }
+
+        function selectTime(btn, time) {
+            document.querySelectorAll('.time-options .option-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            selectedTime = time;
+        }
+
+        function toggleHomeService() {
+            const toggle = document.getElementById('homeToggle');
+            toggle.classList.toggle('on');
+            homeService = toggle.classList.contains('on');
+        }
+
+        // --- WHATSAPP ---
+        function sendToWhatsApp() {
+            const name = document.getElementById('userName').value || 'Guest';
+            const gender = document.getElementById('userGender').value;
+            const customDate = document.getElementById('customDate').value;
+            const date = customDate || selectedDate;
+
+            if (!selectedTime) {
+                alert('Please select a preferred time slot!');
+                return;
+            }
+
+            let message = `✨ APPOINTMENT REQUEST - ${SALON_NAME}\n\n`;
+            message += `👤 Client: ${name}\n`;
+            message += `🚻 Gender: ${gender}\n`;
+            message += `📅 Date: ${date}\n`;
+            message += `⏰ Time: ${selectedTime}\n`;
+            message += `🏠 Home Service: ${homeService ? 'Yes' : 'No'}\n\n`;
+            message += `📋 Selected Services:\n`;
+
+            selectedServices.forEach((s, i) => {
+                message += `${i + 1}. ${s.name} - ₹${s.price.toLocaleString('en-IN')}\n`;
+            });
+
+            const sum = selectedServices.reduce((a, b) => a + b.price, 0);
+            message += `\n💰 Total: ₹${sum.toLocaleString('en-IN')}\n\n`;
+            message += `_Please confirm availability._`;
+
+            window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`, '_blank');
+        }
+
+        // --- INIT ---
+        init();
+    </script>
+</body>
+
+</html>

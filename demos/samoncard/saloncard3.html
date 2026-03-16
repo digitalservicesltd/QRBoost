@@ -1,0 +1,1198 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Divine Beauty | Luxury Salon Menu & Booking</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <style>
+        :root {
+            /* Modern Purple-Violet Palette */
+            --primary: #8b5cf6;
+            --primary-light: #a78bfa;
+            --primary-dark: #6d28d9;
+            --accent: #c4b5fd;
+            --accent-glow: rgba(139, 92, 246, 0.4);
+
+            /* Background Colors */
+            --bg-dark: #0c0a14;
+            --bg-card: #16131f;
+            --bg-card-hover: #1e1a2e;
+            --bg-elevated: #1f1b2e;
+
+            /* Text Colors */
+            --text-primary: #f4f0fb;
+            --text-secondary: #a8a0b8;
+            --text-muted: #6b6480;
+
+            /* UI Colors */
+            --border-subtle: rgba(139, 92, 246, 0.1);
+            --border-active: rgba(139, 92, 246, 0.3);
+
+            /* Gradients */
+            --gradient-primary: linear-gradient(135deg, #6d28d9 0%, #8b5cf6 50%, #a78bfa 100%);
+            --gradient-glow: radial-gradient(circle at center, rgba(139, 92, 246, 0.15) 0%, transparent 70%);
+
+            /* Shadows */
+            --shadow-card: 0 4px 20px rgba(0, 0, 0, 0.3);
+            --shadow-selected: 0 0 30px rgba(139, 92, 246, 0.25), 0 0 60px rgba(139, 92, 246, 0.1);
+            --shadow-hover: 0 8px 30px rgba(0, 0, 0, 0.4);
+
+            /* Transitions */
+            --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+            --ease-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--primary);
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--bg-dark);
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-dark);
+            background-image:
+                radial-gradient(ellipse at 0% 0%, rgba(109, 40, 217, 0.08) 0%, transparent 50%),
+                radial-gradient(ellipse at 100% 100%, rgba(139, 92, 246, 0.06) 0%, transparent 50%);
+            color: var(--text-primary);
+            min-height: 100vh;
+            line-height: 1.6;
+            padding-bottom: 120px;
+        }
+
+        /* --- Header --- */
+        .header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: linear-gradient(180deg, var(--bg-dark) 0%, var(--bg-dark) 70%, transparent 100%);
+            padding: 1.5rem 1.25rem 0;
+        }
+
+        .header-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .brand {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .brand-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.6rem;
+            font-weight: 600;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .brand-tagline {
+            font-size: 0.65rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-top: 2px;
+        }
+
+        .cart-icon {
+            position: relative;
+            width: 48px;
+            height: 48px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s var(--ease-smooth);
+        }
+
+        .cart-icon:hover {
+            background: var(--bg-card-hover);
+            border-color: var(--border-active);
+        }
+
+        .cart-icon svg {
+            width: 22px;
+            height: 22px;
+            stroke: var(--primary-light);
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -6px;
+            right: -6px;
+            min-width: 22px;
+            height: 22px;
+            background: var(--gradient-primary);
+            border-radius: 11px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 6px;
+            opacity: 0;
+            transform: scale(0);
+            transition: all 0.3s var(--ease-bounce);
+        }
+
+        .cart-icon.active .cart-count {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        /* --- Category Filter --- */
+        .category-filter {
+            display: flex;
+            gap: 8px;
+            overflow-x: auto;
+            padding-bottom: 1rem;
+            scrollbar-width: none;
+        }
+
+        .category-filter::-webkit-scrollbar {
+            display: none;
+        }
+
+        .filter-chip {
+            flex-shrink: 0;
+            padding: 10px 18px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: 25px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: all 0.3s var(--ease-smooth);
+            white-space: nowrap;
+        }
+
+        .filter-chip:hover {
+            background: var(--bg-card-hover);
+            color: var(--text-primary);
+            border-color: var(--border-active);
+        }
+
+        .filter-chip.active {
+            background: var(--gradient-primary);
+            border-color: transparent;
+            color: white;
+            box-shadow: 0 4px 15px rgba(139, 92, 246, 0.3);
+        }
+
+        .filter-chip .chip-count {
+            display: inline-block;
+            margin-left: 6px;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 2px 7px;
+            border-radius: 10px;
+            font-size: 0.7rem;
+            opacity: 0;
+            transform: scale(0.8);
+            transition: all 0.3s ease;
+        }
+
+        .filter-chip.active .chip-count {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .filter-chip.has-items .chip-count {
+            opacity: 1;
+            transform: scale(1);
+            background: rgba(139, 92, 246, 0.3);
+        }
+
+        /* --- Main Content --- */
+        .main-content {
+            padding: 0 1rem;
+        }
+
+        /* --- Section Header --- */
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-bottom: 1rem;
+            padding: 0 0.25rem;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .section-count {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        .section-count span {
+            color: var(--primary-light);
+            font-weight: 600;
+        }
+
+        /* --- Services Grid --- */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+        }
+
+        @media (min-width: 500px) {
+            .services-grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 14px;
+            }
+        }
+
+        @media (min-width: 768px) {
+            .services-grid {
+                grid-template-columns: repeat(4, 1fr);
+                gap: 16px;
+            }
+        }
+
+        /* --- Service Card --- */
+        .service-card {
+            background: var(--bg-card);
+            border-radius: 18px;
+            padding: 1.25rem 1rem;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid transparent;
+            transition: all 0.4s var(--ease-smooth);
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--gradient-glow);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            pointer-events: none;
+        }
+
+        .service-card::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(139, 92, 246, 0.1) 0%, transparent 50%);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            pointer-events: none;
+        }
+
+        .service-card:hover {
+            background: var(--bg-card-hover);
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-hover);
+            border-color: var(--border-subtle);
+        }
+
+        .service-card.selected {
+            background: var(--bg-card-hover);
+            border-color: var(--primary);
+            box-shadow: var(--shadow-selected);
+        }
+
+        .service-card.selected::before {
+            opacity: 1;
+        }
+
+        .service-card.selected::after {
+            opacity: 1;
+            animation: pulse-glow 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse-glow {
+            0%, 100% { opacity: 0.5; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.1); }
+        }
+
+        .card-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .card-icon {
+            width: 50px;
+            height: 50px;
+            background: rgba(139, 92, 246, 0.1);
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .service-card:hover .card-icon {
+            background: rgba(139, 92, 246, 0.15);
+            transform: scale(1.05);
+        }
+
+        .service-card.selected .card-icon {
+            background: var(--gradient-primary);
+        }
+
+        .service-card.selected .card-icon .icon-emoji {
+            display: none;
+        }
+
+        .service-card.selected .card-icon::after {
+            content: '✓';
+            font-size: 1.4rem;
+            color: white;
+            font-weight: bold;
+        }
+
+        .service-name {
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: var(--text-primary);
+            margin-bottom: 0.4rem;
+            line-height: 1.4;
+            min-height: 2.5rem;
+        }
+
+        .service-card.selected .service-name {
+            color: var(--accent);
+        }
+
+        .service-badge {
+            display: inline-block;
+            font-size: 0.55rem;
+            background: var(--gradient-primary);
+            color: white;
+            padding: 3px 8px;
+            border-radius: 20px;
+            text-transform: uppercase;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            margin-bottom: 0.5rem;
+        }
+
+        .service-price {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--primary-light);
+            display: flex;
+            align-items: baseline;
+            gap: 2px;
+        }
+
+        .service-price::before {
+            content: '₹';
+            font-size: 0.9rem;
+            opacity: 0.7;
+        }
+
+        .card-duration {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            margin-top: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        /* --- Floating Booking Bar --- */
+        .booking-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: linear-gradient(180deg, transparent 0%, var(--bg-dark) 30%);
+            padding: 2.5rem 1rem 1.5rem;
+            z-index: 90;
+            transform: translateY(100%);
+            transition: transform 0.5s var(--ease-smooth);
+        }
+
+        .booking-bar.visible {
+            transform: translateY(0);
+        }
+
+        .booking-bar-inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: var(--bg-elevated);
+            border: 1px solid var(--border-active);
+            border-radius: 18px;
+            padding: 1rem 1.25rem;
+            box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .booking-details {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .booking-services {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+
+        .booking-services strong {
+            color: var(--primary-light);
+            font-weight: 600;
+        }
+
+        .booking-total {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--accent);
+        }
+
+        .btn-continue {
+            background: var(--gradient-primary);
+            border: none;
+            padding: 14px 28px;
+            border-radius: 14px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 20px rgba(139, 92, 246, 0.3);
+        }
+
+        .btn-continue:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(139, 92, 246, 0.4);
+        }
+
+        /* --- Booking Modal --- */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(12, 10, 20, 0);
+            z-index: 200;
+            display: none;
+            transition: background 0.4s ease;
+        }
+
+        .modal-overlay.active {
+            background: rgba(12, 10, 20, 0.92);
+        }
+
+        .booking-modal {
+            position: fixed;
+            bottom: -100%;
+            left: 0;
+            width: 100%;
+            max-height: 92vh;
+            background: var(--bg-elevated);
+            border-radius: 28px 28px 0 0;
+            z-index: 201;
+            transition: bottom 0.5s var(--ease-smooth);
+            overflow-y: auto;
+        }
+
+        .booking-modal.open {
+            bottom: 0;
+        }
+
+        .modal-handle {
+            width: 48px;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 2px;
+            margin: 1rem auto 1.5rem;
+        }
+
+        .modal-header {
+            text-align: center;
+            padding: 0 1.5rem 1.5rem;
+            border-bottom: 1px solid var(--border-subtle);
+        }
+
+        .modal-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.6rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 0.3rem;
+        }
+
+        .modal-subtitle {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        .modal-body {
+            padding: 1.5rem;
+        }
+
+        /* Selected Services Summary */
+        .selected-summary {
+            background: var(--bg-card);
+            border-radius: 16px;
+            padding: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .summary-header {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 0.8rem;
+        }
+
+        .summary-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.6rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+            font-size: 0.9rem;
+        }
+
+        .summary-item:last-child {
+            border-bottom: none;
+        }
+
+        .summary-item.total {
+            font-weight: 600;
+            color: var(--accent);
+            margin-top: 0.5rem;
+            padding-top: 0.8rem;
+            border-top: 1px solid var(--border-subtle);
+        }
+
+        /* Form Groups */
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 10px;
+        }
+
+        input[type="text"],
+        select {
+            width: 100%;
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            padding: 14px 16px;
+            border-radius: 12px;
+            color: var(--text-primary);
+            font-size: 0.95rem;
+            outline: none;
+            transition: border-color 0.3s ease;
+        }
+
+        input[type="text"]:focus,
+        select:focus {
+            border-color: var(--primary);
+        }
+
+        input[type="text"]::placeholder {
+            color: var(--text-muted);
+        }
+
+        .options-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+        }
+
+        .option-btn {
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            padding: 12px;
+            border-radius: 12px;
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            cursor: pointer;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .option-btn:hover {
+            border-color: var(--border-active);
+            color: var(--text-primary);
+        }
+
+        .option-btn.active {
+            background: rgba(139, 92, 246, 0.15);
+            border-color: var(--primary);
+            color: var(--accent);
+        }
+
+        .time-options {
+            grid-template-columns: repeat(3, 1fr);
+        }
+
+        /* Home Service Toggle */
+        .toggle-row {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 14px;
+            background: var(--bg-card);
+            border-radius: 12px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .toggle-row:hover {
+            background: var(--bg-card-hover);
+        }
+
+        .toggle-switch {
+            width: 52px;
+            height: 28px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 14px;
+            position: relative;
+            transition: background 0.3s ease;
+            flex-shrink: 0;
+        }
+
+        .toggle-switch.on {
+            background: var(--primary);
+        }
+
+        .toggle-switch::after {
+            content: '';
+            position: absolute;
+            top: 3px;
+            left: 3px;
+            width: 22px;
+            height: 22px;
+            background: white;
+            border-radius: 50%;
+            transition: transform 0.3s var(--ease-smooth);
+        }
+
+        .toggle-switch.on::after {
+            transform: translateX(24px);
+        }
+
+        .toggle-text {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        /* WhatsApp Button */
+        .whatsapp-btn {
+            width: 100%;
+            background: linear-gradient(135deg, #25d366 0%, #128c7e 100%);
+            border: none;
+            padding: 16px;
+            border-radius: 14px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: white;
+            cursor: pointer;
+            margin-top: 0.5rem;
+            box-shadow: 0 4px 20px rgba(37, 211, 102, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .whatsapp-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(37, 211, 102, 0.4);
+        }
+
+        /* --- Animations --- */
+        @keyframes cardFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px) scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .service-card {
+            animation: cardFadeIn 0.5s var(--ease-smooth) forwards;
+            opacity: 0;
+        }
+
+        .service-card:nth-child(1) { animation-delay: 0.05s; }
+        .service-card:nth-child(2) { animation-delay: 0.1s; }
+        .service-card:nth-child(3) { animation-delay: 0.15s; }
+        .service-card:nth-child(4) { animation-delay: 0.2s; }
+        .service-card:nth-child(5) { animation-delay: 0.25s; }
+        .service-card:nth-child(6) { animation-delay: 0.3s; }
+        .service-card:nth-child(7) { animation-delay: 0.35s; }
+        .service-card:nth-child(8) { animation-delay: 0.4s; }
+        .service-card:nth-child(9) { animation-delay: 0.45s; }
+        .service-card:nth-child(10) { animation-delay: 0.5s; }
+    </style>
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="header-top">
+            <div class="brand">
+                <h1 class="brand-name">Divine Beauty</h1>
+                <span class="brand-tagline">Luxury Salon & Spa</span>
+            </div>
+            <div class="cart-icon" id="cartIcon" onclick="openModal()">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="9" cy="21" r="1"></circle>
+                    <circle cx="20" cy="21" r="1"></circle>
+                    <path d="m1 1 4 4h16l-2 9H7L5 5"></path>
+                </svg>
+                <span class="cart-count" id="cartCount">0</span>
+            </div>
+        </div>
+
+        <!-- Category Filter -->
+        <div class="category-filter" id="categoryFilter">
+            <button class="filter-chip active" data-category="all" onclick="filterCategory('all')">
+                All Services
+            </button>
+            <button class="filter-chip" data-category="hair" onclick="filterCategory('hair')">
+                Hair
+                <span class="chip-count">0</span>
+            </button>
+            <button class="filter-chip" data-category="treatments" onclick="filterCategory('treatments')">
+                Treatments
+                <span class="chip-count">0</span>
+            </button>
+            <button class="filter-chip" data-category="mehndi" onclick="filterCategory('mehndi')">
+                Mehndi
+                <span class="chip-count">0</span>
+            </button>
+            <button class="filter-chip" data-category="facial" onclick="filterCategory('facial')">
+                Facial
+                <span class="chip-count">0</span>
+            </button>
+            <button class="filter-chip" data-category="detan" onclick="filterCategory('detan')">
+                De-Tan
+                <span class="chip-count">0</span>
+            </button>
+            <button class="filter-chip" data-category="waxing" onclick="filterCategory('waxing')">
+                Waxing
+                <span class="chip-count">0</span>
+            </button>
+            <button class="filter-chip" data-category="manicure" onclick="filterCategory('manicure')">
+                Hands & Feet
+                <span class="chip-count">0</span>
+            </button>
+            <button class="filter-chip" data-category="threading" onclick="filterCategory('threading')">
+                Threading
+                <span class="chip-count">0</span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="section-header">
+            <h2 class="section-title" id="sectionTitle">All Services</h2>
+            <span class="section-count"><span id="visibleCount">0</span> services</span>
+        </div>
+
+        <div class="services-grid" id="servicesGrid">
+            <!-- Cards will be generated dynamically -->
+        </div>
+    </main>
+
+    <!-- Booking Bar -->
+    <div class="booking-bar" id="bookingBar">
+        <div class="booking-bar-inner">
+            <div class="booking-details">
+                <span class="booking-services"><strong id="selectedCount">0</strong> services selected</span>
+                <span class="booking-total" id="totalPrice">₹0</span>
+            </div>
+            <button class="btn-continue" onclick="openModal()">Continue</button>
+        </div>
+    </div>
+
+    <!-- Booking Modal -->
+    <div class="modal-overlay" id="modalOverlay" onclick="closeModal()"></div>
+    <div class="booking-modal" id="bookingModal">
+        <div class="modal-handle"></div>
+        <div class="modal-header">
+            <h3 class="modal-title">Complete Your Booking</h3>
+            <p class="modal-subtitle">Select your preferred date and time</p>
+        </div>
+        <div class="modal-body">
+            <!-- Selected Summary -->
+            <div class="selected-summary" id="selectedSummary">
+                <div class="summary-header">Selected Services</div>
+            </div>
+
+            <!-- Date Selection -->
+            <div class="form-group">
+                <label class="form-label">Preferred Date</label>
+                <div class="options-grid">
+                    <button class="option-btn active" onclick="selectDate(this, 'Today')">Today</button>
+                    <button class="option-btn" onclick="selectDate(this, 'Tomorrow')">Tomorrow</button>
+                </div>
+                <input type="text" id="customDate" placeholder="Or enter a specific date" style="margin-top:10px;">
+            </div>
+
+            <!-- Time Selection -->
+            <div class="form-group">
+                <label class="form-label">Preferred Time</label>
+                <div class="options-grid time-options">
+                    <button class="option-btn" onclick="selectTime(this, '10:00 AM')">10 AM</button>
+                    <button class="option-btn" onclick="selectTime(this, '12:30 PM')">12:30 PM</button>
+                    <button class="option-btn" onclick="selectTime(this, '03:00 PM')">03 PM</button>
+                    <button class="option-btn" onclick="selectTime(this, '05:30 PM')">05:30 PM</button>
+                    <button class="option-btn" onclick="selectTime(this, '07:00 PM')">07 PM</button>
+                </div>
+            </div>
+
+            <!-- Customer Details -->
+            <div class="form-group">
+                <label class="form-label">Your Details</label>
+                <input type="text" id="userName" placeholder="Your Name" style="margin-bottom:10px;">
+                <select id="userGender">
+                    <option value="Not Specified">Select Gender</option>
+                    <option value="Female">Female</option>
+                    <option value="Male">Male</option>
+                </select>
+            </div>
+
+            <!-- Home Service Toggle -->
+            <div class="toggle-row" onclick="toggleHomeService()">
+                <div class="toggle-switch" id="homeToggle"></div>
+                <span class="toggle-text">Request Home Service (+ Extra Charges)</span>
+            </div>
+
+            <!-- WhatsApp Button -->
+            <button class="whatsapp-btn" onclick="sendToWhatsApp()">Confirm via WhatsApp</button>
+        </div>
+    </div>
+
+    <script>
+        // --- CONFIGURATION ---
+        const WHATSAPP_NUMBER = "918219928236";
+        const SALON_NAME = "Divine Beauty Unisex Salon";
+
+        // --- SERVICES DATA ---
+        const servicesData = [
+            // Hair & Styling
+            { id: 'hair-1', name: 'U Shape Hair Cut', price: 100, category: 'hair', icon: '✂️', duration: '30 min' },
+            { id: 'hair-2', name: 'Straight Hair Cut', price: 100, category: 'hair', icon: '✂️', duration: '30 min' },
+            { id: 'hair-3', name: 'Step Hair Cut', price: 300, category: 'hair', icon: '✂️', duration: '45 min', badge: 'Trending' },
+            { id: 'hair-4', name: 'Hair Wash (LOréal)', price: 100, category: 'hair', icon: '💧', duration: '20 min' },
+            
+            // Treatments
+            { id: 'treat-1', name: 'Perm. Straightening', price: 4000, category: 'treatments', icon: '✨', duration: '4 hrs', badge: 'Premium' },
+            { id: 'treat-2', name: 'Hair Smoothing', price: 3500, category: 'treatments', icon: '✨', duration: '3 hrs' },
+            { id: 'treat-3', name: 'Hair Spa (LOréal)', price: 800, category: 'treatments', icon: '🧴', duration: '1 hr' },
+            
+            // Mehndi
+            { id: 'mehndi-1', name: 'Mehndi (Shahnaz)', price: 300, category: 'mehndi', icon: '🌺', duration: '1 hr' },
+            { id: 'mehndi-2', name: 'Mehndi (Nupur)', price: 250, category: 'mehndi', icon: '🌺', duration: '1 hr' },
+            
+            // Facial
+            { id: 'facial-1', name: 'Facial (Shahnaz)', price: 800, category: 'facial', icon: '🌸', duration: '1 hr', badge: 'Top Pick' },
+            { id: 'facial-2', name: 'Fruit Facial (VLCC)', price: 600, category: 'facial', icon: '🍓', duration: '45 min' },
+            { id: 'facial-3', name: 'Facial (Cheryls)', price: 600, category: 'facial', icon: '🌸', duration: '45 min' },
+            
+            // De-Tan
+            { id: 'detan-1', name: 'De-Tan (Face)', price: 150, category: 'detan', icon: '☀️', duration: '30 min' },
+            { id: 'detan-2', name: 'De-Tan (Body)', price: 650, category: 'detan', icon: '☀️', duration: '1 hr' },
+            
+            // Waxing
+            { id: 'waxing-1', name: 'Full Hand Waxing', price: 250, category: 'waxing', icon: '🤚', duration: '30 min' },
+            { id: 'waxing-2', name: 'Full Leg Waxing', price: 450, category: 'waxing', icon: '🦵', duration: '45 min' },
+            { id: 'waxing-3', name: 'Face Waxing', price: 50, category: 'waxing', icon: '😊', duration: '15 min' },
+            
+            // Hands & Feet
+            { id: 'mani-1', name: 'Manicure (VLCC)', price: 350, category: 'manicure', icon: '💅', duration: '45 min' },
+            { id: 'mani-2', name: 'Pedicure (VLCC)', price: 450, category: 'manicure', icon: '🦶', duration: '1 hr', badge: 'Relaxing' },
+            
+            // Threading & Massage
+            { id: 'thread-1', name: 'Eyebrows', price: 50, category: 'threading', icon: '👁️', duration: '10 min' },
+            { id: 'thread-2', name: 'Upper Lips', price: 20, category: 'threading', icon: '👄', duration: '5 min' },
+            { id: 'thread-3', name: 'Body Massage', price: 1000, category: 'threading', icon: '💆', duration: '1 hr', badge: 'Relax' }
+        ];
+
+        // --- STATE ---
+        let selectedServices = [];
+        let currentCategory = 'all';
+        let selectedDate = 'Today';
+        let selectedTime = '';
+        let homeService = false;
+
+        // --- CATEGORY NAMES ---
+        const categoryNames = {
+            all: 'All Services',
+            hair: 'Hair & Styling',
+            treatments: 'Treatments & Color',
+            mehndi: 'Mehndi Art',
+            facial: 'Facial & Skin',
+            detan: 'De-Tan Care',
+            waxing: 'Waxing',
+            manicure: 'Hands & Feet',
+            threading: 'Threading & Massage'
+        };
+
+        // --- INITIALIZE ---
+        function init() {
+            renderServices();
+        }
+
+        // --- RENDER SERVICES ---
+        function renderServices() {
+            const grid = document.getElementById('servicesGrid');
+            const title = document.getElementById('sectionTitle');
+            const count = document.getElementById('visibleCount');
+
+            const filtered = currentCategory === 'all' 
+                ? servicesData 
+                : servicesData.filter(s => s.category === currentCategory);
+
+            title.textContent = categoryNames[currentCategory];
+            count.textContent = filtered.length;
+
+            grid.innerHTML = filtered.map((service, index) => {
+                const isSelected = selectedServices.some(s => s.id === service.id);
+                return `
+                    <div class="service-card ${isSelected ? 'selected' : ''}" 
+                         style="animation-delay: ${index * 0.05}s"
+                         onclick="toggleService('${service.id}')">
+                        <div class="card-content">
+                            <div class="card-icon">
+                                <span class="icon-emoji">${service.icon}</span>
+                            </div>
+                            ${service.badge ? `<span class="service-badge">${service.badge}</span>` : ''}
+                            <h3 class="service-name">${service.name}</h3>
+                            <div class="service-price">${service.price.toLocaleString('en-IN')}</div>
+                            <div class="card-duration">~ ${service.duration}</div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        // --- TOGGLE SERVICE ---
+        function toggleService(id) {
+            const service = servicesData.find(s => s.id === id);
+            const index = selectedServices.findIndex(s => s.id === id);
+
+            if (index > -1) {
+                selectedServices.splice(index, 1);
+            } else {
+                selectedServices.push(service);
+            }
+
+            updateUI();
+            renderServices();
+        }
+
+        // --- UPDATE UI ---
+        function updateUI() {
+            // Update booking bar
+            const bar = document.getElementById('bookingBar');
+            const count = document.getElementById('selectedCount');
+            const total = document.getElementById('totalPrice');
+            const cartCount = document.getElementById('cartCount');
+            const cartIcon = document.getElementById('cartIcon');
+
+            count.textContent = selectedServices.length;
+            cartCount.textContent = selectedServices.length;
+
+            const sum = selectedServices.reduce((a, b) => a + b.price, 0);
+            total.textContent = `₹${sum.toLocaleString('en-IN')}`;
+
+            if (selectedServices.length > 0) {
+                bar.classList.add('visible');
+                cartIcon.classList.add('active');
+            } else {
+                bar.classList.remove('visible');
+                cartIcon.classList.remove('active');
+            }
+
+            // Update filter chips
+            document.querySelectorAll('.filter-chip').forEach(chip => {
+                const cat = chip.dataset.category;
+                const catCount = selectedServices.filter(s => s.category === cat).length;
+                const countSpan = chip.querySelector('.chip-count');
+
+                if (catCount > 0) {
+                    chip.classList.add('has-items');
+                    countSpan.textContent = catCount;
+                } else {
+                    chip.classList.remove('has-items');
+                }
+            });
+        }
+
+        // --- FILTER CATEGORY ---
+        function filterCategory(category) {
+            currentCategory = category;
+
+            // Update filter chips
+            document.querySelectorAll('.filter-chip').forEach(chip => {
+                chip.classList.toggle('active', chip.dataset.category === category);
+            });
+
+            renderServices();
+        }
+
+        // --- MODAL FUNCTIONS ---
+        function openModal() {
+            if (selectedServices.length === 0) return;
+
+            const overlay = document.getElementById('modalOverlay');
+            const modal = document.getElementById('bookingModal');
+            const summary = document.getElementById('selectedSummary');
+
+            // Build summary
+            let html = '<div class="summary-header">Selected Services</div>';
+            selectedServices.forEach(s => {
+                html += `
+                    <div class="summary-item">
+                        <span>${s.name}</span>
+                        <span>₹${s.price.toLocaleString('en-IN')}</span>
+                    </div>
+                `;
+            });
+
+            const total = selectedServices.reduce((a, b) => a + b.price, 0);
+            html += `
+                <div class="summary-item total">
+                    <span>Total</span>
+                    <span>₹${total.toLocaleString('en-IN')}</span>
+                </div>
+            `;
+
+            summary.innerHTML = html;
+
+            overlay.style.display = 'block';
+            setTimeout(() => {
+                overlay.classList.add('active');
+                modal.classList.add('open');
+            }, 10);
+        }
+
+        function closeModal() {
+            const overlay = document.getElementById('modalOverlay');
+            const modal = document.getElementById('bookingModal');
+
+            modal.classList.remove('open');
+            overlay.classList.remove('active');
+
+            setTimeout(() => {
+                overlay.style.display = 'none';
+            }, 400);
+        }
+
+        function selectDate(btn, date) {
+            document.querySelectorAll('.options-grid .option-btn').forEach(b => {
+                if (b.textContent === 'Today' || b.textContent === 'Tomorrow') {
+                    b.classList.remove('active');
+                }
+            });
+            btn.classList.add('active');
+            selectedDate = date;
+            document.getElementById('customDate').value = '';
+        }
+
+        function selectTime(btn, time) {
+            document.querySelectorAll('.time-options .option-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            selectedTime = time;
+        }
+
+        function toggleHomeService() {
+            const toggle = document.getElementById('homeToggle');
+            toggle.classList.toggle('on');
+            homeService = toggle.classList.contains('on');
+        }
+
+        // --- WHATSAPP ---
+        function sendToWhatsApp() {
+            const name = document.getElementById('userName').value || 'Guest';
+            const gender = document.getElementById('userGender').value;
+            const customDate = document.getElementById('customDate').value;
+            const date = customDate || selectedDate;
+
+            if (!selectedTime) {
+                alert('Please select a preferred time slot!');
+                return;
+            }
+
+            let message = `🌟 APPOINTMENT REQUEST - ${SALON_NAME}\n\n`;
+            message += `👤 Client: ${name}\n`;
+            message += `🚻 Gender: ${gender}\n`;
+            message += `📅 Date: ${date}\n`;
+            message += `⏰ Time: ${selectedTime}\n`;
+            message += `🏠 Home Service: ${homeService ? 'Yes' : 'No'}\n\n`;
+            message += `📋 Selected Services:\n`;
+
+            selectedServices.forEach((s, i) => {
+                message += `${i + 1}. ${s.name} - ₹${s.price.toLocaleString('en-IN')}\n`;
+            });
+
+            const total = selectedServices.reduce((a, b) => a + b.price, 0);
+            message += `\n💰 Total: ₹${total.toLocaleString('en-IN')}\n\n`;
+            message += `_Please confirm availability._`;
+
+            window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`, '_blank');
+        }
+
+        // --- INIT ---
+        init();
+    </script>
+</body>
+
+</html>

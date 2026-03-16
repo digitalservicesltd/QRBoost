@@ -1,0 +1,1301 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Divine Beauty | Luxury Salon Menu & Booking</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
+
+    <style>
+        :root {
+            /* Luxury Gold & Noir Palette */
+            --gold-primary: #c9a962;
+            --gold-light: #e8d5a3;
+            --gold-dark: #8b7355;
+            --gold-accent: #d4af37;
+
+            /* Background Colors */
+            --noir-deep: #0a0a0a;
+            --noir-surface: #141414;
+            --noir-elevated: #1c1c1c;
+            --noir-card: #1a1a1a;
+
+            /* Text Colors */
+            --text-primary: #f8f6f0;
+            --text-secondary: #c4c0b5;
+            --text-muted: #7a7670;
+
+            /* UI Colors */
+            --border-subtle: rgba(201, 169, 98, 0.12);
+            --border-active: rgba(201, 169, 98, 0.35);
+
+            /* Gradients */
+            --gradient-gold: linear-gradient(135deg, #8b7355 0%, #c9a962 50%, #e8d5a3 100%);
+            --gradient-card: linear-gradient(180deg, rgba(201, 169, 98, 0.08) 0%, transparent 50%);
+
+            /* Shadows */
+            --shadow-card: 0 4px 20px rgba(0, 0, 0, 0.4), 0 0 1px rgba(201, 169, 98, 0.1);
+            --shadow-stacked: 0 8px 40px rgba(0, 0, 0, 0.5), 0 2px 2px rgba(0, 0, 0, 0.3);
+            --shadow-expanded: 0 20px 60px rgba(0, 0, 0, 0.6), 0 0 40px rgba(201, 169, 98, 0.1);
+            --shadow-hover: 0 12px 40px rgba(0, 0, 0, 0.5), 0 0 20px rgba(201, 169, 98, 0.1);
+
+            /* Transitions */
+            --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+            --ease-expand: cubic-bezier(0.16, 1, 0.3, 1);
+            --ease-stack: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--gold-primary);
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--noir-deep);
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--noir-deep);
+            background-image:
+                radial-gradient(ellipse at 30% 0%, rgba(201, 169, 98, 0.04) 0%, transparent 50%),
+                radial-gradient(ellipse at 70% 100%, rgba(139, 115, 85, 0.03) 0%, transparent 50%);
+            color: var(--text-primary);
+            min-height: 100vh;
+            line-height: 1.6;
+            padding-bottom: 160px;
+        }
+
+        /* --- Header --- */
+        .header {
+            padding: 3rem 1.5rem 2rem;
+            text-align: center;
+            position: relative;
+        }
+
+        .header::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 1px;
+            background: var(--gradient-gold);
+            opacity: 0.3;
+        }
+
+        .brand-name {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.6rem;
+            font-weight: 600;
+            background: var(--gradient-gold);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: 4px;
+            margin-bottom: 0.4rem;
+        }
+
+        .brand-tagline {
+            font-size: 0.65rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 6px;
+        }
+
+        /* --- Card Stack Container --- */
+        .stack-container {
+            max-width: 520px;
+            margin: 1.5rem auto 0;
+            padding: 0 1rem;
+            position: relative;
+        }
+
+        /* --- Stacked Card --- */
+        .stacked-card {
+            position: relative;
+            margin-bottom: -60px;
+            transform-origin: top center;
+            transition: all 0.5s var(--ease-stack);
+            z-index: 1;
+        }
+
+        .stacked-card:last-child {
+            margin-bottom: 0;
+        }
+
+        /* Stack depth effect */
+        .stacked-card:nth-child(1) { z-index: 8; }
+        .stacked-card:nth-child(2) { z-index: 7; }
+        .stacked-card:nth-child(3) { z-index: 6; }
+        .stacked-card:nth-child(4) { z-index: 5; }
+        .stacked-card:nth-child(5) { z-index: 4; }
+        .stacked-card:nth-child(6) { z-index: 3; }
+        .stacked-card:nth-child(7) { z-index: 2; }
+        .stacked-card:nth-child(8) { z-index: 1; }
+
+        /* Inactive stacked state */
+        .stacked-card.is-stacked {
+            transform: scale(0.96) translateY(-10px);
+            opacity: 0.7;
+        }
+
+        .stacked-card.is-stacked:hover {
+            opacity: 0.9;
+            transform: scale(0.97) translateY(-8px);
+        }
+
+        /* Active/Expanded state */
+        .stacked-card.is-expanded {
+            z-index: 100 !important;
+            transform: scale(1) translateY(0);
+            opacity: 1;
+            margin-bottom: 1rem;
+        }
+
+        /* --- Card Panel --- */
+        .card-panel {
+            background: var(--noir-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: var(--shadow-card);
+            transition: all 0.5s var(--ease-expand);
+            position: relative;
+        }
+
+        .card-panel::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 100%;
+            background: var(--gradient-card);
+            pointer-events: none;
+        }
+
+        .stacked-card:hover .card-panel {
+            box-shadow: var(--shadow-hover);
+            border-color: rgba(201, 169, 98, 0.2);
+        }
+
+        .stacked-card.is-expanded .card-panel {
+            box-shadow: var(--shadow-expanded);
+            border-color: var(--border-active);
+        }
+
+        /* --- Card Header --- */
+        .card-header {
+            position: relative;
+            height: 100px;
+            cursor: pointer;
+            overflow: hidden;
+        }
+
+        .card-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            transition: all 0.6s var(--ease-smooth);
+            filter: brightness(0.4) saturate(1.1);
+        }
+
+        .stacked-card:hover .card-bg {
+            transform: scale(1.03);
+            filter: brightness(0.45) saturate(1.2);
+        }
+
+        .stacked-card.is-expanded .card-bg {
+            filter: brightness(0.35) saturate(1);
+        }
+
+        /* Background Images */
+        .cat-hair .card-bg { background-image: url('images/haircut.webp'); }
+        .cat-treatments .card-bg { background-image: url('images/hairtreat.webp'); }
+        .cat-mehndi .card-bg { background-image: url('images/design.webp'); }
+        .cat-facial .card-bg { background-image: url('images/skin.webp'); }
+        .cat-detan .card-bg { background-image: url('images/detan.webp'); }
+        .cat-waxing .card-bg { background-image: url('images/waxing.webp'); }
+        .cat-manicure .card-bg { background-image: url('images/pedicure.webp'); }
+        .cat-threading .card-bg { background-image: url('images/threading.webp'); }
+
+        .card-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(180deg, 
+                rgba(10, 10, 10, 0.2) 0%, 
+                rgba(10, 10, 10, 0.5) 60%, 
+                rgba(10, 10, 10, 0.95) 100%);
+            z-index: 1;
+        }
+
+        .card-content {
+            position: relative;
+            z-index: 2;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 1.25rem 1.5rem;
+        }
+
+        .card-top {
+            position: absolute;
+            top: 0.75rem;
+            right: 1rem;
+            left: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+
+        .card-number {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2rem;
+            font-weight: 600;
+            color: rgba(201, 169, 98, 0.2);
+            line-height: 1;
+        }
+
+        .selection-badge {
+            background: var(--gradient-gold);
+            color: var(--noir-deep);
+            font-size: 0.6rem;
+            font-weight: 700;
+            padding: 5px 12px;
+            border-radius: 20px;
+            opacity: 0;
+            transform: scale(0.8) translateY(-5px);
+            transition: all 0.4s var(--ease-expand);
+        }
+
+        .stacked-card.has-selection .selection-badge {
+            opacity: 1;
+            transform: scale(1) translateY(0);
+        }
+
+        .card-label {
+            font-size: 0.6rem;
+            color: var(--gold-primary);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 0.2rem;
+        }
+
+        .card-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .stacked-card.is-expanded .card-title {
+            color: var(--gold-light);
+        }
+
+        .card-meta {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-top: 0.4rem;
+        }
+
+        .service-count {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        .service-count span {
+            color: var(--gold-primary);
+            font-weight: 600;
+        }
+
+        .expand-icon {
+            width: 28px;
+            height: 28px;
+            background: rgba(201, 169, 98, 0.1);
+            border: 1px solid rgba(201, 169, 98, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            color: var(--gold-light);
+            transition: all 0.4s var(--ease-expand);
+        }
+
+        .stacked-card.is-expanded .expand-icon {
+            background: var(--gradient-gold);
+            border-color: transparent;
+            color: var(--noir-deep);
+            transform: rotate(45deg);
+        }
+
+        /* --- Services Container --- */
+        .services-container {
+            max-height: 0;
+            overflow: hidden;
+            background: var(--noir-elevated);
+            transition: max-height 0.6s var(--ease-expand);
+        }
+
+        .stacked-card.is-expanded .services-container {
+            max-height: 500px;
+        }
+
+        .services-inner {
+            padding: 0 1rem 1rem;
+            opacity: 0;
+            transform: translateY(-15px);
+            transition: all 0.5s var(--ease-smooth) 0.1s;
+        }
+
+        .stacked-card.is-expanded .services-inner {
+            opacity: 1;
+            transform: translateY(0);
+            padding: 1rem;
+        }
+
+        .services-divider {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--gold-primary), transparent);
+            opacity: 0.2;
+            margin-bottom: 1rem;
+        }
+
+        /* --- Service Item --- */
+        .service-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 1.2rem;
+            margin-bottom: 0.5rem;
+            background: rgba(201, 169, 98, 0.02);
+            border-radius: 14px;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid transparent;
+            transition: all 0.3s var(--ease-smooth);
+        }
+
+        .service-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(201, 169, 98, 0.05), transparent);
+            transform: translateX(-100%);
+            transition: transform 0.5s var(--ease-smooth);
+        }
+
+        .service-item:hover::before {
+            transform: translateX(100%);
+        }
+
+        .service-item:hover {
+            background: rgba(201, 169, 98, 0.06);
+            border-color: rgba(201, 169, 98, 0.15);
+        }
+
+        .service-item.selected {
+            background: rgba(201, 169, 98, 0.1);
+            border-color: rgba(201, 169, 98, 0.3);
+            box-shadow: 0 0 20px rgba(201, 169, 98, 0.1);
+        }
+
+        .service-left {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .service-checkbox {
+            width: 22px;
+            height: 22px;
+            background: transparent;
+            border: 2px solid rgba(201, 169, 98, 0.4);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s var(--ease-expand);
+            flex-shrink: 0;
+        }
+
+        .service-item:hover .service-checkbox {
+            border-color: var(--gold-primary);
+        }
+
+        .service-item.selected .service-checkbox {
+            background: var(--gradient-gold);
+            border-color: transparent;
+            box-shadow: 0 0 15px rgba(201, 169, 98, 0.3);
+        }
+
+        .service-item.selected .service-checkbox::after {
+            content: '✓';
+            color: var(--noir-deep);
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .service-info {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .service-name {
+            font-size: 0.9rem;
+            color: var(--text-primary);
+            transition: color 0.3s ease;
+        }
+
+        .service-item.selected .service-name {
+            color: var(--gold-light);
+        }
+
+        .service-badge {
+            display: inline-block;
+            font-size: 0.55rem;
+            background: var(--gradient-gold);
+            color: var(--noir-deep);
+            padding: 3px 10px;
+            border-radius: 20px;
+            text-transform: uppercase;
+            font-weight: 700;
+            margin-top: 3px;
+        }
+
+        .service-right {
+            text-align: right;
+            position: relative;
+            z-index: 1;
+        }
+
+        .service-price {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--gold-light);
+        }
+
+        .service-duration {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            margin-top: 2px;
+        }
+
+        /* --- Floating Booking Bar --- */
+        .booking-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: linear-gradient(180deg, transparent 0%, var(--noir-deep) 30%);
+            padding: 2.5rem 1rem 1.5rem;
+            z-index: 200;
+            transform: translateY(100%);
+            transition: transform 0.5s var(--ease-expand);
+        }
+
+        .booking-bar.visible {
+            transform: translateY(0);
+        }
+
+        .booking-bar-inner {
+            max-width: 520px;
+            margin: 0 auto;
+            background: var(--noir-card);
+            border: 1px solid var(--border-active);
+            border-radius: 20px;
+            padding: 1.2rem 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: var(--shadow-expanded);
+        }
+
+        .booking-info {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .booking-services {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+        }
+
+        .booking-services strong {
+            color: var(--gold-primary);
+            font-weight: 600;
+        }
+
+        .booking-total {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--gold-light);
+        }
+
+        .btn-continue {
+            background: var(--gradient-gold);
+            border: none;
+            padding: 14px 28px;
+            border-radius: 14px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--noir-deep);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 20px rgba(201, 169, 98, 0.3);
+        }
+
+        .btn-continue:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(201, 169, 98, 0.4);
+        }
+
+        /* --- Booking Modal --- */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(10, 10, 10, 0);
+            backdrop-filter: blur(0);
+            z-index: 300;
+            display: none;
+            transition: all 0.4s ease;
+        }
+
+        .modal-overlay.active {
+            background: rgba(10, 10, 10, 0.9);
+            backdrop-filter: blur(5px);
+        }
+
+        .booking-modal {
+            position: fixed;
+            bottom: -100%;
+            left: 0;
+            width: 100%;
+            max-height: 92vh;
+            background: var(--noir-card);
+            border: 1px solid var(--border-active);
+            border-radius: 32px 32px 0 0;
+            z-index: 301;
+            transition: bottom 0.5s var(--ease-expand);
+            overflow-y: auto;
+        }
+
+        .booking-modal.open {
+            bottom: 0;
+        }
+
+        .modal-handle {
+            width: 50px;
+            height: 4px;
+            background: rgba(201, 169, 98, 0.3);
+            border-radius: 2px;
+            margin: 1.2rem auto 1.5rem;
+        }
+
+        .modal-header {
+            text-align: center;
+            padding: 0 1.5rem 1.5rem;
+            border-bottom: 1px solid rgba(201, 169, 98, 0.1);
+        }
+
+        .modal-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.6rem;
+            font-weight: 600;
+            color: var(--gold-light);
+            margin-bottom: 0.3rem;
+        }
+
+        .modal-subtitle {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        .modal-body {
+            padding: 1.5rem;
+        }
+
+        .selected-summary {
+            background: rgba(201, 169, 98, 0.05);
+            border: 1px solid rgba(201, 169, 98, 0.1);
+            border-radius: 18px;
+            padding: 1.2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .summary-header {
+            font-size: 0.65rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 0.8rem;
+        }
+
+        .summary-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.6rem 0;
+            border-bottom: 1px solid rgba(201, 169, 98, 0.05);
+            font-size: 0.9rem;
+        }
+
+        .summary-item:last-child {
+            border-bottom: none;
+        }
+
+        .summary-item.total {
+            font-weight: 600;
+            color: var(--gold-light);
+            margin-top: 0.5rem;
+            padding-top: 0.8rem;
+            border-top: 1px solid rgba(201, 169, 98, 0.15);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 0.65rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 10px;
+        }
+
+        input[type="text"],
+        select {
+            width: 100%;
+            background: rgba(201, 169, 98, 0.05);
+            border: 1px solid rgba(201, 169, 98, 0.15);
+            padding: 14px 16px;
+            border-radius: 14px;
+            color: var(--text-primary);
+            font-size: 0.95rem;
+            outline: none;
+            font-family: 'Inter', sans-serif;
+            transition: all 0.3s ease;
+        }
+
+        input[type="text"]:focus,
+        select:focus {
+            border-color: var(--gold-primary);
+            box-shadow: 0 0 20px rgba(201, 169, 98, 0.1);
+        }
+
+        input[type="text"]::placeholder {
+            color: var(--text-muted);
+        }
+
+        .options-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+        }
+
+        .option-btn {
+            background: rgba(201, 169, 98, 0.05);
+            border: 1px solid rgba(201, 169, 98, 0.15);
+            padding: 12px;
+            border-radius: 14px;
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            cursor: pointer;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .option-btn:hover {
+            border-color: rgba(201, 169, 98, 0.3);
+            background: rgba(201, 169, 98, 0.08);
+        }
+
+        .option-btn.active {
+            background: rgba(201, 169, 98, 0.15);
+            border-color: var(--gold-primary);
+            color: var(--gold-light);
+        }
+
+        .time-options {
+            grid-template-columns: repeat(3, 1fr);
+        }
+
+        .toggle-row {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 14px;
+            background: rgba(201, 169, 98, 0.05);
+            border: 1px solid rgba(201, 169, 98, 0.1);
+            border-radius: 14px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .toggle-row:hover {
+            background: rgba(201, 169, 98, 0.08);
+        }
+
+        .toggle-switch {
+            width: 52px;
+            height: 28px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 14px;
+            position: relative;
+            transition: background 0.3s ease;
+            flex-shrink: 0;
+        }
+
+        .toggle-switch.on {
+            background: var(--gold-primary);
+        }
+
+        .toggle-switch::after {
+            content: '';
+            position: absolute;
+            top: 3px;
+            left: 3px;
+            width: 22px;
+            height: 22px;
+            background: white;
+            border-radius: 50%;
+            transition: transform 0.3s var(--ease-smooth);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .toggle-switch.on::after {
+            transform: translateX(24px);
+        }
+
+        .toggle-text {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        .whatsapp-btn {
+            width: 100%;
+            background: linear-gradient(135deg, #25d366 0%, #128c7e 100%);
+            border: none;
+            padding: 16px;
+            border-radius: 16px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: white;
+            cursor: pointer;
+            margin-top: 0.5rem;
+            box-shadow: 0 4px 20px rgba(37, 211, 102, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .whatsapp-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(37, 211, 102, 0.4);
+        }
+
+        /* --- Animations --- */
+        @keyframes stackEnter {
+            from {
+                opacity: 0;
+                transform: translateY(40px) scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .stacked-card {
+            animation: stackEnter 0.6s var(--ease-smooth) forwards;
+            opacity: 0;
+        }
+
+        .stacked-card:nth-child(1) { animation-delay: 0.1s; }
+        .stacked-card:nth-child(2) { animation-delay: 0.2s; }
+        .stacked-card:nth-child(3) { animation-delay: 0.3s; }
+        .stacked-card:nth-child(4) { animation-delay: 0.4s; }
+        .stacked-card:nth-child(5) { animation-delay: 0.5s; }
+        .stacked-card:nth-child(6) { animation-delay: 0.6s; }
+        .stacked-card:nth-child(7) { animation-delay: 0.7s; }
+        .stacked-card:nth-child(8) { animation-delay: 0.8s; }
+
+        /* --- Responsive --- */
+        @media (max-width: 480px) {
+            .brand-name {
+                font-size: 2rem;
+            }
+
+            .card-header {
+                height: 85px;
+            }
+
+            .card-title {
+                font-size: 1.2rem;
+            }
+
+            .stacked-card.is-stacked {
+                transform: scale(0.98) translateY(-5px);
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header class="header">
+        <h1 class="brand-name">Divine Beauty</h1>
+        <p class="brand-tagline">Luxury Salon & Spa Experience</p>
+    </header>
+
+    <!-- Card Stack Container -->
+    <div class="stack-container" id="stackContainer">
+        <!-- Cards will be rendered dynamically -->
+    </div>
+
+    <!-- Floating Booking Bar -->
+    <div class="booking-bar" id="bookingBar">
+        <div class="booking-bar-inner">
+            <div class="booking-info">
+                <span class="booking-services"><strong id="selectedCount">0</strong> services selected</span>
+                <span class="booking-total" id="totalPrice">₹0</span>
+            </div>
+            <button class="btn-continue" onclick="openModal()">Continue</button>
+        </div>
+    </div>
+
+    <!-- Booking Modal -->
+    <div class="modal-overlay" id="modalOverlay" onclick="closeModal()"></div>
+    <div class="booking-modal" id="bookingModal">
+        <div class="modal-handle"></div>
+        <div class="modal-header">
+            <h3 class="modal-title">Complete Your Booking</h3>
+            <p class="modal-subtitle">Select your preferred date and time</p>
+        </div>
+        <div class="modal-body">
+            <div class="selected-summary" id="selectedSummary">
+                <div class="summary-header">Selected Services</div>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">Preferred Date</label>
+                <div class="options-grid">
+                    <button class="option-btn active" onclick="selectDate(this, 'Today')">Today</button>
+                    <button class="option-btn" onclick="selectDate(this, 'Tomorrow')">Tomorrow</button>
+                </div>
+                <input type="text" id="customDate" placeholder="Or enter a specific date" style="margin-top:10px;">
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">Preferred Time</label>
+                <div class="options-grid time-options">
+                    <button class="option-btn" onclick="selectTime(this, '10:00 AM')">10 AM</button>
+                    <button class="option-btn" onclick="selectTime(this, '12:30 PM')">12:30 PM</button>
+                    <button class="option-btn" onclick="selectTime(this, '03:00 PM')">03 PM</button>
+                    <button class="option-btn" onclick="selectTime(this, '05:30 PM')">05:30 PM</button>
+                    <button class="option-btn" onclick="selectTime(this, '07:00 PM')">07 PM</button>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">Your Details</label>
+                <input type="text" id="userName" placeholder="Your Name" style="margin-bottom:10px;">
+                <select id="userGender">
+                    <option value="Not Specified">Select Gender</option>
+                    <option value="Female">Female</option>
+                    <option value="Male">Male</option>
+                </select>
+            </div>
+
+            <div class="toggle-row" onclick="toggleHomeService()">
+                <div class="toggle-switch" id="homeToggle"></div>
+                <span class="toggle-text">Request Home Service (+ Extra Charges)</span>
+            </div>
+
+            <button class="whatsapp-btn" onclick="sendToWhatsApp()">Confirm via WhatsApp</button>
+        </div>
+    </div>
+
+    <script>
+        // --- CONFIGURATION ---
+        const WHATSAPP_NUMBER = "918219928236";
+        const SALON_NAME = "Divine Beauty Unisex Salon";
+
+        // --- SERVICES DATA ---
+        const categoriesData = [
+            {
+                id: 'hair',
+                label: 'Signature Services',
+                title: 'Hair & Styling',
+                class: 'cat-hair',
+                services: [
+                    { id: 'hair-1', name: 'U Shape Hair Cut', price: 100, duration: '30 min' },
+                    { id: 'hair-2', name: 'Straight Hair Cut', price: 100, duration: '30 min' },
+                    { id: 'hair-3', name: 'Step Hair Cut', price: 300, duration: '45 min', badge: 'Trending' },
+                    { id: 'hair-4', name: 'Hair Wash (LOréal)', price: 100, duration: '20 min' }
+                ]
+            },
+            {
+                id: 'treatments',
+                label: 'Premium Care',
+                title: 'Treatments & Color',
+                class: 'cat-treatments',
+                services: [
+                    { id: 'treat-1', name: 'Perm. Straightening', price: 4000, duration: '4 hrs', badge: 'Premium' },
+                    { id: 'treat-2', name: 'Hair Smoothing', price: 3500, duration: '3 hrs' },
+                    { id: 'treat-3', name: 'Hair Spa (LOréal)', price: 800, duration: '1 hr' }
+                ]
+            },
+            {
+                id: 'mehndi',
+                label: 'Traditional Art',
+                title: 'Mehndi Art',
+                class: 'cat-mehndi',
+                services: [
+                    { id: 'mehndi-1', name: 'Mehndi (Shahnaz)', price: 300, duration: '1 hr' },
+                    { id: 'mehndi-2', name: 'Mehndi (Nupur)', price: 250, duration: '1 hr' }
+                ]
+            },
+            {
+                id: 'facial',
+                label: 'Skin Rejuvenation',
+                title: 'Facial & Skin',
+                class: 'cat-facial',
+                services: [
+                    { id: 'facial-1', name: 'Facial (Shahnaz Power)', price: 800, duration: '1 hr', badge: 'Top Pick' },
+                    { id: 'facial-2', name: 'Fruit Facial (VLCC)', price: 600, duration: '45 min' },
+                    { id: 'facial-3', name: 'Facial (Cheryls)', price: 600, duration: '45 min' }
+                ]
+            },
+            {
+                id: 'detan',
+                label: 'Skin Brightening',
+                title: 'De-Tan Care',
+                class: 'cat-detan',
+                services: [
+                    { id: 'detan-1', name: 'De-Tan (Only Face)', price: 150, duration: '30 min' },
+                    { id: 'detan-2', name: 'De-Tan (Body)', price: 650, duration: '1 hr' }
+                ]
+            },
+            {
+                id: 'waxing',
+                label: 'Smooth Finish',
+                title: 'Waxing',
+                class: 'cat-waxing',
+                services: [
+                    { id: 'waxing-1', name: 'Full Hand Waxing', price: 250, duration: '30 min' },
+                    { id: 'waxing-2', name: 'Full Leg Waxing', price: 450, duration: '45 min' },
+                    { id: 'waxing-3', name: 'Face Waxing', price: 50, duration: '15 min' }
+                ]
+            },
+            {
+                id: 'manicure',
+                label: 'Nail Care',
+                title: 'Hands & Feet',
+                class: 'cat-manicure',
+                services: [
+                    { id: 'mani-1', name: 'Manicure (VLCC)', price: 350, duration: '45 min' },
+                    { id: 'mani-2', name: 'Pedicure (VLCC)', price: 450, duration: '1 hr', badge: 'Relaxing' }
+                ]
+            },
+            {
+                id: 'threading',
+                label: 'Precision & Relax',
+                title: 'Threading & Massage',
+                class: 'cat-threading',
+                services: [
+                    { id: 'thread-1', name: 'Eyebrows', price: 50, duration: '10 min' },
+                    { id: 'thread-2', name: 'Upper Lips', price: 20, duration: '5 min' },
+                    { id: 'thread-3', name: 'Body Massage (60 Min)', price: 1000, duration: '1 hr', badge: 'Relax' }
+                ]
+            }
+        ];
+
+        // --- STATE ---
+        let selectedServices = [];
+        let expandedCard = null;
+        let selectedDate = 'Today';
+        let selectedTime = '';
+        let homeService = false;
+
+        // --- INITIALIZE ---
+        function init() {
+            renderCards();
+            // Set all cards to stacked state initially
+            document.querySelectorAll('.stacked-card').forEach(card => {
+                card.classList.add('is-stacked');
+            });
+        }
+
+        // --- RENDER CARDS ---
+        function renderCards() {
+            const container = document.getElementById('stackContainer');
+
+            container.innerHTML = categoriesData.map((cat, index) => `
+                <div class="stacked-card ${cat.class}" data-category="${cat.id}">
+                    <div class="card-panel">
+                        <div class="card-header" onclick="toggleCard('${cat.id}')">
+                            <div class="card-bg"></div>
+                            <div class="card-overlay"></div>
+                            <div class="card-content">
+                                <div class="card-top">
+                                    <span class="card-number">0${index + 1}</span>
+                                    <span class="selection-badge" id="badge-${cat.id}">
+                                        <span id="count-${cat.id}">0</span> selected
+                                    </span>
+                                </div>
+                                <span class="card-label">${cat.label}</span>
+                                <div class="card-title">
+                                    <span>${cat.title}</span>
+                                    <span class="expand-icon">+</span>
+                                </div>
+                                <div class="card-meta">
+                                    <span class="service-count"><span>${cat.services.length}</span> services</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="services-container">
+                            <div class="services-inner">
+                                <div class="services-divider"></div>
+                                ${cat.services.map(service => `
+                                    <div class="service-item" id="item-${service.id}" onclick="toggleService('${service.id}', '${cat.id}')">
+                                        <div class="service-left">
+                                            <div class="service-checkbox"></div>
+                                            <div class="service-info">
+                                                <span class="service-name">${service.name}</span>
+                                                ${service.badge ? `<span class="service-badge">${service.badge}</span>` : ''}
+                                            </div>
+                                        </div>
+                                        <div class="service-right">
+                                            <div class="service-price">₹${service.price.toLocaleString('en-IN')}</div>
+                                            <div class="service-duration">~ ${service.duration}</div>
+                                        </div>
+                                    </div>
+                                `).join('')}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // --- TOGGLE CARD ---
+        function toggleCard(categoryId) {
+            const clickedCard = document.querySelector(`.stacked-card[data-category="${categoryId}"]`);
+            const wasExpanded = clickedCard.classList.contains('is-expanded');
+
+            // Close all cards and set them to stacked
+            document.querySelectorAll('.stacked-card').forEach(card => {
+                card.classList.remove('is-expanded');
+                card.classList.add('is-stacked');
+            });
+
+            // If clicked card wasn't expanded, expand it
+            if (!wasExpanded) {
+                clickedCard.classList.remove('is-stacked');
+                clickedCard.classList.add('is-expanded');
+                expandedCard = categoryId;
+
+                // Scroll the expanded card into view
+                setTimeout(() => {
+                    clickedCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }, 100);
+            } else {
+                expandedCard = null;
+            }
+        }
+
+        // --- TOGGLE SERVICE ---
+        function toggleService(serviceId, categoryId) {
+            const category = categoriesData.find(c => c.id === categoryId);
+            const service = category.services.find(s => s.id === serviceId);
+            const item = document.getElementById(`item-${serviceId}`);
+
+            const index = selectedServices.findIndex(s => s.id === serviceId);
+
+            if (index > -1) {
+                selectedServices.splice(index, 1);
+                item.classList.remove('selected');
+            } else {
+                selectedServices.push({ ...service, category: categoryId });
+                item.classList.add('selected');
+            }
+
+            updateUI();
+        }
+
+        // --- UPDATE UI ---
+        function updateUI() {
+            // Update booking bar
+            const bar = document.getElementById('bookingBar');
+            const count = document.getElementById('selectedCount');
+            const total = document.getElementById('totalPrice');
+
+            count.textContent = selectedServices.length;
+            const sum = selectedServices.reduce((a, b) => a + b.price, 0);
+            total.textContent = `₹${sum.toLocaleString('en-IN')}`;
+
+            if (selectedServices.length > 0) {
+                bar.classList.add('visible');
+            } else {
+                bar.classList.remove('visible');
+            }
+
+            // Update card badges
+            categoriesData.forEach(cat => {
+                const catSelections = selectedServices.filter(s => s.category === cat.id);
+                const cardEl = document.querySelector(`.stacked-card[data-category="${cat.id}"]`);
+                const countSpan = document.getElementById(`count-${cat.id}`);
+
+                if (catSelections.length > 0) {
+                    cardEl.classList.add('has-selection');
+                    countSpan.textContent = catSelections.length;
+                } else {
+                    cardEl.classList.remove('has-selection');
+                }
+            });
+        }
+
+        // --- MODAL FUNCTIONS ---
+        function openModal() {
+            if (selectedServices.length === 0) return;
+
+            const overlay = document.getElementById('modalOverlay');
+            const modal = document.getElementById('bookingModal');
+            const summary = document.getElementById('selectedSummary');
+
+            let html = '<div class="summary-header">Selected Services</div>';
+            selectedServices.forEach(s => {
+                html += `
+                    <div class="summary-item">
+                        <span>${s.name}</span>
+                        <span>₹${s.price.toLocaleString('en-IN')}</span>
+                    </div>
+                `;
+            });
+
+            const sum = selectedServices.reduce((a, b) => a + b.price, 0);
+            html += `
+                <div class="summary-item total">
+                    <span>Total</span>
+                    <span>₹${sum.toLocaleString('en-IN')}</span>
+                </div>
+            `;
+
+            summary.innerHTML = html;
+
+            overlay.style.display = 'block';
+            setTimeout(() => {
+                overlay.classList.add('active');
+                modal.classList.add('open');
+            }, 10);
+        }
+
+        function closeModal() {
+            const overlay = document.getElementById('modalOverlay');
+            const modal = document.getElementById('bookingModal');
+
+            modal.classList.remove('open');
+            overlay.classList.remove('active');
+
+            setTimeout(() => {
+                overlay.style.display = 'none';
+            }, 400);
+        }
+
+        function selectDate(btn, date) {
+            document.querySelectorAll('.options-grid:not(.time-options) .option-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            selectedDate = date;
+            document.getElementById('customDate').value = '';
+        }
+
+        function selectTime(btn, time) {
+            document.querySelectorAll('.time-options .option-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            selectedTime = time;
+        }
+
+        function toggleHomeService() {
+            const toggle = document.getElementById('homeToggle');
+            toggle.classList.toggle('on');
+            homeService = toggle.classList.contains('on');
+        }
+
+        // --- WHATSAPP ---
+        function sendToWhatsApp() {
+            const name = document.getElementById('userName').value || 'Guest';
+            const gender = document.getElementById('userGender').value;
+            const customDate = document.getElementById('customDate').value;
+            const date = customDate || selectedDate;
+
+            if (!selectedTime) {
+                alert('Please select a preferred time slot!');
+                return;
+            }
+
+            let message = `✨ APPOINTMENT REQUEST - ${SALON_NAME}\n\n`;
+            message += `👤 Client: ${name}\n`;
+            message += `🚻 Gender: ${gender}\n`;
+            message += `📅 Date: ${date}\n`;
+            message += `⏰ Time: ${selectedTime}\n`;
+            message += `🏠 Home Service: ${homeService ? 'Yes' : 'No'}\n\n`;
+            message += `📋 Selected Services:\n`;
+
+            selectedServices.forEach((s, i) => {
+                message += `${i + 1}. ${s.name} - ₹${s.price.toLocaleString('en-IN')}\n`;
+            });
+
+            const sum = selectedServices.reduce((a, b) => a + b.price, 0);
+            message += `\n💰 Total: ₹${sum.toLocaleString('en-IN')}\n\n`;
+            message += `_Please confirm availability._`;
+
+            window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`, '_blank');
+        }
+
+        // --- INIT ---
+        init();
+    </script>
+</body>
+
+</html>
