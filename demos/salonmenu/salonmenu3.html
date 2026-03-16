@@ -4,50 +4,50 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Divine Beauty | Luxury Salon Menu</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;700&family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
 
     <style>
         :root {
             /* Premium Gold Palette */
-            --gold-deep: #b8960b;
+            --gold-deep: #9a7b1a;
             --gold-primary: #d4af37;
-            --gold-light: #f1d592;
-            --gold-pale: #fdf6e3;
-            --gold-glow: rgba(212, 175, 55, 0.4);
+            --gold-light: #e8c872;
+            --gold-pale: #f5e6b8;
+            --gold-glow: rgba(212, 175, 55, 0.25);
             
-            /* Background Tones */
-            --obsidian: #08080a;
-            --obsidian-light: #0f0f12;
-            --charcoal: #161619;
+            /* Card Colors */
+            --card-bg: #18161a;
+            --card-bg-hover: #1e1c21;
+            --card-border: rgba(255, 255, 255, 0.06);
+            --card-border-active: rgba(212, 175, 55, 0.3);
             
-            /* Glass Effects */
-            --glass-bg: rgba(255, 255, 255, 0.02);
-            --glass-hover: rgba(212, 175, 55, 0.04);
-            --glass-border: rgba(212, 175, 55, 0.12);
-            --glass-active: rgba(212, 175, 55, 0.08);
+            /* Background */
+            --bg-primary: #0d0b0f;
+            --bg-secondary: #131116;
             
             /* Text */
-            --text-main: #f0ebe3;
+            --text-main: #f2efe9;
             --text-muted: #9a9590;
             --text-gold: var(--gold-light);
             
             /* Gradients */
-            --gradient-gold: linear-gradient(135deg, #b8960b 0%, #d4af37 25%, #f1d592 50%, #d4af37 75%, #b8960b 100%);
-            --gradient-gold-subtle: linear-gradient(135deg, rgba(184, 150, 11, 0.2) 0%, rgba(212, 175, 55, 0.3) 50%, rgba(184, 150, 11, 0.2) 100%);
-            --gradient-border: linear-gradient(135deg, var(--gold-deep), var(--gold-primary), var(--gold-light), var(--gold-primary), var(--gold-deep));
+            --gradient-gold: linear-gradient(135deg, #9a7b1a 0%, #d4af37 30%, #e8c872 50%, #d4af37 70%, #9a7b1a 100%);
+            --gradient-card: linear-gradient(180deg, rgba(255, 255, 255, 0.04) 0%, rgba(255, 255, 255, 0.01) 100%);
             
-            /* Shadows */
-            --shadow-card: 0 4px 20px rgba(0, 0, 0, 0.4), 0 0 40px rgba(212, 175, 55, 0.03);
-            --shadow-elevated: 0 20px 60px rgba(0, 0, 0, 0.6), 0 0 80px rgba(212, 175, 55, 0.08);
-            --shadow-glow: 0 0 30px rgba(212, 175, 55, 0.2);
+            /* Shadows - Floating Effect */
+            --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3), 0 1px 2px rgba(0, 0, 0, 0.2);
+            --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.35), 0 2px 8px rgba(0, 0, 0, 0.25);
+            --shadow-lg: 0 16px 48px rgba(0, 0, 0, 0.4), 0 4px 16px rgba(0, 0, 0, 0.3);
+            --shadow-xl: 0 24px 64px rgba(0, 0, 0, 0.5), 0 8px 24px rgba(0, 0, 0, 0.35);
+            --shadow-gold: 0 8px 32px rgba(212, 175, 55, 0.15), 0 0 0 1px rgba(212, 175, 55, 0.1);
             
             /* Animation */
-            --ease-luxe: cubic-bezier(0.16, 1, 0.3, 1);
             --ease-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
             --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
-            --duration-fast: 0.3s;
-            --duration-normal: 0.5s;
-            --duration-slow: 0.8s;
+            --ease-premium: cubic-bezier(0.16, 1, 0.3, 1);
+            --duration-fast: 0.25s;
+            --duration-normal: 0.4s;
+            --duration-slow: 0.6s;
         }
 
         * { 
@@ -59,14 +59,15 @@
 
         body {
             font-family: 'Inter', sans-serif;
-            background: var(--obsidian);
+            background: var(--bg-primary);
             color: var(--text-main);
             min-height: 100vh;
             line-height: 1.6;
             overflow-x: hidden;
+            position: relative;
         }
 
-        /* Ambient Background */
+        /* Subtle Background Pattern */
         body::before {
             content: '';
             position: fixed;
@@ -75,70 +76,68 @@
             right: 0;
             bottom: 0;
             background: 
-                radial-gradient(ellipse 80% 50% at 20% 10%, rgba(212, 175, 55, 0.06) 0%, transparent 50%),
-                radial-gradient(ellipse 60% 40% at 80% 90%, rgba(184, 150, 11, 0.05) 0%, transparent 50%),
-                radial-gradient(ellipse 100% 100% at 50% 50%, rgba(212, 175, 55, 0.02) 0%, transparent 70%);
+                radial-gradient(ellipse 120% 80% at 50% -20%, rgba(212, 175, 55, 0.04) 0%, transparent 50%),
+                radial-gradient(ellipse 80% 50% at 0% 100%, rgba(154, 123, 26, 0.03) 0%, transparent 40%);
             pointer-events: none;
-            z-index: -1;
+            z-index: 0;
         }
 
         /* ═══════════════════════════════════════════
-           HEADER SECTION
+           HEADER - FLOATING STYLE
         ═══════════════════════════════════════════ */
         header { 
             text-align: center; 
-            padding: 4rem 1.5rem 2.5rem;
+            padding: 3.5rem 1.5rem 2rem;
             position: relative;
-        }
-
-        header::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 60%;
-            max-width: 300px;
-            height: 1px;
-            background: var(--gradient-gold);
-            opacity: 0.3;
+            z-index: 10;
         }
 
         .brand-crest {
-            width: 50px;
-            height: 50px;
-            margin: 0 auto 1.5rem;
+            width: 56px;
+            height: 56px;
+            margin: 0 auto 1.25rem;
             position: relative;
             display: flex;
             align-items: center;
             justify-content: center;
         }
 
+        /* Floating Crest Background */
         .brand-crest::before {
             content: '';
             position: absolute;
             inset: 0;
-            border: 1px solid var(--gold-primary);
-            border-radius: 50%;
-            opacity: 0.3;
-            animation: crestPulse 3s ease-in-out infinite;
+            background: var(--card-bg);
+            border-radius: 18px;
+            box-shadow: var(--shadow-lg);
+            border: 1px solid var(--card-border);
+            transform: rotate(45deg);
+            transition: all var(--duration-normal) var(--ease-bounce);
+        }
+
+        .brand-crest:hover::before {
+            transform: rotate(45deg) scale(1.05);
+            box-shadow: var(--shadow-xl), var(--shadow-gold);
+            border-color: var(--card-border-active);
         }
 
         .brand-crest svg {
             width: 24px;
             height: 24px;
             fill: var(--gold-primary);
-            opacity: 0.8;
+            position: relative;
+            z-index: 2;
+            filter: drop-shadow(0 2px 8px rgba(212, 175, 55, 0.4));
+            transition: transform var(--duration-normal) var(--ease-bounce);
         }
 
-        @keyframes crestPulse {
-            0%, 100% { transform: scale(1); opacity: 0.3; }
-            50% { transform: scale(1.1); opacity: 0.5; }
+        .brand-crest:hover svg {
+            transform: scale(1.1);
         }
 
         .salon-name { 
             font-family: 'Playfair Display', serif; 
-            font-size: 2.8rem; 
+            font-size: 2.4rem; 
             font-weight: 600;
             letter-spacing: -0.5px;
             background: var(--gradient-gold);
@@ -146,115 +145,99 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            margin-bottom: 0.5rem;
-            animation: textShimmer 8s linear infinite;
+            margin-bottom: 0.4rem;
+            animation: shimmer 5s linear infinite;
         }
 
-        @keyframes textShimmer {
+        @keyframes shimmer {
             0% { background-position: 0% center; }
             100% { background-position: 200% center; }
         }
 
         .tagline { 
             font-family: 'Cinzel', serif; 
-            font-size: 0.7rem; 
+            font-size: 0.65rem; 
             color: var(--gold-light); 
-            letter-spacing: 6px; 
+            letter-spacing: 5px; 
             text-transform: uppercase; 
-            opacity: 0.7;
+            opacity: 0.75;
             font-weight: 500;
         }
 
         main { 
-            max-width: 600px; 
+            max-width: 540px; 
             margin: 0 auto; 
-            padding: 1.5rem 16px 2rem; 
+            padding: 1rem 12px 1.5rem;
+            position: relative;
+            z-index: 10;
         }
 
         /* ═══════════════════════════════════════════
-           PREMIUM CATEGORY CARDS
+           FLOATING CATEGORY CARDS
         ═══════════════════════════════════════════ */
         .category { 
             position: relative;
-            margin-bottom: 14px; 
-            border-radius: 20px; 
-            overflow: visible;
+            margin-bottom: 10px;
             opacity: 0;
-            transform: translateY(20px);
-            animation: cardEntrance 0.6s var(--ease-luxe) forwards;
+            transform: translateY(25px) scale(0.96);
+            animation: cardFloat 0.6s var(--ease-premium) forwards;
         }
 
-        .category:nth-child(1) { animation-delay: 0.1s; }
-        .category:nth-child(2) { animation-delay: 0.15s; }
+        .category:nth-child(1) { animation-delay: 0.08s; }
+        .category:nth-child(2) { animation-delay: 0.14s; }
         .category:nth-child(3) { animation-delay: 0.2s; }
-        .category:nth-child(4) { animation-delay: 0.25s; }
-        .category:nth-child(5) { animation-delay: 0.3s; }
-        .category:nth-child(6) { animation-delay: 0.35s; }
-        .category:nth-child(7) { animation-delay: 0.4s; }
-        .category:nth-child(8) { animation-delay: 0.45s; }
+        .category:nth-child(4) { animation-delay: 0.26s; }
+        .category:nth-child(5) { animation-delay: 0.32s; }
+        .category:nth-child(6) { animation-delay: 0.38s; }
+        .category:nth-child(7) { animation-delay: 0.44s; }
+        .category:nth-child(8) { animation-delay: 0.5s; }
 
-        @keyframes cardEntrance {
-            to { opacity: 1; transform: translateY(0); }
+        @keyframes cardFloat {
+            to { 
+                opacity: 1; 
+                transform: translateY(0) scale(1);
+            }
         }
 
-        /* Gradient Border Container */
-        .category::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            border-radius: 20px;
-            padding: 1px;
-            background: linear-gradient(135deg, var(--gold-deep), transparent 40%, transparent 60%, var(--gold-primary));
-            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-            -webkit-mask-composite: xor;
-            mask-composite: exclude;
-            opacity: 0.4;
-            transition: opacity var(--duration-normal) var(--ease-luxe);
-            pointer-events: none;
-            z-index: 2;
-        }
-
-        .category:hover::before,
-        .category.active::before {
-            opacity: 1;
-            background: var(--gradient-border);
-        }
-
-        /* Card Inner */
+        /* Floating Card Container */
         .category-inner {
             position: relative;
-            background: linear-gradient(165deg, rgba(20, 20, 24, 0.95) 0%, rgba(12, 12, 15, 0.98) 100%);
+            background: var(--card-bg);
             border-radius: 20px;
             overflow: hidden;
-            box-shadow: var(--shadow-card);
-            transition: all var(--duration-normal) var(--ease-luxe);
+            box-shadow: var(--shadow-md);
+            border: 1px solid var(--card-border);
+            transition: all var(--duration-normal) var(--ease-premium);
         }
 
         .category:hover .category-inner {
-            box-shadow: var(--shadow-elevated);
-            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+            transform: translateY(-3px);
+            border-color: rgba(255, 255, 255, 0.1);
         }
 
         .category.active .category-inner {
-            box-shadow: var(--shadow-elevated), var(--shadow-glow);
+            box-shadow: var(--shadow-xl), var(--shadow-gold);
+            transform: translateY(-5px) scale(1.01);
+            border-color: var(--card-border-active);
         }
 
-        /* Glass Overlay on Hover */
-        .category::after {
+        /* Card Top Highlight */
+        .category-inner::before {
             content: '';
             position: absolute;
-            inset: 0;
-            background: linear-gradient(135deg, rgba(212, 175, 55, 0.05) 0%, transparent 50%);
-            border-radius: 20px;
-            opacity: 0;
-            transition: opacity var(--duration-normal) var(--ease-luxe);
-            pointer-events: none;
-            z-index: 1;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            opacity: 0.5;
+            transition: opacity var(--duration-normal) var(--ease-smooth);
         }
 
-        .category:hover::after {
+        .category.active .category-inner::before {
             opacity: 1;
+            background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.4), transparent);
         }
 
         /* ═══════════════════════════════════════════
@@ -262,13 +245,12 @@
         ═══════════════════════════════════════════ */
         .category-header {
             position: relative;
-            height: 90px;
+            height: 80px;
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
             overflow: hidden;
-            z-index: 3;
         }
 
         /* Background Image */
@@ -282,8 +264,8 @@
             background-size: cover;
             background-position: center;
             z-index: 1;
-            transition: all 1s var(--ease-luxe);
-            filter: grayscale(50%) brightness(0.4) saturate(0.8);
+            transition: all 1s var(--ease-premium);
+            filter: brightness(0.35) saturate(0.6);
         }
 
         .cat-hair .category-header::before { background-image: url('images/haircut.webp'); }
@@ -297,11 +279,11 @@
 
         .category:hover .category-header::before,
         .category.active .category-header::before { 
-            transform: scale(1.08);
-            filter: grayscale(30%) brightness(0.35) saturate(1);
+            transform: scale(1.06);
+            filter: brightness(0.4) saturate(0.8);
         }
 
-        /* Gradient Overlay */
+        /* Dark Overlay */
         .category-header::after {
             content: '';
             position: absolute;
@@ -309,9 +291,8 @@
             background: linear-gradient(
                 to bottom,
                 transparent 0%,
-                rgba(8, 8, 10, 0.3) 40%,
-                rgba(8, 8, 10, 0.7) 70%,
-                rgba(8, 8, 10, 0.95) 100%
+                rgba(13, 11, 15, 0.3) 40%,
+                rgba(13, 11, 15, 0.85) 100%
             );
             z-index: 2;
         }
@@ -321,55 +302,61 @@
             z-index: 3;
             color: #fff;
             font-family: 'Cinzel', serif;
-            font-size: 0.95rem;
+            font-size: 0.82rem;
             font-weight: 500;
-            letter-spacing: 4px;
+            letter-spacing: 3px;
             text-transform: uppercase;
-            text-shadow: 0 2px 15px rgba(0, 0, 0, 0.5);
+            text-shadow: 0 2px 12px rgba(0, 0, 0, 0.5);
             display: flex;
             align-items: center;
-            gap: 12px;
-            transition: all var(--duration-normal) var(--ease-luxe);
+            gap: 10px;
+            transition: all var(--duration-normal) var(--ease-premium);
         }
 
+        /* Animated Lines */
         .category-title::before,
         .category-title::after {
             content: '';
             width: 0;
             height: 1px;
             background: var(--gradient-gold);
-            transition: width var(--duration-normal) var(--ease-luxe);
+            box-shadow: 0 0 8px var(--gold-glow);
+            transition: width var(--duration-normal) var(--ease-premium);
         }
 
         .category:hover .category-title::before,
         .category:hover .category-title::after,
         .category.active .category-title::before,
         .category.active .category-title::after {
-            width: 20px;
+            width: 22px;
         }
 
         .category:hover .category-title {
-            letter-spacing: 6px;
-            text-shadow: 0 2px 20px rgba(212, 175, 55, 0.3);
+            letter-spacing: 4px;
         }
 
-        /* Expand Indicator */
+        .category.active .category-title {
+            color: var(--gold-light);
+            text-shadow: 0 2px 15px rgba(212, 175, 55, 0.3);
+        }
+
+        /* Expand Button */
         .expand-icon {
             position: absolute;
-            right: 20px;
+            right: 14px;
             top: 50%;
             transform: translateY(-50%);
             z-index: 4;
-            width: 28px;
-            height: 28px;
-            border-radius: 50%;
-            background: rgba(212, 175, 55, 0.1);
-            border: 1px solid rgba(212, 175, 55, 0.3);
+            width: 30px;
+            height: 30px;
+            border-radius: 10px;
+            background: rgba(0, 0, 0, 0.4);
             display: flex;
             align-items: center;
             justify-content: center;
             transition: all var(--duration-normal) var(--ease-bounce);
             opacity: 0;
+            box-shadow: var(--shadow-sm);
         }
 
         .category-header:hover .expand-icon {
@@ -377,99 +364,99 @@
         }
 
         .expand-icon svg {
-            width: 12px;
-            height: 12px;
+            width: 14px;
+            height: 14px;
             stroke: var(--gold-light);
-            stroke-width: 2;
+            stroke-width: 2.5;
             fill: none;
-            transition: transform var(--duration-normal) var(--ease-luxe);
+            transition: all var(--duration-normal) var(--ease-premium);
         }
 
         .category.active .expand-icon {
-            background: var(--gradient-gold);
-            border-color: var(--gold-primary);
+            background: var(--gold-primary);
+            box-shadow: 0 4px 16px rgba(212, 175, 55, 0.4);
+            transform: translateY(-50%) scale(1.05);
         }
 
         .category.active .expand-icon svg {
-            stroke: var(--obsidian);
+            stroke: var(--bg-primary);
+            transform: rotate(180deg);
         }
 
         /* ═══════════════════════════════════════════
-           CATEGORY CONTENT - PREMIUM REVEAL
+           CATEGORY CONTENT - FLOATING EXPAND
         ═══════════════════════════════════════════ */
         .category-content {
             max-height: 0;
             overflow: hidden;
             position: relative;
-            transition: max-height 0.6s var(--ease-luxe);
+            transition: max-height var(--duration-slow) var(--ease-premium);
         }
 
+        /* Floating Content Background */
         .category-content::before {
             content: '';
             position: absolute;
             top: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: calc(100% - 40px);
+            left: 12px;
+            right: 12px;
             height: 1px;
-            background: linear-gradient(90deg, transparent, var(--gold-primary), transparent);
-            opacity: 0.3;
+            background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.3), transparent);
         }
 
         .service-list { 
             list-style: none; 
-            padding: 8px 12px 12px;
+            padding: 6px 8px 10px;
             position: relative;
         }
 
         /* ═══════════════════════════════════════════
-           SERVICE ITEMS - INTERACTIVE DESIGN
+           SERVICE ITEMS - FLOATING ROWS
         ═══════════════════════════════════════════ */
         .service-item {
             position: relative;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 14px 16px;
+            padding: 13px 16px;
             margin: 4px 0;
-            border-radius: 12px;
+            border-radius: 14px;
             background: transparent;
             overflow: hidden;
-            transform: translateX(-20px);
+            transform: translateY(8px);
             opacity: 0;
-            transition: opacity 0.4s var(--ease-smooth), transform 0.4s var(--ease-smooth);
+            transition: all 0.35s var(--ease-premium);
         }
 
-        /* Staggered entrance - Fixed */
+        /* Staggered Entrance */
         .category.active .service-item {
             opacity: 1;
-            transform: translateX(0);
+            transform: translateY(0);
         }
 
-        .category.active .service-item:nth-child(1) { transition-delay: 0.08s; }
-        .category.active .service-item:nth-child(2) { transition-delay: 0.16s; }
-        .category.active .service-item:nth-child(3) { transition-delay: 0.24s; }
-        .category.active .service-item:nth-child(4) { transition-delay: 0.32s; }
-        .category.active .service-item:nth-child(5) { transition-delay: 0.40s; }
+        .category.active .service-item:nth-child(1) { transition-delay: 0.06s; }
+        .category.active .service-item:nth-child(2) { transition-delay: 0.12s; }
+        .category.active .service-item:nth-child(3) { transition-delay: 0.18s; }
+        .category.active .service-item:nth-child(4) { transition-delay: 0.24s; }
+        .category.active .service-item:nth-child(5) { transition-delay: 0.30s; }
 
-        /* Sliding highlight effect */
+        /* Floating Hover Background */
         .service-item::before {
             content: '';
             position: absolute;
-            left: 0;
-            top: 0;
-            height: 100%;
-            width: 0;
-            background: linear-gradient(90deg, rgba(212, 175, 55, 0.08) 0%, rgba(212, 175, 55, 0.02) 50%, transparent 100%);
-            transition: width var(--duration-normal) var(--ease-luxe);
-            border-radius: 12px;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.08) 0%, rgba(212, 175, 55, 0.02) 100%);
+            border-radius: 14px;
+            opacity: 0;
+            transition: opacity var(--duration-normal) var(--ease-smooth);
+            box-shadow: inset 0 0 0 1px rgba(212, 175, 55, 0.1);
         }
 
         .service-item:hover::before {
-            width: 100%;
+            opacity: 1;
         }
 
-        /* Left accent line */
+        /* Left Gold Bar */
         .service-item::after {
             content: '';
             position: absolute;
@@ -477,10 +464,11 @@
             top: 50%;
             transform: translateY(-50%);
             width: 0;
-            height: 60%;
-            background: var(--gradient-gold);
+            height: 45%;
+            background: var(--gold-primary);
             border-radius: 0 4px 4px 0;
-            transition: width var(--duration-fast) var(--ease-luxe);
+            box-shadow: 0 0 12px var(--gold-glow);
+            transition: width var(--duration-fast) var(--ease-bounce);
         }
 
         .service-item:hover::after {
@@ -491,17 +479,17 @@
             position: relative;
             z-index: 1;
             font-weight: 400; 
-            font-size: 0.92rem; 
+            font-size: 0.9rem; 
             display: flex; 
             align-items: center; 
-            gap: 10px;
+            gap: 8px;
             color: var(--text-main);
             transition: all var(--duration-fast) var(--ease-smooth);
         }
 
         .service-item:hover .service-name {
             color: var(--gold-pale);
-            transform: translateX(4px);
+            transform: translateX(5px);
         }
 
         .service-price { 
@@ -509,54 +497,38 @@
             z-index: 1;
             color: var(--gold-light); 
             font-weight: 600; 
-            font-size: 0.95rem;
-            font-family: 'Inter', sans-serif;
-            letter-spacing: 0.5px;
+            font-size: 0.92rem;
+            letter-spacing: 0.3px;
             transition: all var(--duration-fast) var(--ease-smooth);
         }
 
         .service-item:hover .service-price {
-            transform: scale(1.05);
-            text-shadow: 0 0 20px rgba(212, 175, 55, 0.4);
+            transform: scale(1.06);
+            text-shadow: 0 0 15px rgba(212, 175, 55, 0.5);
         }
 
-        /* Badge Styling */
+        /* Badge */
         .badge-popular {
-            font-size: 0.55rem;
+            font-size: 0.52rem;
             background: var(--gradient-gold);
-            color: var(--obsidian);
+            color: var(--bg-primary);
             padding: 3px 10px;
             border-radius: 50px;
             text-transform: uppercase;
             font-weight: 700;
-            letter-spacing: 1px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .badge-popular::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-            animation: badgeShine 3s ease-in-out infinite;
-        }
-
-        @keyframes badgeShine {
-            0% { left: -100%; }
-            50%, 100% { left: 100%; }
+            letter-spacing: 0.8px;
+            box-shadow: 0 2px 8px rgba(212, 175, 55, 0.35);
         }
 
         /* ═══════════════════════════════════════════
-           RATE US BUTTON
+           RATE US BUTTON - FLOATING CARD
         ═══════════════════════════════════════════ */
         .rate-us-container {
-            max-width: 600px;
-            margin: 2rem auto;
-            padding: 0 16px;
+            max-width: 540px;
+            margin: 1.5rem auto;
+            padding: 0 12px;
+            position: relative;
+            z-index: 10;
         }
 
         .rate-us-btn {
@@ -565,24 +537,25 @@
             justify-content: center;
             gap: 12px;
             width: 100%;
-            padding: 18px 24px;
-            background: linear-gradient(135deg, rgba(212, 175, 55, 0.1) 0%, rgba(184, 150, 11, 0.05) 100%);
-            border: 1px solid rgba(212, 175, 55, 0.3);
-            border-radius: 16px;
+            padding: 18px 20px;
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 18px;
             cursor: pointer;
             text-decoration: none;
-            transition: all var(--duration-normal) var(--ease-luxe);
+            transition: all var(--duration-normal) var(--ease-premium);
             position: relative;
             overflow: hidden;
+            box-shadow: var(--shadow-md);
         }
 
         .rate-us-btn::before {
             content: '';
             position: absolute;
             inset: 0;
-            background: var(--gradient-gold);
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.1) 0%, transparent 100%);
             opacity: 0;
-            transition: opacity var(--duration-normal) var(--ease-luxe);
+            transition: opacity var(--duration-normal) var(--ease-smooth);
         }
 
         .rate-us-btn:hover::before {
@@ -590,52 +563,51 @@
         }
 
         .rate-us-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 40px rgba(212, 175, 55, 0.2);
-            border-color: var(--gold-primary);
-        }
-
-        .rate-us-btn svg,
-        .rate-us-btn span {
-            position: relative;
-            z-index: 1;
-            transition: all var(--duration-normal) var(--ease-luxe);
-        }
-
-        .rate-us-btn:hover svg,
-        .rate-us-btn:hover span {
-            color: var(--obsidian);
+            transform: translateY(-4px) scale(1.01);
+            box-shadow: var(--shadow-xl), var(--shadow-gold);
+            border-color: var(--card-border-active);
         }
 
         .rate-us-btn svg {
-            width: 22px;
-            height: 22px;
-            fill: var(--gold-light);
-            transition: all var(--duration-normal) var(--ease-luxe);
+            width: 20px;
+            height: 20px;
+            fill: var(--gold-primary);
+            transition: all var(--duration-normal) var(--ease-bounce);
+            filter: drop-shadow(0 2px 6px rgba(212, 175, 55, 0.4));
+            position: relative;
+            z-index: 1;
         }
 
         .rate-us-btn:hover svg {
-            fill: var(--obsidian);
-            transform: scale(1.1);
+            transform: scale(1.15) rotate(10deg);
         }
 
         .rate-us-btn span {
             font-family: 'Cinzel', serif;
-            font-size: 0.9rem;
+            font-size: 0.8rem;
             font-weight: 500;
-            letter-spacing: 3px;
+            letter-spacing: 2.5px;
             text-transform: uppercase;
             color: var(--gold-light);
+            position: relative;
+            z-index: 1;
+            transition: all var(--duration-normal) var(--ease-smooth);
+        }
+
+        .rate-us-btn:hover span {
+            letter-spacing: 3.5px;
         }
 
         .rate-us-btn .stars {
             display: flex;
-            gap: 4px;
+            gap: 3px;
+            position: relative;
+            z-index: 1;
         }
 
         .rate-us-btn .stars svg {
-            width: 16px;
-            height: 16px;
+            width: 13px;
+            height: 13px;
         }
 
         /* ═══════════════════════════════════════════
@@ -643,8 +615,9 @@
         ═══════════════════════════════════════════ */
         footer { 
             text-align: center; 
-            padding: 2rem 2rem 4rem; 
+            padding: 1.5rem 2rem 3.5rem; 
             position: relative;
+            z-index: 10;
         }
 
         footer::before {
@@ -653,88 +626,88 @@
             top: 0;
             left: 50%;
             transform: translateX(-50%);
-            width: 100px;
+            width: 80px;
             height: 1px;
-            background: linear-gradient(90deg, transparent, var(--gold-primary), transparent);
-            opacity: 0.3;
+            background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.3), transparent);
         }
 
         footer p {
-            font-size: 0.7rem; 
+            font-size: 0.65rem; 
             color: var(--text-muted);
-            letter-spacing: 1px;
-            margin: 6px 0;
-            opacity: 0.6;
+            letter-spacing: 0.8px;
+            margin: 5px 0;
+            opacity: 0.45;
         }
 
         footer p:first-of-type {
             font-family: 'Cinzel', serif;
-            letter-spacing: 2px;
-            opacity: 0.5;
+            letter-spacing: 1.5px;
+            opacity: 0.35;
         }
 
         /* ═══════════════════════════════════════════
-           RESPONSIVE DESIGN
+           RESPONSIVE
         ═══════════════════════════════════════════ */
         @media (max-width: 480px) {
             .salon-name { 
-                font-size: 2.2rem; 
+                font-size: 2rem; 
             }
             
             .tagline {
-                font-size: 0.6rem;
+                font-size: 0.58rem;
                 letter-spacing: 4px;
             }
             
             .category-header {
-                height: 80px;
+                height: 72px;
             }
             
             .category-title {
-                font-size: 0.85rem;
-                letter-spacing: 3px;
+                font-size: 0.75rem;
+                letter-spacing: 2.5px;
             }
             
             .service-item {
-                padding: 12px 14px;
+                padding: 11px 14px;
             }
             
             .service-name {
-                font-size: 0.88rem;
+                font-size: 0.85rem;
             }
             
             .rate-us-btn span {
-                font-size: 0.8rem;
+                font-size: 0.72rem;
                 letter-spacing: 2px;
             }
-        }
 
-        /* ═══════════════════════════════════════════
-           PREMIUM TOUCH - RIPPLE EFFECT
-        ═══════════════════════════════════════════ */
-        .ripple {
-            position: absolute;
-            border-radius: 50%;
-            background: rgba(212, 175, 55, 0.3);
-            transform: scale(0);
-            animation: rippleEffect 0.6s linear;
-            pointer-events: none;
-        }
-
-        @keyframes rippleEffect {
-            to {
-                transform: scale(4);
-                opacity: 0;
+            .rate-us-btn .stars svg {
+                width: 11px;
+                height: 11px;
             }
         }
 
-        /* Selection highlight for future booking functionality */
+        /* Selection State */
         .service-item.selected {
-            background: rgba(212, 175, 55, 0.1);
+            background: rgba(212, 175, 55, 0.08);
         }
 
         .service-item.selected::after {
             width: 3px;
+        }
+
+        .service-item.selected::before {
+            opacity: 1;
+        }
+
+        /* Active Tap State for Mobile */
+        @media (hover: none) {
+            .category:active .category-inner {
+                transform: scale(0.98);
+            }
+            
+            .service-item:active {
+                transform: scale(0.98);
+            }
         }
     </style>
 </head>
@@ -1000,82 +973,67 @@
     </footer>
 
     <script>
-        // Premium Accordion with Smooth Animations
-        document.querySelectorAll('.category-header').forEach(header => {
-            header.addEventListener('click', function(e) {
-                const category = this.closest('.category');
-                const content = category.querySelector('.category-content');
-                const inner = category.querySelector('.category-inner');
-                const isOpen = category.classList.contains('active');
-                
-                // Ripple effect
-                createRipple(e, this);
+    // Floating Card Accordion - Fixed Version
+    document.querySelectorAll('.category-header').forEach(header => {
+        header.addEventListener('click', function(e) {
+            const category = this.closest('.category');
+            const content = category.querySelector('.category-content');
+            const isOpen = category.classList.contains('active');
 
-                // Close all other categories with smooth animation
-                document.querySelectorAll('.category').forEach(cat => {
-                    if (cat !== category && cat.classList.contains('active')) {
-                        cat.classList.remove('active');
-                        const otherContent = cat.querySelector('.category-content');
-                        otherContent.style.maxHeight = '0px';
-                        
-                        // Reset service items for re-animation
-                        cat.querySelectorAll('.service-item').forEach(item => {
-                            item.style.opacity = '0';
-                            item.style.transform = 'translateX(-20px)';
-                        });
-                    }
-                });
-
-                // Toggle current category
-                if (isOpen) {
-                    category.classList.remove('active');
-                    content.style.maxHeight = '0px';
-                    
-                    // Reset service items for re-animation
-                    category.querySelectorAll('.service-item').forEach(item => {
-                        item.style.opacity = '0';
-                        item.style.transform = 'translateX(-20px)';
-                    });
-                } else {
-                    category.classList.add('active');
-                    
-                    // Calculate height after a small delay for smooth entrance
-                    requestAnimationFrame(() => {
-                        const scrollHeight = content.scrollHeight;
-                        content.style.maxHeight = scrollHeight + 'px';
-                    });
+            // Close all other categories
+            document.querySelectorAll('.category').forEach(cat => {
+                if (cat !== category && cat.classList.contains('active')) {
+                    closeCategory(cat);
                 }
             });
-        });
 
-        // Ripple Effect Function
-        function createRipple(event, element) {
-            const ripple = document.createElement('span');
-            ripple.classList.add('ripple');
-            
-            const rect = element.getBoundingClientRect();
-            const size = Math.max(rect.width, rect.height);
-            const x = event.clientX - rect.left - size / 2;
-            const y = event.clientY - rect.top - size / 2;
-            
-            ripple.style.width = ripple.style.height = size + 'px';
-            ripple.style.left = x + 'px';
-            ripple.style.top = y + 'px';
-            
-            element.appendChild(ripple);
-            
-            ripple.addEventListener('animationend', () => {
-                ripple.remove();
-            });
-        }
-
-        // Service Item Interaction
-        document.querySelectorAll('.service-item').forEach(item => {
-            item.addEventListener('click', function() {
-                // Toggle selection state (for future booking functionality)
-                this.classList.toggle('selected');
-            });
+            // Toggle current category
+            if (isOpen) {
+                closeCategory(category);
+            } else {
+                openCategory(category);
+            }
         });
-    </script>
+    });
+
+    // Open Category Function
+    function openCategory(category) {
+        const content = category.querySelector('.category-content');
+        
+        category.classList.add('active');
+        
+        // Clear inline styles from service items
+        category.querySelectorAll('.service-item').forEach(item => {
+            item.style.removeProperty('opacity');
+            item.style.removeProperty('transform');
+        });
+        
+        // Calculate and set height
+        requestAnimationFrame(() => {
+            content.style.maxHeight = content.scrollHeight + 'px';
+        });
+    }
+
+    // Close Category Function
+    function closeCategory(category) {
+        const content = category.querySelector('.category-content');
+        
+        category.classList.remove('active');
+        content.style.maxHeight = '0px';
+        
+        // Reset service items with inline styles
+        category.querySelectorAll('.service-item').forEach(item => {
+            item.style.opacity = '0';
+            item.style.transform = 'translateY(8px)';
+        });
+    }
+
+    // Service Item Selection
+    document.querySelectorAll('.service-item').forEach(item => {
+        item.addEventListener('click', function() {
+            this.classList.toggle('selected');
+        });
+    });
+</script>
 </body>
 </html>
