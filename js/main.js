@@ -36,12 +36,7 @@ const navbarToggle = document.getElementById('navbarToggle');
 const navbarMenu = document.getElementById('navbarMenu');
 const currentYearEl = document.getElementById('currentYear');
 
-// Demo Modal Elements
-const demoModal = document.getElementById('demoModal');
-const demoScan = document.getElementById('demoScan');
-const demoPhone = document.getElementById('demoPhone');
-const demoIframe = document.getElementById('demoIframe');
-const demoModalTitle = document.getElementById('demoModalTitle');
+
 
 // ========================================
 // Preloader Logic
@@ -104,48 +99,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
   });
 });
 
-// ========================================
-// Demo Logic - MOBILE FIXED
-// ========================================
-function openDemoModal(demoPath, title) {
-  // Open full screen in new tab on mobile
-  if (window.innerWidth <= 768) {
-    window.open(demoPath, '_blank');
-    return;
-  }
-
-  // Desktop: Show Phone Modal
-  demoModalTitle.textContent = title || 'System Demo';
-  demoModal.classList.add('active');
-  demoModal.setAttribute('aria-hidden', 'false');
-  document.body.classList.add('modal-open');
-  if (lenis) lenis.stop();
-
-  demoScan.classList.add('active');
-  demoPhone.classList.remove('active');
-
-  setTimeout(() => {
-    demoScan.classList.remove('active');
-    demoPhone.classList.add('active');
-    demoIframe.src = demoPath;
-  }, 1500);
-}
-
-function closeDemoModal() {
-  demoModal.classList.remove('active');
-  demoModal.setAttribute('aria-hidden', 'true');
-  document.body.classList.remove('modal-open');
-  if (lenis) lenis.start();
-
-  demoIframe.src = 'about:blank';
-  demoScan.classList.remove('active');
-  demoPhone.classList.remove('active');
-}
-
 document.addEventListener('keydown', (e) => {
-  if (e.key === 'Escape' && demoModal.classList.contains('active')) {
-    closeDemoModal();
-  }
   if (e.key === 'Escape' && navbarMenu.classList.contains('active')) {
     navbarToggle.classList.remove('active');
     navbarMenu.classList.remove('active');
@@ -157,7 +111,7 @@ document.addEventListener('keydown', (e) => {
 // ========================================
 function initAnimations() {
   const elements = document.querySelectorAll(
-    '.section-header, .problem-card, .system-card, .how-it-works-step, ' +
+    '.section-header, .problem-card, .gallery-card, .how-it-works-step, ' +
     '.cta-box, .pricing-card'
   );
 
