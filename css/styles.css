@@ -628,7 +628,7 @@ section {
 }
 
 /* ========================================
-   Theme Gallery Sections
+   Theme Gallery Sections — Swipeable Carousel
 ======================================== */
 .gallery {
   background: var(--bg-secondary);
@@ -638,52 +638,73 @@ section {
   background: var(--bg-primary);
 }
 
-/* Gallery Grid */
-.gallery__grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
+/* Carousel Container */
+.carousel {
+  position: relative;
+  overflow: hidden;
+}
+
+.carousel__track {
+  display: flex;
   gap: 24px;
-  max-width: 960px;
-  margin: 0 auto;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  padding: 16px 4px 24px;
+  cursor: grab;
 }
 
-@media (max-width: 1024px) {
-  .gallery__grid {
-    grid-template-columns: repeat(2, 1fr);
-    max-width: 640px;
-  }
+.carousel__track::-webkit-scrollbar {
+  display: none;
 }
 
-@media (max-width: 560px) {
-  .gallery__grid {
-    grid-template-columns: 1fr;
-    max-width: 300px;
-    gap: 20px;
-  }
+.carousel__track.dragging {
+  cursor: grabbing;
+  scroll-snap-type: none;
+  scroll-behavior: auto;
 }
 
-/* Gallery Card */
+/* Gallery Card — Inside Carousel */
 .gallery-card {
-  display: block;
+  flex: 0 0 280px;
+  scroll-snap-align: center;
+  display: flex;
+  flex-direction: column;
   text-decoration: none;
   color: inherit;
   background: var(--bg-card);
-  border: 1px solid var(--border);
+  border: 2px solid var(--border);
   border-radius: 14px;
   overflow: hidden;
-  max-width: 300px;
-  margin: 0 auto;
   transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  user-select: none;
 }
 
 .gallery-card:hover {
-  transform: translateY(-8px);
+  transform: translateY(-6px);
   border-color: var(--border-hover);
   box-shadow: 0 12px 40px rgba(0, 0, 0, 0.35), 0 0 30px rgba(212, 175, 55, 0.1);
 }
 
-/* Card Image — Default (Salon Menu & Salon Card) */
+/* Selected State */
+.gallery-card.selected {
+  border-color: var(--accent-gold);
+  box-shadow: 0 0 20px rgba(212, 175, 55, 0.25), 0 8px 32px rgba(0, 0, 0, 0.3);
+  transform: translateY(-4px);
+}
+
+.gallery-card.selected .gallery-card__image-wrap::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(212, 175, 55, 0.08);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Card Image */
 .gallery-card__image-wrap {
   overflow: hidden;
   height: 200px;
@@ -697,6 +718,7 @@ section {
   object-fit: cover;
   display: block;
   transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  pointer-events: none;
 }
 
 .gallery-card:hover .gallery-card__image {
@@ -705,7 +727,7 @@ section {
 
 /* Visiting Card variant — shorter, wider ratio */
 .gallery--visiting .gallery-card {
-  max-width: 260px;
+  flex: 0 0 260px;
 }
 
 .gallery--visiting .gallery-card__image-wrap {
@@ -713,13 +735,12 @@ section {
   aspect-ratio: 3.5 / 2;
 }
 
-/* Card Info */
+/* Card Info — Stacked Layout */
 .gallery-card__info {
-  padding: 14px 16px;
+  padding: 14px 16px 16px;
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
+  flex-direction: column;
+  gap: 10px;
 }
 
 .gallery-card__name {
@@ -730,17 +751,181 @@ section {
   margin: 0;
 }
 
-.gallery-card__cta {
-  font-size: 0.8125rem;
-  font-weight: 500;
-  color: var(--accent-gold);
-  white-space: nowrap;
-  transition: opacity 0.3s ease;
-  opacity: 0.7;
+/* Action Buttons Row */
+.gallery-card__actions {
+  display: flex;
+  gap: 8px;
 }
 
-.gallery-card:hover .gallery-card__cta {
+.gallery-card__btn {
+  flex: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 10px 12px;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  border-radius: 10px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  border: none;
+  letter-spacing: 0.02em;
+}
+
+.gallery-card__btn--view {
+  background: transparent;
+  color: var(--text-secondary);
+  border: 1px solid var(--border);
+}
+
+.gallery-card__btn--view:hover {
+  background: var(--bg-card);
+  border-color: rgba(255, 255, 255, 0.15);
+  color: var(--text-primary);
+}
+
+.gallery-card__btn--select {
+  background: var(--accent-gradient);
+  color: var(--bg-primary);
+  box-shadow: 0 0 12px rgba(212, 175, 55, 0.15);
+}
+
+.gallery-card__btn--select:hover {
+  box-shadow: 0 0 20px rgba(212, 175, 55, 0.35);
+  transform: translateY(-1px);
+}
+
+/* Selected Button State */
+.gallery-card.selected .gallery-card__btn--select {
+  background: transparent;
+  color: var(--accent-gold);
+  border: 1.5px solid var(--accent-gold);
+  box-shadow: none;
+}
+
+/* ========================================
+   Fixed Bottom Selection Bar
+======================================== */
+.selection-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 900;
+  background: rgba(10, 10, 12, 0.92);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-top: 1px solid rgba(212, 175, 55, 0.2);
+  padding: 14px 0;
+  transform: translateY(100%);
+  opacity: 0;
+  transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+              opacity 0.35s ease;
+  pointer-events: none;
+}
+
+.selection-bar.active {
+  transform: translateY(0);
   opacity: 1;
+  pointer-events: auto;
+}
+
+.selection-bar__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.selection-bar__summary {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.selection-bar__item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.selection-bar__label {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.selection-bar__value {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--accent-gold);
+}
+
+.selection-bar__cta {
+  white-space: nowrap;
+  padding: 12px 24px;
+  font-size: 0.875rem;
+}
+
+@media (max-width: 768px) {
+  .carousel__track .gallery-card {
+    flex: 0 0 260px;
+  }
+
+  .gallery--visiting .gallery-card {
+    flex: 0 0 240px;
+  }
+
+  .selection-bar__inner {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .selection-bar__summary {
+    gap: 12px;
+    justify-content: center;
+  }
+
+  .selection-bar__cta {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .carousel__track .gallery-card {
+    flex: 0 0 240px;
+  }
+
+  .gallery--visiting .gallery-card {
+    flex: 0 0 220px;
+  }
+
+  .selection-bar__summary {
+    gap: 8px;
+  }
+
+  .selection-bar__item {
+    gap: 4px;
+  }
+
+  .selection-bar__label {
+    font-size: 0.6875rem;
+  }
+
+  .selection-bar__value {
+    font-size: 0.75rem;
+  }
+}
+
+/* Adjust WhatsApp floating button when selection bar is active */
+body.has-selection .whatsapp-button {
+  bottom: 100px;
 }
 
 /* How It Works */

@@ -190,6 +190,159 @@ if (currentYearEl) {
   currentYearEl.textContent = new Date().getFullYear();
 }
 
+// ========================================
+// Carousel Drag-to-Scroll (Desktop)
+// ========================================
+function initCarousels() {
+  const tracks = document.querySelectorAll('.carousel__track');
+
+  tracks.forEach(track => {
+    let isDown = false;
+    let startX;
+    let scrollLeft;
+    let hasDragged = false;
+
+    track.addEventListener('mousedown', (e) => {
+      // Don't initiate drag if clicking a button/link
+      if (e.target.closest('.gallery-card__btn')) return;
+      isDown = true;
+      hasDragged = false;
+      track.classList.add('dragging');
+      startX = e.pageX - track.offsetLeft;
+      scrollLeft = track.scrollLeft;
+      e.preventDefault();
+    });
+
+    track.addEventListener('mouseleave', () => {
+      if (!isDown) return;
+      isDown = false;
+      track.classList.remove('dragging');
+    });
+
+    track.addEventListener('mouseup', () => {
+      isDown = false;
+      track.classList.remove('dragging');
+    });
+
+    track.addEventListener('mousemove', (e) => {
+      if (!isDown) return;
+      e.preventDefault();
+      const x = e.pageX - track.offsetLeft;
+      const walk = (x - startX) * 1.5;
+      if (Math.abs(walk) > 5) hasDragged = true;
+      track.scrollLeft = scrollLeft - walk;
+    });
+
+    // Prevent click on links after drag
+    track.addEventListener('click', (e) => {
+      if (hasDragged) {
+        e.preventDefault();
+        e.stopPropagation();
+        hasDragged = false;
+      }
+    }, true);
+  });
+}
+
+// ========================================
+// Theme Selection State Management
+// ========================================
+const selections = {
+  salonMenu: null,
+  salonCard: null,
+  visitingCard: null
+};
+
+const selectionBar = document.getElementById('selectionBar');
+const summaryMenu = document.getElementById('summaryMenu');
+const summaryCard = document.getElementById('summaryCard');
+const summaryVisiting = document.getElementById('summaryVisiting');
+const whatsappCta = document.getElementById('whatsappCta');
+
+function updateSelectionBar() {
+  summaryMenu.textContent = selections.salonMenu || '—';
+  summaryCard.textContent = selections.salonCard || '—';
+  summaryVisiting.textContent = selections.visitingCard || '—';
+
+  const hasAny = selections.salonMenu || selections.salonCard || selections.visitingCard;
+
+  if (hasAny) {
+    selectionBar.classList.add('active');
+    document.body.classList.add('has-selection');
+  } else {
+    selectionBar.classList.remove('active');
+    document.body.classList.remove('has-selection');
+  }
+}
+
+function initThemeSelection() {
+  document.querySelectorAll('.gallery-card__btn--select').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const card = btn.closest('.gallery-card');
+      const carousel = btn.closest('.carousel');
+      const category = carousel.dataset.category;
+      const themeName = btn.dataset.theme;
+
+      // If already selected, deselect
+      if (card.classList.contains('selected')) {
+        card.classList.remove('selected');
+        btn.textContent = 'Select';
+        selections[category] = null;
+      } else {
+        // Deselect any previously selected card in this category
+        carousel.querySelectorAll('.gallery-card.selected').forEach(prev => {
+          prev.classList.remove('selected');
+          prev.querySelector('.gallery-card__btn--select').textContent = 'Select';
+        });
+
+        // Select this card
+        card.classList.add('selected');
+        btn.textContent = 'Selected ✓';
+        selections[category] = themeName;
+      }
+
+      updateSelectionBar();
+    });
+  });
+}
+
+// ========================================
+// WhatsApp CTA — Build Dynamic Message
+// ========================================
+function initWhatsAppCta() {
+  if (!whatsappCta) return;
+
+  whatsappCta.addEventListener('click', () => {
+    const menu = selections.salonMenu || 'Not selected';
+    const card = selections.salonCard || 'Not selected';
+    const visiting = selections.visitingCard || 'Not selected';
+
+    const message =
+      `Hi, I want this setup:\n\n` +
+      `Salon Menu Theme: ${menu}\n` +
+      `Salon Card Theme: ${card}\n` +
+      `Visiting Card Theme: ${visiting}\n\n` +
+      `Please share details.`;
+
+    const encoded = encodeURIComponent(message);
+    const url = `https://wa.me/918219928236?text=${encoded}`;
+    window.open(url, '_blank', 'noopener');
+  });
+}
+
+// ========================================
+// Initialize Carousel & Selection on Load
+// ========================================
+window.addEventListener('load', () => {
+  // Small delay so it runs after preloader init
+  setTimeout(() => {
+    initCarousels();
+    initThemeSelection();
+    initWhatsAppCta();
+  }, 100);
+});
+
 // Refresh ScrollTrigger on resize
 window.addEventListener('resize', () => {
   ScrollTrigger.refresh();
