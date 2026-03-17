@@ -9,43 +9,33 @@
     <style>
         :root {
             /* Premium Gold Palette */
-            --gold-deep: #a78b2a;
+            --gold-deep: #b8960b;
             --gold-primary: #d4af37;
             --gold-light: #f1d592;
             --gold-pale: #fdf6e3;
-            --gold-glow: rgba(212, 175, 55, 0.35);
+            --gold-glow: rgba(212, 175, 55, 0.4);
             
-            /* Glass Colors */
-            --glass-white: rgba(255, 255, 255, 0.03);
-            --glass-white-hover: rgba(255, 255, 255, 0.06);
-            --glass-border: rgba(255, 255, 255, 0.08);
-            --glass-border-hover: rgba(255, 255, 255, 0.15);
-            --glass-shine: rgba(255, 255, 255, 0.1);
+            /* Background Tones */
+            --obsidian: #08080a;
+            --obsidian-light: #0f0f12;
+            --charcoal: #161619;
             
-            /* Background */
-            --bg-primary: #0c0a0f;
-            --bg-secondary: #12101a;
+            /* Glass Effects */
+            --glass-bg: rgba(255, 255, 255, 0.02);
+            --glass-hover: rgba(212, 175, 55, 0.04);
+            --glass-border: rgba(212, 175, 55, 0.12);
             
             /* Text */
-            --text-main: #f5f2ed;
-            --text-muted: #a8a3a0;
+            --text-main: #f0ebe3;
+            --text-muted: #9a9590;
             --text-gold: var(--gold-light);
             
             /* Gradients */
-            --gradient-gold: linear-gradient(135deg, #a78b2a 0%, #d4af37 25%, #f1d592 50%, #d4af37 75%, #a78b2a 100%);
-            --gradient-glass-border: linear-gradient(135deg, rgba(212, 175, 55, 0.3) 0%, rgba(255, 255, 255, 0.1) 50%, rgba(212, 175, 55, 0.3) 100%);
-            --gradient-ambient: radial-gradient(ellipse at 30% 20%, rgba(212, 175, 55, 0.08) 0%, transparent 50%);
-            
-            /* Shadows */
-            --shadow-glass: 0 8px 32px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.05);
-            --shadow-elevated: 0 20px 50px rgba(0, 0, 0, 0.5), 0 0 40px rgba(212, 175, 55, 0.1);
-            --shadow-glow: 0 0 40px rgba(212, 175, 55, 0.15);
+            --gradient-gold: linear-gradient(135deg, #b8960b 0%, #d4af37 25%, #f1d592 50%, #d4af37 75%, #b8960b 100%);
             
             /* Animation */
-            --ease-premium: cubic-bezier(0.16, 1, 0.3, 1);
+            --ease-luxe: cubic-bezier(0.16, 1, 0.3, 1);
             --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
-            --duration-fast: 0.3s;
-            --duration-normal: 0.5s;
         }
 
         * { 
@@ -55,114 +45,104 @@
             -webkit-tap-highlight-color: transparent; 
         }
 
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
             font-family: 'Inter', sans-serif;
-            background: var(--bg-primary);
+            background: var(--obsidian);
             color: var(--text-main);
             min-height: 100vh;
             line-height: 1.6;
             overflow-x: hidden;
-            position: relative;
-        }
-
-        /* Ambient Background Effects */
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: 
-                radial-gradient(ellipse 100% 80% at 20% 10%, rgba(212, 175, 55, 0.07) 0%, transparent 50%),
-                radial-gradient(ellipse 80% 60% at 80% 90%, rgba(167, 139, 42, 0.05) 0%, transparent 50%),
-                radial-gradient(ellipse 60% 40% at 50% 50%, rgba(212, 175, 55, 0.03) 0%, transparent 60%);
-            pointer-events: none;
-            z-index: 0;
-        }
-
-        /* Noise Texture Overlay */
-        body::after {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
-            opacity: 0.015;
-            pointer-events: none;
-            z-index: 1;
         }
 
         /* ═══════════════════════════════════════════
-           HEADER SECTION
+           HERO HEADER
         ═══════════════════════════════════════════ */
-        header { 
-            text-align: center; 
-            padding: 4rem 1.5rem 2.5rem;
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
             position: relative;
-            z-index: 10;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: 
+                radial-gradient(ellipse 80% 50% at 20% 20%, rgba(212, 175, 55, 0.08) 0%, transparent 50%),
+                radial-gradient(ellipse 60% 40% at 80% 80%, rgba(184, 150, 11, 0.06) 0%, transparent 50%),
+                radial-gradient(ellipse 100% 100% at 50% 50%, rgba(212, 175, 55, 0.03) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .hero-content {
+            text-align: center;
+            position: relative;
+            z-index: 2;
+            padding: 2rem;
         }
 
         .brand-crest {
-            width: 60px;
-            height: 60px;
-            margin: 0 auto 1.5rem;
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 2rem;
             position: relative;
             display: flex;
             align-items: center;
             justify-content: center;
         }
 
-        /* Glass Ring Around Crest */
         .brand-crest::before {
             content: '';
             position: absolute;
-            inset: 0;
-            background: linear-gradient(135deg, rgba(212, 175, 55, 0.2), rgba(255, 255, 255, 0.05));
+            inset: -10px;
+            border: 1px solid var(--gold-primary);
             border-radius: 50%;
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border: 1px solid rgba(212, 175, 55, 0.3);
-            animation: ringPulse 4s ease-in-out infinite;
+            opacity: 0.2;
+            animation: crestPulse 3s ease-in-out infinite;
         }
 
         .brand-crest::after {
             content: '';
             position: absolute;
-            inset: 4px;
-            background: rgba(12, 10, 15, 0.6);
+            inset: 0;
+            border: 1px solid var(--gold-primary);
             border-radius: 50%;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-        }
-
-        @keyframes ringPulse {
-            0%, 100% { transform: scale(1); box-shadow: 0 0 20px rgba(212, 175, 55, 0.1); }
-            50% { transform: scale(1.05); box-shadow: 0 0 30px rgba(212, 175, 55, 0.2); }
+            opacity: 0.4;
+            animation: crestPulse 3s ease-in-out infinite 0.5s;
         }
 
         .brand-crest svg {
-            width: 26px;
-            height: 26px;
+            width: 36px;
+            height: 36px;
             fill: var(--gold-primary);
-            position: relative;
-            z-index: 2;
-            filter: drop-shadow(0 0 10px rgba(212, 175, 55, 0.5));
+            opacity: 0.9;
+        }
+
+        @keyframes crestPulse {
+            0%, 100% { transform: scale(1); opacity: 0.2; }
+            50% { transform: scale(1.1); opacity: 0.5; }
         }
 
         .salon-name { 
             font-family: 'Playfair Display', serif; 
-            font-size: 2.6rem; 
+            font-size: clamp(2.5rem, 8vw, 5rem);
             font-weight: 600;
-            letter-spacing: -0.5px;
+            letter-spacing: -1px;
             background: var(--gradient-gold);
             background-size: 200% auto;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            margin-bottom: 0.5rem;
-            animation: textShimmer 6s linear infinite;
+            margin-bottom: 1rem;
+            animation: textShimmer 8s linear infinite;
         }
 
         @keyframes textShimmer {
@@ -172,922 +152,1152 @@
 
         .tagline { 
             font-family: 'Cinzel', serif; 
-            font-size: 0.7rem; 
+            font-size: clamp(0.65rem, 2vw, 0.8rem);
             color: var(--gold-light); 
-            letter-spacing: 5px; 
+            letter-spacing: 8px; 
             text-transform: uppercase; 
-            opacity: 0.8;
+            opacity: 0.7;
             font-weight: 500;
+            margin-bottom: 3rem;
         }
 
-        main { 
-            max-width: 580px; 
-            margin: 0 auto; 
-            padding: 1rem 14px 2rem;
-            position: relative;
-            z-index: 10;
-        }
-
-        /* ═══════════════════════════════════════════
-           GLASS CATEGORY CARDS
-        ═══════════════════════════════════════════ */
-        .category { 
-            position: relative;
-            margin-bottom: 12px; 
-            border-radius: 24px;
-            opacity: 0;
-            transform: translateY(30px);
-            animation: cardEntrance 0.7s var(--ease-premium) forwards;
-        }
-
-        .category:nth-child(1) { animation-delay: 0.1s; }
-        .category:nth-child(2) { animation-delay: 0.15s; }
-        .category:nth-child(3) { animation-delay: 0.2s; }
-        .category:nth-child(4) { animation-delay: 0.25s; }
-        .category:nth-child(5) { animation-delay: 0.3s; }
-        .category:nth-child(6) { animation-delay: 0.35s; }
-        .category:nth-child(7) { animation-delay: 0.4s; }
-        .category:nth-child(8) { animation-delay: 0.45s; }
-
-        @keyframes cardEntrance {
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* Gradient Border Wrapper */
-        .category::before {
-            content: '';
+        .scroll-indicator {
             position: absolute;
-            inset: 0;
-            border-radius: 24px;
-            padding: 1.5px;
-            background: linear-gradient(
-                135deg, 
-                rgba(212, 175, 55, 0.4) 0%, 
-                rgba(255, 255, 255, 0.1) 30%,
-                rgba(255, 255, 255, 0.05) 50%,
-                rgba(255, 255, 255, 0.1) 70%,
-                rgba(212, 175, 55, 0.4) 100%
-            );
-            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-            -webkit-mask-composite: xor;
-            mask-composite: exclude;
-            opacity: 0.5;
-            transition: opacity var(--duration-normal) var(--ease-premium);
-            pointer-events: none;
-            z-index: 3;
-        }
-
-        .category:hover::before,
-        .category.active::before {
-            opacity: 1;
-        }
-
-        /* Glass Card Inner */
-        .category-inner {
-            position: relative;
-            background: linear-gradient(
-                165deg,
-                rgba(255, 255, 255, 0.05) 0%,
-                rgba(255, 255, 255, 0.02) 50%,
-                rgba(255, 255, 255, 0.01) 100%
-            );
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border-radius: 24px;
-            overflow: hidden;
-            box-shadow: var(--shadow-glass);
-            transition: all var(--duration-normal) var(--ease-premium);
-        }
-
-        .category:hover .category-inner {
-            background: linear-gradient(
-                165deg,
-                rgba(255, 255, 255, 0.08) 0%,
-                rgba(255, 255, 255, 0.04) 50%,
-                rgba(255, 255, 255, 0.02) 100%
-            );
-            box-shadow: var(--shadow-elevated);
-            transform: translateY(-4px);
-        }
-
-        .category.active .category-inner {
-            box-shadow: var(--shadow-elevated), var(--shadow-glow);
-        }
-
-        /* Glass Shine Effect */
-        .category-inner::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 50%;
-            height: 100%;
-            background: linear-gradient(
-                90deg,
-                transparent,
-                rgba(255, 255, 255, 0.03),
-                transparent
-            );
-            transition: left 0.8s var(--ease-premium);
-            pointer-events: none;
-            z-index: 1;
-        }
-
-        .category:hover .category-inner::before {
-            left: 100%;
-        }
-
-        /* ═══════════════════════════════════════════
-           CATEGORY HEADER
-        ═══════════════════════════════════════════ */
-        .category-header {
-            position: relative;
-            height: 95px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            overflow: hidden;
-            z-index: 2;
-        }
-
-        /* Background Image with Blur Overlay */
-        .category-header::before {
-            content: '';
-            position: absolute;
-            top: 0; 
-            left: 0; 
-            width: 100%; 
-            height: 100%;
-            background-size: cover;
-            background-position: center;
-            z-index: 1;
-            transition: all 1s var(--ease-premium);
-            filter: brightness(0.3) saturate(0.7);
-        }
-
-        .cat-hair .category-header::before { background-image: url('images/haircut.webp'); }
-        .cat-treatments .category-header::before { background-image: url('images/hairtreat.webp'); }
-        .cat-mehndi .category-header::before { background-image: url('images/design.webp'); }
-        .cat-facial .category-header::before { background-image: url('images/skin.webp'); }
-        .cat-detan .category-header::before { background-image: url('images/detan.webp'); }
-        .cat-waxing .category-header::before { background-image: url('images/waxing.webp'); }
-        .cat-manicure .category-header::before { background-image: url('images/pedicure.webp'); }
-        .cat-threading .category-header::before { background-image: url('images/threading.webp'); }
-
-        .category:hover .category-header::before,
-        .category.active .category-header::before { 
-            transform: scale(1.08);
-            filter: brightness(0.35) saturate(0.9);
-        }
-
-        /* Glass Overlay */
-        .category-header::after {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(
-                to bottom,
-                rgba(12, 10, 15, 0.2) 0%,
-                rgba(12, 10, 15, 0.4) 50%,
-                rgba(12, 10, 15, 0.8) 100%
-            );
-            backdrop-filter: blur(1px);
-            -webkit-backdrop-filter: blur(1px);
-            z-index: 2;
-        }
-
-        .category-title {
-            position: relative;
-            z-index: 3;
-            color: #fff;
-            font-family: 'Cinzel', serif;
-            font-size: 0.9rem;
-            font-weight: 500;
-            letter-spacing: 4px;
-            text-transform: uppercase;
-            text-shadow: 0 2px 20px rgba(0, 0, 0, 0.5);
-            display: flex;
-            align-items: center;
-            gap: 14px;
-            transition: all var(--duration-normal) var(--ease-premium);
-        }
-
-        /* Decorative Lines */
-        .category-title::before,
-        .category-title::after {
-            content: '';
-            width: 0;
-            height: 1px;
-            background: var(--gradient-gold);
-            transition: width var(--duration-normal) var(--ease-premium);
-            box-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
-        }
-
-        .category:hover .category-title::before,
-        .category:hover .category-title::after,
-        .category.active .category-title::before,
-        .category.active .category-title::after {
-            width: 25px;
-        }
-
-        .category:hover .category-title {
-            letter-spacing: 6px;
-            text-shadow: 0 2px 25px rgba(212, 175, 55, 0.4);
-        }
-
-        /* Expand Icon */
-        .expand-icon {
-            position: absolute;
-            right: 18px;
-            top: 50%;
-            transform: translateY(-50%);
-            z-index: 4;
-            width: 32px;
-            height: 32px;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border: 1px solid rgba(212, 175, 55, 0.2);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all var(--duration-normal) var(--ease-premium);
-            opacity: 0;
-        }
-
-        .category-header:hover .expand-icon {
-            opacity: 1;
-        }
-
-        .expand-icon svg {
-            width: 14px;
-            height: 14px;
-            stroke: var(--gold-light);
-            stroke-width: 2;
-            fill: none;
-            transition: all var(--duration-normal) var(--ease-premium);
-        }
-
-        .category.active .expand-icon {
-            background: linear-gradient(135deg, rgba(212, 175, 55, 0.3), rgba(212, 175, 55, 0.1));
-            border-color: var(--gold-primary);
-            box-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
-        }
-
-        .category.active .expand-icon svg {
-            stroke: var(--gold-light);
-            transform: rotate(180deg);
-        }
-
-        /* ═══════════════════════════════════════════
-           CATEGORY CONTENT - GLASS REVEAL
-        ═══════════════════════════════════════════ */
-        .category-content {
-            max-height: 0;
-            overflow: hidden;
-            position: relative;
-            transition: max-height 0.6s var(--ease-premium);
-        }
-
-        /* Divider Line */
-        .category-content::before {
-            content: '';
-            position: absolute;
-            top: 0;
+            bottom: 40px;
             left: 50%;
             transform: translateX(-50%);
-            width: calc(100% - 50px);
-            height: 1px;
-            background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.4), transparent);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            animation: bounce 2s ease-in-out infinite;
+        }
+
+        .scroll-indicator span {
+            font-family: 'Cinzel', serif;
+            font-size: 0.6rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--text-muted);
             opacity: 0.6;
         }
 
-        .service-list { 
-            list-style: none; 
-            padding: 10px 14px 14px;
-            position: relative;
+        .scroll-indicator svg {
+            width: 20px;
+            height: 20px;
+            stroke: var(--gold-primary);
+            opacity: 0.5;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(10px); }
         }
 
         /* ═══════════════════════════════════════════
-           SERVICE ITEMS - GLASS INTERACTIVE
+           CATEGORY SECTIONS
         ═══════════════════════════════════════════ */
-        .service-item {
+        .category-section {
+            min-height: 100vh;
             position: relative;
             display: flex;
-            justify-content: space-between;
             align-items: center;
-            padding: 15px 18px;
-            margin: 5px 0;
-            border-radius: 14px;
-            background: transparent;
             overflow: hidden;
-            transform: translateY(10px);
-            opacity: 0;
-            transition: all 0.4s var(--ease-premium);
         }
 
-        /* Staggered Entrance Animation */
-        .category.active .service-item {
+        /* Background Image */
+        .category-bg {
+            position: absolute;
+            inset: 0;
+            background-size: cover;
+            background-position: center;
+            filter: brightness(0.3) saturate(0.7);
+            transform: scale(1.1);
+            transition: transform 8s var(--ease-luxe), filter 1s var(--ease-smooth);
+        }
+
+        .category-section.visible .category-bg {
+            transform: scale(1);
+            filter: brightness(0.25) saturate(0.9);
+        }
+
+        /* Gradient Overlay */
+        .category-overlay {
+            position: absolute;
+            inset: 0;
+            background: 
+                linear-gradient(to right, rgba(8, 8, 10, 0.95) 0%, rgba(8, 8, 10, 0.7) 50%, rgba(8, 8, 10, 0.4) 100%),
+                linear-gradient(to top, rgba(8, 8, 10, 0.8) 0%, transparent 30%),
+                linear-gradient(to bottom, rgba(8, 8, 10, 0.8) 0%, transparent 30%);
+        }
+
+        /* Decorative Elements */
+        .category-decoration {
+            position: absolute;
+            top: 50%;
+            right: 10%;
+            transform: translateY(-50%);
+            width: 300px;
+            height: 300px;
+            border: 1px solid rgba(212, 175, 55, 0.1);
+            border-radius: 50%;
+            opacity: 0.3;
+        }
+
+        .category-decoration::before {
+            content: '';
+            position: absolute;
+            inset: 30px;
+            border: 1px solid rgba(212, 175, 55, 0.15);
+            border-radius: 50%;
+        }
+
+        /* Content Container */
+        .category-content {
+            position: relative;
+            z-index: 3;
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        /* Category Header */
+        .category-header {
+            margin-bottom: 4rem;
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 1s var(--ease-luxe);
+        }
+
+        .category-section.visible .category-header {
             opacity: 1;
             transform: translateY(0);
         }
 
-        .category.active .service-item:nth-child(1) { transition-delay: 0.08s; }
-        .category.active .service-item:nth-child(2) { transition-delay: 0.16s; }
-        .category.active .service-item:nth-child(3) { transition-delay: 0.24s; }
-        .category.active .service-item:nth-child(4) { transition-delay: 0.32s; }
-        .category.active .service-item:nth-child(5) { transition-delay: 0.40s; }
-
-        /* Glass Hover Background */
-        .service-item::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(
-                135deg,
-                rgba(212, 175, 55, 0.08) 0%,
-                rgba(255, 255, 255, 0.03) 50%,
-                transparent 100%
-            );
-            backdrop-filter: blur(5px);
-            -webkit-backdrop-filter: blur(5px);
-            border-radius: 14px;
-            opacity: 0;
-            transition: opacity var(--duration-normal) var(--ease-premium);
-        }
-
-        .service-item:hover::before {
-            opacity: 1;
-        }
-
-        /* Left Accent Glow */
-        .service-item::after {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 0;
-            height: 50%;
-            background: linear-gradient(180deg, var(--gold-primary), var(--gold-light));
-            border-radius: 0 6px 6px 0;
-            box-shadow: 0 0 15px var(--gold-glow);
-            transition: width var(--duration-fast) var(--ease-premium);
-        }
-
-        .service-item:hover::after {
-            width: 3px;
-        }
-
-        .service-name { 
-            position: relative;
-            z-index: 1;
-            font-weight: 400; 
-            font-size: 0.92rem; 
-            display: flex; 
-            align-items: center; 
-            gap: 10px;
-            color: var(--text-main);
-            transition: all var(--duration-fast) var(--ease-smooth);
-        }
-
-        .service-item:hover .service-name {
-            color: var(--gold-pale);
-            transform: translateX(6px);
-        }
-
-        .service-price { 
-            position: relative;
-            z-index: 1;
-            color: var(--gold-light); 
-            font-weight: 600; 
-            font-size: 0.95rem;
-            font-family: 'Inter', sans-serif;
-            letter-spacing: 0.5px;
-            transition: all var(--duration-fast) var(--ease-smooth);
-        }
-
-        .service-item:hover .service-price {
-            transform: scale(1.08);
-            text-shadow: 0 0 25px rgba(212, 175, 55, 0.5);
-        }
-
-        /* Badge */
-        .badge-popular {
-            font-size: 0.55rem;
-            background: var(--gradient-gold);
-            color: var(--bg-primary);
-            padding: 3px 12px;
-            border-radius: 50px;
-            text-transform: uppercase;
+        .category-number {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(4rem, 12vw, 8rem);
             font-weight: 700;
-            letter-spacing: 1px;
-            box-shadow: 0 0 15px rgba(212, 175, 55, 0.4);
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.15) 0%, rgba(212, 175, 55, 0.05) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1;
+            margin-bottom: -1rem;
+        }
+
+        .category-title {
+            font-family: 'Cinzel', serif;
+            font-size: clamp(1.5rem, 5vw, 2.5rem);
+            font-weight: 500;
+            letter-spacing: 6px;
+            text-transform: uppercase;
+            color: var(--text-main);
+            position: relative;
+            display: inline-block;
+        }
+
+        .category-title::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 0;
+            width: 60px;
+            height: 2px;
+            background: var(--gradient-gold);
+        }
+
+        .category-subtitle {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            letter-spacing: 2px;
+            margin-top: 1.5rem;
+            max-width: 400px;
         }
 
         /* ═══════════════════════════════════════════
-           RATE US BUTTON - GLASS STYLE
+           SERVICE CARDS - LUXURY SPACED LAYOUT
         ═══════════════════════════════════════════ */
-        .rate-us-container {
-            max-width: 580px;
-            margin: 2rem auto;
-            padding: 0 14px;
-            position: relative;
-            z-index: 10;
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+            max-width: 900px;
         }
 
-        .rate-us-btn {
+        .service-card {
+            position: relative;
+            padding: 2rem 2.5rem;
+            background: linear-gradient(135deg, rgba(20, 20, 24, 0.8) 0%, rgba(12, 12, 15, 0.9) 100%);
+            border-radius: 16px;
+            border: 1px solid rgba(212, 175, 55, 0.1);
+            backdrop-filter: blur(10px);
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s var(--ease-luxe);
+            overflow: hidden;
+        }
+
+        .category-section.visible .service-card {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .service-card:nth-child(1) { transition-delay: 0.2s; }
+        .service-card:nth-child(2) { transition-delay: 0.35s; }
+        .service-card:nth-child(3) { transition-delay: 0.5s; }
+        .service-card:nth-child(4) { transition-delay: 0.65s; }
+        .service-card:nth-child(5) { transition-delay: 0.8s; }
+
+        /* Card Hover Effects */
+        .service-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.08) 0%, transparent 60%);
+            opacity: 0;
+            transition: opacity 0.5s var(--ease-smooth);
+        }
+
+        .service-card:hover::before {
+            opacity: 1;
+        }
+
+        .service-card::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 3px;
+            height: 0;
+            background: var(--gradient-gold);
+            transition: height 0.5s var(--ease-luxe);
+        }
+
+        .service-card:hover::after {
+            height: 100%;
+        }
+
+        .service-card:hover {
+            border-color: rgba(212, 175, 55, 0.3);
+            transform: translateX(8px);
+        }
+
+        /* Premium Card Style */
+        .service-card.premium {
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.1) 0%, rgba(20, 20, 24, 0.9) 100%);
+            border-color: rgba(212, 175, 55, 0.25);
+        }
+
+        .service-card.premium::before {
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.15) 0%, transparent 60%);
+            opacity: 0.3;
+        }
+
+        /* Service Content */
+        .service-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.15rem;
+            font-weight: 500;
+            color: var(--text-main);
+            margin-bottom: 0.5rem;
+            position: relative;
+            z-index: 1;
+            transition: color 0.3s var(--ease-smooth);
+        }
+
+        .service-card:hover .service-name {
+            color: var(--gold-pale);
+        }
+
+        .service-description {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            letter-spacing: 0.5px;
+            margin-bottom: 1.25rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .service-price-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: relative;
+            z-index: 1;
+        }
+
+        .service-price {
+            font-family: 'Inter', sans-serif;
+            font-size: 1.4rem;
+            font-weight: 600;
+            background: var(--gradient-gold);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .service-duration {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            letter-spacing: 1px;
+        }
+
+        /* Badges */
+        .badge {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            font-size: 0.55rem;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            padding: 6px 12px;
+            border-radius: 50px;
+            z-index: 2;
+        }
+
+        .badge-trending {
+            background: var(--gradient-gold);
+            color: var(--obsidian);
+        }
+
+        .badge-premium {
+            background: transparent;
+            border: 1px solid var(--gold-primary);
+            color: var(--gold-light);
+        }
+
+        .badge-top-pick {
+            background: rgba(212, 175, 55, 0.15);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            color: var(--gold-light);
+        }
+
+        /* ═══════════════════════════════════════════
+           SECTION DIVIDERS
+        ═══════════════════════════════════════════ */
+        .section-divider {
+            height: 1px;
+            background: linear-gradient(90deg, transparent 0%, var(--gold-primary) 50%, transparent 100%);
+            opacity: 0.2;
+            margin: 0;
+        }
+
+        /* ═══════════════════════════════════════════
+           RATE US SECTION
+        ═══════════════════════════════════════════ */
+        .rate-section {
+            min-height: 60vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            padding: 4rem 2rem;
+            background: linear-gradient(to bottom, var(--obsidian) 0%, var(--charcoal) 50%, var(--obsidian) 100%);
+        }
+
+        .rate-section::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(ellipse 60% 60% at 50% 50%, rgba(212, 175, 55, 0.05) 0%, transparent 70%);
+        }
+
+        .rate-content {
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .rate-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.5rem, 4vw, 2rem);
+            margin-bottom: 1rem;
+            color: var(--text-main);
+        }
+
+        .rate-subtitle {
+            font-family: 'Cinzel', serif;
+            font-size: 0.7rem;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            margin-bottom: 2.5rem;
+        }
+
+        .rate-stars {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 2.5rem;
+        }
+
+        .rate-stars svg {
+            width: 32px;
+            height: 32px;
+            fill: var(--gold-primary);
+            filter: drop-shadow(0 0 10px rgba(212, 175, 55, 0.4));
+            cursor: pointer;
+            transition: transform 0.3s var(--ease-luxe);
+        }
+
+        .rate-stars svg:hover {
+            transform: scale(1.2) rotate(5deg);
+        }
+
+        .rate-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            padding: 18px 40px;
+            background: transparent;
+            border: 2px solid var(--gold-primary);
+            border-radius: 60px;
+            text-decoration: none;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.5s var(--ease-luxe);
+        }
+
+        .rate-btn::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: var(--gradient-gold);
+            opacity: 0;
+            transition: opacity 0.5s var(--ease-smooth);
+        }
+
+        .rate-btn:hover::before {
+            opacity: 1;
+        }
+
+        .rate-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 20px 40px rgba(212, 175, 55, 0.25);
+        }
+
+        .rate-btn span {
+            font-family: 'Cinzel', serif;
+            font-size: 0.85rem;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: var(--gold-light);
+            position: relative;
+            z-index: 1;
+            transition: color 0.3s var(--ease-smooth);
+        }
+
+        .rate-btn:hover span {
+            color: var(--obsidian);
+        }
+
+        .rate-btn svg {
+            width: 20px;
+            height: 20px;
+            fill: var(--gold-light);
+            position: relative;
+            z-index: 1;
+            transition: fill 0.3s var(--ease-smooth);
+        }
+
+        .rate-btn:hover svg {
+            fill: var(--obsidian);
+        }
+
+        /* ═══════════════════════════════════════════
+           SOCIAL MEDIA SECTION
+        ═══════════════════════════════════════════ */
+        .social-section {
+            padding: 2rem;
+            text-align: center;
+            background: var(--obsidian);
+        }
+
+        .social-title {
+            font-family: 'Cinzel', serif;
+            font-size: 0.65rem;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            margin-bottom: 1.5rem;
+            opacity: 0.6;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .social-link {
+            width: 50px;
+            height: 50px;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 14px;
-            width: 100%;
-            padding: 20px 24px;
-            background: linear-gradient(
-                165deg,
-                rgba(212, 175, 55, 0.1) 0%,
-                rgba(255, 255, 255, 0.05) 50%,
-                rgba(212, 175, 55, 0.05) 100%
-            );
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1.5px solid rgba(212, 175, 55, 0.3);
-            border-radius: 20px;
-            cursor: pointer;
+            border-radius: 50%;
+            background: rgba(212, 175, 55, 0.05);
+            border: 1px solid rgba(212, 175, 55, 0.2);
             text-decoration: none;
-            transition: all var(--duration-normal) var(--ease-premium);
+            transition: all 0.4s var(--ease-luxe);
             position: relative;
             overflow: hidden;
         }
 
-        /* Glass Shine */
-        .rate-us-btn::before {
+        .social-link::before {
             content: '';
             position: absolute;
-            top: 0;
-            left: -100%;
-            width: 60%;
-            height: 100%;
-            background: linear-gradient(
-                90deg,
-                transparent,
-                rgba(255, 255, 255, 0.1),
-                transparent
-            );
-            transition: left 0.6s var(--ease-premium);
+            inset: 0;
+            background: var(--gradient-gold);
+            opacity: 0;
+            transition: opacity 0.4s var(--ease-smooth);
         }
 
-        .rate-us-btn:hover::before {
-            left: 120%;
-        }
-
-        .rate-us-btn:hover {
-            transform: translateY(-4px);
+        .social-link:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.2);
             border-color: var(--gold-primary);
-            box-shadow: 
-                0 15px 40px rgba(0, 0, 0, 0.4),
-                0 0 30px rgba(212, 175, 55, 0.2);
-            background: linear-gradient(
-                165deg,
-                rgba(212, 175, 55, 0.2) 0%,
-                rgba(255, 255, 255, 0.08) 50%,
-                rgba(212, 175, 55, 0.1) 100%
-            );
         }
 
-        .rate-us-btn svg {
+        .social-link:hover::before {
+            opacity: 1;
+        }
+
+        .social-link svg {
             width: 22px;
             height: 22px;
             fill: var(--gold-light);
-            transition: all var(--duration-normal) var(--ease-premium);
-            filter: drop-shadow(0 0 8px rgba(212, 175, 55, 0.5));
+            position: relative;
+            z-index: 1;
+            transition: fill 0.3s var(--ease-smooth);
         }
 
-        .rate-us-btn:hover svg {
-            transform: scale(1.15) rotate(5deg);
-        }
-
-        .rate-us-btn span {
-            font-family: 'Cinzel', serif;
-            font-size: 0.85rem;
-            font-weight: 500;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-            color: var(--gold-light);
-            text-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
-            transition: all var(--duration-normal) var(--ease-premium);
-        }
-
-        .rate-us-btn:hover span {
-            letter-spacing: 4px;
-        }
-
-        .rate-us-btn .stars {
-            display: flex;
-            gap: 4px;
-        }
-
-        .rate-us-btn .stars svg {
-            width: 14px;
-            height: 14px;
+        .social-link:hover svg {
+            fill: var(--obsidian);
         }
 
         /* ═══════════════════════════════════════════
            FOOTER
         ═══════════════════════════════════════════ */
-        footer { 
-            text-align: center; 
-            padding: 2rem 2rem 4rem; 
-            position: relative;
-            z-index: 10;
+        footer {
+            text-align: center;
+            padding: 3rem 2rem;
+            background: var(--obsidian);
+            border-top: 1px solid rgba(212, 175, 55, 0.1);
         }
 
-        footer::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 120px;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.4), transparent);
+        .footer-crest {
+            width: 40px;
+            height: 40px;
+            margin: 0 auto 1.5rem;
+        }
+
+        .footer-crest svg {
+            width: 100%;
+            height: 100%;
+            fill: var(--gold-primary);
+            opacity: 0.5;
         }
 
         footer p {
-            font-size: 0.7rem; 
+            font-size: 0.7rem;
             color: var(--text-muted);
             letter-spacing: 1px;
-            margin: 6px 0;
-            opacity: 0.5;
+            margin: 8px 0;
+            opacity: 0.6;
         }
 
         footer p:first-of-type {
             font-family: 'Cinzel', serif;
-            letter-spacing: 2px;
-            opacity: 0.4;
+            letter-spacing: 3px;
+            opacity: 0.5;
         }
 
         /* ═══════════════════════════════════════════
-           RESPONSIVE
+           RESPONSIVE DESIGN
         ═══════════════════════════════════════════ */
+        @media (max-width: 768px) {
+            .category-content {
+                padding: 3rem 1.5rem;
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+                gap: 16px;
+            }
+
+            .service-card {
+                padding: 1.5rem 1.75rem;
+            }
+
+            .category-decoration {
+                display: none;
+            }
+
+            .category-overlay {
+                background: 
+                    linear-gradient(to right, rgba(8, 8, 10, 0.98) 0%, rgba(8, 8, 10, 0.85) 100%),
+                    linear-gradient(to top, rgba(8, 8, 10, 0.9) 0%, transparent 40%),
+                    linear-gradient(to bottom, rgba(8, 8, 10, 0.9) 0%, transparent 40%);
+            }
+
+            .social-links {
+                gap: 16px;
+            }
+
+            .social-link {
+                width: 45px;
+                height: 45px;
+            }
+        }
+
         @media (max-width: 480px) {
-            .salon-name { 
-                font-size: 2.1rem; 
+            .hero {
+                min-height: 90vh;
             }
-            
-            .tagline {
-                font-size: 0.6rem;
-                letter-spacing: 4px;
+
+            .brand-crest {
+                width: 60px;
+                height: 60px;
             }
-            
-            .category-header {
-                height: 85px;
+
+            .category-number {
+                font-size: 3rem;
             }
-            
-            .category-title {
-                font-size: 0.8rem;
-                letter-spacing: 3px;
-            }
-            
-            .service-item {
-                padding: 13px 15px;
-            }
-            
-            .service-name {
-                font-size: 0.88rem;
-            }
-            
-            .rate-us-btn span {
-                font-size: 0.75rem;
-                letter-spacing: 2px;
+
+            .service-price {
+                font-size: 1.2rem;
             }
         }
 
-        /* Selection State */
-        .service-item.selected {
-            background: linear-gradient(
-                135deg,
-                rgba(212, 175, 55, 0.12) 0%,
-                rgba(212, 175, 55, 0.05) 100%
-            );
-        }
-
-        .service-item.selected::after {
-            width: 3px;
+        /* Progress Indicator */
+        .scroll-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 2px;
+            background: var(--gradient-gold);
+            z-index: 1000;
+            transform-origin: left;
+            transform: scaleX(0);
         }
     </style>
 </head>
 <body>
 
-    <header>
-        <div class="brand-crest">
-            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
+    <!-- Scroll Progress -->
+    <div class="scroll-progress"></div>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="brand-crest">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
+                </svg>
+            </div>
+            <h1 class="salon-name">Divine Beauty</h1>
+            <p class="tagline">The Art of Luxury Grooming</p>
+        </div>
+        <div class="scroll-indicator">
+            <span>Scroll to Explore</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="7 13 12 18 17 13"></polyline>
+                <polyline points="7 6 12 11 17 6"></polyline>
             </svg>
         </div>
-        <h1 class="salon-name">Divine Beauty</h1>
-        <p class="tagline">The Art of Luxury Grooming</p>
-    </header>
+    </section>
 
+    <!-- Category Sections -->
     <main>
-        <section class="category cat-hair">
-            <div class="category-inner">
+        <!-- Hair & Styling -->
+        <section class="category-section" data-category="hair">
+            <div class="category-bg" style="background-image: url('images/haircut.webp');"></div>
+            <div class="category-overlay"></div>
+            <div class="category-decoration"></div>
+            
+            <div class="category-content">
                 <div class="category-header">
+                    <span class="category-number">01</span>
                     <h2 class="category-title">Hair & Styling</h2>
-                    <div class="expand-icon">
-                        <svg viewBox="0 0 24 24">
-                            <polyline points="6 9 12 15 18 9"></polyline>
-                        </svg>
-                    </div>
+                    <p class="category-subtitle">Precision cuts and expert styling tailored to your unique personality</p>
                 </div>
-                <div class="category-content">
-                    <ul class="service-list">
-                        <li class="service-item">
-                            <span class="service-name">'U' Shape Hair Cut</span>
+
+                <div class="services-grid">
+                    <div class="service-card">
+                        <span class="service-name">'U' Shape Hair Cut</span>
+                        <p class="service-description">Classic layered cut with elegant U-shape finish</p>
+                        <div class="service-price-row">
                             <span class="service-price">₹100</span>
-                        </li>
-                        <li class="service-item">
-                            <span class="service-name">Straight Hair Cut</span>
+                            <span class="service-duration">30 min</span>
+                        </div>
+                    </div>
+
+                    <div class="service-card">
+                        <span class="service-name">Straight Hair Cut</span>
+                        <p class="service-description">Clean and precise straight-across styling</p>
+                        <div class="service-price-row">
                             <span class="service-price">₹100</span>
-                        </li>
-                        <li class="service-item">
-                            <span class="service-name">Step Hair Cut <span class="badge-popular">Trending</span></span>
+                            <span class="service-duration">30 min</span>
+                        </div>
+                    </div>
+
+                    <div class="service-card premium">
+                        <span class="badge badge-trending">Trending</span>
+                        <span class="service-name">Step Hair Cut</span>
+                        <p class="service-description">Modern stepped layers for volume and movement</p>
+                        <div class="service-price-row">
                             <span class="service-price">₹300</span>
-                        </li>
-                        <li class="service-item">
-                            <span class="service-name">Hair Wash (L'Oréal)</span>
+                            <span class="service-duration">45 min</span>
+                        </div>
+                    </div>
+
+                    <div class="service-card">
+                        <span class="service-name">Hair Wash</span>
+                        <p class="service-description">Professional cleanse with L'Oréal products</p>
+                        <div class="service-price-row">
                             <span class="service-price">₹100</span>
-                        </li>
-                    </ul>
+                            <span class="service-duration">15 min</span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <section class="category cat-treatments">
-            <div class="category-inner">
+        <div class="section-divider"></div>
+
+        <!-- Treatments & Color -->
+        <section class="category-section" data-category="treatments">
+            <div class="category-bg" style="background-image: url('images/hairtreat.webp');"></div>
+            <div class="category-overlay"></div>
+            <div class="category-decoration"></div>
+            
+            <div class="category-content">
                 <div class="category-header">
+                    <span class="category-number">02</span>
                     <h2 class="category-title">Treatments & Color</h2>
-                    <div class="expand-icon">
-                        <svg viewBox="0 0 24 24">
-                            <polyline points="6 9 12 15 18 9"></polyline>
-                        </svg>
-                    </div>
+                    <p class="category-subtitle">Transformative hair treatments using premium products</p>
                 </div>
-                <div class="category-content">
-                    <ul class="service-list">
-                        <li class="service-item">
-                            <span class="service-name">Perm. Straightening (L'Oréal)</span>
+
+                <div class="services-grid">
+                    <div class="service-card premium">
+                        <span class="badge badge-premium">Premium</span>
+                        <span class="service-name">Permanent Straightening</span>
+                        <p class="service-description">L'Oréal professional permanent straightening treatment</p>
+                        <div class="service-price-row">
                             <span class="service-price">₹4,000</span>
-                        </li>
-                        <li class="service-item">
-                            <span class="service-name">Hair Smoothing</span>
+                            <span class="service-duration">3-4 hrs</span>
+                        </div>
+                    </div>
+
+                    <div class="service-card premium">
+                        <span class="badge badge-premium">Premium</span>
+                        <span class="service-name">Hair Smoothing</span>
+                        <p class="service-description">Professional keratin smoothing treatment</p>
+                        <div class="service-price-row">
                             <span class="service-price">₹3,500</span>
-                        </li>
-                        <li class="service-item">
-                            <span class="service-name">Hair Spa (L'Oréal)</span>
+                            <span class="service-duration">2-3 hrs</span>
+                        </div>
+                    </div>
+
+                    <div class="service-card">
+                        <span class="service-name">Hair Spa</span>
+                        <p class="service-description">Deep conditioning spa with L'Oréal products</p>
+                        <div class="service-price-row">
                             <span class="service-price">₹800</span>
-                        </li>
-                    </ul>
+                            <span class="service-duration">45 min</span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <section class="category cat-mehndi">
-            <div class="category-inner">
+        <div class="section-divider"></div>
+
+        <!-- Mehndi Art -->
+        <section class="category-section" data-category="mehndi">
+            <div class="category-bg" style="background-image: url('images/design.webp');"></div>
+            <div class="category-overlay"></div>
+            <div class="category-decoration"></div>
+            
+            <div class="category-content">
                 <div class="category-header">
+                    <span class="category-number">03</span>
                     <h2 class="category-title">Mehndi Art</h2>
-                    <div class="expand-icon">
-                        <svg viewBox="0 0 24 24">
-                            <polyline points="6 9 12 15 18 9"></polyline>
-                        </svg>
-                    </div>
+                    <p class="category-subtitle">Intricate traditional and contemporary henna designs</p>
                 </div>
-                <div class="category-content">
-                    <ul class="service-list">
-                        <li class="service-item">
-                            <span class="service-name">Mehndi (Shahnaz)</span>
+
+                <div class="services-grid">
+                    <div class="service-card">
+                        <span class="service-name">Mehndi (Shahnaz)</span>
+                        <p class="service-description">Premium natural henna for rich, long-lasting color</p>
+                        <div class="service-price-row">
                             <span class="service-price">₹300</span>
-                        </li>
-                        <li class="service-item">
-                            <span class="service-name">Mehndi (Nupur)</span>
+                            <span class="service-duration">Per hand</span>
+                        </div>
+                    </div>
+
+                    <div class="service-card">
+                        <span class="service-name">Mehndi (Nupur)</span>
+                        <p class="service-description">Quality henna for beautiful traditional designs</p>
+                        <div class="service-price-row">
                             <span class="service-price">₹250</span>
-                        </li>
-                    </ul>
+                            <span class="service-duration">Per hand</span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <section class="category cat-facial">
-            <div class="category-inner">
+        <div class="section-divider"></div>
+
+        <!-- Facial & Skin -->
+        <section class="category-section" data-category="facial">
+            <div class="category-bg" style="background-image: url('images/skin.webp');"></div>
+            <div class="category-overlay"></div>
+            <div class="category-decoration"></div>
+            
+            <div class="category-content">
                 <div class="category-header">
+                    <span class="category-number">04</span>
                     <h2 class="category-title">Facial & Skin</h2>
-                    <div class="expand-icon">
-                        <svg viewBox="0 0 24 24">
-                            <polyline points="6 9 12 15 18 9"></polyline>
-                        </svg>
-                    </div>
+                    <p class="category-subtitle">Rejuvenating treatments for radiant, healthy skin</p>
                 </div>
-                <div class="category-content">
-                    <ul class="service-list">
-                        <li class="service-item">
-                            <span class="service-name">Facial (Shahnaz Power) <span class="badge-popular">Top Pick</span></span>
+
+                <div class="services-grid">
+                    <div class="service-card premium">
+                        <span class="badge badge-top-pick">Top Pick</span>
+                        <span class="service-name">Shahnaz Power Facial</span>
+                        <p class="service-description">Luxury herbal facial for deep rejuvenation</p>
+                        <div class="service-price-row">
                             <span class="service-price">₹800</span>
-                        </li>
-                        <li class="service-item">
-                            <span class="service-name">Fruit Facial (VLCC)</span>
+                            <span class="service-duration">60 min</span>
+                        </div>
+                    </div>
+
+                    <div class="service-card">
+                        <span class="service-name">Fruit Facial</span>
+                        <p class="service-description">VLCC natural fruit extract facial treatment</p>
+                        <div class="service-price-row">
                             <span class="service-price">₹600</span>
-                        </li>
-                        <li class="service-item">
-                            <span class="service-name">Facial (Cheryl's)</span>
+                            <span class="service-duration">45 min</span>
+                        </div>
+                    </div>
+
+                    <div class="service-card">
+                        <span class="service-name">Cheryl's Facial</span>
+                        <p class="service-description">Professional skincare by Cheryl's</p>
+                        <div class="service-price-row">
                             <span class="service-price">₹600</span>
-                        </li>
-                    </ul>
+                            <span class="service-duration">45 min</span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <section class="category cat-detan">
-            <div class="category-inner">
+        <div class="section-divider"></div>
+
+        <!-- De-Tan Care -->
+        <section class="category-section" data-category="detan">
+            <div class="category-bg" style="background-image: url('images/detan.webp');"></div>
+            <div class="category-overlay"></div>
+            <div class="category-decoration"></div>
+            
+            <div class="category-content">
                 <div class="category-header">
+                    <span class="category-number">05</span>
                     <h2 class="category-title">De-Tan Care</h2>
-                    <div class="expand-icon">
-                        <svg viewBox="0 0 24 24">
-                            <polyline points="6 9 12 15 18 9"></polyline>
-                        </svg>
-                    </div>
+                    <p class="category-subtitle">Restore your natural skin tone with expert care</p>
                 </div>
-                <div class="category-content">
-                    <ul class="service-list">
-                        <li class="service-item">
-                            <span class="service-name">De-Tan (Only Face)</span>
+
+                <div class="services-grid">
+                    <div class="service-card">
+                        <span class="service-name">De-Tan (Face)</span>
+                        <p class="service-description">Targeted tan removal for face</p>
+                        <div class="service-price-row">
                             <span class="service-price">₹150</span>
-                        </li>
-                        <li class="service-item">
-                            <span class="service-name">De-Tan (Body)</span>
+                            <span class="service-duration">20 min</span>
+                        </div>
+                    </div>
+
+                    <div class="service-card">
+                        <span class="service-name">De-Tan (Body)</span>
+                        <p class="service-description">Full body tan removal treatment</p>
+                        <div class="service-price-row">
                             <span class="service-price">₹650</span>
-                        </li>
-                    </ul>
+                            <span class="service-duration">60 min</span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <section class="category cat-waxing">
-            <div class="category-inner">
+        <div class="section-divider"></div>
+
+        <!-- Waxing -->
+        <section class="category-section" data-category="waxing">
+            <div class="category-bg" style="background-image: url('images/waxing.webp');"></div>
+            <div class="category-overlay"></div>
+            <div class="category-decoration"></div>
+            
+            <div class="category-content">
                 <div class="category-header">
+                    <span class="category-number">06</span>
                     <h2 class="category-title">Waxing</h2>
-                    <div class="expand-icon">
-                        <svg viewBox="0 0 24 24">
-                            <polyline points="6 9 12 15 18 9"></polyline>
-                        </svg>
-                    </div>
+                    <p class="category-subtitle">Smooth, flawless skin with gentle waxing techniques</p>
                 </div>
-                <div class="category-content">
-                    <ul class="service-list">
-                        <li class="service-item">
-                            <span class="service-name">Full Hand</span>
+
+                <div class="services-grid">
+                    <div class="service-card">
+                        <span class="service-name">Full Hand</span>
+                        <p class="service-description">Complete arm waxing for smooth skin</p>
+                        <div class="service-price-row">
                             <span class="service-price">₹250</span>
-                        </li>
-                        <li class="service-item">
-                            <span class="service-name">Full Leg Waxing</span>
+                            <span class="service-duration">25 min</span>
+                        </div>
+                    </div>
+
+                    <div class="service-card">
+                        <span class="service-name">Full Leg</span>
+                        <p class="service-description">Complete leg waxing treatment</p>
+                        <div class="service-price-row">
                             <span class="service-price">₹450</span>
-                        </li>
-                        <li class="service-item">
-                            <span class="service-name">Face Waxing</span>
+                            <span class="service-duration">35 min</span>
+                        </div>
+                    </div>
+
+                    <div class="service-card">
+                        <span class="service-name">Face Waxing</span>
+                        <p class="service-description">Precise facial hair removal</p>
+                        <div class="service-price-row">
                             <span class="service-price">₹50</span>
-                        </li>
-                    </ul>
+                            <span class="service-duration">10 min</span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <section class="category cat-manicure">
-            <div class="category-inner">
+        <div class="section-divider"></div>
+
+        <!-- Hands & Feet -->
+        <section class="category-section" data-category="manicure">
+            <div class="category-bg" style="background-image: url('images/pedicure.webp');"></div>
+            <div class="category-overlay"></div>
+            <div class="category-decoration"></div>
+            
+            <div class="category-content">
                 <div class="category-header">
+                    <span class="category-number">07</span>
                     <h2 class="category-title">Hands & Feet</h2>
-                    <div class="expand-icon">
-                        <svg viewBox="0 0 24 24">
-                            <polyline points="6 9 12 15 18 9"></polyline>
-                        </svg>
-                    </div>
+                    <p class="category-subtitle">Pampering treatments for beautiful hands and feet</p>
                 </div>
-                <div class="category-content">
-                    <ul class="service-list">
-                        <li class="service-item">
-                            <span class="service-name">Manicure (VLCC)</span>
+
+                <div class="services-grid">
+                    <div class="service-card">
+                        <span class="service-name">Manicure</span>
+                        <p class="service-description">VLCC professional hand care treatment</p>
+                        <div class="service-price-row">
                             <span class="service-price">₹350</span>
-                        </li>
-                        <li class="service-item">
-                            <span class="service-name">Pedicure (VLCC)</span>
+                            <span class="service-duration">30 min</span>
+                        </div>
+                    </div>
+
+                    <div class="service-card">
+                        <span class="service-name">Pedicure</span>
+                        <p class="service-description">VLCC relaxing foot care experience</p>
+                        <div class="service-price-row">
                             <span class="service-price">₹450</span>
-                        </li>
-                    </ul>
+                            <span class="service-duration">45 min</span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <section class="category cat-threading">
-            <div class="category-inner">
+        <div class="section-divider"></div>
+
+        <!-- Threading & Massage -->
+        <section class="category-section" data-category="threading">
+            <div class="category-bg" style="background-image: url('images/threading.webp');"></div>
+            <div class="category-overlay"></div>
+            <div class="category-decoration"></div>
+            
+            <div class="category-content">
                 <div class="category-header">
+                    <span class="category-number">08</span>
                     <h2 class="category-title">Threading & Massage</h2>
-                    <div class="expand-icon">
-                        <svg viewBox="0 0 24 24">
-                            <polyline points="6 9 12 15 18 9"></polyline>
-                        </svg>
-                    </div>
+                    <p class="category-subtitle">Precision grooming and therapeutic relaxation</p>
                 </div>
-                <div class="category-content">
-                    <ul class="service-list">
-                        <li class="service-item">
-                            <span class="service-name">Eyebrows</span>
+
+                <div class="services-grid">
+                    <div class="service-card">
+                        <span class="service-name">Eyebrows</span>
+                        <p class="service-description">Expert brow shaping with threading</p>
+                        <div class="service-price-row">
                             <span class="service-price">₹50</span>
-                        </li>
-                        <li class="service-item">
-                            <span class="service-name">Upper Lips</span>
+                            <span class="service-duration">10 min</span>
+                        </div>
+                    </div>
+
+                    <div class="service-card">
+                        <span class="service-name">Upper Lips</span>
+                        <p class="service-description">Quick and precise upper lip threading</p>
+                        <div class="service-price-row">
                             <span class="service-price">₹20</span>
-                        </li>
-                        <li class="service-item">
-                            <span class="service-name">Body Massage (60 Min) <span class="badge-popular">Relax</span></span>
+                            <span class="service-duration">5 min</span>
+                        </div>
+                    </div>
+
+                    <div class="service-card premium">
+                        <span class="badge badge-top-pick">Relax</span>
+                        <span class="service-name">Body Massage</span>
+                        <p class="service-description">Full body therapeutic massage session</p>
+                        <div class="service-price-row">
                             <span class="service-price">₹1,000</span>
-                        </li>
-                    </ul>
+                            <span class="service-duration">60 min</span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
     </main>
 
-    <!-- Rate Us Button -->
-    <div class="rate-us-container">
-        <a href="https://g.page/r/YOUR_GOOGLE_MAPS_REVIEW_LINK/review" target="_blank" rel="noopener noreferrer" class="rate-us-btn">
-            <svg viewBox="0 0 24 24">
-                <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
-            </svg>
-            <span>Rate Us on Google</span>
-            <div class="stars">
+    <!-- Rate Us Section -->
+    <section class="rate-section">
+        <div class="rate-content">
+            <h2 class="rate-title">Love Your Experience?</h2>
+            <p class="rate-subtitle">Share your divine moment with us</p>
+            
+            <div class="rate-stars">
                 <svg viewBox="0 0 24 24"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
                 <svg viewBox="0 0 24 24"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
                 <svg viewBox="0 0 24 24"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
                 <svg viewBox="0 0 24 24"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
                 <svg viewBox="0 0 24 24"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
             </div>
-        </a>
-    </div>
+
+            <a href="https://g.page/r/YOUR_GOOGLE_MAPS_REVIEW_LINK/review" target="_blank" rel="noopener noreferrer" class="rate-btn">
+                <span>Rate Us on Google</span>
+                <svg viewBox="0 0 24 24">
+                    <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
+                </svg>
+            </a>
+        </div>
+    </section>
+
+    <!-- Social Media Section -->
+    <section class="social-section">
+        <p class="social-title">Follow Us</p>
+        <div class="social-links">
+            <!-- Instagram -->
+            <a href="#" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Instagram">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                </svg>
+            </a>
+            
+            <!-- Facebook -->
+            <a href="#" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Facebook">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                </svg>
+            </a>
+            
+            <!-- YouTube -->
+            <a href="#" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="YouTube">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                </svg>
+            </a>
+        </div>
+    </section>
 
     <footer>
+        <div class="footer-crest">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
+            </svg>
+        </div>
         <p>Divine Beauty Unisex Salon</p>
         <p>&copy; 2026 All Rights Reserved</p>
         <p>Prices subject to variation based on consultation</p>
     </footer>
 
     <script>
-        // Premium Accordion with Glass Animations
-        document.querySelectorAll('.category-header').forEach(header => {
-            header.addEventListener('click', function(e) {
-                const category = this.closest('.category');
-                const content = category.querySelector('.category-content');
-                const isOpen = category.classList.contains('active');
+        // Scroll Progress Indicator
+        const scrollProgress = document.querySelector('.scroll-progress');
+        
+        window.addEventListener('scroll', () => {
+            const scrollTop = window.scrollY;
+            const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+            const scrollPercent = scrollTop / docHeight;
+            scrollProgress.style.transform = `scaleX(${scrollPercent})`;
+        });
 
-                // Close all other categories
-                document.querySelectorAll('.category').forEach(cat => {
-                    if (cat !== category && cat.classList.contains('active')) {
-                        cat.classList.remove('active');
-                        const otherContent = cat.querySelector('.category-content');
-                        otherContent.style.maxHeight = '0px';
-                        
-                        // Reset service items
-                        cat.querySelectorAll('.service-item').forEach(item => {
-                            item.style.opacity = '0';
-                            item.style.transform = 'translateY(10px)';
-                        });
-                    }
-                });
+        // Intersection Observer for Scroll Animations
+        const observerOptions = {
+            root: null,
+            rootMargin: '-10% 0px -10% 0px',
+            threshold: 0.1
+        };
 
-                // Toggle current category
-                if (isOpen) {
-                    category.classList.remove('active');
-                    content.style.maxHeight = '0px';
-                    
-                    category.querySelectorAll('.service-item').forEach(item => {
-                        item.style.opacity = '0';
-                        item.style.transform = 'translateY(10px)';
-                    });
-                } else {
-                    category.classList.add('active');
-                    
-                    requestAnimationFrame(() => {
-                        const scrollHeight = content.scrollHeight;
-                        content.style.maxHeight = scrollHeight + 'px';
-                    });
+        const sectionObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        // Observe all category sections
+        document.querySelectorAll('.category-section').forEach(section => {
+            sectionObserver.observe(section);
+        });
+
+        // Parallax effect on background images
+        window.addEventListener('scroll', () => {
+            const scrolled = window.scrollY;
+            
+            document.querySelectorAll('.category-bg').forEach(bg => {
+                const section = bg.closest('.category-section');
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.offsetHeight;
+                
+                // Only animate when section is in view
+                if (scrolled > sectionTop - window.innerHeight && scrolled < sectionTop + sectionHeight) {
+                    const yPos = (scrolled - sectionTop) * 0.15;
+                    bg.style.transform = `translateY(${yPos}px) scale(1.1)`;
                 }
             });
         });
 
-        // Service Item Selection
-        document.querySelectorAll('.service-item').forEach(item => {
-            item.addEventListener('click', function() {
-                this.classList.toggle('selected');
+        // Star hover animation
+        document.querySelectorAll('.rate-stars svg').forEach((star, index) => {
+            star.addEventListener('mouseenter', function() {
+                // Light up all stars up to this one
+                document.querySelectorAll('.rate-stars svg').forEach((s, i) => {
+                    if (i <= index) {
+                        s.style.transform = 'scale(1.2) rotate(5deg)';
+                        s.style.filter = 'drop-shadow(0 0 15px rgba(212, 175, 55, 0.6))';
+                    } else {
+                        s.style.transform = 'scale(1)';
+                        s.style.filter = 'drop-shadow(0 0 10px rgba(212, 175, 55, 0.4))';
+                    }
+                });
+            });
+        });
+
+        document.querySelector('.rate-stars').addEventListener('mouseleave', function() {
+            this.querySelectorAll('svg').forEach(star => {
+                star.style.transform = 'scale(1)';
+                star.style.filter = 'drop-shadow(0 0 10px rgba(212, 175, 55, 0.4))';
             });
         });
     </script>

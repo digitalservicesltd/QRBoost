@@ -4,50 +4,35 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Divine Beauty | Luxury Salon Menu</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
 
     <style>
         :root {
-            /* Premium Gold Palette */
-            --gold-deep: #9a7b1a;
-            --gold-primary: #d4af37;
-            --gold-light: #e8c872;
-            --gold-pale: #f5e6b8;
-            --gold-glow: rgba(212, 175, 55, 0.25);
+            /* Swipe Card Palette */
+            --bg-primary: #0f0d10;
+            --bg-card: #1a171c;
+            --bg-card-alt: #211e24;
             
-            /* Card Colors */
-            --card-bg: #18161a;
-            --card-bg-hover: #1e1c21;
-            --card-border: rgba(255, 255, 255, 0.06);
-            --card-border-active: rgba(212, 175, 55, 0.3);
-            
-            /* Background */
-            --bg-primary: #0d0b0f;
-            --bg-secondary: #131116;
+            /* Accent Colors */
+            --accent-rose: #e8a4b8;
+            --accent-gold: #d4a574;
+            --accent-lavender: #b8a5d4;
+            --accent-mint: #a5d4c4;
+            --accent-coral: #e8a48c;
             
             /* Text */
-            --text-main: #f2efe9;
-            --text-muted: #9a9590;
-            --text-gold: var(--gold-light);
+            --text-primary: #f5f0e8;
+            --text-secondary: #a8a0b0;
+            --text-tertiary: #6a6075;
             
-            /* Gradients */
-            --gradient-gold: linear-gradient(135deg, #9a7b1a 0%, #d4af37 30%, #e8c872 50%, #d4af37 70%, #9a7b1a 100%);
-            --gradient-card: linear-gradient(180deg, rgba(255, 255, 255, 0.04) 0%, rgba(255, 255, 255, 0.01) 100%);
-            
-            /* Shadows - Floating Effect */
-            --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3), 0 1px 2px rgba(0, 0, 0, 0.2);
-            --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.35), 0 2px 8px rgba(0, 0, 0, 0.25);
-            --shadow-lg: 0 16px 48px rgba(0, 0, 0, 0.4), 0 4px 16px rgba(0, 0, 0, 0.3);
-            --shadow-xl: 0 24px 64px rgba(0, 0, 0, 0.5), 0 8px 24px rgba(0, 0, 0, 0.35);
-            --shadow-gold: 0 8px 32px rgba(212, 175, 55, 0.15), 0 0 0 1px rgba(212, 175, 55, 0.1);
+            /* Shadows */
+            --shadow-card: 0 20px 60px rgba(0, 0, 0, 0.5);
+            --shadow-glow: 0 0 60px rgba(232, 164, 184, 0.15);
             
             /* Animation */
-            --ease-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
             --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
-            --ease-premium: cubic-bezier(0.16, 1, 0.3, 1);
-            --duration-fast: 0.25s;
-            --duration-normal: 0.4s;
-            --duration-slow: 0.6s;
+            --ease-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
+            --ease-slide: cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         * { 
@@ -60,14 +45,14 @@
         body {
             font-family: 'Inter', sans-serif;
             background: var(--bg-primary);
-            color: var(--text-main);
+            color: var(--text-primary);
             min-height: 100vh;
-            line-height: 1.6;
-            overflow-x: hidden;
-            position: relative;
+            line-height: 1.5;
+            -webkit-font-smoothing: antialiased;
+            overflow: hidden;
         }
 
-        /* Subtle Background Pattern */
+        /* Background Gradient */
         body::before {
             content: '';
             position: fixed;
@@ -76,637 +61,510 @@
             right: 0;
             bottom: 0;
             background: 
-                radial-gradient(ellipse 120% 80% at 50% -20%, rgba(212, 175, 55, 0.04) 0%, transparent 50%),
-                radial-gradient(ellipse 80% 50% at 0% 100%, rgba(154, 123, 26, 0.03) 0%, transparent 40%);
+                radial-gradient(ellipse 100% 80% at 30% -20%, rgba(232, 164, 184, 0.08) 0%, transparent 50%),
+                radial-gradient(ellipse 80% 60% at 70% 120%, rgba(184, 165, 212, 0.06) 0%, transparent 50%);
             pointer-events: none;
             z-index: 0;
         }
 
         /* ═══════════════════════════════════════════
-           HEADER - FLOATING STYLE
+           HEADER - COMPACT
         ═══════════════════════════════════════════ */
         header { 
             text-align: center; 
-            padding: 3.5rem 1.5rem 2rem;
+            padding: 1.5rem 1.5rem 1rem;
             position: relative;
-            z-index: 10;
+            z-index: 20;
         }
 
-        .brand-crest {
-            width: 56px;
-            height: 56px;
-            margin: 0 auto 1.25rem;
-            position: relative;
+        .brand-row {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 0.5rem;
+        }
+
+        .brand-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--accent-rose), var(--accent-lavender));
             display: flex;
             align-items: center;
             justify-content: center;
         }
 
-        /* Floating Crest Background */
-        .brand-crest::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: var(--card-bg);
-            border-radius: 18px;
-            box-shadow: var(--shadow-lg);
-            border: 1px solid var(--card-border);
-            transform: rotate(45deg);
-            transition: all var(--duration-normal) var(--ease-bounce);
-        }
-
-        .brand-crest:hover::before {
-            transform: rotate(45deg) scale(1.05);
-            box-shadow: var(--shadow-xl), var(--shadow-gold);
-            border-color: var(--card-border-active);
-        }
-
-        .brand-crest svg {
-            width: 24px;
-            height: 24px;
-            fill: var(--gold-primary);
-            position: relative;
-            z-index: 2;
-            filter: drop-shadow(0 2px 8px rgba(212, 175, 55, 0.4));
-            transition: transform var(--duration-normal) var(--ease-bounce);
-        }
-
-        .brand-crest:hover svg {
-            transform: scale(1.1);
+        .brand-icon svg {
+            width: 16px;
+            height: 16px;
+            fill: #fff;
         }
 
         .salon-name { 
             font-family: 'Playfair Display', serif; 
-            font-size: 2.4rem; 
-            font-weight: 600;
-            letter-spacing: -0.5px;
-            background: var(--gradient-gold);
-            background-size: 200% auto;
+            font-size: 1.5rem; 
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            background: linear-gradient(135deg, var(--text-primary), var(--accent-rose));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            margin-bottom: 0.4rem;
-            animation: shimmer 5s linear infinite;
         }
 
-        @keyframes shimmer {
-            0% { background-position: 0% center; }
-            100% { background-position: 200% center; }
+        .category-indicator {
+            font-size: 0.75rem;
+            color: var(--text-tertiary);
+            letter-spacing: 2px;
+            text-transform: uppercase;
         }
 
-        .tagline { 
-            font-family: 'Cinzel', serif; 
-            font-size: 0.65rem; 
-            color: var(--gold-light); 
-            letter-spacing: 5px; 
-            text-transform: uppercase; 
-            opacity: 0.75;
-            font-weight: 500;
-        }
-
-        main { 
-            max-width: 540px; 
-            margin: 0 auto; 
-            padding: 1rem 12px 1.5rem;
+        /* ═══════════════════════════════════════════
+           SWIPE CARD CONTAINER
+        ═══════════════════════════════════════════ */
+        .swipe-container {
             position: relative;
+            width: 100%;
+            height: calc(100vh - 180px);
+            overflow: hidden;
             z-index: 10;
         }
 
-        /* ═══════════════════════════════════════════
-           FLOATING CATEGORY CARDS
-        ═══════════════════════════════════════════ */
-        .category { 
-            position: relative;
-            margin-bottom: 10px;
-            opacity: 0;
-            transform: translateY(25px) scale(0.96);
-            animation: cardFloat 0.6s var(--ease-premium) forwards;
+        .cards-wrapper {
+            display: flex;
+            height: 100%;
+            transition: transform 0.5s var(--ease-slide);
+            will-change: transform;
         }
 
-        .category:nth-child(1) { animation-delay: 0.08s; }
-        .category:nth-child(2) { animation-delay: 0.14s; }
-        .category:nth-child(3) { animation-delay: 0.2s; }
-        .category:nth-child(4) { animation-delay: 0.26s; }
-        .category:nth-child(5) { animation-delay: 0.32s; }
-        .category:nth-child(6) { animation-delay: 0.38s; }
-        .category:nth-child(7) { animation-delay: 0.44s; }
-        .category:nth-child(8) { animation-delay: 0.5s; }
-
-        @keyframes cardFloat {
-            to { 
-                opacity: 1; 
-                transform: translateY(0) scale(1);
-            }
-        }
-
-        /* Floating Card Container */
-        .category-inner {
-            position: relative;
-            background: var(--card-bg);
-            border-radius: 20px;
-            overflow: hidden;
-            box-shadow: var(--shadow-md);
-            border: 1px solid var(--card-border);
-            transition: all var(--duration-normal) var(--ease-premium);
-        }
-
-        .category:hover .category-inner {
-            box-shadow: var(--shadow-lg);
-            transform: translateY(-3px);
-            border-color: rgba(255, 255, 255, 0.1);
-        }
-
-        .category.active .category-inner {
-            box-shadow: var(--shadow-xl), var(--shadow-gold);
-            transform: translateY(-5px) scale(1.01);
-            border-color: var(--card-border-active);
-        }
-
-        /* Card Top Highlight */
-        .category-inner::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
-            opacity: 0.5;
-            transition: opacity var(--duration-normal) var(--ease-smooth);
-        }
-
-        .category.active .category-inner::before {
-            opacity: 1;
-            background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.4), transparent);
-        }
-
-        /* ═══════════════════════════════════════════
-           CATEGORY HEADER
-        ═══════════════════════════════════════════ */
-        .category-header {
-            position: relative;
-            height: 80px;
+        .swipe-card {
+            flex-shrink: 0;
+            width: 100%;
+            height: 100%;
+            padding: 0 16px;
             display: flex;
             align-items: center;
             justify-content: center;
-            cursor: pointer;
-            overflow: hidden;
         }
 
-        /* Background Image */
-        .category-header::before {
+        .card-inner {
+            width: 100%;
+            max-width: 400px;
+            height: 100%;
+            max-height: 520px;
+            background: var(--bg-card);
+            border-radius: 28px;
+            overflow: hidden;
+            box-shadow: var(--shadow-card);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Card Header Image */
+        .card-header {
+            position: relative;
+            height: 140px;
+            flex-shrink: 0;
+        }
+
+        .card-header::before {
             content: '';
             position: absolute;
-            top: 0; 
-            left: 0; 
-            width: 100%; 
-            height: 100%;
+            inset: 0;
             background-size: cover;
             background-position: center;
-            z-index: 1;
-            transition: all 1s var(--ease-premium);
-            filter: brightness(0.35) saturate(0.6);
+            transition: transform 0.6s var(--ease-smooth);
         }
 
-        .cat-hair .category-header::before { background-image: url('images/haircut.webp'); }
-        .cat-treatments .category-header::before { background-image: url('images/hairtreat.webp'); }
-        .cat-mehndi .category-header::before { background-image: url('images/design.webp'); }
-        .cat-facial .category-header::before { background-image: url('images/skin.webp'); }
-        .cat-detan .category-header::before { background-image: url('images/detan.webp'); }
-        .cat-waxing .category-header::before { background-image: url('images/waxing.webp'); }
-        .cat-manicure .category-header::before { background-image: url('images/pedicure.webp'); }
-        .cat-threading .category-header::before { background-image: url('images/threading.webp'); }
+        .swipe-card[data-category="hair"] .card-header::before { background-image: url('images/haircut.webp'); }
+        .swipe-card[data-category="treatments"] .card-header::before { background-image: url('images/hairtreat.webp'); }
+        .swipe-card[data-category="mehndi"] .card-header::before { background-image: url('images/design.webp'); }
+        .swipe-card[data-category="facial"] .card-header::before { background-image: url('images/skin.webp'); }
+        .swipe-card[data-category="detan"] .card-header::before { background-image: url('images/detan.webp'); }
+        .swipe-card[data-category="waxing"] .card-header::before { background-image: url('images/waxing.webp'); }
+        .swipe-card[data-category="manicure"] .card-header::before { background-image: url('images/pedicure.webp'); }
+        .swipe-card[data-category="threading"] .card-header::before { background-image: url('images/threading.webp'); }
 
-        .category:hover .category-header::before,
-        .category.active .category-header::before { 
-            transform: scale(1.06);
-            filter: brightness(0.4) saturate(0.8);
+        .swipe-card.active .card-header::before {
+            transform: scale(1.05);
         }
 
-        /* Dark Overlay */
-        .category-header::after {
+        /* Gradient Overlay */
+        .card-header::after {
             content: '';
             position: absolute;
             inset: 0;
             background: linear-gradient(
                 to bottom,
                 transparent 0%,
-                rgba(13, 11, 15, 0.3) 40%,
-                rgba(13, 11, 15, 0.85) 100%
+                rgba(15, 13, 16, 0.3) 50%,
+                var(--bg-card) 100%
             );
+        }
+
+        /* Category Title on Card */
+        .card-title-wrap {
+            position: absolute;
+            bottom: 20px;
+            left: 24px;
+            right: 24px;
             z-index: 2;
         }
 
-        .category-title {
-            position: relative;
-            z-index: 3;
-            color: #fff;
-            font-family: 'Cinzel', serif;
-            font-size: 0.82rem;
-            font-weight: 500;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-            text-shadow: 0 2px 12px rgba(0, 0, 0, 0.5);
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            transition: all var(--duration-normal) var(--ease-premium);
-        }
-
-        /* Animated Lines */
-        .category-title::before,
-        .category-title::after {
-            content: '';
-            width: 0;
-            height: 1px;
-            background: var(--gradient-gold);
-            box-shadow: 0 0 8px var(--gold-glow);
-            transition: width var(--duration-normal) var(--ease-premium);
-        }
-
-        .category:hover .category-title::before,
-        .category:hover .category-title::after,
-        .category.active .category-title::before,
-        .category.active .category-title::after {
-            width: 22px;
-        }
-
-        .category:hover .category-title {
-            letter-spacing: 4px;
-        }
-
-        .category.active .category-title {
-            color: var(--gold-light);
-            text-shadow: 0 2px 15px rgba(212, 175, 55, 0.3);
-        }
-
-        /* Expand Button */
-        .expand-icon {
-            position: absolute;
-            right: 14px;
-            top: 50%;
-            transform: translateY(-50%);
-            z-index: 4;
-            width: 30px;
-            height: 30px;
+        .card-category-icon {
+            width: 36px;
+            height: 36px;
             border-radius: 10px;
-            background: rgba(0, 0, 0, 0.4);
             display: flex;
             align-items: center;
             justify-content: center;
-            transition: all var(--duration-normal) var(--ease-bounce);
-            opacity: 0;
-            box-shadow: var(--shadow-sm);
+            font-size: 1.1rem;
+            margin-bottom: 8px;
         }
 
-        .category-header:hover .expand-icon {
-            opacity: 1;
+        .swipe-card[data-category="hair"] .card-category-icon { background: linear-gradient(135deg, #e8a4b8, #d4a574); }
+        .swipe-card[data-category="treatments"] .card-category-icon { background: linear-gradient(135deg, #d4a574, #e8a48c); }
+        .swipe-card[data-category="mehndi"] .card-category-icon { background: linear-gradient(135deg, #a8b4d4, #b8a5d4); }
+        .swipe-card[data-category="facial"] .card-category-icon { background: linear-gradient(135deg, #a5d4c4, #a5d4b8); }
+        .swipe-card[data-category="detan"] .card-category-icon { background: linear-gradient(135deg, #e8c4a4, #d4a574); }
+        .swipe-card[data-category="waxing"] .card-category-icon { background: linear-gradient(135deg, #c4a8d8, #b8a5d4); }
+        .swipe-card[data-category="manicure"] .card-category-icon { background: linear-gradient(135deg, #a4d4d8, #a5d4c4); }
+        .swipe-card[data-category="threading"] .card-category-icon { background: linear-gradient(135deg, #d4c4a4, #c4b4a4); }
+
+        .card-category-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 500;
+            color: var(--text-primary);
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
         }
 
-        .expand-icon svg {
-            width: 14px;
-            height: 14px;
-            stroke: var(--gold-light);
-            stroke-width: 2.5;
-            fill: none;
-            transition: all var(--duration-normal) var(--ease-premium);
+        .card-service-count {
+            font-size: 0.72rem;
+            color: var(--text-secondary);
+            letter-spacing: 1px;
+            text-transform: uppercase;
         }
 
-        .category.active .expand-icon {
-            background: var(--gold-primary);
-            box-shadow: 0 4px 16px rgba(212, 175, 55, 0.4);
-            transform: translateY(-50%) scale(1.05);
+        /* Services List */
+        .card-services {
+            flex: 1;
+            overflow-y: auto;
+            padding: 12px 20px 20px;
+            scrollbar-width: thin;
+            scrollbar-color: var(--bg-card-alt) transparent;
         }
 
-        .category.active .expand-icon svg {
-            stroke: var(--bg-primary);
-            transform: rotate(180deg);
+        .card-services::-webkit-scrollbar {
+            width: 4px;
         }
 
-        /* ═══════════════════════════════════════════
-           CATEGORY CONTENT - FLOATING EXPAND
-        ═══════════════════════════════════════════ */
-        .category-content {
-            max-height: 0;
-            overflow: hidden;
-            position: relative;
-            transition: max-height var(--duration-slow) var(--ease-premium);
+        .card-services::-webkit-scrollbar-track {
+            background: transparent;
         }
 
-        /* Floating Content Background */
-        .category-content::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 12px;
-            right: 12px;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.3), transparent);
+        .card-services::-webkit-scrollbar-thumb {
+            background: var(--bg-card-alt);
+            border-radius: 4px;
         }
 
-        .service-list { 
-            list-style: none; 
-            padding: 6px 8px 10px;
-            position: relative;
-        }
-
-        /* ═══════════════════════════════════════════
-           SERVICE ITEMS - FLOATING ROWS
-        ═══════════════════════════════════════════ */
         .service-item {
-            position: relative;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 13px 16px;
-            margin: 4px 0;
+            padding: 14px 16px;
+            margin-bottom: 8px;
             border-radius: 14px;
-            background: transparent;
-            overflow: hidden;
-            transform: translateY(8px);
+            background: var(--bg-card-alt);
+            cursor: pointer;
             opacity: 0;
-            transition: all 0.35s var(--ease-premium);
+            transform: translateY(15px);
+            transition: all 0.4s var(--ease-smooth);
+            position: relative;
+            overflow: hidden;
         }
 
-        /* Staggered Entrance */
-        .category.active .service-item {
+        .swipe-card.active .service-item {
             opacity: 1;
             transform: translateY(0);
         }
 
-        .category.active .service-item:nth-child(1) { transition-delay: 0.06s; }
-        .category.active .service-item:nth-child(2) { transition-delay: 0.12s; }
-        .category.active .service-item:nth-child(3) { transition-delay: 0.18s; }
-        .category.active .service-item:nth-child(4) { transition-delay: 0.24s; }
-        .category.active .service-item:nth-child(5) { transition-delay: 0.30s; }
+        .swipe-card.active .service-item:nth-child(1) { transition-delay: 0.1s; }
+        .swipe-card.active .service-item:nth-child(2) { transition-delay: 0.15s; }
+        .swipe-card.active .service-item:nth-child(3) { transition-delay: 0.2s; }
+        .swipe-card.active .service-item:nth-child(4) { transition-delay: 0.25s; }
+        .swipe-card.active .service-item:nth-child(5) { transition-delay: 0.3s; }
+        .swipe-card.active .service-item:nth-child(6) { transition-delay: 0.35s; }
 
-        /* Floating Hover Background */
         .service-item::before {
             content: '';
             position: absolute;
             inset: 0;
-            background: linear-gradient(135deg, rgba(212, 175, 55, 0.08) 0%, rgba(212, 175, 55, 0.02) 100%);
-            border-radius: 14px;
+            background: linear-gradient(135deg, rgba(232, 164, 184, 0.15), rgba(184, 165, 212, 0.1));
             opacity: 0;
-            transition: opacity var(--duration-normal) var(--ease-smooth);
-            box-shadow: inset 0 0 0 1px rgba(212, 175, 55, 0.1);
+            transition: opacity 0.3s var(--ease-smooth);
         }
 
         .service-item:hover::before {
             opacity: 1;
         }
 
-        /* Left Gold Bar */
-        .service-item::after {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 0;
-            height: 45%;
-            background: var(--gold-primary);
-            border-radius: 0 4px 4px 0;
-            box-shadow: 0 0 12px var(--gold-glow);
-            transition: width var(--duration-fast) var(--ease-bounce);
-        }
-
-        .service-item:hover::after {
-            width: 3px;
+        .service-item.selected {
+            background: rgba(232, 164, 184, 0.15);
+            box-shadow: 0 0 0 1px var(--accent-rose);
         }
 
         .service-name { 
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: var(--text-primary);
             position: relative;
             z-index: 1;
-            font-weight: 400; 
-            font-size: 0.9rem; 
-            display: flex; 
-            align-items: center; 
-            gap: 8px;
-            color: var(--text-main);
-            transition: all var(--duration-fast) var(--ease-smooth);
-        }
-
-        .service-item:hover .service-name {
-            color: var(--gold-pale);
-            transform: translateX(5px);
         }
 
         .service-price { 
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--accent-rose);
             position: relative;
             z-index: 1;
-            color: var(--gold-light); 
-            font-weight: 600; 
-            font-size: 0.92rem;
-            letter-spacing: 0.3px;
-            transition: all var(--duration-fast) var(--ease-smooth);
         }
 
-        .service-item:hover .service-price {
-            transform: scale(1.06);
-            text-shadow: 0 0 15px rgba(212, 175, 55, 0.5);
-        }
-
-        /* Badge */
-        .badge-popular {
-            font-size: 0.52rem;
-            background: var(--gradient-gold);
+        .service-badge {
+            font-size: 0.55rem;
+            background: var(--accent-rose);
             color: var(--bg-primary);
-            padding: 3px 10px;
-            border-radius: 50px;
+            padding: 2px 8px;
+            border-radius: 10px;
             text-transform: uppercase;
             font-weight: 700;
-            letter-spacing: 0.8px;
-            box-shadow: 0 2px 8px rgba(212, 175, 55, 0.35);
+            letter-spacing: 0.5px;
+            margin-left: 8px;
         }
 
         /* ═══════════════════════════════════════════
-           RATE US BUTTON - FLOATING CARD
+           NAVIGATION
         ═══════════════════════════════════════════ */
-        .rate-us-container {
-            max-width: 540px;
-            margin: 1.5rem auto;
-            padding: 0 12px;
-            position: relative;
-            z-index: 10;
+        .nav-container {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 16px 20px 24px;
+            background: linear-gradient(to top, var(--bg-primary) 60%, transparent);
+            z-index: 20;
         }
 
-        .rate-us-btn {
+        .nav-inner {
+            max-width: 400px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+        }
+
+        /* Nav Arrows */
+        .nav-arrow {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: var(--bg-card);
+            border: 1px solid rgba(255, 255, 255, 0.08);
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 12px;
-            width: 100%;
-            padding: 18px 20px;
-            background: var(--card-bg);
-            border: 1px solid var(--card-border);
-            border-radius: 18px;
             cursor: pointer;
-            text-decoration: none;
-            transition: all var(--duration-normal) var(--ease-premium);
-            position: relative;
-            overflow: hidden;
-            box-shadow: var(--shadow-md);
+            transition: all 0.3s var(--ease-smooth);
+            flex-shrink: 0;
         }
 
-        .rate-us-btn::before {
-            content: '';
+        .nav-arrow svg {
+            width: 20px;
+            height: 20px;
+            stroke: var(--text-secondary);
+            stroke-width: 2;
+            fill: none;
+            transition: all 0.3s var(--ease-smooth);
+        }
+
+        .nav-arrow:hover {
+            background: var(--accent-rose);
+            border-color: var(--accent-rose);
+        }
+
+        .nav-arrow:hover svg {
+            stroke: #fff;
+        }
+
+        .nav-arrow:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+        }
+
+        .nav-arrow:disabled:hover {
+            background: var(--bg-card);
+            border-color: rgba(255, 255, 255, 0.08);
+        }
+
+        .nav-arrow:disabled:hover svg {
+            stroke: var(--text-secondary);
+        }
+
+        /* Dots */
+        .nav-dots {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            flex: 1;
+        }
+
+        .nav-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--bg-card-alt);
+            cursor: pointer;
+            transition: all 0.3s var(--ease-smooth);
+        }
+
+        .nav-dot:hover {
+            background: var(--text-tertiary);
+        }
+
+        .nav-dot.active {
+            width: 24px;
+            border-radius: 4px;
+            background: linear-gradient(90deg, var(--accent-rose), var(--accent-lavender));
+        }
+
+        /* Swipe Hint */
+        .swipe-hint {
             position: absolute;
-            inset: 0;
-            background: linear-gradient(135deg, rgba(212, 175, 55, 0.1) 0%, transparent 100%);
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            color: var(--text-tertiary);
+            font-size: 0.7rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
             opacity: 0;
-            transition: opacity var(--duration-normal) var(--ease-smooth);
+            transition: opacity 0.3s var(--ease-smooth);
+            pointer-events: none;
         }
 
-        .rate-us-btn:hover::before {
+        .swipe-hint.left {
+            left: 20px;
+        }
+
+        .swipe-hint.right {
+            right: 20px;
+        }
+
+        .swipe-hint svg {
+            width: 16px;
+            height: 16px;
+            stroke: var(--text-tertiary);
+            stroke-width: 2;
+            fill: none;
+            animation: swipeHint 1.5s ease-in-out infinite;
+        }
+
+        .swipe-hint.left svg {
+            animation-direction: reverse;
+        }
+
+        @keyframes swipeHint {
+            0%, 100% { transform: translateX(0); }
+            50% { transform: translateX(5px); }
+        }
+
+        .swipe-card.active:first-child .swipe-hint.right {
             opacity: 1;
         }
 
-        .rate-us-btn:hover {
-            transform: translateY(-4px) scale(1.01);
-            box-shadow: var(--shadow-xl), var(--shadow-gold);
-            border-color: var(--card-border-active);
+        .swipe-card.active:not(:first-child):not(:last-child) .swipe-hint {
+            opacity: 1;
         }
 
-        .rate-us-btn svg {
-            width: 20px;
-            height: 20px;
-            fill: var(--gold-primary);
-            transition: all var(--duration-normal) var(--ease-bounce);
-            filter: drop-shadow(0 2px 6px rgba(212, 175, 55, 0.4));
-            position: relative;
-            z-index: 1;
-        }
-
-        .rate-us-btn:hover svg {
-            transform: scale(1.15) rotate(10deg);
-        }
-
-        .rate-us-btn span {
-            font-family: 'Cinzel', serif;
-            font-size: 0.8rem;
-            font-weight: 500;
-            letter-spacing: 2.5px;
-            text-transform: uppercase;
-            color: var(--gold-light);
-            position: relative;
-            z-index: 1;
-            transition: all var(--duration-normal) var(--ease-smooth);
-        }
-
-        .rate-us-btn:hover span {
-            letter-spacing: 3.5px;
-        }
-
-        .rate-us-btn .stars {
-            display: flex;
-            gap: 3px;
-            position: relative;
-            z-index: 1;
-        }
-
-        .rate-us-btn .stars svg {
-            width: 13px;
-            height: 13px;
-        }
-
-        /* ═══════════════════════════════════════════
-           FOOTER
-        ═══════════════════════════════════════════ */
-        footer { 
-            text-align: center; 
-            padding: 1.5rem 2rem 3.5rem; 
-            position: relative;
-            z-index: 10;
-        }
-
-        footer::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80px;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.3), transparent);
-        }
-
-        footer p {
-            font-size: 0.65rem; 
-            color: var(--text-muted);
-            letter-spacing: 0.8px;
-            margin: 5px 0;
-            opacity: 0.45;
-        }
-
-        footer p:first-of-type {
-            font-family: 'Cinzel', serif;
-            letter-spacing: 1.5px;
-            opacity: 0.35;
+        .swipe-card.active:last-child .swipe-hint.left {
+            opacity: 1;
         }
 
         /* ═══════════════════════════════════════════
            RESPONSIVE
         ═══════════════════════════════════════════ */
         @media (max-width: 480px) {
-            .salon-name { 
-                font-size: 2rem; 
+            header {
+                padding: 1.25rem 1rem 0.75rem;
             }
-            
-            .tagline {
-                font-size: 0.58rem;
-                letter-spacing: 4px;
+
+            .salon-name {
+                font-size: 1.3rem;
             }
-            
-            .category-header {
-                height: 72px;
+
+            .swipe-container {
+                height: calc(100vh - 160px);
             }
-            
-            .category-title {
-                font-size: 0.75rem;
-                letter-spacing: 2.5px;
+
+            .swipe-card {
+                padding: 0 12px;
             }
-            
+
+            .card-inner {
+                border-radius: 24px;
+                max-height: 480px;
+            }
+
+            .card-header {
+                height: 120px;
+            }
+
+            .card-title-wrap {
+                left: 20px;
+                bottom: 16px;
+            }
+
+            .card-category-name {
+                font-size: 1.3rem;
+            }
+
+            .card-services {
+                padding: 10px 16px 16px;
+            }
+
             .service-item {
-                padding: 11px 14px;
-            }
-            
-            .service-name {
-                font-size: 0.85rem;
-            }
-            
-            .rate-us-btn span {
-                font-size: 0.72rem;
-                letter-spacing: 2px;
+                padding: 12px 14px;
             }
 
-            .rate-us-btn .stars svg {
-                width: 11px;
-                height: 11px;
+            .nav-container {
+                padding: 12px 16px 20px;
+            }
+
+            .nav-arrow {
+                width: 40px;
+                height: 40px;
+            }
+
+            .nav-arrow svg {
+                width: 18px;
+                height: 18px;
             }
         }
 
-        /* Selection State */
-        .service-item.selected {
-            background: rgba(212, 175, 55, 0.08);
-        }
-
-        .service-item.selected::after {
-            width: 3px;
-        }
-
-        .service-item.selected::before {
-            opacity: 1;
-        }
-
-        /* Active Tap State for Mobile */
+        /* Hide scrollbar on touch devices */
         @media (hover: none) {
-            .category:active .category-inner {
-                transform: scale(0.98);
+            .card-services::-webkit-scrollbar {
+                display: none;
             }
             
-            .service-item:active {
-                transform: scale(0.98);
+            .card-services {
+                -ms-overflow-style: none;
+                scrollbar-width: none;
             }
         }
     </style>
@@ -714,326 +572,442 @@
 <body>
 
     <header>
-        <div class="brand-crest">
-            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
-            </svg>
+        <div class="brand-row">
+            <div class="brand-icon">
+                <svg viewBox="0 0 24 24">
+                    <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
+                </svg>
+            </div>
+            <h1 class="salon-name">Divine Beauty</h1>
         </div>
-        <h1 class="salon-name">Divine Beauty</h1>
-        <p class="tagline">The Art of Luxury Grooming</p>
+        <p class="category-indicator">Swipe to explore</p>
     </header>
 
-    <main>
-        <section class="category cat-hair">
-            <div class="category-inner">
-                <div class="category-header">
-                    <h2 class="category-title">Hair & Styling</h2>
-                    <div class="expand-icon">
-                        <svg viewBox="0 0 24 24">
-                            <polyline points="6 9 12 15 18 9"></polyline>
-                        </svg>
+    <div class="swipe-container" id="swipeContainer">
+        <div class="cards-wrapper" id="cardsWrapper">
+            
+            <!-- Card 1: Hair & Styling -->
+            <div class="swipe-card" data-category="hair">
+                <div class="card-inner">
+                    <div class="card-header">
+                        <div class="card-title-wrap">
+                            <div class="card-category-icon">💇‍♀️</div>
+                            <h2 class="card-category-name">Hair & Styling</h2>
+                            <p class="card-service-count">4 Services</p>
+                        </div>
                     </div>
-                </div>
-                <div class="category-content">
-                    <ul class="service-list">
-                        <li class="service-item">
+                    <div class="card-services">
+                        <div class="service-item">
                             <span class="service-name">'U' Shape Hair Cut</span>
                             <span class="service-price">₹100</span>
-                        </li>
-                        <li class="service-item">
+                        </div>
+                        <div class="service-item">
                             <span class="service-name">Straight Hair Cut</span>
                             <span class="service-price">₹100</span>
-                        </li>
-                        <li class="service-item">
-                            <span class="service-name">Step Hair Cut <span class="badge-popular">Trending</span></span>
+                        </div>
+                        <div class="service-item">
+                            <span class="service-name">Step Hair Cut <span class="service-badge">Hot</span></span>
                             <span class="service-price">₹300</span>
-                        </li>
-                        <li class="service-item">
+                        </div>
+                        <div class="service-item">
                             <span class="service-name">Hair Wash (L'Oréal)</span>
                             <span class="service-price">₹100</span>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </section>
-
-        <section class="category cat-treatments">
-            <div class="category-inner">
-                <div class="category-header">
-                    <h2 class="category-title">Treatments & Color</h2>
-                    <div class="expand-icon">
-                        <svg viewBox="0 0 24 24">
-                            <polyline points="6 9 12 15 18 9"></polyline>
-                        </svg>
+                        </div>
                     </div>
                 </div>
-                <div class="category-content">
-                    <ul class="service-list">
-                        <li class="service-item">
-                            <span class="service-name">Perm. Straightening (L'Oréal)</span>
+                <div class="swipe-hint right">
+                    <span>Swipe</span>
+                    <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                </div>
+            </div>
+
+            <!-- Card 2: Treatments & Color -->
+            <div class="swipe-card" data-category="treatments">
+                <div class="card-inner">
+                    <div class="card-header">
+                        <div class="card-title-wrap">
+                            <div class="card-category-icon">✨</div>
+                            <h2 class="card-category-name">Treatments & Color</h2>
+                            <p class="card-service-count">3 Services</p>
+                        </div>
+                    </div>
+                    <div class="card-services">
+                        <div class="service-item">
+                            <span class="service-name">Permanent Straightening</span>
                             <span class="service-price">₹4,000</span>
-                        </li>
-                        <li class="service-item">
+                        </div>
+                        <div class="service-item">
                             <span class="service-name">Hair Smoothing</span>
                             <span class="service-price">₹3,500</span>
-                        </li>
-                        <li class="service-item">
+                        </div>
+                        <div class="service-item">
                             <span class="service-name">Hair Spa (L'Oréal)</span>
                             <span class="service-price">₹800</span>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </section>
-
-        <section class="category cat-mehndi">
-            <div class="category-inner">
-                <div class="category-header">
-                    <h2 class="category-title">Mehndi Art</h2>
-                    <div class="expand-icon">
-                        <svg viewBox="0 0 24 24">
-                            <polyline points="6 9 12 15 18 9"></polyline>
-                        </svg>
+                        </div>
                     </div>
                 </div>
-                <div class="category-content">
-                    <ul class="service-list">
-                        <li class="service-item">
+                <div class="swipe-hint left">
+                    <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg>
+                    <span>Swipe</span>
+                </div>
+                <div class="swipe-hint right">
+                    <span>Swipe</span>
+                    <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                </div>
+            </div>
+
+            <!-- Card 3: Mehndi Art -->
+            <div class="swipe-card" data-category="mehndi">
+                <div class="card-inner">
+                    <div class="card-header">
+                        <div class="card-title-wrap">
+                            <div class="card-category-icon">🌺</div>
+                            <h2 class="card-category-name">Mehndi Art</h2>
+                            <p class="card-service-count">2 Services</p>
+                        </div>
+                    </div>
+                    <div class="card-services">
+                        <div class="service-item">
                             <span class="service-name">Mehndi (Shahnaz)</span>
                             <span class="service-price">₹300</span>
-                        </li>
-                        <li class="service-item">
+                        </div>
+                        <div class="service-item">
                             <span class="service-name">Mehndi (Nupur)</span>
                             <span class="service-price">₹250</span>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </section>
-
-        <section class="category cat-facial">
-            <div class="category-inner">
-                <div class="category-header">
-                    <h2 class="category-title">Facial & Skin</h2>
-                    <div class="expand-icon">
-                        <svg viewBox="0 0 24 24">
-                            <polyline points="6 9 12 15 18 9"></polyline>
-                        </svg>
+                        </div>
                     </div>
                 </div>
-                <div class="category-content">
-                    <ul class="service-list">
-                        <li class="service-item">
-                            <span class="service-name">Facial (Shahnaz Power) <span class="badge-popular">Top Pick</span></span>
+                <div class="swipe-hint left">
+                    <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg>
+                    <span>Swipe</span>
+                </div>
+                <div class="swipe-hint right">
+                    <span>Swipe</span>
+                    <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                </div>
+            </div>
+
+            <!-- Card 4: Facial & Skin -->
+            <div class="swipe-card" data-category="facial">
+                <div class="card-inner">
+                    <div class="card-header">
+                        <div class="card-title-wrap">
+                            <div class="card-category-icon">🧖‍♀️</div>
+                            <h2 class="card-category-name">Facial & Skin</h2>
+                            <p class="card-service-count">3 Services</p>
+                        </div>
+                    </div>
+                    <div class="card-services">
+                        <div class="service-item">
+                            <span class="service-name">Shahnaz Power Facial <span class="service-badge">Top</span></span>
                             <span class="service-price">₹800</span>
-                        </li>
-                        <li class="service-item">
+                        </div>
+                        <div class="service-item">
                             <span class="service-name">Fruit Facial (VLCC)</span>
                             <span class="service-price">₹600</span>
-                        </li>
-                        <li class="service-item">
+                        </div>
+                        <div class="service-item">
                             <span class="service-name">Facial (Cheryl's)</span>
                             <span class="service-price">₹600</span>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </section>
-
-        <section class="category cat-detan">
-            <div class="category-inner">
-                <div class="category-header">
-                    <h2 class="category-title">De-Tan Care</h2>
-                    <div class="expand-icon">
-                        <svg viewBox="0 0 24 24">
-                            <polyline points="6 9 12 15 18 9"></polyline>
-                        </svg>
+                        </div>
                     </div>
                 </div>
-                <div class="category-content">
-                    <ul class="service-list">
-                        <li class="service-item">
-                            <span class="service-name">De-Tan (Only Face)</span>
+                <div class="swipe-hint left">
+                    <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg>
+                    <span>Swipe</span>
+                </div>
+                <div class="swipe-hint right">
+                    <span>Swipe</span>
+                    <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                </div>
+            </div>
+
+            <!-- Card 5: De-Tan Care -->
+            <div class="swipe-card" data-category="detan">
+                <div class="card-inner">
+                    <div class="card-header">
+                        <div class="card-title-wrap">
+                            <div class="card-category-icon">☀️</div>
+                            <h2 class="card-category-name">De-Tan Care</h2>
+                            <p class="card-service-count">2 Services</p>
+                        </div>
+                    </div>
+                    <div class="card-services">
+                        <div class="service-item">
+                            <span class="service-name">De-Tan (Face Only)</span>
                             <span class="service-price">₹150</span>
-                        </li>
-                        <li class="service-item">
-                            <span class="service-name">De-Tan (Body)</span>
+                        </div>
+                        <div class="service-item">
+                            <span class="service-name">De-Tan (Full Body)</span>
                             <span class="service-price">₹650</span>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </section>
-
-        <section class="category cat-waxing">
-            <div class="category-inner">
-                <div class="category-header">
-                    <h2 class="category-title">Waxing</h2>
-                    <div class="expand-icon">
-                        <svg viewBox="0 0 24 24">
-                            <polyline points="6 9 12 15 18 9"></polyline>
-                        </svg>
+                        </div>
                     </div>
                 </div>
-                <div class="category-content">
-                    <ul class="service-list">
-                        <li class="service-item">
-                            <span class="service-name">Full Hand</span>
+                <div class="swipe-hint left">
+                    <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg>
+                    <span>Swipe</span>
+                </div>
+                <div class="swipe-hint right">
+                    <span>Swipe</span>
+                    <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                </div>
+            </div>
+
+            <!-- Card 6: Waxing -->
+            <div class="swipe-card" data-category="waxing">
+                <div class="card-inner">
+                    <div class="card-header">
+                        <div class="card-title-wrap">
+                            <div class="card-category-icon">✨</div>
+                            <h2 class="card-category-name">Waxing</h2>
+                            <p class="card-service-count">3 Services</p>
+                        </div>
+                    </div>
+                    <div class="card-services">
+                        <div class="service-item">
+                            <span class="service-name">Full Hand Waxing</span>
                             <span class="service-price">₹250</span>
-                        </li>
-                        <li class="service-item">
+                        </div>
+                        <div class="service-item">
                             <span class="service-name">Full Leg Waxing</span>
                             <span class="service-price">₹450</span>
-                        </li>
-                        <li class="service-item">
+                        </div>
+                        <div class="service-item">
                             <span class="service-name">Face Waxing</span>
                             <span class="service-price">₹50</span>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </section>
-
-        <section class="category cat-manicure">
-            <div class="category-inner">
-                <div class="category-header">
-                    <h2 class="category-title">Hands & Feet</h2>
-                    <div class="expand-icon">
-                        <svg viewBox="0 0 24 24">
-                            <polyline points="6 9 12 15 18 9"></polyline>
-                        </svg>
+                        </div>
                     </div>
                 </div>
-                <div class="category-content">
-                    <ul class="service-list">
-                        <li class="service-item">
+                <div class="swipe-hint left">
+                    <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg>
+                    <span>Swipe</span>
+                </div>
+                <div class="swipe-hint right">
+                    <span>Swipe</span>
+                    <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                </div>
+            </div>
+
+            <!-- Card 7: Hands & Feet -->
+            <div class="swipe-card" data-category="manicure">
+                <div class="card-inner">
+                    <div class="card-header">
+                        <div class="card-title-wrap">
+                            <div class="card-category-icon">💅</div>
+                            <h2 class="card-category-name">Hands & Feet</h2>
+                            <p class="card-service-count">2 Services</p>
+                        </div>
+                    </div>
+                    <div class="card-services">
+                        <div class="service-item">
                             <span class="service-name">Manicure (VLCC)</span>
                             <span class="service-price">₹350</span>
-                        </li>
-                        <li class="service-item">
+                        </div>
+                        <div class="service-item">
                             <span class="service-name">Pedicure (VLCC)</span>
                             <span class="service-price">₹450</span>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </section>
-
-        <section class="category cat-threading">
-            <div class="category-inner">
-                <div class="category-header">
-                    <h2 class="category-title">Threading & Massage</h2>
-                    <div class="expand-icon">
-                        <svg viewBox="0 0 24 24">
-                            <polyline points="6 9 12 15 18 9"></polyline>
-                        </svg>
+                        </div>
                     </div>
                 </div>
-                <div class="category-content">
-                    <ul class="service-list">
-                        <li class="service-item">
-                            <span class="service-name">Eyebrows</span>
-                            <span class="service-price">₹50</span>
-                        </li>
-                        <li class="service-item">
-                            <span class="service-name">Upper Lips</span>
-                            <span class="service-price">₹20</span>
-                        </li>
-                        <li class="service-item">
-                            <span class="service-name">Body Massage (60 Min) <span class="badge-popular">Relax</span></span>
-                            <span class="service-price">₹1,000</span>
-                        </li>
-                    </ul>
+                <div class="swipe-hint left">
+                    <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg>
+                    <span>Swipe</span>
+                </div>
+                <div class="swipe-hint right">
+                    <span>Swipe</span>
+                    <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg>
                 </div>
             </div>
-        </section>
-    </main>
 
-    <!-- Rate Us Button -->
-    <div class="rate-us-container">
-        <a href="https://g.page/r/YOUR_GOOGLE_MAPS_REVIEW_LINK/review" target="_blank" rel="noopener noreferrer" class="rate-us-btn">
-            <svg viewBox="0 0 24 24">
-                <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
-            </svg>
-            <span>Rate Us on Google</span>
-            <div class="stars">
-                <svg viewBox="0 0 24 24"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
-                <svg viewBox="0 0 24 24"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
-                <svg viewBox="0 0 24 24"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
-                <svg viewBox="0 0 24 24"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
-                <svg viewBox="0 0 24 24"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
+            <!-- Card 8: Threading & Massage -->
+            <div class="swipe-card" data-category="threading">
+                <div class="card-inner">
+                    <div class="card-header">
+                        <div class="card-title-wrap">
+                            <div class="card-category-icon">💆‍♀️</div>
+                            <h2 class="card-category-name">Threading & Massage</h2>
+                            <p class="card-service-count">3 Services</p>
+                        </div>
+                    </div>
+                    <div class="card-services">
+                        <div class="service-item">
+                            <span class="service-name">Eyebrows</span>
+                            <span class="service-price">₹50</span>
+                        </div>
+                        <div class="service-item">
+                            <span class="service-name">Upper Lips</span>
+                            <span class="service-price">₹20</span>
+                        </div>
+                        <div class="service-item">
+                            <span class="service-name">Body Massage (60 min) <span class="service-badge">Relax</span></span>
+                            <span class="service-price">₹1,000</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="swipe-hint left">
+                    <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg>
+                    <span>Swipe</span>
+                </div>
             </div>
-        </a>
+
+        </div>
     </div>
 
-    <footer>
-        <p>Divine Beauty Unisex Salon</p>
-        <p>&copy; 2026 All Rights Reserved</p>
-        <p>Prices subject to variation based on consultation</p>
-    </footer>
+    <!-- Navigation -->
+    <div class="nav-container">
+        <div class="nav-inner">
+            <button class="nav-arrow" id="prevBtn" aria-label="Previous">
+                <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg>
+            </button>
+            
+            <div class="nav-dots" id="navDots"></div>
+            
+            <button class="nav-arrow" id="nextBtn" aria-label="Next">
+                <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg>
+            </button>
+        </div>
+    </div>
 
     <script>
-    // Floating Card Accordion - Fixed Version
-    document.querySelectorAll('.category-header').forEach(header => {
-        header.addEventListener('click', function(e) {
-            const category = this.closest('.category');
-            const content = category.querySelector('.category-content');
-            const isOpen = category.classList.contains('active');
-
-            // Close all other categories
-            document.querySelectorAll('.category').forEach(cat => {
-                if (cat !== category && cat.classList.contains('active')) {
-                    closeCategory(cat);
-                }
-            });
-
-            // Toggle current category
-            if (isOpen) {
-                closeCategory(category);
-            } else {
-                openCategory(category);
+        // Swipe Card Interface
+        const swipeContainer = document.getElementById('swipeContainer');
+        const cardsWrapper = document.getElementById('cardsWrapper');
+        const cards = document.querySelectorAll('.swipe-card');
+        const navDots = document.getElementById('navDots');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        
+        let currentIndex = 0;
+        const totalCards = cards.length;
+        let startX = 0;
+        let currentX = 0;
+        let isDragging = false;
+        
+        // Initialize dots
+        function initDots() {
+            for (let i = 0; i < totalCards; i++) {
+                const dot = document.createElement('div');
+                dot.className = 'nav-dot' + (i === 0 ? ' active' : '');
+                dot.addEventListener('click', () => goToCard(i));
+                navDots.appendChild(dot);
             }
-        });
-    });
-
-    // Open Category Function
-    function openCategory(category) {
-        const content = category.querySelector('.category-content');
+        }
         
-        category.classList.add('active');
+        // Update active states
+        function updateActiveStates() {
+            // Update cards
+            cards.forEach((card, index) => {
+                card.classList.toggle('active', index === currentIndex);
+            });
+            
+            // Update dots
+            const dots = navDots.querySelectorAll('.nav-dot');
+            dots.forEach((dot, index) => {
+                dot.classList.toggle('active', index === currentIndex);
+            });
+            
+            // Update buttons
+            prevBtn.disabled = currentIndex === 0;
+            nextBtn.disabled = currentIndex === totalCards - 1;
+        }
         
-        // Clear inline styles from service items
-        category.querySelectorAll('.service-item').forEach(item => {
-            item.style.removeProperty('opacity');
-            item.style.removeProperty('transform');
+        // Go to specific card
+        function goToCard(index) {
+            if (index < 0 || index >= totalCards) return;
+            currentIndex = index;
+            cardsWrapper.style.transform = `translateX(-${currentIndex * 100}%)`;
+            updateActiveStates();
+        }
+        
+        // Next card
+        function nextCard() {
+            if (currentIndex < totalCards - 1) {
+                goToCard(currentIndex + 1);
+            }
+        }
+        
+        // Previous card
+        function prevCard() {
+            if (currentIndex > 0) {
+                goToCard(currentIndex - 1);
+            }
+        }
+        
+        // Touch/Mouse Events
+        function handleDragStart(e) {
+            isDragging = true;
+            startX = e.type.includes('mouse') ? e.pageX : e.touches[0].pageX;
+            cardsWrapper.style.transition = 'none';
+        }
+        
+        function handleDragMove(e) {
+            if (!isDragging) return;
+            
+            const x = e.type.includes('mouse') ? e.pageX : e.touches[0].pageX;
+            const diff = x - startX;
+            currentX = diff;
+            
+            const offset = -currentIndex * 100;
+            const dragOffset = (diff / swipeContainer.offsetWidth) * 100;
+            cardsWrapper.style.transform = `translateX(calc(${offset}% + ${dragOffset}%))`;
+        }
+        
+        function handleDragEnd() {
+            if (!isDragging) return;
+            isDragging = false;
+            
+            cardsWrapper.style.transition = 'transform 0.5s cubic-bezier(0.16, 1, 0.3, 1)';
+            
+            const threshold = swipeContainer.offsetWidth * 0.2;
+            
+            if (currentX < -threshold && currentIndex < totalCards - 1) {
+                nextCard();
+            } else if (currentX > threshold && currentIndex > 0) {
+                prevCard();
+            } else {
+                goToCard(currentIndex);
+            }
+            
+            currentX = 0;
+        }
+        
+        // Event Listeners
+        swipeContainer.addEventListener('touchstart', handleDragStart, { passive: true });
+        swipeContainer.addEventListener('touchmove', handleDragMove, { passive: true });
+        swipeContainer.addEventListener('touchend', handleDragEnd);
+        
+        swipeContainer.addEventListener('mousedown', handleDragStart);
+        swipeContainer.addEventListener('mousemove', handleDragMove);
+        swipeContainer.addEventListener('mouseup', handleDragEnd);
+        swipeContainer.addEventListener('mouseleave', handleDragEnd);
+        
+        prevBtn.addEventListener('click', prevCard);
+        nextBtn.addEventListener('click', nextCard);
+        
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowLeft') prevCard();
+            if (e.key === 'ArrowRight') nextCard();
         });
         
-        // Calculate and set height
-        requestAnimationFrame(() => {
-            content.style.maxHeight = content.scrollHeight + 'px';
+        // Service item selection
+        document.querySelectorAll('.service-item').forEach(item => {
+            item.addEventListener('click', function(e) {
+                e.stopPropagation();
+                this.classList.toggle('selected');
+            });
         });
-    }
-
-    // Close Category Function
-    function closeCategory(category) {
-        const content = category.querySelector('.category-content');
         
-        category.classList.remove('active');
-        content.style.maxHeight = '0px';
+        // Initialize
+        initDots();
+        updateActiveStates();
         
-        // Reset service items with inline styles
-        category.querySelectorAll('.service-item').forEach(item => {
-            item.style.opacity = '0';
-            item.style.transform = 'translateY(8px)';
-        });
-    }
-
-    // Service Item Selection
-    document.querySelectorAll('.service-item').forEach(item => {
-        item.addEventListener('click', function() {
-            this.classList.toggle('selected');
-        });
-    });
-</script>
+        // Prevent default touch behavior on swipe
+        swipeContainer.addEventListener('touchmove', (e) => {
+            if (isDragging) {
+                e.preventDefault();
+            }
+        }, { passive: false });
+    </script>
 </body>
 </html>

@@ -1,1549 +1,1211 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Divine Beauty | Luxury Salon Journal</title>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=Inter:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap"
-        rel="stylesheet">
+    <title>Divine Beauty | Luxury Salon Menu</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
 
     <style>
         :root {
-            /* Luxury Magazine Palette */
-            --gold-deep: #9a7b4f;
-            --gold-rich: #c9a962;
-            --gold-light: #e8d5a3;
-            --gold-pale: #f5efe6;
-
-            /* Background Colors */
-            --cream: #faf8f5;
-            --ivory: #f5f2ed;
-            --charcoal: #1a1a1a;
-            --charcoal-light: #2a2a2a;
-
-            /* Text Colors */
-            --text-dark: #1a1a1a;
-            --text-body: #3d3d3d;
-            --text-muted: #6b6b6b;
-            --text-light: #8a8a8a;
-
-            /* UI Colors */
-            --border-light: rgba(201, 169, 98, 0.2);
-            --border-medium: rgba(201, 169, 98, 0.35);
-
+            /* Velvet Dark Palette */
+            --velvet-black: #0a0808;
+            --velvet-deep: #0f0c0d;
+            --velvet-rich: #1a1517;
+            --velvet-medium: #231e20;
+            --velvet-light: #2d2729;
+            
+            /* Champagne Gold */
+            --champagne: #c9a961;
+            --champagne-light: #ddc78a;
+            --champagne-dark: #a68b3d;
+            --champagne-glow: rgba(201, 169, 97, 0.35);
+            --champagne-subtle: rgba(201, 169, 97, 0.12);
+            
+            /* Warm Beige */
+            --beige: #c4a87c;
+            --beige-light: #d9c4a4;
+            --beige-subtle: rgba(196, 168, 124, 0.15);
+            
+            /* Rose Gold */
+            --rose-gold: #c8a090;
+            --rose-gold-light: #dbb8a8;
+            --rose-gold-glow: rgba(200, 160, 144, 0.3);
+            
+            /* Text */
+            --text-primary: #f5f0e8;
+            --text-secondary: #b8a99a;
+            --text-tertiary: #7a6f66;
+            --text-accent: var(--champagne-light);
+            
             /* Gradients */
-            --gradient-gold: linear-gradient(135deg, #9a7b4f 0%, #c9a962 50%, #e8d5a3 100%);
-            --gradient-overlay: linear-gradient(180deg, rgba(26, 26, 26, 0) 0%, rgba(26, 26, 26, 0.4) 60%, rgba(26, 26, 26, 0.95) 100%);
-
-            /* Shadows */
-            --shadow-soft: 0 20px 60px rgba(0, 0, 0, 0.08);
-            --shadow-card: 0 8px 30px rgba(0, 0, 0, 0.06);
-
-            /* Transitions */
-            --ease-elegant: cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            --ease-reveal: cubic-bezier(0.16, 1, 0.3, 1);
+            --gradient-gold: linear-gradient(135deg, var(--champagne-dark) 0%, var(--champagne) 25%, var(--champagne-light) 50%, var(--champagne) 75%, var(--champagne-dark) 100%);
+            --gradient-border: linear-gradient(135deg, var(--champagne), var(--rose-gold), var(--beige), var(--champagne));
+            --gradient-card: linear-gradient(180deg, rgba(255,255,255,0.03) 0%, transparent 100%);
+            --gradient-velvet: radial-gradient(ellipse at 50% 0%, rgba(201, 169, 97, 0.05) 0%, transparent 50%);
+            
+            /* Shadows & Glows */
+            --shadow-soft: 0 4px 24px rgba(0, 0, 0, 0.4);
+            --shadow-medium: 0 8px 40px rgba(0, 0, 0, 0.5);
+            --shadow-deep: 0 16px 64px rgba(0, 0, 0, 0.6);
+            --glow-gold: 0 0 40px rgba(201, 169, 97, 0.2), 0 0 80px rgba(201, 169, 97, 0.1);
+            --glow-rose: 0 0 30px rgba(200, 160, 144, 0.15);
+            --glow-premium: 0 0 60px rgba(201, 169, 97, 0.15), 0 0 120px rgba(200, 160, 144, 0.08);
+            
+            /* Animation */
+            --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+            --ease-luxury: cubic-bezier(0.16, 1, 0.3, 1);
+            --duration-fast: 0.25s;
+            --duration-normal: 0.45s;
+            --duration-slow: 0.65s;
         }
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            -webkit-tap-highlight-color: transparent;
-        }
-
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-
-        ::-webkit-scrollbar-thumb {
-            background: var(--gold-rich);
-            border-radius: 10px;
-        }
-
-        ::-webkit-scrollbar-track {
-            background: var(--cream);
-        }
-
-        html {
-            scroll-behavior: smooth;
+        * { 
+            box-sizing: border-box; 
+            margin: 0; 
+            padding: 0; 
+            -webkit-tap-highlight-color: transparent; 
         }
 
         body {
             font-family: 'Inter', sans-serif;
-            background-color: var(--cream);
-            color: var(--text-dark);
-            line-height: 1.7;
-            overflow-x: hidden;
-        }
-
-        /* --- Magazine Cover Hero --- */
-        .magazine-cover {
+            background: var(--velvet-black);
+            color: var(--text-primary);
+            min-height: 100vh;
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
             position: relative;
-            height: 100vh;
-            min-height: 600px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
         }
 
-        .cover-bg {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 120%;
-            background-image: url('images/skin.webp');
-            background-size: cover;
-            background-position: center 20%;
-            filter: brightness(0.7) saturate(0.9);
-            will-change: transform;
-        }
-
-        .cover-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(180deg,
-                    rgba(26, 26, 26, 0.3) 0%,
-                    rgba(26, 26, 26, 0.1) 30%,
-                    rgba(26, 26, 26, 0.2) 60%,
-                    rgba(26, 26, 26, 0.95) 100%);
-        }
-
-        .cover-content {
-            position: relative;
-            z-index: 10;
-            text-align: center;
-            color: var(--gold-pale);
-            padding: 2rem;
-        }
-
-        .cover-edition {
-            font-family: 'Inter', sans-serif;
-            font-size: 0.65rem;
-            letter-spacing: 6px;
-            text-transform: uppercase;
-            color: var(--gold-light);
-            margin-bottom: 2rem;
-            opacity: 0;
-            transform: translateY(20px);
-            animation: fadeUp 1s var(--ease-elegant) 0.3s forwards;
-        }
-
-        .cover-title {
-            font-family: 'Playfair Display', serif;
-            font-size: clamp(3rem, 10vw, 6rem);
-            font-weight: 400;
-            letter-spacing: 8px;
-            line-height: 1.1;
-            margin-bottom: 0.5rem;
-            opacity: 0;
-            transform: translateY(30px);
-            animation: fadeUp 1s var(--ease-elegant) 0.5s forwards;
-        }
-
-        .cover-title span {
-            display: block;
-            font-style: italic;
-            font-size: 0.6em;
-            letter-spacing: 12px;
-            margin-top: 0.5rem;
-            color: var(--gold-light);
-        }
-
-        .cover-tagline {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 1.1rem;
-            font-weight: 300;
-            letter-spacing: 4px;
-            color: var(--gold-pale);
-            margin-top: 1.5rem;
-            opacity: 0;
-            transform: translateY(20px);
-            animation: fadeUp 1s var(--ease-elegant) 0.7s forwards;
-        }
-
-        .cover-cta {
-            margin-top: 3rem;
-            opacity: 0;
-            transform: translateY(20px);
-            animation: fadeUp 1s var(--ease-elegant) 0.9s forwards;
-        }
-
-        .scroll-indicator {
-            display: inline-flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 8px;
-            color: var(--gold-light);
-            font-size: 0.65rem;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-        }
-
-        .scroll-line {
-            width: 1px;
-            height: 40px;
-            background: linear-gradient(180deg, var(--gold-light), transparent);
-            animation: scrollPulse 2s ease-in-out infinite;
-        }
-
-        @keyframes scrollPulse {
-
-            0%,
-            100% {
-                opacity: 0.3;
-                height: 40px;
-            }
-
-            50% {
-                opacity: 1;
-                height: 50px;
-            }
-        }
-
-        @keyframes fadeUp {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* --- Magazine Navigation --- */
-        .magazine-nav {
+        /* Rich Velvet Background */
+        body::before {
+            content: '';
             position: fixed;
             top: 0;
             left: 0;
-            width: 100%;
-            padding: 1.5rem 2rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            z-index: 100;
-            background: transparent;
-            transition: all 0.5s var(--ease-elegant);
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(ellipse 100% 80% at 50% -20%, rgba(201, 169, 97, 0.04) 0%, transparent 50%),
+                radial-gradient(ellipse 80% 60% at 0% 100%, rgba(200, 160, 144, 0.03) 0%, transparent 40%),
+                radial-gradient(ellipse 60% 40% at 100% 80%, rgba(196, 168, 124, 0.03) 0%, transparent 40%);
+            pointer-events: none;
+            z-index: 0;
         }
 
-        .magazine-nav.scrolled {
-            background: rgba(250, 248, 245, 0.95);
-            backdrop-filter: blur(10px);
-            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.05);
-        }
-
-        .nav-brand {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.2rem;
-            color: var(--gold-pale);
-            letter-spacing: 3px;
-            transition: color 0.3s ease;
-        }
-
-        .magazine-nav.scrolled .nav-brand {
-            color: var(--text-dark);
-        }
-
-        .nav-cart {
-            position: relative;
-            width: 44px;
-            height: 44px;
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(201, 169, 98, 0.3);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .magazine-nav.scrolled .nav-cart {
-            background: var(--gold-pale);
-            border-color: var(--gold-pale);
-        }
-
-        .nav-cart svg {
-            width: 20px;
-            height: 20px;
-            stroke: var(--gold-light);
-            transition: stroke 0.3s ease;
-        }
-
-        .magazine-nav.scrolled .nav-cart svg {
-            stroke: var(--text-dark);
-        }
-
-        .nav-cart-count {
-            position: absolute;
-            top: -4px;
-            right: -4px;
-            width: 22px;
-            height: 22px;
-            background: var(--gradient-gold);
-            border-radius: 50%;
-            font-size: 0.65rem;
-            font-weight: 600;
-            color: white;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            opacity: 0;
-            transform: scale(0);
-            transition: all 0.3s var(--ease-reveal);
-        }
-
-        .nav-cart.has-items .nav-cart-count {
-            opacity: 1;
-            transform: scale(1);
-        }
-
-        /* --- Section Introduction --- */
-        .section-intro {
-            padding: 6rem 2rem 4rem;
-            text-align: center;
-            background: var(--cream);
-        }
-
-        .intro-label {
-            font-size: 0.65rem;
-            letter-spacing: 6px;
-            text-transform: uppercase;
-            color: var(--gold-deep);
-            margin-bottom: 1rem;
-        }
-
-        .intro-title {
-            font-family: 'Playfair Display', serif;
-            font-size: clamp(2rem, 5vw, 3rem);
-            font-weight: 400;
-            color: var(--text-dark);
-            letter-spacing: 2px;
-            margin-bottom: 1rem;
-        }
-
-        .intro-title em {
-            font-style: italic;
-            color: var(--gold-deep);
-        }
-
-        .intro-divider {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 20px;
-            margin: 2rem 0;
-        }
-
-        .divider-line {
-            width: 60px;
-            height: 1px;
-            background: var(--gold-rich);
-        }
-
-        .divider-diamond {
-            width: 8px;
-            height: 8px;
-            background: var(--gradient-gold);
-            transform: rotate(45deg);
-        }
-
-        .intro-text {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 1.15rem;
-            color: var(--text-muted);
-            max-width: 500px;
-            margin: 0 auto;
-            line-height: 1.9;
-        }
-
-        /* --- Magazine Section --- */
-        .magazine-section {
-            position: relative;
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            overflow: hidden;
-        }
-
-        .section-bg {
-            position: absolute;
-            top: -10%;
-            left: 0;
-            width: 100%;
-            height: 120%;
-            background-size: cover;
-            background-position: center;
-            will-change: transform;
-            transition: transform 0.1s linear;
-        }
-
-        .section-bg::after {
+        /* Subtle Texture */
+        body::after {
             content: '';
-            position: absolute;
+            position: fixed;
             top: 0;
             left: 0;
-            width: 100%;
-            height: 100%;
-            background: var(--gradient-overlay);
+            right: 0;
+            bottom: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+            opacity: 0.015;
+            pointer-events: none;
+            z-index: 1;
         }
 
-        /* Background Images */
-        .section-hair .section-bg {
-            background-image: url('images/haircut.webp');
-        }
-
-        .section-treatments .section-bg {
-            background-image: url('images/hairtreat.webp');
-        }
-
-        .section-mehndi .section-bg {
-            background-image: url('images/design.webp');
-        }
-
-        .section-facial .section-bg {
-            background-image: url('images/skin.webp');
-        }
-
-        .section-detan .section-bg {
-            background-image: url('images/detan.webp');
-        }
-
-        .section-waxing .section-bg {
-            background-image: url('images/waxing.webp');
-        }
-
-        .section-manicure .section-bg {
-            background-image: url('images/pedicure.webp');
-        }
-
-        .section-threading .section-bg {
-            background-image: url('images/threading.webp');
-        }
-
-        .section-content {
+        /* ═══════════════════════════════════════════
+           HEADER - VELVET LUXURY
+        ═══════════════════════════════════════════ */
+        header { 
+            text-align: center; 
+            padding: 5rem 2rem 3rem;
             position: relative;
             z-index: 10;
-            width: 100%;
-            padding: 6rem 2rem;
         }
 
-        .section-inner {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .section-header {
-            margin-bottom: 3rem;
-            opacity: 0;
-            transform: translateY(40px);
-            transition: all 0.8s var(--ease-reveal);
-        }
-
-        .section-header.revealed {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .section-number {
-            font-family: 'Playfair Display', serif;
-            font-size: 6rem;
-            font-weight: 300;
-            color: rgba(201, 169, 98, 0.15);
-            line-height: 1;
-            margin-bottom: -1rem;
-        }
-
-        .section-label {
-            font-size: 0.6rem;
-            letter-spacing: 5px;
-            text-transform: uppercase;
-            color: var(--gold-light);
-            margin-bottom: 0.5rem;
-        }
-
-        .section-title {
-            font-family: 'Playfair Display', serif;
-            font-size: clamp(2.5rem, 6vw, 4rem);
-            font-weight: 400;
-            color: var(--gold-pale);
-            letter-spacing: 3px;
-            line-height: 1.2;
-        }
-
-        /* --- Services Grid --- */
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 20px;
-        }
-
-        .service-block {
-            background: rgba(255, 255, 255, 0.03);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(201, 169, 98, 0.15);
-            border-radius: 4px;
-            padding: 2rem;
-            cursor: pointer;
+        .brand-crest {
+            width: 72px;
+            height: 72px;
+            margin: 0 auto 2rem;
             position: relative;
-            overflow: hidden;
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.6s var(--ease-elegant);
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
-        .service-block.revealed {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .service-block::before {
+        /* Luxurious Gradient Ring */
+        .brand-crest::before {
             content: '';
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 3px;
-            height: 0;
+            inset: -4px;
             background: var(--gradient-gold);
-            transition: height 0.4s var(--ease-elegant);
+            background-size: 200% 200%;
+            border-radius: 50%;
+            animation: borderRotate 5s linear infinite;
+            opacity: 0.7;
         }
 
-        .service-block:hover::before {
-            height: 100%;
+        @keyframes borderRotate {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
 
-        .service-block:hover {
-            background: rgba(255, 255, 255, 0.06);
-            border-color: rgba(201, 169, 98, 0.3);
+        .brand-crest::after {
+            content: '';
+            position: absolute;
+            inset: 3px;
+            background: var(--velvet-deep);
+            border-radius: 50%;
+            box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.5);
         }
 
-        .service-block.selected {
-            background: rgba(201, 169, 98, 0.1);
-            border-color: var(--gold-rich);
-        }
-
-        .service-block.selected::before {
-            height: 100%;
-        }
-
-        .service-name {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 1.3rem;
-            font-weight: 500;
-            color: var(--gold-pale);
-            margin-bottom: 0.3rem;
-            transition: color 0.3s ease;
-        }
-
-        .service-block.selected .service-name {
-            color: var(--gold-light);
-        }
-
-        .service-badge {
-            display: inline-block;
-            font-size: 0.55rem;
-            background: var(--gradient-gold);
-            color: var(--charcoal);
-            padding: 3px 10px;
-            border-radius: 2px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            font-weight: 600;
-            margin-bottom: 0.8rem;
-        }
-
-        .service-description {
-            font-size: 0.85rem;
-            color: rgba(232, 213, 163, 0.6);
-            margin-bottom: 1rem;
-            line-height: 1.6;
-        }
-
-        .service-footer {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding-top: 1rem;
-            border-top: 1px solid rgba(201, 169, 98, 0.1);
-        }
-
-        .service-price {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.5rem;
-            font-weight: 500;
-            color: var(--gold-light);
-        }
-
-        .service-duration {
-            font-size: 0.7rem;
-            color: rgba(232, 213, 163, 0.5);
-            letter-spacing: 1px;
-        }
-
-        .service-select {
+        .brand-crest svg {
             width: 28px;
             height: 28px;
-            border: 1px solid rgba(201, 169, 98, 0.4);
-            border-radius: 50%;
+            fill: var(--champagne);
+            position: relative;
+            z-index: 2;
+            filter: drop-shadow(0 0 15px rgba(201, 169, 97, 0.6));
+            animation: iconGlow 3s ease-in-out infinite;
+        }
+
+        @keyframes iconGlow {
+            0%, 100% { filter: drop-shadow(0 0 15px rgba(201, 169, 97, 0.6)); }
+            50% { filter: drop-shadow(0 0 25px rgba(201, 169, 97, 0.9)); }
+        }
+
+        .salon-name { 
+            font-family: 'Playfair Display', serif; 
+            font-size: 2.8rem; 
+            font-weight: 500;
+            letter-spacing: 2px;
+            background: var(--gradient-gold);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.75rem;
+            animation: textShimmer 6s linear infinite;
+        }
+
+        @keyframes textShimmer {
+            0% { background-position: 0% center; }
+            100% { background-position: 200% center; }
+        }
+
+        .tagline { 
+            font-family: 'Cormorant Garamond', serif; 
+            font-size: 0.85rem; 
+            color: var(--text-secondary); 
+            letter-spacing: 5px; 
+            text-transform: uppercase; 
+            font-style: italic;
+        }
+
+        /* Decorative Divider */
+        header::after {
+            content: '';
+            position: absolute;
+            bottom: 1rem;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--champagne), var(--rose-gold), var(--champagne), transparent);
+        }
+
+        main { 
+            max-width: 560px; 
+            margin: 0 auto; 
+            padding: 1rem 16px 2rem;
+            position: relative;
+            z-index: 10;
+        }
+
+        /* ═══════════════════════════════════════════
+           VELVET CATEGORY CARDS
+        ═══════════════════════════════════════════ */
+        .category { 
+            position: relative;
+            margin-bottom: 16px;
+            opacity: 0;
+            transform: translateY(25px);
+            animation: cardReveal 0.7s var(--ease-luxury) forwards;
+        }
+
+        .category:nth-child(1) { animation-delay: 0.1s; }
+        .category:nth-child(2) { animation-delay: 0.16s; }
+        .category:nth-child(3) { animation-delay: 0.22s; }
+        .category:nth-child(4) { animation-delay: 0.28s; }
+        .category:nth-child(5) { animation-delay: 0.34s; }
+        .category:nth-child(6) { animation-delay: 0.4s; }
+        .category:nth-child(7) { animation-delay: 0.46s; }
+        .category:nth-child(8) { animation-delay: 0.52s; }
+
+        @keyframes cardReveal {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Elegant Gradient Border */
+        .category::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 20px;
+            padding: 1.5px;
+            background: linear-gradient(
+                135deg,
+                var(--champagne) 0%,
+                var(--rose-gold) 25%,
+                var(--beige) 50%,
+                var(--rose-gold) 75%,
+                var(--champagne) 100%
+            );
+            background-size: 300% 300%;
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            opacity: 0.25;
+            transition: all var(--duration-normal) var(--ease-luxury);
+            pointer-events: none;
+            z-index: 3;
+        }
+
+        .category:hover::before {
+            opacity: 0.5;
+        }
+
+        .category.active::before {
+            opacity: 1;
+            animation: borderGlow 4s linear infinite;
+        }
+
+        @keyframes borderGlow {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Floating Card Container */
+        .category-inner {
+            position: relative;
+            background: linear-gradient(
+                165deg,
+                rgba(35, 30, 32, 0.95) 0%,
+                rgba(26, 21, 23, 0.98) 50%,
+                rgba(15, 12, 13, 0.95) 100%
+            );
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: var(--shadow-medium);
+            transition: all var(--duration-normal) var(--ease-luxury);
+        }
+
+        .category:hover .category-inner {
+            box-shadow: var(--shadow-deep);
+            transform: translateY(-4px) scale(1.005);
+        }
+
+        .category.active .category-inner {
+            box-shadow: var(--shadow-deep), var(--glow-premium);
+            transform: translateY(-6px) scale(1.01);
+        }
+
+        /* Inner Glow Effect */
+        .category-inner::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(201, 169, 97, 0.3), rgba(200, 160, 144, 0.3), transparent);
+            opacity: 0.5;
+            z-index: 1;
+        }
+
+        .category.active .category-inner::before {
+            opacity: 1;
+        }
+
+        /* ═══════════════════════════════════════════
+           CATEGORY HEADER
+        ═══════════════════════════════════════════ */
+        .category-header {
+            position: relative;
+            height: 90px;
             display: flex;
             align-items: center;
             justify-content: center;
-            transition: all 0.3s ease;
+            cursor: pointer;
+            overflow: hidden;
+            z-index: 2;
         }
 
-        .service-block:hover .service-select {
-            border-color: var(--gold-rich);
+        /* Luxurious Background Image */
+        .category-header::before {
+            content: '';
+            position: absolute;
+            top: 0; 
+            left: 0; 
+            width: 100%; 
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            z-index: 1;
+            transition: all 1.2s var(--ease-luxury);
+            filter: brightness(0.25) saturate(0.5);
         }
 
-        .service-block.selected .service-select {
-            background: var(--gradient-gold);
-            border-color: transparent;
+        .cat-hair .category-header::before { background-image: url('images/haircut.webp'); }
+        .cat-treatments .category-header::before { background-image: url('images/hairtreat.webp'); }
+        .cat-mehndi .category-header::before { background-image: url('images/design.webp'); }
+        .cat-facial .category-header::before { background-image: url('images/skin.webp'); }
+        .cat-detan .category-header::before { background-image: url('images/detan.webp'); }
+        .cat-waxing .category-header::before { background-image: url('images/waxing.webp'); }
+        .cat-manicure .category-header::before { background-image: url('images/pedicure.webp'); }
+        .cat-threading .category-header::before { background-image: url('images/threading.webp'); }
+
+        .category:hover .category-header::before,
+        .category.active .category-header::before { 
+            transform: scale(1.08);
+            filter: brightness(0.3) saturate(0.6);
         }
 
-        .service-block.selected .service-select::after {
-            content: '✓';
-            color: var(--charcoal);
-            font-size: 14px;
+        /* Velvet Overlay */
+        .category-header::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(
+                to bottom,
+                transparent 0%,
+                rgba(10, 8, 8, 0.2) 30%,
+                rgba(10, 8, 8, 0.5) 60%,
+                rgba(10, 8, 8, 0.9) 100%
+            );
+            z-index: 2;
         }
 
-        /* --- Section Divider --- */
-        .section-divider {
-            height: 1px;
-            background: linear-gradient(90deg, transparent, var(--border-light), transparent);
-            margin: 0;
-        }
-
-        /* --- Quote Section --- */
-        .quote-section {
-            padding: 8rem 2rem;
-            background: var(--charcoal);
-            text-align: center;
-        }
-
-        .quote-content {
-            max-width: 700px;
-            margin: 0 auto;
-        }
-
-        .quote-mark {
-            font-family: 'Playfair Display', serif;
-            font-size: 8rem;
-            color: var(--gold-deep);
-            line-height: 0.5;
-            opacity: 0.3;
-        }
-
-        .quote-text {
+        .category-title {
+            position: relative;
+            z-index: 3;
             font-family: 'Cormorant Garamond', serif;
-            font-size: clamp(1.5rem, 4vw, 2.2rem);
-            font-weight: 300;
-            font-style: italic;
-            color: var(--gold-pale);
-            line-height: 1.6;
-            margin-top: -1rem;
-        }
-
-        .quote-author {
-            font-size: 0.7rem;
+            font-size: 0.95rem;
+            font-weight: 600;
             letter-spacing: 4px;
             text-transform: uppercase;
-            color: var(--gold-deep);
-            margin-top: 2rem;
-        }
-
-        /* --- Floating Booking Bar --- */
-        .booking-bar {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            background: rgba(250, 248, 245, 0.98);
-            backdrop-filter: blur(20px);
-            padding: 1.5rem 2rem;
-            z-index: 100;
-            transform: translateY(100%);
-            transition: transform 0.5s var(--ease-reveal);
-            box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.08);
-        }
-
-        .booking-bar.visible {
-            transform: translateY(0);
-        }
-
-        .booking-bar-inner {
-            max-width: 600px;
-            margin: 0 auto;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        .booking-info {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .booking-services {
-            font-size: 0.7rem;
-            color: var(--text-muted);
-            text-transform: uppercase;
-            letter-spacing: 2px;
-        }
-
-        .booking-services strong {
-            color: var(--gold-deep);
-        }
-
-        .booking-total {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.8rem;
-            font-weight: 500;
-            color: var(--text-dark);
-        }
-
-        .btn-book {
-            background: var(--charcoal);
-            border: none;
-            padding: 16px 36px;
-            border-radius: 2px;
-            font-family: 'Inter', sans-serif;
-            font-size: 0.75rem;
-            font-weight: 500;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-            color: var(--gold-pale);
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .btn-book:hover {
-            background: var(--gradient-gold);
-            color: var(--charcoal);
-        }
-
-        /* --- Booking Modal --- */
-        .modal-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(26, 26, 26, 0);
-            backdrop-filter: blur(0);
-            z-index: 200;
-            display: none;
-            transition: all 0.5s ease;
-        }
-
-        .modal-overlay.active {
-            background: rgba(26, 26, 26, 0.9);
-            backdrop-filter: blur(10px);
-        }
-
-        .booking-modal {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%) scale(0.95);
-            width: 90%;
-            max-width: 500px;
-            max-height: 90vh;
-            background: var(--cream);
-            border-radius: 4px;
-            z-index: 201;
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.5s var(--ease-reveal);
-            overflow-y: auto;
-        }
-
-        .booking-modal.open {
-            opacity: 1;
-            visibility: visible;
-            transform: translate(-50%, -50%) scale(1);
-        }
-
-        .modal-header {
-            padding: 2.5rem 2rem 1.5rem;
-            text-align: center;
-            border-bottom: 1px solid var(--border-light);
-        }
-
-        .modal-title {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.8rem;
-            font-weight: 400;
-            color: var(--text-dark);
-            letter-spacing: 2px;
-            margin-bottom: 0.3rem;
-        }
-
-        .modal-subtitle {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 1rem;
-            color: var(--text-muted);
-        }
-
-        .modal-body {
-            padding: 2rem;
-        }
-
-        .selected-summary {
-            background: var(--ivory);
-            border: 1px solid var(--border-light);
-            border-radius: 4px;
-            padding: 1.5rem;
-            margin-bottom: 2rem;
-        }
-
-        .summary-header {
-            font-size: 0.6rem;
-            color: var(--text-muted);
-            text-transform: uppercase;
-            letter-spacing: 3px;
-            margin-bottom: 1rem;
-        }
-
-        .summary-item {
-            display: flex;
-            justify-content: space-between;
-            padding: 0.7rem 0;
-            border-bottom: 1px solid var(--border-light);
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 1.05rem;
-        }
-
-        .summary-item:last-child {
-            border-bottom: none;
-        }
-
-        .summary-item.total {
-            font-weight: 600;
-            color: var(--gold-deep);
-            margin-top: 0.5rem;
-            padding-top: 1rem;
-            border-top: 1px solid var(--border-medium);
-        }
-
-        .form-group {
-            margin-bottom: 1.8rem;
-        }
-
-        .form-label {
-            display: block;
-            font-size: 0.6rem;
-            color: var(--text-muted);
-            text-transform: uppercase;
-            letter-spacing: 3px;
-            margin-bottom: 12px;
-        }
-
-        input[type="text"],
-        select {
-            width: 100%;
-            background: white;
-            border: 1px solid var(--border-light);
-            padding: 14px 18px;
-            border-radius: 2px;
-            color: var(--text-dark);
-            font-size: 0.95rem;
-            font-family: 'Inter', sans-serif;
-            outline: none;
-            transition: border-color 0.3s ease;
-        }
-
-        input[type="text"]:focus,
-        select:focus {
-            border-color: var(--gold-rich);
-        }
-
-        input[type="text"]::placeholder {
-            color: var(--text-light);
-        }
-
-        .options-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 12px;
-        }
-
-        .option-btn {
-            background: white;
-            border: 1px solid var(--border-light);
-            padding: 14px;
-            border-radius: 2px;
-            color: var(--text-body);
-            font-size: 0.85rem;
-            cursor: pointer;
-            text-align: center;
-            transition: all 0.3s ease;
-        }
-
-        .option-btn:hover {
-            border-color: var(--gold-rich);
-        }
-
-        .option-btn.active {
-            background: var(--charcoal);
-            border-color: var(--charcoal);
-            color: var(--gold-pale);
-        }
-
-        .time-options {
-            grid-template-columns: repeat(3, 1fr);
-        }
-
-        .toggle-row {
+            color: var(--text-secondary);
+            text-shadow: 0 2px 15px rgba(0, 0, 0, 0.5);
             display: flex;
             align-items: center;
             gap: 14px;
-            padding: 16px;
-            background: var(--ivory);
-            border: 1px solid var(--border-light);
-            border-radius: 2px;
-            cursor: pointer;
-            transition: background 0.3s ease;
+            transition: all var(--duration-normal) var(--ease-smooth);
         }
 
-        .toggle-row:hover {
-            background: white;
-        }
-
-        .toggle-switch {
-            width: 48px;
-            height: 26px;
-            background: var(--border-light);
-            border-radius: 13px;
-            position: relative;
-            transition: background 0.3s ease;
-            flex-shrink: 0;
-        }
-
-        .toggle-switch.on {
-            background: var(--gold-rich);
-        }
-
-        .toggle-switch::after {
+        /* Elegant Decorative Lines */
+        .category-title::before,
+        .category-title::after {
             content: '';
+            width: 0;
+            height: 1px;
+            background: var(--gradient-gold);
+            box-shadow: 0 0 10px var(--champagne-glow);
+            transition: width var(--duration-normal) var(--ease-luxury);
+        }
+
+        .category:hover .category-title::before,
+        .category:hover .category-title::after,
+        .category.active .category-title::before,
+        .category.active .category-title::after {
+            width: 28px;
+        }
+
+        .category:hover .category-title {
+            letter-spacing: 5px;
+            color: var(--text-primary);
+        }
+
+        .category.active .category-title {
+            color: var(--champagne-light);
+            text-shadow: 0 0 20px rgba(201, 169, 97, 0.4);
+        }
+
+        /* Expand Icon - Luxury */
+        .expand-icon {
             position: absolute;
-            top: 3px;
-            left: 3px;
-            width: 20px;
-            height: 20px;
-            background: white;
+            right: 18px;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 4;
+            width: 36px;
+            height: 36px;
             border-radius: 50%;
-            transition: transform 0.3s var(--ease-elegant);
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-        }
-
-        .toggle-switch.on::after {
-            transform: translateX(22px);
-        }
-
-        .toggle-text {
-            font-size: 0.85rem;
-            color: var(--text-body);
-        }
-
-        .whatsapp-btn {
-            width: 100%;
-            background: var(--charcoal);
-            border: none;
-            padding: 18px;
-            border-radius: 2px;
-            font-size: 0.75rem;
-            font-weight: 500;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-            color: var(--gold-pale);
-            cursor: pointer;
-            margin-top: 1rem;
-            transition: all 0.3s ease;
-        }
-
-        .whatsapp-btn:hover {
-            background: linear-gradient(135deg, #25d366 0%, #128c7e 100%);
-            color: white;
-        }
-
-        .modal-close {
-            position: absolute;
-            top: 1.5rem;
-            right: 1.5rem;
-            width: 40px;
-            height: 40px;
-            background: transparent;
-            border: 1px solid var(--border-light);
-            border-radius: 50%;
-            cursor: pointer;
+            background: linear-gradient(135deg, rgba(201, 169, 97, 0.15), rgba(200, 160, 144, 0.1));
+            border: 1px solid rgba(201, 169, 97, 0.3);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.2rem;
-            color: var(--text-muted);
-            transition: all 0.3s ease;
+            transition: all var(--duration-normal) var(--ease-luxury);
+            opacity: 0;
         }
 
-        .modal-close:hover {
-            background: var(--charcoal);
-            border-color: var(--charcoal);
-            color: var(--gold-pale);
+        .category-header:hover .expand-icon {
+            opacity: 1;
         }
 
-        /* --- Footer --- */
-        .magazine-footer {
-            background: var(--charcoal);
-            padding: 4rem 2rem;
-            text-align: center;
+        .expand-icon svg {
+            width: 16px;
+            height: 16px;
+            stroke: var(--champagne-light);
+            stroke-width: 2;
+            fill: none;
+            transition: all var(--duration-normal) var(--ease-smooth);
         }
 
-        .footer-brand {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.5rem;
-            color: var(--gold-pale);
-            letter-spacing: 4px;
-            margin-bottom: 1rem;
+        .category.active .expand-icon {
+            background: linear-gradient(135deg, var(--champagne), var(--champagne-light));
+            border-color: transparent;
+            box-shadow: 0 4px 20px rgba(201, 169, 97, 0.5);
+            opacity: 1;
         }
 
-        .footer-tagline {
+        .category.active .expand-icon svg {
+            stroke: var(--velvet-deep);
+            transform: rotate(180deg);
+        }
+
+        /* ═══════════════════════════════════════════
+           CATEGORY CONTENT - EXPANSION
+        ═══════════════════════════════════════════ */
+        .category-content {
+            max-height: 0;
+            overflow: hidden;
+            position: relative;
+            transition: max-height var(--duration-slow) var(--ease-luxury);
+        }
+
+        /* Elegant Divider */
+        .category-content::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: calc(100% - 50px);
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--champagne), rgba(200, 160, 144, 0.5), var(--champagne), transparent);
+            opacity: 0.4;
+        }
+
+        .service-list { 
+            list-style: none; 
+            padding: 10px 12px 14px;
+            position: relative;
+        }
+
+        /* ═══════════════════════════════════════════
+           SERVICE ITEMS - PREMIUM
+        ═══════════════════════════════════════════ */
+        .service-item {
+            position: relative;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 22px;
+            margin: 5px 0;
+            border-radius: 14px;
+            background: transparent;
+            overflow: hidden;
+            cursor: pointer;
+            opacity: 0;
+            transform: translateY(15px);
+            transition: all 0.4s var(--ease-luxury);
+        }
+
+        /* Staggered Reveal */
+        .category.active .service-item {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .category.active .service-item:nth-child(1) { transition-delay: 0.08s; }
+        .category.active .service-item:nth-child(2) { transition-delay: 0.16s; }
+        .category.active .service-item:nth-child(3) { transition-delay: 0.24s; }
+        .category.active .service-item:nth-child(4) { transition-delay: 0.32s; }
+        .category.active .service-item:nth-child(5) { transition-delay: 0.40s; }
+
+        /* Premium Hover Background */
+        .service-item::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(
+                135deg,
+                var(--champagne-subtle) 0%,
+                rgba(200, 160, 144, 0.08) 50%,
+                var(--beige-subtle) 100%
+            );
+            border-radius: 14px;
+            opacity: 0;
+            transition: opacity var(--duration-normal) var(--ease-smooth);
+        }
+
+        .service-item:hover::before {
+            opacity: 1;
+        }
+
+        /* Gold Accent Line */
+        .service-item::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 0;
+            height: 55%;
+            background: linear-gradient(180deg, var(--champagne-light), var(--rose-gold-light));
+            border-radius: 0 5px 5px 0;
+            box-shadow: 0 0 20px var(--champagne-glow), 0 0 40px rgba(200, 160, 144, 0.2);
+            transition: width var(--duration-fast) var(--ease-luxury);
+        }
+
+        .service-item:hover::after {
+            width: 4px;
+        }
+
+        .service-name { 
+            position: relative;
+            z-index: 1;
+            font-weight: 400; 
+            font-size: 0.95rem; 
+            color: var(--text-primary);
+            transition: all var(--duration-fast) var(--ease-smooth);
+        }
+
+        .service-item:hover .service-name {
+            color: var(--champagne-light);
+            transform: translateX(8px);
+        }
+
+        .service-price { 
+            position: relative;
+            z-index: 1;
+            color: var(--text-secondary); 
+            font-weight: 600; 
+            font-size: 0.95rem;
+            letter-spacing: 0.5px;
+            transition: all var(--duration-fast) var(--ease-smooth);
+        }
+
+        .service-item:hover .service-price {
+            color: var(--champagne);
+            transform: scale(1.08);
+            text-shadow: 0 0 20px rgba(201, 169, 97, 0.5);
+        }
+
+        /* Badge - Luxury */
+        .badge-popular {
+            font-size: 0.52rem;
+            background: var(--gradient-gold);
+            background-size: 200% auto;
+            color: var(--velvet-deep);
+            padding: 3px 12px;
+            border-radius: 20px;
+            text-transform: uppercase;
+            font-weight: 700;
+            letter-spacing: 1px;
+            box-shadow: 0 2px 12px rgba(201, 169, 97, 0.4);
+            animation: badgeShimmer 3s linear infinite;
+        }
+
+        @keyframes badgeShimmer {
+            0% { background-position: 0% center; }
+            100% { background-position: 200% center; }
+        }
+
+        /* Selected State - Gold Border */
+        .service-item.selected {
+            background: var(--champagne-subtle);
+            box-shadow: inset 0 0 0 1px var(--champagne), 0 0 30px rgba(201, 169, 97, 0.15);
+        }
+
+        .service-item.selected::after {
+            width: 4px;
+        }
+
+        .service-item.selected .service-name {
+            color: var(--champagne-light);
+        }
+
+        .service-item.selected .service-price {
+            color: var(--champagne);
+        }
+
+        /* ═══════════════════════════════════════════
+           RATE US BUTTON - VELVET LUXURY
+        ═══════════════════════════════════════════ */
+        .rate-us-container {
+            max-width: 560px;
+            margin: 2.5rem auto;
+            padding: 0 16px;
+            position: relative;
+            z-index: 10;
+        }
+
+        .rate-us-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 16px;
+            width: 100%;
+            padding: 22px 28px;
+            background: linear-gradient(
+                165deg,
+                rgba(35, 30, 32, 0.95) 0%,
+                rgba(26, 21, 23, 0.98) 100%
+            );
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1.5px solid rgba(201, 169, 97, 0.25);
+            border-radius: 18px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all var(--duration-normal) var(--ease-luxury);
+            box-shadow: var(--shadow-medium);
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Animated Border */
+        .rate-us-btn::before {
+            content: '';
+            position: absolute;
+            inset: -2px;
+            background: var(--gradient-border);
+            background-size: 300% 300%;
+            border-radius: 20px;
+            opacity: 0;
+            transition: opacity var(--duration-normal) var(--ease-smooth);
+            z-index: -1;
+        }
+
+        .rate-us-btn::after {
+            content: '';
+            position: absolute;
+            inset: 1px;
+            background: linear-gradient(
+                165deg,
+                rgba(35, 30, 32, 0.98) 0%,
+                rgba(26, 21, 23, 1) 100%
+            );
+            border-radius: 17px;
+            z-index: -1;
+        }
+
+        .rate-us-btn:hover::before {
+            opacity: 1;
+            animation: borderGlow 4s linear infinite;
+        }
+
+        .rate-us-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-deep), var(--glow-premium);
+        }
+
+        .rate-us-btn svg {
+            width: 22px;
+            height: 22px;
+            fill: var(--champagne);
+            transition: all var(--duration-normal) var(--ease-luxury);
+            filter: drop-shadow(0 0 10px rgba(201, 169, 97, 0.5));
+            position: relative;
+            z-index: 1;
+        }
+
+        .rate-us-btn:hover svg {
+            transform: scale(1.15) rotate(10deg);
+            filter: drop-shadow(0 0 20px rgba(201, 169, 97, 0.8));
+        }
+
+        .rate-us-btn span {
             font-family: 'Cormorant Garamond', serif;
             font-size: 0.9rem;
-            color: var(--gold-deep);
-            margin-bottom: 2rem;
+            font-weight: 600;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--text-secondary);
+            position: relative;
+            z-index: 1;
+            transition: all var(--duration-normal) var(--ease-smooth);
         }
 
-        .footer-divider {
-            width: 60px;
-            height: 1px;
-            background: var(--gold-deep);
-            margin: 2rem auto;
-            opacity: 0.3;
+        .rate-us-btn:hover span {
+            color: var(--champagne-light);
+            letter-spacing: 4px;
         }
 
-        .footer-copyright {
-            font-size: 0.65rem;
-            color: var(--text-light);
+        .rate-us-btn .stars {
+            display: flex;
+            gap: 4px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .rate-us-btn .stars svg {
+            width: 14px;
+            height: 14px;
+        }
+
+        /* ═══════════════════════════════════════════
+           FOOTER
+        ═══════════════════════════════════════════ */
+        footer { 
+            text-align: center; 
+            padding: 3rem 2rem 5rem;
+            position: relative;
+            z-index: 10;
+        }
+
+        /* Decorative Top Element */
+        footer::before {
+            content: '✦';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.8rem;
+            color: var(--champagne);
+            opacity: 0.6;
+        }
+
+        footer p {
+            font-size: 0.72rem; 
+            color: var(--text-tertiary);
+            letter-spacing: 1px;
+            margin: 5px 0;
+        }
+
+        footer p:first-of-type {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 0.9rem;
+            font-style: italic;
+            color: var(--text-secondary);
             letter-spacing: 2px;
+            margin-bottom: 10px;
         }
 
-        /* --- Responsive --- */
-        @media (max-width: 768px) {
-            .section-content {
-                padding: 4rem 1.5rem;
+        /* ═══════════════════════════════════════════
+           RESPONSIVE
+        ═══════════════════════════════════════════ */
+        @media (max-width: 480px) {
+            header {
+                padding: 4rem 1.5rem 2.5rem;
             }
 
-            .services-grid {
-                grid-template-columns: 1fr;
+            .brand-crest {
+                width: 62px;
+                height: 62px;
             }
 
-            .section-number {
-                font-size: 4rem;
+            .brand-crest svg {
+                width: 24px;
+                height: 24px;
+            }
+
+            .salon-name { 
+                font-size: 2.2rem; 
+                letter-spacing: 1px;
+            }
+            
+            .tagline {
+                font-size: 0.75rem;
+                letter-spacing: 3px;
+            }
+
+            main {
+                padding: 0.5rem 14px 1.5rem;
+            }
+            
+            .category-header {
+                height: 78px;
+            }
+            
+            .category-title {
+                font-size: 0.85rem;
+                letter-spacing: 3px;
+            }
+
+            .category-title::before,
+            .category-title::after {
+                width: 0;
+            }
+
+            .category.active .category-title::before,
+            .category.active .category-title::after {
+                width: 22px;
+            }
+            
+            .service-item {
+                padding: 14px 18px;
+            }
+            
+            .service-name {
+                font-size: 0.9rem;
+            }
+
+            .service-price {
+                font-size: 0.9rem;
+            }
+
+            .rate-us-container {
+                padding: 0 14px;
+            }
+            
+            .rate-us-btn {
+                padding: 18px 22px;
+            }
+
+            .rate-us-btn span {
+                font-size: 0.8rem;
+                letter-spacing: 2px;
+            }
+
+            .rate-us-btn .stars svg {
+                width: 12px;
+                height: 12px;
+            }
+        }
+
+        /* Touch Feedback */
+        @media (hover: none) {
+            .category:active .category-inner {
+                transform: scale(0.98);
             }
         }
     </style>
 </head>
-
 <body>
 
-    <!-- Magazine Navigation -->
-    <nav class="magazine-nav" id="magazineNav">
-        <div class="nav-brand">Divine Beauty</div>
-        <div class="nav-cart" id="navCart" onclick="openModal()">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
-                <line x1="3" y1="6" x2="21" y2="6"></line>
-                <path d="M16 10a4 4 0 0 1-8 0"></path>
+    <header>
+        <div class="brand-crest">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
             </svg>
-            <span class="nav-cart-count" id="navCartCount">0</span>
         </div>
-    </nav>
+        <h1 class="salon-name">Divine Beauty</h1>
+        <p class="tagline">Luxury Salon & Spa Experience</p>
+    </header>
 
-    <!-- Magazine Cover Hero -->
-    <section class="magazine-cover">
-        <div class="cover-bg" id="coverBg"></div>
-        <div class="cover-overlay"></div>
-        <div class="cover-content">
-            <div class="cover-edition">The Beauty Journal</div>
-            <h1 class="cover-title">
-                Divine
-                <span>Beauty</span>
-            </h1>
-            <p class="cover-tagline">Where Luxury Meets Transformation</p>
-            <div class="cover-cta">
-                <div class="scroll-indicator">
-                    <span>Explore</span>
-                    <div class="scroll-line"></div>
+    <main>
+        <section class="category cat-hair">
+            <div class="category-inner">
+                <div class="category-header">
+                    <h2 class="category-title">Hair & Styling</h2>
+                    <div class="expand-icon">
+                        <svg viewBox="0 0 24 24">
+                            <polyline points="6 9 12 15 18 9"></polyline>
+                        </svg>
+                    </div>
+                </div>
+                <div class="category-content">
+                    <ul class="service-list">
+                        <li class="service-item">
+                            <span class="service-name">'U' Shape Hair Cut</span>
+                            <span class="service-price">₹100</span>
+                        </li>
+                        <li class="service-item">
+                            <span class="service-name">Straight Hair Cut</span>
+                            <span class="service-price">₹100</span>
+                        </li>
+                        <li class="service-item">
+                            <span class="service-name">Step Hair Cut <span class="badge-popular">Trending</span></span>
+                            <span class="service-price">₹300</span>
+                        </li>
+                        <li class="service-item">
+                            <span class="service-name">Hair Wash (L'Oréal)</span>
+                            <span class="service-price">₹100</span>
+                        </li>
+                    </ul>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Section Introduction -->
-    <section class="section-intro">
-        <div class="intro-label">Our Services</div>
-        <h2 class="intro-title">The Art of <em>Beautiful</em> Living</h2>
-        <div class="intro-divider">
-            <div class="divider-line"></div>
-            <div class="divider-diamond"></div>
-            <div class="divider-line"></div>
-        </div>
-        <p class="intro-text">
-            Discover our curated collection of luxury beauty treatments,
-            each designed to enhance your natural radiance and renew your spirit.
-        </p>
-    </section>
+        <section class="category cat-treatments">
+            <div class="category-inner">
+                <div class="category-header">
+                    <h2 class="category-title">Treatments & Color</h2>
+                    <div class="expand-icon">
+                        <svg viewBox="0 0 24 24">
+                            <polyline points="6 9 12 15 18 9"></polyline>
+                        </svg>
+                    </div>
+                </div>
+                <div class="category-content">
+                    <ul class="service-list">
+                        <li class="service-item">
+                            <span class="service-name">Permanent Straightening</span>
+                            <span class="service-price">₹4,000</span>
+                        </li>
+                        <li class="service-item">
+                            <span class="service-name">Hair Smoothing</span>
+                            <span class="service-price">₹3,500</span>
+                        </li>
+                        <li class="service-item">
+                            <span class="service-name">Hair Spa (L'Oréal)</span>
+                            <span class="service-price">₹800</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
 
-    <!-- Magazine Sections Container -->
-    <div id="sectionsContainer">
-        <!-- Sections will be rendered dynamically -->
+        <section class="category cat-mehndi">
+            <div class="category-inner">
+                <div class="category-header">
+                    <h2 class="category-title">Mehndi Art</h2>
+                    <div class="expand-icon">
+                        <svg viewBox="0 0 24 24">
+                            <polyline points="6 9 12 15 18 9"></polyline>
+                        </svg>
+                    </div>
+                </div>
+                <div class="category-content">
+                    <ul class="service-list">
+                        <li class="service-item">
+                            <span class="service-name">Mehndi (Shahnaz)</span>
+                            <span class="service-price">₹300</span>
+                        </li>
+                        <li class="service-item">
+                            <span class="service-name">Mehndi (Nupur)</span>
+                            <span class="service-price">₹250</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section class="category cat-facial">
+            <div class="category-inner">
+                <div class="category-header">
+                    <h2 class="category-title">Facial & Skin</h2>
+                    <div class="expand-icon">
+                        <svg viewBox="0 0 24 24">
+                            <polyline points="6 9 12 15 18 9"></polyline>
+                        </svg>
+                    </div>
+                </div>
+                <div class="category-content">
+                    <ul class="service-list">
+                        <li class="service-item">
+                            <span class="service-name">Shahnaz Power Facial <span class="badge-popular">Top Pick</span></span>
+                            <span class="service-price">₹800</span>
+                        </li>
+                        <li class="service-item">
+                            <span class="service-name">Fruit Facial (VLCC)</span>
+                            <span class="service-price">₹600</span>
+                        </li>
+                        <li class="service-item">
+                            <span class="service-name">Facial (Cheryl's)</span>
+                            <span class="service-price">₹600</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section class="category cat-detan">
+            <div class="category-inner">
+                <div class="category-header">
+                    <h2 class="category-title">De-Tan Care</h2>
+                    <div class="expand-icon">
+                        <svg viewBox="0 0 24 24">
+                            <polyline points="6 9 12 15 18 9"></polyline>
+                        </svg>
+                    </div>
+                </div>
+                <div class="category-content">
+                    <ul class="service-list">
+                        <li class="service-item">
+                            <span class="service-name">De-Tan (Face Only)</span>
+                            <span class="service-price">₹150</span>
+                        </li>
+                        <li class="service-item">
+                            <span class="service-name">De-Tan (Full Body)</span>
+                            <span class="service-price">₹650</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section class="category cat-waxing">
+            <div class="category-inner">
+                <div class="category-header">
+                    <h2 class="category-title">Waxing</h2>
+                    <div class="expand-icon">
+                        <svg viewBox="0 0 24 24">
+                            <polyline points="6 9 12 15 18 9"></polyline>
+                        </svg>
+                    </div>
+                </div>
+                <div class="category-content">
+                    <ul class="service-list">
+                        <li class="service-item">
+                            <span class="service-name">Full Hand Waxing</span>
+                            <span class="service-price">₹250</span>
+                        </li>
+                        <li class="service-item">
+                            <span class="service-name">Full Leg Waxing</span>
+                            <span class="service-price">₹450</span>
+                        </li>
+                        <li class="service-item">
+                            <span class="service-name">Face Waxing</span>
+                            <span class="service-price">₹50</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section class="category cat-manicure">
+            <div class="category-inner">
+                <div class="category-header">
+                    <h2 class="category-title">Hands & Feet</h2>
+                    <div class="expand-icon">
+                        <svg viewBox="0 0 24 24">
+                            <polyline points="6 9 12 15 18 9"></polyline>
+                        </svg>
+                    </div>
+                </div>
+                <div class="category-content">
+                    <ul class="service-list">
+                        <li class="service-item">
+                            <span class="service-name">Manicure (VLCC)</span>
+                            <span class="service-price">₹350</span>
+                        </li>
+                        <li class="service-item">
+                            <span class="service-name">Pedicure (VLCC)</span>
+                            <span class="service-price">₹450</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section class="category cat-threading">
+            <div class="category-inner">
+                <div class="category-header">
+                    <h2 class="category-title">Threading & Massage</h2>
+                    <div class="expand-icon">
+                        <svg viewBox="0 0 24 24">
+                            <polyline points="6 9 12 15 18 9"></polyline>
+                        </svg>
+                    </div>
+                </div>
+                <div class="category-content">
+                    <ul class="service-list">
+                        <li class="service-item">
+                            <span class="service-name">Eyebrows</span>
+                            <span class="service-price">₹50</span>
+                        </li>
+                        <li class="service-item">
+                            <span class="service-name">Upper Lips</span>
+                            <span class="service-price">₹20</span>
+                        </li>
+                        <li class="service-item">
+                            <span class="service-name">Body Massage (60 min) <span class="badge-popular">Relax</span></span>
+                            <span class="service-price">₹1,000</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Rate Us Button -->
+    <div class="rate-us-container">
+        <a href="https://g.page/r/YOUR_GOOGLE_MAPS_REVIEW_LINK/review" target="_blank" rel="noopener noreferrer" class="rate-us-btn">
+            <svg viewBox="0 0 24 24">
+                <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
+            </svg>
+            <span>Rate Us</span>
+            <div class="stars">
+                <svg viewBox="0 0 24 24"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
+                <svg viewBox="0 0 24 24"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
+                <svg viewBox="0 0 24 24"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
+                <svg viewBox="0 0 24 24"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
+                <svg viewBox="0 0 24 24"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
+            </div>
+        </a>
     </div>
 
-    <!-- Quote Section -->
-    <section class="quote-section">
-        <div class="quote-content">
-            <div class="quote-mark">"</div>
-            <p class="quote-text">Beauty is not in the face; beauty is a light in the heart that shines through the
-                eyes.</p>
-            <div class="quote-author">— Kahlil Gibran</div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="magazine-footer">
-        <div class="footer-brand">Divine Beauty</div>
-        <div class="footer-tagline">Luxury Unisex Salon & Spa</div>
-        <div class="footer-divider"></div>
-        <div class="footer-copyright">© 2026 Divine Beauty. All Rights Reserved.</div>
+    <footer>
+        <p>Divine Beauty Unisex Salon</p>
+        <p>© 2026 All Rights Reserved</p>
     </footer>
 
-    <!-- Floating Booking Bar -->
-    <div class="booking-bar" id="bookingBar">
-        <div class="booking-bar-inner">
-            <div class="booking-info">
-                <span class="booking-services"><strong id="selectedCount">0</strong> services selected</span>
-                <span class="booking-total" id="totalPrice">₹0</span>
-            </div>
-            <button class="btn-book" onclick="openModal()">Book Appointment</button>
-        </div>
-    </div>
-
-    <!-- Booking Modal -->
-    <div class="modal-overlay" id="modalOverlay" onclick="closeModal()"></div>
-    <div class="booking-modal" id="bookingModal">
-        <button class="modal-close" onclick="closeModal()">×</button>
-        <div class="modal-header">
-            <h3 class="modal-title">Book Your Visit</h3>
-            <p class="modal-subtitle">Complete your appointment details</p>
-        </div>
-        <div class="modal-body">
-            <div class="selected-summary" id="selectedSummary">
-                <div class="summary-header">Your Selections</div>
-            </div>
-
-            <div class="form-group">
-                <label class="form-label">Preferred Date</label>
-                <div class="options-grid">
-                    <button class="option-btn active" onclick="selectDate(this, 'Today')">Today</button>
-                    <button class="option-btn" onclick="selectDate(this, 'Tomorrow')">Tomorrow</button>
-                </div>
-                <input type="text" id="customDate" placeholder="Or enter a specific date" style="margin-top:12px;">
-            </div>
-
-            <div class="form-group">
-                <label class="form-label">Preferred Time</label>
-                <div class="options-grid time-options">
-                    <button class="option-btn" onclick="selectTime(this, '10:00 AM')">10 AM</button>
-                    <button class="option-btn" onclick="selectTime(this, '12:30 PM')">12:30 PM</button>
-                    <button class="option-btn" onclick="selectTime(this, '03:00 PM')">03 PM</button>
-                    <button class="option-btn" onclick="selectTime(this, '05:30 PM')">05:30 PM</button>
-                    <button class="option-btn" onclick="selectTime(this, '07:00 PM')">07 PM</button>
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label class="form-label">Your Details</label>
-                <input type="text" id="userName" placeholder="Your Name" style="margin-bottom:12px;">
-                <select id="userGender">
-                    <option value="Not Specified">Select Gender</option>
-                    <option value="Female">Female</option>
-                    <option value="Male">Male</option>
-                </select>
-            </div>
-
-            <div class="toggle-row" onclick="toggleHomeService()">
-                <div class="toggle-switch" id="homeToggle"></div>
-                <span class="toggle-text">Request Home Service (+ Extra Charges)</span>
-            </div>
-
-            <button class="whatsapp-btn" onclick="sendToWhatsApp()">Confirm via WhatsApp</button>
-        </div>
-    </div>
-
     <script>
-        // --- CONFIGURATION ---
-        const WHATSAPP_NUMBER = "918219928236";
-        const SALON_NAME = "Divine Beauty Unisex Salon";
+        // Dark Velvet Luxury Accordion - Fixed Version
+        document.querySelectorAll('.category-header').forEach(header => {
+            header.addEventListener('click', function(e) {
+                const category = this.closest('.category');
+                const content = category.querySelector('.category-content');
+                const isOpen = category.classList.contains('active');
 
-        // --- SERVICES DATA ---
-        const categoriesData = [
-            {
-                id: 'hair',
-                label: 'Signature Services',
-                title: 'Hair & Styling',
-                class: 'section-hair',
-                description: 'Expert cuts and styling for every occasion',
-                services: [
-                    { id: 'hair-1', name: 'U Shape Hair Cut', description: 'Elegant U-shaped silhouette for flowing movement', price: 100, duration: '30 min' },
-                    { id: 'hair-2', name: 'Straight Hair Cut', description: 'Clean, precision cut for sleek lines', price: 100, duration: '30 min' },
-                    { id: 'hair-3', name: 'Step Hair Cut', description: 'Layered dimension for volume and style', price: 300, duration: '45 min', badge: 'Trending' },
-                    { id: 'hair-4', name: 'Hair Wash (LOréal)', description: 'Professional cleansing with premium products', price: 100, duration: '20 min' }
-                ]
-            },
-            {
-                id: 'treatments',
-                label: 'Premium Care',
-                title: 'Treatments & Color',
-                class: 'section-treatments',
-                description: 'Transformative hair treatments',
-                services: [
-                    { id: 'treat-1', name: 'Permanent Straightening', description: 'LOréal professional permanent smoothing', price: 4000, duration: '4 hrs', badge: 'Premium' },
-                    { id: 'treat-2', name: 'Hair Smoothing', description: 'Frizz-free silky smooth results', price: 3500, duration: '3 hrs' },
-                    { id: 'treat-3', name: 'Hair Spa (LOréal)', description: 'Deep conditioning and relaxation', price: 800, duration: '1 hr' }
-                ]
-            },
-            {
-                id: 'mehndi',
-                label: 'Traditional Art',
-                title: 'Mehndi Art',
-                class: 'section-mehndi',
-                description: 'Intricate henna designs',
-                services: [
-                    { id: 'mehndi-1', name: 'Mehndi (Shahnaz)', description: 'Premium herbal henna application', price: 300, duration: '1 hr' },
-                    { id: 'mehndi-2', name: 'Mehndi (Nupur)', description: 'Traditional henna with rich color', price: 250, duration: '1 hr' }
-                ]
-            },
-            {
-                id: 'facial',
-                label: 'Skin Rejuvenation',
-                title: 'Facial & Skin',
-                class: 'section-facial',
-                description: 'Radiant skin treatments',
-                services: [
-                    { id: 'facial-1', name: 'Facial (Shahnaz Power)', description: 'Ayurvedic power treatment for glowing skin', price: 800, duration: '1 hr', badge: 'Top Pick' },
-                    { id: 'facial-2', name: 'Fruit Facial (VLCC)', description: 'Natural fruit extracts for fresh radiance', price: 600, duration: '45 min' },
-                    { id: 'facial-3', name: 'Facial (Cheryls)', description: 'Professional skincare treatment', price: 600, duration: '45 min' }
-                ]
-            },
-            {
-                id: 'detan',
-                label: 'Skin Brightening',
-                title: 'De-Tan Care',
-                class: 'section-detan',
-                description: 'Sun damage repair treatments',
-                services: [
-                    { id: 'detan-1', name: 'De-Tan (Face)', description: 'Gentle tan removal for face', price: 150, duration: '30 min' },
-                    { id: 'detan-2', name: 'De-Tan (Body)', description: 'Full body tan removal treatment', price: 650, duration: '1 hr' }
-                ]
-            },
-            {
-                id: 'waxing',
-                label: 'Smooth Finish',
-                title: 'Waxing',
-                class: 'section-waxing',
-                description: 'Silky smooth skin',
-                services: [
-                    { id: 'waxing-1', name: 'Full Hand Waxing', description: 'Complete arm waxing service', price: 250, duration: '30 min' },
-                    { id: 'waxing-2', name: 'Full Leg Waxing', description: 'Complete leg waxing service', price: 450, duration: '45 min' },
-                    { id: 'waxing-3', name: 'Face Waxing', description: 'Precise facial hair removal', price: 50, duration: '15 min' }
-                ]
-            },
-            {
-                id: 'manicure',
-                label: 'Nail Care',
-                title: 'Hands & Feet',
-                class: 'section-manicure',
-                description: 'Pampering nail treatments',
-                services: [
-                    { id: 'mani-1', name: 'Manicure (VLCC)', description: 'Complete hand and nail care', price: 350, duration: '45 min' },
-                    { id: 'mani-2', name: 'Pedicure (VLCC)', description: 'Relaxing foot spa and care', price: 450, duration: '1 hr', badge: 'Relaxing' }
-                ]
-            },
-            {
-                id: 'threading',
-                label: 'Precision & Relax',
-                title: 'Threading & Massage',
-                class: 'section-threading',
-                description: 'Precise grooming and relaxation',
-                services: [
-                    { id: 'thread-1', name: 'Eyebrows', description: 'Precise eyebrow shaping', price: 50, duration: '10 min' },
-                    { id: 'thread-2', name: 'Upper Lips', description: 'Quick upper lip threading', price: 20, duration: '5 min' },
-                    { id: 'thread-3', name: 'Body Massage', description: 'Full body relaxation massage', price: 1000, duration: '1 hr', badge: 'Relax' }
-                ]
-            }
-        ];
-
-        // --- STATE ---
-        let selectedServices = [];
-        let selectedDate = 'Today';
-        let selectedTime = '';
-        let homeService = false;
-
-        // --- INITIALIZE ---
-        function init() {
-            renderSections();
-            setupScrollAnimations();
-            setupParallax();
-        }
-
-        // --- RENDER SECTIONS ---
-        function renderSections() {
-            const container = document.getElementById('sectionsContainer');
-
-            container.innerHTML = categoriesData.map((cat, index) => `
-                <section class="magazine-section ${cat.class}">
-                    <div class="section-bg"></div>
-                    <div class="section-content">
-                        <div class="section-inner">
-                            <div class="section-header">
-                                <div class="section-number">0${index + 1}</div>
-                                <div class="section-label">${cat.label}</div>
-                                <h2 class="section-title">${cat.title}</h2>
-                            </div>
-                            
-                            <div class="services-grid">
-                                ${cat.services.map(service => `
-                                    <div class="service-block" 
-                                         id="block-${service.id}" 
-                                         onclick="toggleService('${service.id}', '${cat.id}')">
-                                        ${service.badge ? `<span class="service-badge">${service.badge}</span>` : ''}
-                                        <h3 class="service-name">${service.name}</h3>
-                                        <p class="service-description">${service.description}</p>
-                                        <div class="service-footer">
-                                            <div>
-                                                <div class="service-price">₹${service.price.toLocaleString('en-IN')}</div>
-                                                <div class="service-duration">${service.duration}</div>
-                                            </div>
-                                            <div class="service-select"></div>
-                                        </div>
-                                    </div>
-                                `).join('')}
-                            </div>
-                        </div>
-                    </div>
-                </section>
-                <div class="section-divider"></div>
-            `).join('');
-        }
-
-        // --- SCROLL ANIMATIONS ---
-        function setupScrollAnimations() {
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        if (entry.target.classList.contains('section-header')) {
-                            entry.target.classList.add('revealed');
-                        }
-                        if (entry.target.classList.contains('service-block')) {
-                            entry.target.classList.add('revealed');
-                        }
+                // Close all other categories
+                document.querySelectorAll('.category').forEach(cat => {
+                    if (cat !== category && cat.classList.contains('active')) {
+                        closeCategory(cat);
                     }
                 });
-            }, {
-                threshold: 0.2,
-                rootMargin: '0px 0px -50px 0px'
-            });
 
-            // Observe after render
-            setTimeout(() => {
-                document.querySelectorAll('.section-header').forEach(el => observer.observe(el));
-                document.querySelectorAll('.service-block').forEach(el => observer.observe(el));
-            }, 100);
-
-            // Nav scroll effect
-            window.addEventListener('scroll', () => {
-                const nav = document.getElementById('magazineNav');
-                if (window.scrollY > 100) {
-                    nav.classList.add('scrolled');
+                // Toggle current category
+                if (isOpen) {
+                    closeCategory(category);
                 } else {
-                    nav.classList.remove('scrolled');
+                    openCategory(category);
                 }
             });
-        }
+        });
 
-        // --- PARALLAX EFFECT ---
-        function setupParallax() {
-            const coverBg = document.getElementById('coverBg');
-            const sectionBgs = document.querySelectorAll('.section-bg');
-
-            window.addEventListener('scroll', () => {
-                const scrolled = window.pageYOffset;
-
-                // Cover parallax
-                if (coverBg) {
-                    coverBg.style.transform = `translateY(${scrolled * 0.4}px)`;
-                }
-
-                // Section parallax
-                sectionBgs.forEach(bg => {
-                    const rect = bg.getBoundingClientRect();
-                    const visible = rect.top < window.innerHeight && rect.bottom > 0;
-
-                    if (visible) {
-                        const progress = (window.innerHeight - rect.top) / (window.innerHeight + rect.height);
-                        const offset = (progress - 0.5) * 100;
-                        bg.style.transform = `translateY(${offset}px)`;
-                    }
-                });
+        // Open Category Function
+        function openCategory(category) {
+            const content = category.querySelector('.category-content');
+            
+            category.classList.add('active');
+            
+            // Clear inline styles from service items
+            category.querySelectorAll('.service-item').forEach(item => {
+                item.style.removeProperty('opacity');
+                item.style.removeProperty('transform');
+            });
+            
+            // Calculate and set height
+            requestAnimationFrame(() => {
+                content.style.maxHeight = content.scrollHeight + 'px';
             });
         }
 
-        // --- TOGGLE SERVICE ---
-        function toggleService(serviceId, categoryId) {
-            const category = categoriesData.find(c => c.id === categoryId);
-            const service = category.services.find(s => s.id === serviceId);
-            const block = document.getElementById(`block-${serviceId}`);
-
-            const index = selectedServices.findIndex(s => s.id === serviceId);
-
-            if (index > -1) {
-                selectedServices.splice(index, 1);
-                block.classList.remove('selected');
-            } else {
-                selectedServices.push({ ...service, category: categoryId });
-                block.classList.add('selected');
-            }
-
-            updateUI();
-        }
-
-        // --- UPDATE UI ---
-        function updateUI() {
-            const bar = document.getElementById('bookingBar');
-            const count = document.getElementById('selectedCount');
-            const total = document.getElementById('totalPrice');
-            const navCart = document.getElementById('navCart');
-            const navCartCount = document.getElementById('navCartCount');
-
-            count.textContent = selectedServices.length;
-            navCartCount.textContent = selectedServices.length;
-
-            const sum = selectedServices.reduce((a, b) => a + b.price, 0);
-            total.textContent = `₹${sum.toLocaleString('en-IN')}`;
-
-            if (selectedServices.length > 0) {
-                bar.classList.add('visible');
-                navCart.classList.add('has-items');
-            } else {
-                bar.classList.remove('visible');
-                navCart.classList.remove('has-items');
-            }
-        }
-
-        // --- MODAL FUNCTIONS ---
-        function openModal() {
-            if (selectedServices.length === 0) return;
-
-            const overlay = document.getElementById('modalOverlay');
-            const modal = document.getElementById('bookingModal');
-            const summary = document.getElementById('selectedSummary');
-
-            let html = '<div class="summary-header">Your Selections</div>';
-            selectedServices.forEach(s => {
-                html += `
-                    <div class="summary-item">
-                        <span>${s.name}</span>
-                        <span>₹${s.price.toLocaleString('en-IN')}</span>
-                    </div>
-                `;
+        // Close Category Function
+        function closeCategory(category) {
+            const content = category.querySelector('.category-content');
+            
+            category.classList.remove('active');
+            content.style.maxHeight = '0px';
+            
+            // Reset service items with inline styles
+            category.querySelectorAll('.service-item').forEach(item => {
+                item.style.opacity = '0';
+                item.style.transform = 'translateY(15px)';
             });
-
-            const sum = selectedServices.reduce((a, b) => a + b.price, 0);
-            html += `
-                <div class="summary-item total">
-                    <span>Total</span>
-                    <span>₹${sum.toLocaleString('en-IN')}</span>
-                </div>
-            `;
-
-            summary.innerHTML = html;
-
-            overlay.style.display = 'block';
-            modal.style.visibility = 'visible';
-            setTimeout(() => {
-                overlay.classList.add('active');
-                modal.classList.add('open');
-            }, 10);
         }
 
-        function closeModal() {
-            const overlay = document.getElementById('modalOverlay');
-            const modal = document.getElementById('bookingModal');
-
-            modal.classList.remove('open');
-            overlay.classList.remove('active');
-
-            setTimeout(() => {
-                overlay.style.display = 'none';
-                modal.style.visibility = 'hidden';
-            }, 500);
-        }
-
-        function selectDate(btn, date) {
-            document.querySelectorAll('.options-grid:not(.time-options) .option-btn').forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
-            selectedDate = date;
-            document.getElementById('customDate').value = '';
-        }
-
-        function selectTime(btn, time) {
-            document.querySelectorAll('.time-options .option-btn').forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
-            selectedTime = time;
-        }
-
-        function toggleHomeService() {
-            const toggle = document.getElementById('homeToggle');
-            toggle.classList.toggle('on');
-            homeService = toggle.classList.contains('on');
-        }
-
-        // --- WHATSAPP ---
-        function sendToWhatsApp() {
-            const name = document.getElementById('userName').value || 'Guest';
-            const gender = document.getElementById('userGender').value;
-            const customDate = document.getElementById('customDate').value;
-            const date = customDate || selectedDate;
-
-            if (!selectedTime) {
-                alert('Please select a preferred time slot!');
-                return;
-            }
-
-            let message = `✨ APPOINTMENT REQUEST\n${SALON_NAME}\n\n`;
-            message += `👤 ${name}\n`;
-            message += `🚻 ${gender}\n`;
-            message += `📅 ${date}\n`;
-            message += `⏰ ${selectedTime}\n`;
-            message += `🏠 Home: ${homeService ? 'Yes' : 'No'}\n\n`;
-            message += `Selected Services:\n`;
-
-            selectedServices.forEach((s, i) => {
-                message += `${i + 1}. ${s.name} – ₹${s.price.toLocaleString('en-IN')}\n`;
+        // Service Item Selection
+        document.querySelectorAll('.service-item').forEach(item => {
+            item.addEventListener('click', function() {
+                this.classList.toggle('selected');
             });
-
-            const sum = selectedServices.reduce((a, b) => a + b.price, 0);
-            message += `\nTotal: ₹${sum.toLocaleString('en-IN')}\n\n`;
-            message += `_Please confirm availability._`;
-
-            window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`, '_blank');
-        }
-
-        // --- INIT ---
-        init();
+        });
     </script>
 </body>
-
 </html>
+      
