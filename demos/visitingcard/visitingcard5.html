@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -34,7 +35,8 @@
             transform-style: preserve-3d;
             transition: transform 0.8s cubic-bezier(0.65, 0, 0.35, 1);
             border-radius: 12px;
-            will-change: transform; /* 🔥 smooth + stable */
+            will-change: transform;
+            /* 🔥 smooth + stable */
         }
 
         .card.flipped {
@@ -51,8 +53,9 @@
             backface-visibility: hidden;
             -webkit-backface-visibility: hidden;
 
-            transform: translateZ(0); /* 🔥 KEY FIX */
-            box-shadow: 
+            transform: translateZ(0);
+            /* 🔥 KEY FIX */
+            box-shadow:
                 0 25px 50px -12px rgba(0, 0, 0, 0.8),
                 0 0 0 1px rgba(255, 255, 255, 0.05);
         }
@@ -124,4 +127,5 @@
     </script>
 
 </body>
+
 </html>
