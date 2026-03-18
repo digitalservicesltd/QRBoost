@@ -33,9 +33,10 @@
         <rect x="3" y="3" width="7" height="7" rx="1.5" stroke="currentColor" stroke-width="2" />
         <rect x="14" y="3" width="7" height="7" rx="1.5" stroke="currentColor" stroke-width="2" />
         <rect x="3" y="14" width="7" height="7" rx="1.5" stroke="currentColor" stroke-width="2" />
-        <path d="M14 21V16C14 14.8954 14.8954 14 16 14H21" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+        <path d="M14 21V16C14 14.8954 14.8954 14 16 14H21" stroke="currentColor" stroke-width="2"
+          stroke-linecap="round" stroke-linejoin="round" />
+        <path d="M14 21L21 14" stroke="currentColor" stroke-width="2" stroke-linecap="round"
           stroke-linejoin="round" />
-        <path d="M14 21L21 14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
       </svg>
       <div class="loader-text gradient-text">QRBoost</div>
     </div>
@@ -201,115 +202,115 @@
     </div>
   </section>
 
-  <!-- ============ SALON MENU THEMES GALLERY ============ -->
+  <!-- ============ SALON MENU THEMES — STACKED SWIPE ============ -->
   <section class="gallery" id="salon-menu-gallery">
     <div class="container">
       <div class="section-header">
         <h2 class="section-title">Salon Menu <span class="gradient-text">Themes</span></h2>
-        <p class="section-subtitle">Beautiful digital menus for your salon — swipe to explore and pick your favourite.
-        </p>
+        <p class="section-subtitle">Beautiful digital menus for your salon — swipe to explore and pick your favourite.</p>
       </div>
 
-      <div class="carousel" data-category="salonMenu">
-        <div class="carousel__track">
-          <!-- Theme 1 -->
-          <div class="gallery-card" id="salon-menu-theme-1" data-theme="Luxery Glassmorphism">
-            <div class="gallery-card__image-wrap">
-              <img src="assets/images/gallery/salonmenu-1.webp" alt="Salon Menu Theme 1 — Obsidian Gold"
-                class="gallery-card__image" loading="lazy">
-            </div>
-            <div class="gallery-card__info">
-              <h3 class="gallery-card__name">Luxery Glassmorphism</h3>
-              <div class="gallery-card__actions">
-                <a href="demos/salonmenu/salonmenu1.html" class="gallery-card__btn gallery-card__btn--view">View</a>
-                <button class="gallery-card__btn gallery-card__btn--select"
-                  data-theme="Luxery Glassmorphism">Select</button>
+      <div class="swipe-stack" data-category="salonMenu">
+        <div class="swipe-stack__viewport">
+          <div class="swipe-stack__cards">
+            <div class="stack-card" data-theme="Luxery Glassmorphism" data-index="0">
+              <div class="stack-card__image">
+                <img src="assets/images/gallery/salonmenu-1.webp" alt="Salon Menu Theme 1 — Luxery Glassmorphism" loading="lazy">
+              </div>
+              <div class="stack-card__body">
+                <h3 class="stack-card__title">Luxery Glassmorphism</h3>
+                <div class="stack-card__actions">
+                  <a href="demos/salonmenu/salonmenu1.html" class="stack-card__btn stack-card__btn--view">View</a>
+                  <button class="stack-card__btn stack-card__btn--select" data-theme="Luxery Glassmorphism">Select</button>
+                </div>
               </div>
             </div>
-          </div>
 
-          <!-- Theme 2 -->
-          <div class="gallery-card" id="salon-menu-theme-2" data-theme="Luxery Section Based">
-            <div class="gallery-card__image-wrap">
-              <img src="assets/images/gallery/salonmenu-2.webp" alt="Salon Menu Theme 2 — Blush Pink"
-                class="gallery-card__image" loading="lazy">
-            </div>
-            <div class="gallery-card__info">
-              <h3 class="gallery-card__name">Luxery Section Based</h3>
-              <div class="gallery-card__actions">
-                <a href="demos/salonmenu/salonmenu2.html" class="gallery-card__btn gallery-card__btn--view">View</a>
-                <button class="gallery-card__btn gallery-card__btn--select"
-                  data-theme="Luxery Section Based">Select</button>
+            <div class="stack-card" data-theme="Luxery Section Based" data-index="1">
+              <div class="stack-card__image">
+                <img src="assets/images/gallery/salonmenu-2.webp" alt="Salon Menu Theme 2 — Luxery Section Based" loading="lazy">
+              </div>
+              <div class="stack-card__body">
+                <h3 class="stack-card__title">Luxery Section Based</h3>
+                <div class="stack-card__actions">
+                  <a href="demos/salonmenu/salonmenu2.html" class="stack-card__btn stack-card__btn--view">View</a>
+                  <button class="stack-card__btn stack-card__btn--select" data-theme="Luxery Section Based">Select</button>
+                </div>
               </div>
             </div>
-          </div>
 
-          <!-- Theme 3 -->
-          <div class="gallery-card" id="salon-menu-theme-3" data-theme="Swipe Card">
-            <div class="gallery-card__image-wrap">
-              <img src="assets/images/gallery/salonmenu-3.webp" alt="Salon Menu Theme 3 — Tropical Teal"
-                class="gallery-card__image" loading="lazy">
-            </div>
-            <div class="gallery-card__info">
-              <h3 class="gallery-card__name">Swipe Card</h3>
-              <div class="gallery-card__actions">
-                <a href="demos/salonmenu/salonmenu3.html" class="gallery-card__btn gallery-card__btn--view">View</a>
-                <button class="gallery-card__btn gallery-card__btn--select" data-theme="Swipe Card">Select</button>
+            <div class="stack-card" data-theme="Swipe Card" data-index="2">
+              <div class="stack-card__image">
+                <img src="assets/images/gallery/salonmenu-3.webp" alt="Salon Menu Theme 3 — Swipe Card" loading="lazy">
+              </div>
+              <div class="stack-card__body">
+                <h3 class="stack-card__title">Swipe Card</h3>
+                <div class="stack-card__actions">
+                  <a href="demos/salonmenu/salonmenu3.html" class="stack-card__btn stack-card__btn--view">View</a>
+                  <button class="stack-card__btn stack-card__btn--select" data-theme="Swipe Card">Select</button>
+                </div>
               </div>
             </div>
-          </div>
 
-          <!-- Theme 4 -->
-          <div class="gallery-card" id="salon-menu-theme-4" data-theme="Compact Dropdown">
-            <div class="gallery-card__image-wrap">
-              <img src="assets/images/gallery/salonmenu-4.webp" alt="Salon Menu Theme 4 — Royal Purple"
-                class="gallery-card__image" loading="lazy">
-            </div>
-            <div class="gallery-card__info">
-              <h3 class="gallery-card__name">Compact Dropdown</h3>
-              <div class="gallery-card__actions">
-                <a href="demos/salonmenu/salonmenu4.html" class="gallery-card__btn gallery-card__btn--view">View</a>
-                <button class="gallery-card__btn gallery-card__btn--select"
-                  data-theme="Compact Dropdown">Select</button>
+            <div class="stack-card" data-theme="Compact Dropdown" data-index="3">
+              <div class="stack-card__image">
+                <img src="assets/images/gallery/salonmenu-4.webp" alt="Salon Menu Theme 4 — Compact Dropdown" loading="lazy">
+              </div>
+              <div class="stack-card__body">
+                <h3 class="stack-card__title">Compact Dropdown</h3>
+                <div class="stack-card__actions">
+                  <a href="demos/salonmenu/salonmenu4.html" class="stack-card__btn stack-card__btn--view">View</a>
+                  <button class="stack-card__btn stack-card__btn--select" data-theme="Compact Dropdown">Select</button>
+                </div>
               </div>
             </div>
-          </div>
 
-          <!-- Theme 5 -->
-          <div class="gallery-card" id="salon-menu-theme-5" data-theme="Floating Bubble">
-            <div class="gallery-card__image-wrap">
-              <img src="assets/images/gallery/salonmenu-5.webp" alt="Salon Menu Theme 5 — Midnight Blue"
-                class="gallery-card__image" loading="lazy">
-            </div>
-            <div class="gallery-card__info">
-              <h3 class="gallery-card__name">Floating Bubble</h3>
-              <div class="gallery-card__actions">
-                <a href="demos/salonmenu/salonmenu5.html" class="gallery-card__btn gallery-card__btn--view">View</a>
-                <button class="gallery-card__btn gallery-card__btn--select" data-theme="Floating Bubble">Select</button>
+            <div class="stack-card" data-theme="Floating Bubble" data-index="4">
+              <div class="stack-card__image">
+                <img src="assets/images/gallery/salonmenu-5.webp" alt="Salon Menu Theme 5 — Floating Bubble" loading="lazy">
+              </div>
+              <div class="stack-card__body">
+                <h3 class="stack-card__title">Floating Bubble</h3>
+                <div class="stack-card__actions">
+                  <a href="demos/salonmenu/salonmenu5.html" class="stack-card__btn stack-card__btn--view">View</a>
+                  <button class="stack-card__btn stack-card__btn--select" data-theme="Floating Bubble">Select</button>
+                </div>
               </div>
             </div>
-          </div>
 
-          <!-- Theme 6 -->
-          <div class="gallery-card" id="salon-menu-theme-6" data-theme="Dark Velvet">
-            <div class="gallery-card__image-wrap">
-              <img src="assets/images/gallery/salonmenu-6.webp" alt="Salon Menu Theme 6 — Rose Wood"
-                class="gallery-card__image" loading="lazy">
-            </div>
-            <div class="gallery-card__info">
-              <h3 class="gallery-card__name">Dark Velvet</h3>
-              <div class="gallery-card__actions">
-                <a href="demos/salonmenu/salonmenu6.html" class="gallery-card__btn gallery-card__btn--view">View</a>
-                <button class="gallery-card__btn gallery-card__btn--select" data-theme="Dark Velvet">Select</button>
+            <div class="stack-card" data-theme="Dark Velvet" data-index="5">
+              <div class="stack-card__image">
+                <img src="assets/images/gallery/salonmenu-6.webp" alt="Salon Menu Theme 6 — Dark Velvet" loading="lazy">
+              </div>
+              <div class="stack-card__body">
+                <h3 class="stack-card__title">Dark Velvet</h3>
+                <div class="stack-card__actions">
+                  <a href="demos/salonmenu/salonmenu6.html" class="stack-card__btn stack-card__btn--view">View</a>
+                  <button class="stack-card__btn stack-card__btn--select" data-theme="Dark Velvet">Select</button>
+                </div>
               </div>
             </div>
           </div>
+        </div>
+
+        <div class="swipe-stack__controls">
+          <button class="swipe-stack__nav swipe-stack__nav--prev" aria-label="Previous">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M15 18l-6-6 6-6"/>
+            </svg>
+          </button>
+          <div class="swipe-stack__dots"></div>
+          <button class="swipe-stack__nav swipe-stack__nav--next" aria-label="Next">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M9 18l6-6-6-6"/>
+            </svg>
+          </button>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ============ SALON CARD THEMES GALLERY ============ -->
+  <!-- ============ SALON CARD THEMES — STACKED SWIPE ============ -->
   <section class="gallery gallery--alt" id="salon-card-gallery">
     <div class="container">
       <div class="section-header">
@@ -317,105 +318,107 @@
         <p class="section-subtitle">Smart loyalty & review cards — swipe to explore and pick your favourite.</p>
       </div>
 
-      <div class="carousel" data-category="salonCard">
-        <div class="carousel__track">
-          <!-- Theme 1 -->
-          <div class="gallery-card" id="salon-card-theme-1" data-theme="Luxery Gold">
-            <div class="gallery-card__image-wrap">
-              <img src="assets/images/gallery/saloncard-1.webp" alt="Salon Card Theme 1 — Classic Gold"
-                class="gallery-card__image" loading="lazy">
-            </div>
-            <div class="gallery-card__info">
-              <h3 class="gallery-card__name">Luxery Gold</h3>
-              <div class="gallery-card__actions">
-                <a href="demos/saloncard/saloncard1.html" class="gallery-card__btn gallery-card__btn--view">View</a>
-                <button class="gallery-card__btn gallery-card__btn--select" data-theme="Luxery Gold">Select</button>
+      <div class="swipe-stack" data-category="salonCard">
+        <div class="swipe-stack__viewport">
+          <div class="swipe-stack__cards">
+            <div class="stack-card" data-theme="Luxery Gold" data-index="0">
+              <div class="stack-card__image">
+                <img src="assets/images/gallery/saloncard-1.webp" alt="Salon Card Theme 1 — Luxery Gold" loading="lazy">
+              </div>
+              <div class="stack-card__body">
+                <h3 class="stack-card__title">Luxery Gold</h3>
+                <div class="stack-card__actions">
+                  <a href="demos/saloncard/saloncard1.html" class="stack-card__btn stack-card__btn--view">View</a>
+                  <button class="stack-card__btn stack-card__btn--select" data-theme="Luxery Gold">Select</button>
+                </div>
               </div>
             </div>
-          </div>
 
-          <!-- Theme 2 -->
-          <div class="gallery-card" id="salon-card-theme-2" data-theme="Midnight Sapphire">
-            <div class="gallery-card__image-wrap">
-              <img src="assets/images/gallery/saloncard-2.webp" alt="Salon Card Theme 2 — Soft Lavender"
-                class="gallery-card__image" loading="lazy">
-            </div>
-            <div class="gallery-card__info">
-              <h3 class="gallery-card__name">Midnight Sapphire</h3>
-              <div class="gallery-card__actions">
-                <a href="demos/saloncard/saloncard2.html" class="gallery-card__btn gallery-card__btn--view">View</a>
-                <button class="gallery-card__btn gallery-card__btn--select"
-                  data-theme="Midnight Sapphire">Select</button>
+            <div class="stack-card" data-theme="Midnight Sapphire" data-index="1">
+              <div class="stack-card__image">
+                <img src="assets/images/gallery/saloncard-2.webp" alt="Salon Card Theme 2 — Midnight Sapphire" loading="lazy">
+              </div>
+              <div class="stack-card__body">
+                <h3 class="stack-card__title">Midnight Sapphire</h3>
+                <div class="stack-card__actions">
+                  <a href="demos/saloncard/saloncard2.html" class="stack-card__btn stack-card__btn--view">View</a>
+                  <button class="stack-card__btn stack-card__btn--select" data-theme="Midnight Sapphire">Select</button>
+                </div>
               </div>
             </div>
-          </div>
 
-          <!-- Theme 3 -->
-          <div class="gallery-card" id="salon-card-theme-3" data-theme="Grid Card">
-            <div class="gallery-card__image-wrap">
-              <img src="assets/images/gallery/saloncard-3.webp" alt="Salon Card Theme 3 — Emerald Glow"
-                class="gallery-card__image" loading="lazy">
-            </div>
-            <div class="gallery-card__info">
-              <h3 class="gallery-card__name">Grid Card</h3>
-              <div class="gallery-card__actions">
-                <a href="demos/saloncard/saloncard3.html" class="gallery-card__btn gallery-card__btn--view">View</a>
-                <button class="gallery-card__btn gallery-card__btn--select" data-theme="Grid Card">Select</button>
+            <div class="stack-card" data-theme="Grid Card" data-index="2">
+              <div class="stack-card__image">
+                <img src="assets/images/gallery/saloncard-3.webp" alt="Salon Card Theme 3 — Grid Card" loading="lazy">
+              </div>
+              <div class="stack-card__body">
+                <h3 class="stack-card__title">Grid Card</h3>
+                <div class="stack-card__actions">
+                  <a href="demos/saloncard/saloncard3.html" class="stack-card__btn stack-card__btn--view">View</a>
+                  <button class="stack-card__btn stack-card__btn--select" data-theme="Grid Card">Select</button>
+                </div>
               </div>
             </div>
-          </div>
 
-          <!-- Theme 4 -->
-          <div class="gallery-card" id="salon-card-theme-4" data-theme="Vertical Timeline">
-            <div class="gallery-card__image-wrap">
-              <img src="assets/images/gallery/saloncard-4.webp" alt="Salon Card Theme 4 — Sunset Coral"
-                class="gallery-card__image" loading="lazy">
-            </div>
-            <div class="gallery-card__info">
-              <h3 class="gallery-card__name">Vertical Timeline</h3>
-              <div class="gallery-card__actions">
-                <a href="demos/saloncard/saloncard4.html" class="gallery-card__btn gallery-card__btn--view">View</a>
-                <button class="gallery-card__btn gallery-card__btn--select"
-                  data-theme="Vertical Timeline">Select</button>
+            <div class="stack-card" data-theme="Vertical Timeline" data-index="3">
+              <div class="stack-card__image">
+                <img src="assets/images/gallery/saloncard-4.webp" alt="Salon Card Theme 4 — Vertical Timeline" loading="lazy">
+              </div>
+              <div class="stack-card__body">
+                <h3 class="stack-card__title">Vertical Timeline</h3>
+                <div class="stack-card__actions">
+                  <a href="demos/saloncard/saloncard4.html" class="stack-card__btn stack-card__btn--view">View</a>
+                  <button class="stack-card__btn stack-card__btn--select" data-theme="Vertical Timeline">Select</button>
+                </div>
               </div>
             </div>
-          </div>
 
-          <!-- Theme 5 -->
-          <div class="gallery-card" id="salon-card-theme-5" data-theme="Glassmorphism">
-            <div class="gallery-card__image-wrap">
-              <img src="assets/images/gallery/saloncard-5.webp" alt="Salon Card Theme 5 — Carbon Matte"
-                class="gallery-card__image" loading="lazy">
-            </div>
-            <div class="gallery-card__info">
-              <h3 class="gallery-card__name">Glassmorphism</h3>
-              <div class="gallery-card__actions">
-                <a href="demos/saloncard/saloncard5.html" class="gallery-card__btn gallery-card__btn--view">View</a>
-                <button class="gallery-card__btn gallery-card__btn--select" data-theme="Glassmorphism">Select</button>
+            <div class="stack-card" data-theme="Glassmorphism" data-index="4">
+              <div class="stack-card__image">
+                <img src="assets/images/gallery/saloncard-5.webp" alt="Salon Card Theme 5 — Glassmorphism" loading="lazy">
+              </div>
+              <div class="stack-card__body">
+                <h3 class="stack-card__title">Glassmorphism</h3>
+                <div class="stack-card__actions">
+                  <a href="demos/saloncard/saloncard5.html" class="stack-card__btn stack-card__btn--view">View</a>
+                  <button class="stack-card__btn stack-card__btn--select" data-theme="Glassmorphism">Select</button>
+                </div>
               </div>
             </div>
-          </div>
 
-          <!-- Theme 6 -->
-          <div class="gallery-card" id="salon-card-theme-6" data-theme="Luxery Magazine">
-            <div class="gallery-card__image-wrap">
-              <img src="assets/images/gallery/saloncard-6.webp" alt="Salon Card Theme 6 — Pearl White"
-                class="gallery-card__image" loading="lazy">
-            </div>
-            <div class="gallery-card__info">
-              <h3 class="gallery-card__name">Luxery Magazine</h3>
-              <div class="gallery-card__actions">
-                <a href="demos/saloncard/saloncard6.html" class="gallery-card__btn gallery-card__btn--view">View</a>
-                <button class="gallery-card__btn gallery-card__btn--select" data-theme="Luxery Magazine">Select</button>
+            <div class="stack-card" data-theme="Luxery Magazine" data-index="5">
+              <div class="stack-card__image">
+                <img src="assets/images/gallery/saloncard-6.webp" alt="Salon Card Theme 6 — Luxery Magazine" loading="lazy">
+              </div>
+              <div class="stack-card__body">
+                <h3 class="stack-card__title">Luxery Magazine</h3>
+                <div class="stack-card__actions">
+                  <a href="demos/saloncard/saloncard6.html" class="stack-card__btn stack-card__btn--view">View</a>
+                  <button class="stack-card__btn stack-card__btn--select" data-theme="Luxery Magazine">Select</button>
+                </div>
               </div>
             </div>
           </div>
+        </div>
+
+        <div class="swipe-stack__controls">
+          <button class="swipe-stack__nav swipe-stack__nav--prev" aria-label="Previous">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M15 18l-6-6 6-6"/>
+            </svg>
+          </button>
+          <div class="swipe-stack__dots"></div>
+          <button class="swipe-stack__nav swipe-stack__nav--next" aria-label="Next">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M9 18l6-6-6-6"/>
+            </svg>
+          </button>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ============ VISITING CARD DESIGNS GALLERY ============ -->
+  <!-- ============ VISITING CARD DESIGNS — STACKED SWIPE ============ -->
   <section class="gallery gallery--visiting" id="visiting-card-gallery">
     <div class="container">
       <div class="section-header">
@@ -423,103 +426,101 @@
         <p class="section-subtitle">Professional digital visiting cards — swipe to explore and pick your favourite.</p>
       </div>
 
-      <div class="carousel" data-category="visitingCard">
-        <div class="carousel__track">
-          <!-- Design 1 -->
-          <div class="gallery-card" id="visiting-card-design-1" data-theme="Luxe Minimal">
-            <div class="gallery-card__image-wrap">
-              <img src="assets/images/gallery/vc1-front.webp" alt="Visiting Card Design 1 — Luxe Minimal"
-                class="gallery-card__image" loading="lazy">
-            </div>
-            <div class="gallery-card__info">
-              <h3 class="gallery-card__name">Luxery Red</h3>
-              <div class="gallery-card__actions">
-                <a href="demos/visitingcard/visitingcard1.html"
-                  class="gallery-card__btn gallery-card__btn--view">View</a>
-                <button class="gallery-card__btn gallery-card__btn--select" data-theme="Luxe Minimal">Select</button>
+      <div class="swipe-stack swipe-stack--visiting" data-category="visitingCard">
+        <div class="swipe-stack__viewport">
+          <div class="swipe-stack__cards">
+            <div class="stack-card" data-theme="Luxe Minimal" data-index="0">
+              <div class="stack-card__image stack-card__image--wide">
+                <img src="assets/images/gallery/vc1-front.webp" alt="Visiting Card Design 1 — Luxe Minimal" loading="lazy">
+              </div>
+              <div class="stack-card__body">
+                <h3 class="stack-card__title">Luxery Red</h3>
+                <div class="stack-card__actions">
+                  <a href="demos/visitingcard/visitingcard1.html" class="stack-card__btn stack-card__btn--view">View</a>
+                  <button class="stack-card__btn stack-card__btn--select" data-theme="Luxe Minimal">Select</button>
+                </div>
               </div>
             </div>
-          </div>
 
-          <!-- Design 2 -->
-          <div class="gallery-card" id="visiting-card-design-2" data-theme="Bold Modern">
-            <div class="gallery-card__image-wrap">
-              <img src="assets/images/gallery/vc2-front.webp" alt="Visiting Card Design 2 — Bold Modern"
-                class="gallery-card__image" loading="lazy">
-            </div>
-            <div class="gallery-card__info">
-              <h3 class="gallery-card__name">Bold Blue</h3>
-              <div class="gallery-card__actions">
-                <a href="demos/visitingcard/visitingcard2.html"
-                  class="gallery-card__btn gallery-card__btn--view">View</a>
-                <button class="gallery-card__btn gallery-card__btn--select" data-theme="Bold Modern">Select</button>
+            <div class="stack-card" data-theme="Bold Modern" data-index="1">
+              <div class="stack-card__image stack-card__image--wide">
+                <img src="assets/images/gallery/vc2-front.webp" alt="Visiting Card Design 2 — Bold Modern" loading="lazy">
+              </div>
+              <div class="stack-card__body">
+                <h3 class="stack-card__title">Bold Blue</h3>
+                <div class="stack-card__actions">
+                  <a href="demos/visitingcard/visitingcard2.html" class="stack-card__btn stack-card__btn--view">View</a>
+                  <button class="stack-card__btn stack-card__btn--select" data-theme="Bold Modern">Select</button>
+                </div>
               </div>
             </div>
-          </div>
 
-          <!-- Design 3 -->
-          <div class="gallery-card" id="visiting-card-design-3" data-theme="Gradient Edge">
-            <div class="gallery-card__image-wrap">
-              <img src="assets/images/gallery/vc3-front.webp" alt="Visiting Card Design 3 — Gradient Edge"
-                class="gallery-card__image" loading="lazy">
-            </div>
-            <div class="gallery-card__info">
-              <h3 class="gallery-card__name">Brown Edge</h3>
-              <div class="gallery-card__actions">
-                <a href="demos/visitingcard/visitingcard3.html"
-                  class="gallery-card__btn gallery-card__btn--view">View</a>
-                <button class="gallery-card__btn gallery-card__btn--select" data-theme="Gradient Edge">Select</button>
+            <div class="stack-card" data-theme="Gradient Edge" data-index="2">
+              <div class="stack-card__image stack-card__image--wide">
+                <img src="assets/images/gallery/vc3-front.webp" alt="Visiting Card Design 3 — Gradient Edge" loading="lazy">
+              </div>
+              <div class="stack-card__body">
+                <h3 class="stack-card__title">Brown Edge</h3>
+                <div class="stack-card__actions">
+                  <a href="demos/visitingcard/visitingcard3.html" class="stack-card__btn stack-card__btn--view">View</a>
+                  <button class="stack-card__btn stack-card__btn--select" data-theme="Gradient Edge">Select</button>
+                </div>
               </div>
             </div>
-          </div>
 
-          <!-- Design 4 -->
-          <div class="gallery-card" id="visiting-card-design-4" data-theme="Neon Accent">
-            <div class="gallery-card__image-wrap">
-              <img src="assets/images/gallery/vc4-front.webp" alt="Visiting Card Design 4 — Neon Accent"
-                class="gallery-card__image" loading="lazy">
-            </div>
-            <div class="gallery-card__info">
-              <h3 class="gallery-card__name">Lavender Glow</h3>
-              <div class="gallery-card__actions">
-                <a href="demos/visitingcard/visitingcard4.html"
-                  class="gallery-card__btn gallery-card__btn--view">View</a>
-                <button class="gallery-card__btn gallery-card__btn--select" data-theme="Neon Accent">Select</button>
+            <div class="stack-card" data-theme="Neon Accent" data-index="3">
+              <div class="stack-card__image stack-card__image--wide">
+                <img src="assets/images/gallery/vc4-front.webp" alt="Visiting Card Design 4 — Neon Accent" loading="lazy">
+              </div>
+              <div class="stack-card__body">
+                <h3 class="stack-card__title">Lavender Glow</h3>
+                <div class="stack-card__actions">
+                  <a href="demos/visitingcard/visitingcard4.html" class="stack-card__btn stack-card__btn--view">View</a>
+                  <button class="stack-card__btn stack-card__btn--select" data-theme="Neon Accent">Select</button>
+                </div>
               </div>
             </div>
-          </div>
 
-          <!-- Design 5 -->
-          <div class="gallery-card" id="visiting-card-design-5" data-theme="Ivory Foil">
-            <div class="gallery-card__image-wrap">
-              <img src="assets/images/gallery/vc5-front.webp" alt="Visiting Card Design 5 — Ivory Foil"
-                class="gallery-card__image" loading="lazy">
-            </div>
-            <div class="gallery-card__info">
-              <h3 class="gallery-card__name">Ivory Gold</h3>
-              <div class="gallery-card__actions">
-                <a href="demos/visitngcard/visitingcard5.html"
-                  class="gallery-card__btn gallery-card__btn--view">View</a>
-                <button class="gallery-card__btn gallery-card__btn--select" data-theme="Ivory Foil">Select</button>
+            <div class="stack-card" data-theme="Ivory Foil" data-index="4">
+              <div class="stack-card__image stack-card__image--wide">
+                <img src="assets/images/gallery/vc5-front.webp" alt="Visiting Card Design 5 — Ivory Foil" loading="lazy">
+              </div>
+              <div class="stack-card__body">
+                <h3 class="stack-card__title">Ivory Gold</h3>
+                <div class="stack-card__actions">
+                  <a href="demos/visitingcard/visitingcard5.html" class="stack-card__btn stack-card__btn--view">View</a>
+                  <button class="stack-card__btn stack-card__btn--select" data-theme="Ivory Foil">Select</button>
+                </div>
               </div>
             </div>
-          </div>
 
-          <!-- Design 6 -->
-          <div class="gallery-card" id="visiting-card-design-6" data-theme="Charcoal Slate">
-            <div class="gallery-card__image-wrap">
-              <img src="assets/images/gallery/vc6-front.webp" alt="Visiting Card Design 6 — Charcoal Slate"
-                class="gallery-card__image" loading="lazy">
-            </div>
-            <div class="gallery-card__info">
-              <h3 class="gallery-card__name">Luxery Royal</h3>
-              <div class="gallery-card__actions">
-                <a href="demos/visitingcard/visitingcard6.html"
-                  class="gallery-card__btn gallery-card__btn--view">View</a>
-                <button class="gallery-card__btn gallery-card__btn--select" data-theme="Charcoal Slate">Select</button>
+            <div class="stack-card" data-theme="Charcoal Slate" data-index="5">
+              <div class="stack-card__image stack-card__image--wide">
+                <img src="assets/images/gallery/vc6-front.webp" alt="Visiting Card Design 6 — Charcoal Slate" loading="lazy">
+              </div>
+              <div class="stack-card__body">
+                <h3 class="stack-card__title">Luxery Royal</h3>
+                <div class="stack-card__actions">
+                  <a href="demos/visitingcard/visitingcard6.html" class="stack-card__btn stack-card__btn--view">View</a>
+                  <button class="stack-card__btn stack-card__btn--select" data-theme="Charcoal Slate">Select</button>
+                </div>
               </div>
             </div>
           </div>
+        </div>
+
+        <div class="swipe-stack__controls">
+          <button class="swipe-stack__nav swipe-stack__nav--prev" aria-label="Previous">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M15 18l-6-6 6-6"/>
+            </svg>
+          </button>
+          <div class="swipe-stack__dots"></div>
+          <button class="swipe-stack__nav swipe-stack__nav--next" aria-label="Next">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M9 18l6-6-6-6"/>
+            </svg>
+          </button>
         </div>
       </div>
     </div>
@@ -545,8 +546,7 @@
           </div>
           <div class="step-number">01</div>
           <h3 class="step-title">Share Your Details</h3>
-          <p class="step-text">Send us your services, prices, and logo. We build your complete salon system within 24
-            hours.</p>
+          <p class="step-text">Send us your services, prices, and logo. We build your complete salon system within 24 hours.</p>
         </article>
 
         <article class="how-it-works-step">
@@ -560,8 +560,7 @@
           </div>
           <div class="step-number">02</div>
           <h3 class="step-title">Place the QR Code</h3>
-          <p class="step-text">Print it at your reception, mirror, or billing counter. Clients scan — no app needed,
-            works instantly.</p>
+          <p class="step-text">Print it at your reception, mirror, or billing counter. Clients scan — no app needed, works instantly.</p>
         </article>
 
         <article class="how-it-works-step">
@@ -575,8 +574,7 @@
           </div>
           <div class="step-number">03</div>
           <h3 class="step-title">Clients Keep Coming Back</h3>
-          <p class="step-text">They discover services, book appointments, earn loyalty rewards, and leave 5-star reviews
-            — all from one scan.</p>
+          <p class="step-text">They discover services, book appointments, earn loyalty rewards, and leave 5-star reviews — all from one scan.</p>
         </article>
       </div>
     </div>
@@ -591,8 +589,6 @@
       </div>
 
       <div class="pricing__grid pricing__grid--three">
-
-        <!-- Salon Menu -->
         <article class="pricing-card">
           <div class="pricing-card__header">
             <h3 class="pricing-card__name">Salon Menu</h3>
@@ -602,7 +598,6 @@
             </div>
             <p class="pricing-card__tagline">Your complete digital service menu</p>
           </div>
-
           <ul class="pricing-card__features">
             <li>QR-based service & price list</li>
             <li>Google Maps integration</li>
@@ -610,12 +605,9 @@
             <li>WhatsApp inquiry button</li>
             <li>Basic analytics</li>
           </ul>
-
-          <a href="https://wa.me/918219928236?text=Hi%20Pankaj%2C%20I%20want%20the%20Salon%20Menu%20plan."
-            target="_blank" rel="noopener" class="btn btn--outline btn--block">Choose Salon Menu</a>
+          <a href="https://wa.me/918219928236?text=Hi%20Pankaj%2C%20I%20want%20the%20Salon%20Menu%20plan." target="_blank" rel="noopener" class="btn btn--outline btn--block">Choose Salon Menu</a>
         </article>
 
-        <!-- Salon Card -->
         <article class="pricing-card">
           <div class="pricing-card__header">
             <h3 class="pricing-card__name">Salon Card</h3>
@@ -625,7 +617,6 @@
             </div>
             <p class="pricing-card__tagline">Loyalty, reviews & repeat bookings</p>
           </div>
-
           <ul class="pricing-card__features">
             <li>QR loyalty stamp cards</li>
             <li>WhatsApp appointment booking</li>
@@ -633,12 +624,9 @@
             <li>Repeat customer reminders</li>
             <li>Priority support</li>
           </ul>
-
-          <a href="https://wa.me/918219928236?text=Hi%20Pankaj%2C%20I%20want%20the%20Salon%20Card%20plan."
-            target="_blank" rel="noopener" class="btn btn--outline btn--block">Choose Salon Card</a>
+          <a href="https://wa.me/918219928236?text=Hi%20Pankaj%2C%20I%20want%20the%20Salon%20Card%20plan." target="_blank" rel="noopener" class="btn btn--outline btn--block">Choose Salon Card</a>
         </article>
 
-        <!-- Salon Growth (Best Value) -->
         <article class="pricing-card pricing-card--best-value">
           <div class="pricing-card__best-badge">Best Value</div>
           <div class="pricing-card__header">
@@ -657,7 +645,6 @@
             </div>
             <p class="pricing-card__tagline">Everything your salon needs to grow</p>
           </div>
-
           <ul class="pricing-card__features">
             <li><strong>Everything in Salon Menu</strong></li>
             <li><strong>Everything in Salon Card</strong></li>
@@ -666,11 +653,8 @@
             <li>Monthly performance report</li>
             <li>Dedicated WhatsApp support</li>
           </ul>
-
-          <a href="https://wa.me/918219928236?text=Hi%20Pankaj%2C%20I%20want%20the%20Salon%20Growth%20plan."
-            target="_blank" rel="noopener" class="btn btn--primary btn--block">Choose Salon Growth</a>
+          <a href="https://wa.me/918219928236?text=Hi%20Pankaj%2C%20I%20want%20the%20Salon%20Growth%20plan." target="_blank" rel="noopener" class="btn btn--primary btn--block">Choose Salon Growth</a>
         </article>
-
       </div>
     </div>
   </section>
@@ -680,10 +664,8 @@
     <div class="container">
       <div class="cta-box">
         <h2 class="cta-box__title">Ready to <span class="gradient-text">Grow Your Salon?</span></h2>
-        <p class="cta-box__text">Join salons already using QRBoost to fill their appointment books and build a loyal
-          client base.</p>
-        <a href="https://wa.me/918219928236?text=Hi%20Pankaj%2C%20I%20want%20to%20set%20up%20QRBoost%20for%20my%20salon."
-          target="_blank" rel="noopener" class="btn btn--primary btn--large">Get Your Salon Set Up →</a>
+        <p class="cta-box__text">Join salons already using QRBoost to fill their appointment books and build a loyal client base.</p>
+        <a href="https://wa.me/918219928236?text=Hi%20Pankaj%2C%20I%20want%20to%20set%20up%20QRBoost%20for%20my%20salon." target="_blank" rel="noopener" class="btn btn--primary btn--large">Get Your Salon Set Up →</a>
       </div>
     </div>
   </section>
@@ -698,15 +680,12 @@
               <rect x="3" y="3" width="7" height="7" rx="1.5" stroke="currentColor" stroke-width="2" />
               <rect x="14" y="3" width="7" height="7" rx="1.5" stroke="currentColor" stroke-width="2" />
               <rect x="3" y="14" width="7" height="7" rx="1.5" stroke="currentColor" stroke-width="2" />
-              <path d="M14 21V16C14 14.8954 14.8954 14 16 14H21" stroke="currentColor" stroke-width="2"
-                stroke-linecap="round" stroke-linejoin="round" />
-              <path d="M14 21L21 14" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                stroke-linejoin="round" />
+              <path d="M14 21V16C14 14.8954 14.8954 14 16 14H21" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+              <path d="M14 21L21 14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
             </svg>
             <span class="logo-text">QRBoost</span>
           </a>
-          <p class="footer__tagline">QR-powered systems that help salons get more services discovered, reviews
-            collected, and clients retained.</p>
+          <p class="footer__tagline">QR-powered systems that help salons get more services discovered, reviews collected, and clients retained.</p>
         </div>
 
         <div class="footer__nav">
@@ -755,23 +734,18 @@
       </div>
       <button class="btn btn--primary selection-bar__cta" id="whatsappCta">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-          <path
-            d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
         </svg>
         <span>Get This Setup on WhatsApp</span>
       </button>
     </div>
   </div>
 
-  <a href="https://wa.me/918219928236?text=Hi%20Pankaj%2C%20I%20am%20interested%20in%20QRBoost." target="_blank"
-    rel="noopener" class="whatsapp-button" aria-label="Chat on WhatsApp">
+  <a href="https://wa.me/918219928236?text=Hi%20Pankaj%2C%20I%20am%20interested%20in%20QRBoost." target="_blank" rel="noopener" class="whatsapp-button" aria-label="Chat on WhatsApp">
     <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor">
-      <path
-        d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
     </svg>
   </a>
-
-
 
   <script src="js/main.js"></script>
 </body>
